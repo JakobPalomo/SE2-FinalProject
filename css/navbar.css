@@ -1,0 +1,28 @@
+.body {
+  background-color: #f5f5dc;
+}
+.navbar.navbar-expand-lg {
+  background-color: #004225;
+  padding-top: 24px;
+  padding-bottom: 24px;
+}
+
+.brand {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Inika", serif;
+  font-weight: bolder;
+  font-size: 24px;
+  margin-left: 24px;
+}
+.navbutton {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  margin-left: 12px;
+  margin-right: 12px;
+}
+
+.collapse.navbar-collapse {
+  margin-right: 24px;
+}
