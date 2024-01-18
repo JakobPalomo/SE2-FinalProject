@@ -41,3 +41,21 @@ body {
   right: 0;
   margin-right: 24px;
 }
+
+.expanded-content {
+  display: none;
+  padding: 12px;
+  margin-bottom: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  border-radius: 8px;
+  margin-top: 12px;
+}
+
+.expanded-content.show {
+  display: block;
+}
+
+.drop.rotate {
+  transform: rotate(-90deg);
+  transition: transform 0.3s ease; /* Optional: Add a smooth transition effect */
+}

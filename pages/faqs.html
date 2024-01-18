@@ -58,51 +58,85 @@
       </div>
     </nav>
 
+    <script>
+      function toggleFaqContent(element) {
+        var expandedContent = element.querySelector(".expanded-content");
+        var dropIcon = element.querySelector(".drop");
+
+        expandedContent.classList.toggle("show");
+        dropIcon.classList.toggle("rotate");
+      }
+    </script>
+
     <!-- Code zone -->
     <div class="maintitle">
       <p class="title">Frequently Asked Questions</p>
     </div>
 
     <div class="centercontainer">
-      <div class="itemfaq">
+      <div class="itemfaq" onclick="toggleFaqContent(this)">
         <p class="faqcontent">
           How can I pay for my order?<img
             class="drop"
             src="../img/angle-small-left.png"
           />
         </p>
+        <div class="expanded-content">
+          <!-- Content to show when the item is expanded -->
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+        </div>
       </div>
-      <div class="itemfaq">
+
+      <div class="itemfaq" onclick="toggleFaqContent(this)">
         <p class="faqcontent">
           How can I pay for my order?<img
             class="drop"
             src="../img/angle-small-left.png"
           />
         </p>
+        <div class="expanded-content">
+          <!-- Content to show when the item is expanded -->
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+        </div>
       </div>
-      <div class="itemfaq">
+
+      <div class="itemfaq" onclick="toggleFaqContent(this)">
         <p class="faqcontent">
           How can I pay for my order?<img
             class="drop"
             src="../img/angle-small-left.png"
           />
         </p>
+        <div class="expanded-content">
+          <!-- Content to show when the item is expanded -->
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+        </div>
       </div>
-      <div class="itemfaq">
+
+      <div class="itemfaq" onclick="toggleFaqContent(this)">
         <p class="faqcontent">
           How can I pay for my order?<img
             class="drop"
             src="../img/angle-small-left.png"
           />
         </p>
+        <div class="expanded-content">
+          <!-- Content to show when the item is expanded -->
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+        </div>
       </div>
-      <div class="itemfaq">
+
+      <div class="itemfaq" onclick="toggleFaqContent(this)">
         <p class="faqcontent">
           How can I pay for my order?<img
             class="drop"
             src="../img/angle-small-left.png"
           />
         </p>
+        <div class="expanded-content">
+          <!-- Content to show when the item is expanded -->
+          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+        </div>
       </div>
     </div>
 
