@@ -8,5 +8,14 @@
     <link rel="stylesheet" type="text/css" media="screen" href="main.css" />
     <script src="main.js"></script>
   </head>
-  <body></body>
+  <body>
+    <script>
+      // Fetch and insert the navigation bar
+      fetch("navbar.html")
+        .then((response) => response.text())
+        .then((data) => {
+          document.body.innerHTML += data;
+        });
+    </script>
+  </body>
 </html>
