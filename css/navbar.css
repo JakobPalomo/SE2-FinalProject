@@ -23,6 +23,11 @@ body {
   margin-right: 12px;
 }
 
+.navbar-toggler-icon {
+  background-color: white; /* Set the background color to white */
+  border-radius: 6px;
+}
+
 .collapse.navbar-collapse {
   margin-right: 24px;
 }
