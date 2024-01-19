@@ -15,9 +15,7 @@
 }
 
 .add-item {
-  position: relative;
-  top: 90px;
-  width: 192px;
+  width: 216px;
   height: 32px;
   border-radius: 8px;
   border: none;
@@ -25,4 +23,114 @@
   font-weight: bold;
   font-family: "Plus Jakarta Sans", sans-serif;
   background-color: #ffb000;
+}
+
+.detail-field {
+  display: flex;
+  justify-content: space-between;
+  height: 40px;
+  width: 240px;
+  background-color: rgb(255, 255, 255);
+}
+.desc-field {
+  display: flex;
+  justify-content: space-between;
+  height: 54px;
+  width: 240px;
+}
+
+.food-name {
+  margin-left: 18px;
+  margin-top: 12px;
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.food-price {
+  margin-top: 12px;
+  margin-right: 18px;
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  text-align: right; /* Align the text to the right */
+}
+
+.food-desc {
+  color: #000000;
+  font-size: 9px;
+  margin-left: 18px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.cart-item {
+  display: flex;
+  width: 660px;
+  height: 80px;
+  background-color: white;
+  border-radius: 18px;
+  margin: 24px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+/* Media query for screens with a maximum width of 600px (typical mobile screens) */
+@media only screen and (max-width: 720px) {
+  .cart-item {
+    width: 90%; /* Make it fill the width of the viewport */
+    max-width: none; /* Remove max-width for smaller screens */
+  }
+}
+
+.cart-display {
+  width: 120px;
+  height: 80px;
+  border-top-left-radius: 18px;
+  border-bottom-left-radius: 18px;
+}
+
+.detail-cart {
+  height: 40px;
+  width: 55%;
+  background-color: rgb(255, 255, 255);
+}
+
+.foodcart-name {
+  margin-left: 18px;
+  margin-top: 12px;
+  color: #000000;
+  font-size: 14px;
+  font-weight: bold;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.amount {
+  width: 22px;
+  height: fit-content;
+  border-radius: 48px;
+  border: none;
+  font-size: 12px;
+  color: #050505;
+  font-weight: bold;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #ffb000;
+  word-spacing: 12px;
+}
+
+.total-price {
+  color: #000000;
+  font-size: 12px;
+  font-weight: bold;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  margin-right: 12px;
+}
+
+.price {
+  margin-top: 28px;
+  margin-left: 64px;
+  width: 80px;
+  display: flex;
+  justify-content: flex-end;
+  margin-right: 12px;
 }
