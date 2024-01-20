@@ -1,0 +1,124 @@
+html {
+  background-color: #f5f5dc;
+}
+
+.topdiv {
+  height: 60vh; /* 40% of the viewport height */
+  background-image: url("../img/cateringbg.jpg"); /* Replace 'cateringbg.jpg' with your actual image file */
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  flex-direction: column; /* Display children elements vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+.topdiv img {
+  max-width: 100%;
+  height: auto;
+  max-height: 70%; /* Adjust the max-height as needed */
+}
+
+.order-button {
+  margin-top: 20px; /* Adjust the margin as needed */
+  padding: 10px 20px;
+  background-color: #ffb000;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+
+  font-size: 16px; /* Adjust the font size as needed */
+  border: none;
+  border-radius: 10px; /* Adjust the border-radius for rounded corners */
+  cursor: pointer;
+  transition: transform 0.3s; /* Add a smooth transition effect */
+}
+
+.order-button:hover {
+  transform: scale(1.1); /* Enlarge the button on hover */
+}
+.orderdiv {
+  padding-top: 3vh;
+  background-color: #f5f5dc;
+  display: flex;
+  flex-direction: column; /* Display children elements vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+.orderdiv h1 {
+  color: #004225;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  text-decoration: none;
+  font-weight: 900;
+  padding-bottom: 2vh;
+}
+
+.circularnumber {
+  display: inline-block; /* Ensures that the anchor behaves like a block-level element */
+  width: 40px; /* Adjust the width and height to make it circular */
+  height: 40px;
+  line-height: 40px; /* Center the text vertically */
+  text-align: center; /* Center the text horizontally */
+  background-color: #ffb000;
+  color: #fff;
+  border: none;
+  border-radius: 50%; /* Make it circular by setting border-radius to 50% */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px; /* Adjust the font size as needed */
+  text-decoration: none; /* Remove the default underline for anchor elements */
+  cursor: pointer;
+  transition: transform 0.3s; /* Add a smooth transition effect */
+  margin: 1vh;
+}
+
+.circularnumber:hover {
+  transform: scale(1.1); /* Enlarge the button on hover */
+}
+
+.elementcontainer {
+  display: flex; /* Make the container a flex container */
+  justify-content: center; /* Align items with space around them */
+  align-items: center; /* Center items vertically */
+}
+
+.elementcontainer h5 {
+  color: #000000;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  text-decoration: none;
+}
+
+.elementcontainer img {
+  max-height: 7vh;
+  max-width: 7vh;
+}
+
+.bottomdiv {
+  padding-top: 4vh;
+  display: flex; /* Make the container a flex container to align children horizontally */
+  justify-content: center; /* Align items with space around them */
+  align-items: center; /* Center items vertically */
+  background-color: #f5f5dc;
+}
+
+.textandpiccontainer {
+  padding-left: 7vh;
+  max-width: 50vh; /* Adjust the max-width based on your design needs */
+  max-height: 50vh;
+  display: flex; /* Make the container a flex container to align children vertically */
+  flex-direction: column; /* Display children elements vertically */
+}
+
+.textandpiccontainer img {
+  max-height: 50vh;
+  max-width: 50vh;
+  border-radius: 10px;
+}
+
+.textandpiccontainer p {
+  color: #000000; /* Set paragraph color to black */
+  font-family: "Plus Jakarta Sans", sans-serif; /* Set the desired font-family */
+  text-align: justify; /* Justify the text within the paragraph */
+}
