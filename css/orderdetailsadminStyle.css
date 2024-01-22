@@ -1,0 +1,114 @@
+html {
+  background-color: #f5f5dc;
+}
+/* etong yung header */
+.h1 {
+  padding-top: 3vh;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: bolder;
+  text-align: center;
+}
+
+.ordernumdiv {
+  padding-top: 4vh;
+}
+
+.ordernumdiv p {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 2vh;
+  font-weight: bolder;
+}
+
+.ordersdiv {
+  display: flex;
+  flex-direction: column; /* Display children elements vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+
+.totalcost {
+  width: 100%; /* Take up 100% of the width of the parent div */
+  height: 100%; /* Take up 100% of the height of the parent div */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 2vh;
+  font-weight: bolder;
+  text-align: right;
+}
+.ordertype {
+  display: flex;
+
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
+.ordertypelabel {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 2vh;
+  font-weight: bolder;
+  margin-right: 2vh;
+}
+.highlightedordertype {
+  padding-left: 2vh;
+  padding-right: 2vh;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 2vh;
+
+  background-color: #004225; /* Green background color */
+  color: white; /* White text color */
+  border-radius: 10px; /* Adjust the radius for rounded corners */
+}
+
+.customerinfo {
+  width: 70vh;
+  height: 30vh;
+  background-color: white; /* White background color */
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow */
+  padding: 20px; /* Adjust the padding as needed */
+  text-align: left; /* Align content to the left */
+  border-radius: 20px; /* Adjust the radius for rounded corners */
+}
+
+.orderstatus {
+  margin-top: 4vh;
+}
+.orderstatus p {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 2vh;
+  font-weight: bolder;
+}
+
+.buttonscontainer {
+  display: inline-block;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.orderdetailsbutton {
+  margin-left: 2vh;
+  margin-right: 2vh;
+  margin-top: 20px;
+  padding: 10px 20px;
+  background-color: #ffb000;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 16px;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s;
+}
+/* di gumagana on hover for some reason dito*/
+
+.orderdetailsbutton:hover {
+  transform: scale(1.1);
+}
+.divforall {
+  padding-top: 3vh;
+  background-color: #f5f5dc;
+  display: flex;
+  flex-direction: column; /* Display children elements vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+}
