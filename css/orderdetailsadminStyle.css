@@ -59,7 +59,7 @@ html {
 
 .customerinfo {
   width: 70vh;
-  height: 30vh;
+  height: 35vh;
   background-color: white; /* White background color */
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Slight shadow */
   padding: 20px; /* Adjust the padding as needed */
@@ -67,6 +67,16 @@ html {
   border-radius: 20px; /* Adjust the radius for rounded corners */
 }
 
+.customerinfolabel {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.2vh;
+  font-weight: bolder;
+}
+
+.customerdata {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.2vh;
+}
 .orderstatus {
   margin-top: 4vh;
 }
@@ -104,6 +114,7 @@ html {
 .orderdetailsbutton:hover {
   transform: scale(1.1);
 }
+
 .divforall {
   padding-top: 3vh;
   background-color: #f5f5dc;
