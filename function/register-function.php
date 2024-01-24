@@ -14,8 +14,9 @@ use PHPMailer\PHPMailer\Exception;
 //Load Composer's autoloader
 require '../vendor/autoload.php';
 
-function sendemail_verify($fname,$email,$verify_token)
+function sendemail_verify($fname,$lname,$email,$verify_token)
 {
+    $name = $fname . " " . $lname;
     $mail = new PHPMailer(true);
 
     $mail->isSMTP();   
@@ -28,7 +29,7 @@ function sendemail_verify($fname,$email,$verify_token)
       
     $mail->Port       = 587;           
     
-    $mail->setFrom("cdemailverify@gmail.com", $fname);
+    $mail->setFrom("cdemailverify@gmail.com", $name);
     $mail->addAddress($email);
 
     $mail->isHTML(true);                                  //Set email format to HTML
@@ -80,7 +81,7 @@ if(isset($_POST['register_btn']))
 
      if($query_run)
      {
-        sendemail_verify("$fname","$email", "$verify_token");
+        sendemail_verify("$fname","$lname","$email", "$verify_token");
 
 
          $_SESSION['status'] = "Registration Succesful! Verify your Email";
