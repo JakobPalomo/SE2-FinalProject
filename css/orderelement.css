@@ -6,11 +6,31 @@
   margin: 24px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
+
+.labels {
+  display: flex;
+  flex-direction: row;
+}
+
+.labels p {
+  margin: 0;
+  font-size: 12px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.order-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 .description {
   resize: none;
   width: 550px;
   border-radius: 12px;
   border-width: 2.5px;
+  padding: 12px;
+  font-size: 12px;
 }
 .inputs {
   display: flex;
@@ -73,7 +93,8 @@ form {
   font-weight: bold;
   font-family: "Plus Jakarta Sans", sans-serif;
   border-radius: 6px;
-  width: 60%;
+  width: 62%;
+  padding: 12px;
 }
 
 .food-price {
@@ -84,6 +105,7 @@ form {
   font-family: "Plus Jakarta Sans", sans-serif;
   border-radius: 6px;
   width: 35%;
+  padding: 12px;
 }
 
 .buttons {

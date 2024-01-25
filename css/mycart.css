@@ -1,188 +1,190 @@
 body {
-    background-color: #f5f5dc;
+  background-color: #f5f5dc;
 }
 
 /* NAVBAR */
 .navbar.navbar-expand-lg {
-    background-color: #004225;
-    padding-top: 24px;
-    padding-bottom: 24px;
+  background-color: #004225;
+  padding-top: 24px;
+  padding-bottom: 24px;
 }
 
 .brand {
-    color: #ffffff;
-    text-decoration: none;
-    font-family: "Inika", serif;
-    font-weight: bolder;
-    font-size: 24px;
-    margin-left: 24px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Inika", serif;
+  font-weight: bolder;
+  font-size: 24px;
+  margin-left: 24px;
 }
 
 .navbutton {
-    color: #ffffff;
-    text-decoration: none;
-    font-family: "Plus Jakarta Sans", sans-serif;
-    margin-left: 12px;
-    margin-right: 12px;
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  margin-left: 12px;
+  margin-right: 12px;
 }
-  
+
 .navbar-toggler-icon {
-    background-color: white; /* Set the background color to white */
-    border-radius: 6px;
+  background-color: white; /* Set the background color to white */
+  border-radius: 6px;
 }
-  
+
 .collapse.navbar-collapse {
-    margin-right: 24px;
+  margin-right: 24px;
 }
 /* END OF NAVBAR */
 
-
-
+.order-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+}
 /* TEXT HEADING */
 .maintitle {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    display: flex;
-    justify-content: center;
-    margin-top: 36px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
 }
 
 .title {
-    font-size: 36px;
-    color: #004225;
-    font-weight: bold;
+  font-size: 36px;
+  color: #004225;
+  font-weight: bold;
 }
 /* END OF TEXT HEADING */
 
-
 /* SUBTITLE */
 .subtitle {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    display: flex;
-    justify-content: center;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: flex;
+  justify-content: center;
 }
 
 .subtitle-txt {
-    font-size: 20px;
-    color: #004225;
-    font-weight: bold;
+  font-size: 20px;
+  color: #004225;
+  font-weight: bold;
 }
 
 .subtitle-txt-2 {
-    font-size: 18px;
-    color: black;
-    font-weight: bold;
+  font-size: 18px;
+  color: black;
+  font-weight: bold;
 }
 
 .subtitle-txt-bg {
-    font-size: 20px;
-    text-align: center;
-    color: #f5f5dc;
-    font-weight: bold;
-    background-color: #004225;
-    border-radius: 20px;
-    width: 150px;
+  font-size: 20px;
+  text-align: center;
+  color: #f5f5dc;
+  font-weight: bold;
+  background-color: #004225;
+  border-radius: 20px;
+  width: 150px;
 }
 
 .subtitle-txt-bg {
-    margin-left:5px;
+  margin-left: 5px;
 }
 
 .subtitle-txt-bg-2 {
-    font-size: 12px;
-    text-align: center;
-    color: #6A6A6A;
-    font-weight: bold;
-    background-color: #ffffff;
-    border-radius: 10px;
-    width: 250px;
-    padding: 10px;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow property */
+  font-size: 12px;
+  text-align: center;
+  color: #6a6a6a;
+  font-weight: bold;
+  background-color: #ffffff;
+  border-radius: 10px;
+  width: 250px;
+  padding: 10px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow property */
 }
 /* END OF SUBTITLE */
 
-
 /* FOOTER */
 footer {
-    background-color: #ffffff; /* White background color */
-    text-align: center;
-    position: fixed;
-    bottom: 0;
-    width: 100%;
+  background-color: #ffffff; /* White background color */
+  text-align: center;
+  position: fixed;
+  bottom: 0;
+  width: 100%;
 }
 
 .footer-columns {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 15px;
 }
 
 .footer-column {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    flex: 1;
-    text-align: left;
-    padding: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  flex: 1;
+  text-align: left;
+  padding: 10px;
 }
 
 .footer-column:nth-child(1) {
-    flex: 60%;
+  flex: 60%;
 }
 
 .cart-checkout-btn {
-    background-color: #FFB000;
-    width:200px;
-    font-size:25px;
-    border:0px;
-    border-radius: 20px;
-    color: white;
-    font-weight: bold;
-    padding:10px;
+  background-color: #ffb000;
+  width: 200px;
+  font-size: 25px;
+  border: 0px;
+  border-radius: 20px;
+  color: white;
+  font-weight: bold;
+  padding: 10px;
 }
 
 /* CHECKBOX */
 .checkbox-container {
-    display: flex;
-    align-items: center;
-    margin-top:5px;
+  display: flex;
+  align-items: center;
+  margin-top: 5px;
 }
-  
+
 .checkbox-label {
-    margin-right: 10px;
-    font-size: 16px;
+  margin-right: 10px;
+  font-size: 16px;
 }
-  
+
 .custom-checkbox {
-    appearance: none;
-    -webkit-appearance: none;
-    -moz-appearance: none;
-    width: 15px;
-    height: 15px;
-    border: 2px solid #000; /* Black border */
-    border-radius: 4px;
-    outline: none;
-    cursor: pointer;
-    position: relative;
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  width: 15px;
+  height: 15px;
+  border: 2px solid #000; /* Black border */
+  border-radius: 4px;
+  outline: none;
+  cursor: pointer;
+  position: relative;
 }
-  
+
 .custom-checkbox:checked {
-    background-color: #000; /* Black background when checked */
-    border: 2px solid black; /* White border when checked */
+  background-color: #000; /* Black background when checked */
+  border: 2px solid black; /* White border when checked */
 }
-  
+
 .checkmark {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-    width: 10px;
-    height: 15px;
-    border: solid #fff; /* White checkmark color */
-    border-width: 0 3px 3px 0;
-    transform-origin: bottom;
-    display: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 10px;
+  height: 15px;
+  border: solid #fff; /* White checkmark color */
+  border-width: 0 3px 3px 0;
+  transform-origin: bottom;
+  display: none;
 }
-  
+
 .custom-checkbox:checked + .checkmark {
-    display: block;
+  display: block;
 }

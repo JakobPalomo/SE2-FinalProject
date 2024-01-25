@@ -4,6 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="../css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="../css/menuelement.css" />
     <link rel="stylesheet" type="text/css" href="../css/mycart.css" />
     <title>Document</title>
     <script
@@ -60,77 +61,122 @@
 
     <!-- Code zone -->
     <div class="maintitle">
-        <p class="title">My Cart</p>
+      <p class="title">My Cart</p>
     </div>
     <div class="subtitle">
-        <p class="subtitle-txt">Type</p>
-        <p class="subtitle-txt-bg">Single Order</p>
+      <p class="subtitle-txt">Type</p>
+      <p class="subtitle-txt-bg">Single Order</p>
     </div>
     <!-- INSERT COMPONENTS HERE -->
 
+    <div class="order-list" style="margin-bottom: 200px">
+      <div class="cart-item">
+        <img src="../img/food.jpg" alt="food" class="cart-display" />
+        <div class="detail-cart">
+          <p class="foodcart-name">Longganisa</p>
+          <p class="foodcart-name">
+            <button class="amount">-</button> 1
+            <button class="amount">+</button>
+          </p>
+        </div>
+        <div class="price">
+          <p class="total-price">₱250</p>
+          <img
+            src="../img/cross-circle (2).png"
+            alt="food"
+            width="24px"
+            height="24px"
+          />
+        </div>
+      </div>
 
-
-
-
-
-
-
-
-
-    
+      <div class="cart-item">
+        <img src="../img/food.jpg" alt="food" class="cart-display" />
+        <div class="detail-cart">
+          <p class="foodcart-name">Longganisa</p>
+          <p class="foodcart-name">
+            <button class="amount">-</button> 1
+            <button class="amount">+</button>
+          </p>
+        </div>
+        <div class="price">
+          <p class="total-price">₱250</p>
+          <img
+            src="../img/cross-circle (2).png"
+            alt="food"
+            width="24px"
+            height="24px"
+          />
+        </div>
+      </div>
+    </div>
 
     <!-- END OF COMPONENTS -->
-<!-- FOOTER -->
+    <!-- FOOTER -->
     <footer>
-        <div class="footer-columns">
-            <!-- TOTAL PRICE -->
-            <div class="footer-column">
-                <h8>Total Price</h8>
-                <p class="subtitle-txt-2">P 1,000.00</p>
-            </div>
-            <!-- CHECKBOXES -->
-            <div class="footer-column">
-                <div class="checkbox-container">
-                    <label class="checkbox-label" for="deliveryCheckbox">
-                    <input type="checkbox" id="deliveryCheckbox" class="custom-checkbox" onclick="handleCheckboxClick('deliveryCheckbox')">
-                    <div class="checkmark"></div>
-                    Delivery</label>
-                  </div>
-                  <div class="checkbox-container">
-                    <label class="checkbox-label" for="pickupCheckbox">
-                    <input type="checkbox" id="pickupCheckbox" class="custom-checkbox" onclick="handleCheckboxClick('pickupCheckbox')">
-                    <div class="checkmark"></div>
-                    Pickup</label>
-                  </div>
-            </div>
-            <!-- CHECKOUT BUTTON -->
-            <div class="footer-column">
-                <div class="cart-checkout">
-                    <button class="cart-checkout-btn">Checkout</button>
-                </div>
-            </div>
+      <div class="footer-columns">
+        <!-- TOTAL PRICE -->
+        <div class="footer-column">
+          <h8>Total Price</h8>
+          <p class="subtitle-txt-2">P 1,000.00</p>
         </div>
-<!-- END OF FOOTER -->
+        <!-- CHECKBOXES -->
+        <div class="footer-column">
+          <div class="checkbox-container">
+            <label class="checkbox-label" for="deliveryCheckbox">
+              <input
+                type="checkbox"
+                id="deliveryCheckbox"
+                class="custom-checkbox"
+                onclick="handleCheckboxClick('deliveryCheckbox')"
+              />
+              <div class="checkmark"></div>
+              Delivery</label
+            >
+          </div>
+          <div class="checkbox-container">
+            <label class="checkbox-label" for="pickupCheckbox">
+              <input
+                type="checkbox"
+                id="pickupCheckbox"
+                class="custom-checkbox"
+                onclick="handleCheckboxClick('pickupCheckbox')"
+              />
+              <div class="checkmark"></div>
+              Pickup</label
+            >
+          </div>
+        </div>
+        <!-- CHECKOUT BUTTON -->
+        <div class="footer-column">
+          <div class="cart-checkout">
+            <button class="cart-checkout-btn">Checkout</button>
+          </div>
+        </div>
+      </div>
+      <!-- END OF FOOTER -->
 
-<!-- JAVASCRIPT FOR CHECKBOX -->
-        <script>
-            function handleCheckboxClick(clickedCheckboxId) {
-              const checkboxes = ['deliveryCheckbox', 'pickupCheckbox'];
-        
-              checkboxes.forEach((checkboxId) => {
-                const checkbox = document.getElementById(checkboxId);
-                const checkmark = checkbox.nextElementSibling;
-        
-                if (checkboxId === clickedCheckboxId) {
-                  checkbox.checked = true;
-                  checkmark.style.display = 'block';
-                } else {
-                  checkbox.checked = false;
-                  checkmark.style.display = 'none';
-                }
-              });
+      <!-- JAVASCRIPT FOR CHECKBOX -->
+      <script>
+        function handleCheckboxClick(clickedCheckboxId) {
+          const checkboxes = ["deliveryCheckbox", "pickupCheckbox"];
+
+          checkboxes.forEach((checkboxId) => {
+            const checkbox = document.getElementById(checkboxId);
+            const checkmark = checkbox.nextElementSibling;
+
+            if (checkboxId === clickedCheckboxId) {
+              checkbox.checked = true;
+              checkmark.style.display = "block";
+            } else {
+              checkbox.checked = false;
+              checkmark.style.display = "none";
             }
-          </script>
+          });
+        }
+      </script>
     </footer>
 
-<!--End Code-->
+    <!--End Code-->
+  </body>
+</html>
