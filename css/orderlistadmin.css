@@ -1,0 +1,42 @@
+*{
+    font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+button.custom-button {
+    background-color: #F5F5DC; /* Default color */
+    color: #000; /* Default text color */
+    padding: 8px 16px; /* Adjust padding as needed */
+    border: none;
+    border-radius: 4px; /* Adjust border-radius as needed */
+    cursor: pointer;
+    transition: background-color 0.3s,color 0.3s; /* Smooth transition for color change */
+}
+
+button.custom-button:hover {
+    background-color: #004225; /* Color when hovered */
+    color: #fff;
+}
+
+button.custom-button:active {
+    background-color: #004225; /* Color when clicked */
+    color: #fff;
+}
+
+
+.white-box {
+    width: 100%;
+    height: 85px;
+    background-color: #fff;
+    margin-bottom: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+.order-number{
+    font-weight: bold;
+    font-size: 20px;
+}
+.email{
+    font-size:10px;
+}
+.new-text{
+    font-size:12px;
+}

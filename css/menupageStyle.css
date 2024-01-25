@@ -1,5 +1,14 @@
-html {
-  background-color: #f5f5dc;
+body {
+  margin-bottom: 56px;
+}
+
+.list {
+  margin: 24px;
+  align-items: center;
+  justify-content: center;
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
 }
 
 .topdiv {

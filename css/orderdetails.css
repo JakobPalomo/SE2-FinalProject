@@ -1,91 +1,93 @@
 /* TEXT HEADING */
 .maintitle {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    display: flex;
-    justify-content: center;
-    margin-top: 36px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: flex;
+  justify-content: center;
+  margin-top: 36px;
+}
+.order-list {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
 }
 
 .text-title {
-    font-size: 30px;
-    color: #004225;
-    font-weight: bold;
+  font-size: 30px;
+  color: #004225;
+  font-weight: bold;
 }
 
 .text-orderno {
-    font-size: 40px;
-    color: #004225;
-    font-weight: bold;
+  font-size: 40px;
+  color: #004225;
+  font-weight: bold;
 }
 
 .text-date {
-    font-size: 20px;
-    color: #004225;
-    font-weight: bold;
+  font-size: 20px;
+  color: #004225;
+  font-weight: bold;
 }
 
 .subtitle {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    display: flex;
-    justify-content: center;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  display: flex;
+  justify-content: center;
 }
 
-
 .subtitle-txt {
-    font-size: 20px;
-    color: #004225;
-    font-weight: bold;
+  font-size: 20px;
+  color: #004225;
+  font-weight: bold;
 }
 
 .subtitle-txt-2 {
-    font-size: 24px;
-    color: black;
-    font-weight: bold;
+  font-size: 24px;
+  color: black;
+  font-weight: bold;
 }
 
 .subtitle-txt-bg {
-    font-size: 20px;
-    text-align: center;
-    color: #f5f5dc;
-    font-weight: bold;
-    background-color: #00C36E;
-    border-radius: 20px;
-    width: 180px;
-    margin-left:10px;
-
+  font-size: 20px;
+  text-align: center;
+  color: #f5f5dc;
+  font-weight: bold;
+  background-color: #00c36e;
+  border-radius: 20px;
+  width: 180px;
+  margin-left: 10px;
 }
 
 /* END OF TEXT HEADING */
 
-
-
 .footer-columns {
-    display: flex;
-    justify-content: space-between;
-    max-width: 1200px;
-    margin: 0 auto;
-    margin-top: 15px;
+  display: flex;
+  justify-content: space-between;
+  max-width: 1200px;
+  margin: 0 auto;
+  margin-top: 15px;
 }
 
 .footer-column {
-    font-family: "Plus Jakarta Sans", sans-serif;
-    flex: 1;
-    text-align: left;
-    padding: 10px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  flex: 1;
+  text-align: left;
+  padding: 10px;
 }
 
 .footer-column:nth-child(1) {
-    flex: 60%;
+  flex: 60%;
 }
 
 .cart-checkout-btn {
-    background-color: #FFB000;
-    height:40px;
-    width:200px;
-    font-size:20px;
-    border:0px;
-    border-radius: 10px;
-    color: white;
-    font-weight: bold;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow property */
+  background-color: #ffb000;
+  height: 40px;
+  width: 200px;
+  font-size: 20px;
+  border: 0px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow property */
 }

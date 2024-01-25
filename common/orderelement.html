@@ -58,59 +58,56 @@
       </div>
     </nav>
     <!-- Code zone -->
-    <div class="order-item">
-      <img src="../img/food.jpg" alt="food" class="item-display" />
 
-      <div class="details">
-        <form action="/action_page.php">
-          <center>
-            <button class="add-item" style="background-color: #f0aa60">
-              Change Photo
-            </button>
-          </center>
-          <div>
-            <input
-              type="text"
-              id="fname"
-              name="fname"
-              value="Food Name"
-              class="food-name"
-            />
-            <input
-              type="text"
-              id="lname"
-              name="lname"
-              value="Price"
-              class="food-price"
-            />
-          </div>
+    <div class="order-list">
+      <div class="order-item">
+        <img src="../img/food.jpg" alt="food" class="item-display" />
 
-          <textarea
-            class="description"
-            id="w3review"
-            name="w3review"
-            rows="4"
-            cols="50"
-          >
- description about the food
-          </textarea>
-          <div class="buttons">
-            <input type="checkbox" id="age3" name="age" value="100" />
-            <label>Unavailable</label>
-          </div>
-          <br />
-          <div class="buttons">
-            <input type="submit" value="Cancel" class="add-item" />
-            <input type="submit" value="Submit" class="add-item" />
-            <img
-              src="../img/circle-trash.png"
-              alt="food"
-              style="height: 48px"
-            />
-          </div>
-        </form>
+        <div class="details">
+          <form action="/action_page.php">
+            <center>
+              <button class="add-item" style="background-color: #f0aa60">
+                Change Photo
+              </button>
+            </center>
+            <div class="labels">
+              <p style="margin-right: 56%; margin-left: 2px">Name</p>
+              <p>Price</p>
+            </div>
+            <div>
+              <input type="text" id="fname" name="fname" class="food-name" />
+              <input type="text" id="lname" name="lname" class="food-price" />
+            </div>
+
+            <div class="labels">
+              <p style="margin-right: 56%; margin-left: 2px">Description</p>
+            </div>
+            <textarea
+              class="description"
+              id="w3review"
+              name="w3review"
+              rows="4"
+              cols="50"
+            ></textarea>
+            <div class="buttons">
+              <input type="checkbox" id="age3" name="age" value="100" />
+              <label>Unavailable</label>
+            </div>
+            <br />
+            <div class="buttons">
+              <input type="submit" value="Cancel" class="add-item" />
+              <input type="submit" value="Submit" class="add-item" />
+              <img
+                src="../img/circle-trash.png"
+                alt="food"
+                style="height: 48px"
+              />
+            </div>
+          </form>
+        </div>
       </div>
     </div>
+
     <!-- End Code -->
   </body>
 </html>
