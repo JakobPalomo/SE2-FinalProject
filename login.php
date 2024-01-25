@@ -57,9 +57,10 @@ session_start();
 
           <div class="field">
             <input type="submit"  class="button" name="login_now_btn" value="Login"  required>
+            <a href ="password-reset.php" class="float-end">Forgot Password?</a>
           </div>
           <div class="links">
-            No Account yet?<a href="signUp.html"> Sign Up Now</a>
+            No Account yet?<a href="register.php"> Sign Up Now</a>
           </div>
           <div class="links">
             Verification Not Sent?<a href="resend-email-verification.php"> Resend</a>
