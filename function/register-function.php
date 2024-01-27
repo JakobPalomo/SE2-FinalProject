@@ -54,46 +54,49 @@ function sendemail_verify($fname,$lname,$email,$verify_token)
 
 
 //gets the input from the form
-if(isset($_POST['register_btn']))
-{
+if(isset($_POST['register_btn'])) {
     $fname = $_POST['fname'];
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $contact = $_POST['contact'];
-    $address = $_POST['address'];
-    $password = $_POST['password'];
+    $building_number = $_POST['building_number'];
+    $street = $_POST['street'];
+    $barangay = $_POST['barangay'];
+    $city = $_POST['city'];
+    $province = $_POST['province'];
+    $postal_code = $_POST['postal_code'];
+    $address = "$building_number, $street, $barangay, $city, $province, $postal_code";
+    $hashed_password = password_hash($password, PASSWORD_DEFAULT);
     $verify_token= md5(rand());
 
- //Email exists or not
- $check_email_query = "SELECT email FROM users WHERE email='$email' LIMIT 1";
- $check_email_query_run = mysqli_query($con, $check_email_query);
+    // Prepare the SELECT statement to check if email exists
+    $check_email_query = "SELECT email FROM users WHERE email=? LIMIT 1";
+    $stmt = mysqli_prepare($con, $check_email_query);
+    mysqli_stmt_bind_param($stmt, "s", $email);
+    mysqli_stmt_execute($stmt);
+    mysqli_stmt_store_result($stmt);
 
- if(mysqli_num_rows($check_email_query_run) > 0)
- {
-         $_SESSION['status'] = "Email  already exists";
+    if(mysqli_stmt_num_rows($stmt) > 0) {
+        $_SESSION['status'] = "Email already exists";
         header("Location: ../register.php");
- }
- else
- {
-     //Register user data
-     $query ="INSERT INTO users (fname, lname, email, contact, address, password, verify_token) VALUES ('$fname','$lname','$email','$contact','$address','$password','$verify_token')"; 
-     $query_run = mysqli_query($con, $query);
+        exit(); // Make sure to exit after redirection
+    } else {
+        // Prepare the INSERT statement to register user data
+        $query ="INSERT INTO users (fname, lname, email, contact, address, password, verify_token) VALUES (?, ?, ?, ?, ?, ?, ?)";
+        $stmt = mysqli_prepare($con, $query);
+        mysqli_stmt_bind_param($stmt, "sssssss", $fname, $lname, $email, $contact, $address, $hashed_password, $verify_token);
+        $query_run = mysqli_stmt_execute($stmt);
 
-     if($query_run)
-     {
-        sendemail_verify("$fname","$lname","$email", "$verify_token");
-
-
-         $_SESSION['status'] = "Registration Succesful! Verify your Email";
-         header("Location: ../register.php");
-     }
-     else
-     {
-         $_SESSION['status'] = "Registration Failed";
-         header("Location: ../register.php");
-     }
- }
-
-   
+        if($query_run) {
+            sendemail_verify($fname, $lname, $email, $verify_token);
+            $_SESSION['status'] = "Registration Successful! Verify your Email";
+            header("Location: ../register.php");
+            exit(); // Make sure to exit after redirection
+        } else {
+            $_SESSION['status'] = "Registration Failed";
+            header("Location: ../register.php");
+            exit(); // Make sure to exit after redirection
+        }
+    }
 }
 ?>
