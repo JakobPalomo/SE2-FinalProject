@@ -92,10 +92,8 @@ if(isset($_POST['password_reset_link']))
 
 }
 
-if(isset($_POST['password_update']))
-{
-    if(!empty($_POST['email']) && !empty($_POST['new_password']) && !empty($_POST['confirm_password']) && !empty($_POST['password_token']))
-    {
+if(isset($_POST['password_update'])) {
+    if(!empty($_POST['email']) && !empty($_POST['new_password']) && !empty($_POST['confirm_password']) && !empty($_POST['password_token'])) {
         $email = mysqli_real_escape_string($con, $_POST['email']);
         $new_password = mysqli_real_escape_string($con, $_POST['new_password']);
         $confirm_password = mysqli_real_escape_string($con, $_POST['confirm_password']);
@@ -108,53 +106,60 @@ if(isset($_POST['password_update']))
         mysqli_stmt_execute($stmt_check_token);
         mysqli_stmt_store_result($stmt_check_token);
 
-        if(mysqli_stmt_num_rows($stmt_check_token) > 0)
-        {
+        if(mysqli_stmt_num_rows($stmt_check_token) > 0) {
             // Check if new password matches confirm password
-            if($new_password === $confirm_password)
-            {
-                $hashed_new_password = password_hash($new_password, PASSWORD_DEFAULT);
+            if($new_password === $confirm_password) {
+                // Check password strength
+                if (is_strong_password($new_password)) {
+                    $hashed_new_password = password_hash($new_password, PASSWORD_DEFAULT);
 
-                // Update password and generate new token
-                $update_password_query = "UPDATE users SET password=?, verify_token=? WHERE verify_token=? LIMIT 1";
-                $stmt_update_password = mysqli_prepare($con, $update_password_query);
-                $new_token = md5(rand())."cd";
-                mysqli_stmt_bind_param($stmt_update_password, "sss", $hashed_new_password, $new_token, $token);
-                mysqli_stmt_execute($stmt_update_password);
+                    // Update password and generate new token
+                    $update_password_query = "UPDATE users SET password=?, verify_token=? WHERE verify_token=? LIMIT 1";
+                    $stmt_update_password = mysqli_prepare($con, $update_password_query);
+                    $new_token = md5(rand())."cd";
+                    mysqli_stmt_bind_param($stmt_update_password, "sss", $hashed_new_password, $new_token, $token);
+                    mysqli_stmt_execute($stmt_update_password);
 
-                if(mysqli_stmt_affected_rows($stmt_update_password) > 0)
-                {
-                    $_SESSION['status'] = "New Password Successfully Updated";
-                    header("Location: ../login.php");
-                    exit(0);
-                }
-                else
-                {
-                    $_SESSION['status'] = "Something went wrong";
+                    if(mysqli_stmt_affected_rows($stmt_update_password) > 0) {
+                        $_SESSION['status'] = "New Password Successfully Updated";
+                        header("Location: ../login.php");
+                        exit(0);
+                    } else {
+                        $_SESSION['status'] = "Something went wrong";
+                        header("Location: ../password-change.php?token=$token&email=$email");
+                        exit(0);
+                    }
+                } else {
+                    $_SESSION['status'] = "Password should be at least 8 characters long and include one uppercase letter, one lowercase letter, and one digit.";
                     header("Location: ../password-change.php?token=$token&email=$email");
                     exit(0);
                 }
-            }
-            else
-            {
-                $_SESSION['status'] = "Password and Confirm password does not match";
+            } else {
+                $_SESSION['status'] = "Password and Confirm password do not match";
                 header("Location: ../password-change.php?token=$token&email=$email");
                 exit(0);
             }
-        }
-        else
-        {
+        } else {
             $_SESSION['status'] = "Invalid Token";
             header("Location: ../password-change.php?token=$token&email=$email");
             exit(0);
         }
-    }
-    else
-    {
+    } else {
         $_SESSION['status'] = "All Fields are Mandatory";
         header("Location: ../password-change.php?token=$token&email=$email");
         exit(0);
     }
 }
 
+function is_strong_password($password) {
+    // Add your password strength criteria here
+    $length = strlen($password) >= 8;
+    $uppercase = preg_match('/[A-Z]/', $password);
+    $lowercase = preg_match('/[a-z]/', $password);
+    $digit = preg_match('/\d/', $password);
+
+    return $length && $uppercase && $lowercase && $digit;
+}
 ?>
+
+

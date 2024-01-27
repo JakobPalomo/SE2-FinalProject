@@ -1,7 +1,8 @@
 <?php 
 session_start();
-$page_title ="Password Reset";
+
 include('common/navbar.php');?>
+
 
 <div class="py-5">
     <div class="container">
@@ -19,7 +20,7 @@ include('common/navbar.php');?>
                             <h5> Change Password </h5>
                         </div>
                         <div class="card-body">
-                            <form action ="./function/password-reset-code.php" method ="POST">
+                        <form action ="./function/password-reset-code.php" method ="POST" onsubmit="return validatePassword()">
                                 <input type = "hidden" name ="password_token" value ="<?php if(isset($_GET['token'])){echo $_GET['token'];}?>">
                                 <div class="form-group mb-3">
                                     <label>Email Address</label>
@@ -43,5 +44,26 @@ include('common/navbar.php');?>
         </div>
     </div>
 </div>
+
+<script>
+    function validatePassword() {
+        var password = document.getElementById('new_password').value;
+        var confirmPassword = document.getElementById('confirm_password').value;
+
+        var passwordStrengthRegex = /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d).{8,}$/;
+
+        if (!passwordStrengthRegex.test(password)) {
+            alert("Password should contain at least 8 characters, including one uppercase letter, one lowercase letter, and one digit.");
+            return false;
+        }
+
+        if (password !== confirmPassword) {
+            alert("Passwords do not match.");
+            return false;
+        }
+
+        return true;
+    }
+</script>
 
 
