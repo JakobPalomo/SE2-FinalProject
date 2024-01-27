@@ -52,7 +52,7 @@ session_start();
 
           <div class="field input">
             <label for="Email">Password</label>
-            <input type="text" name="password"  atucomplete="off" required>
+            <input type="password" name="password"  atucomplete="off" required>
           </div>
 
           <div class="field">

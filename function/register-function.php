@@ -59,6 +59,7 @@ if(isset($_POST['register_btn'])) {
     $lname = $_POST['lname'];
     $email = $_POST['email'];
     $contact = $_POST['contact'];
+    $password= $_POST['password'];
     $building_number = $_POST['building_number'];
     $street = $_POST['street'];
     $barangay = $_POST['barangay'];

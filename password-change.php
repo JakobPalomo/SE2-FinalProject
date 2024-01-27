@@ -27,11 +27,11 @@ include('common/navbar.php');?>
                                 </div>
                                 <div class="form-group mb-3">
                                     <label>New Password</label>
-                                    <input type ="text" name ="new_password" class = "form-control" placeholder ="Enter Email Address">
+                                    <input type ="password" name ="new_password" class = "form-control" placeholder ="Enter New Password">
                                 </div>
                                 <div class="form-group mb-3">
                                     <label>Confirm Password</label>
-                                    <input type ="text" name ="confirm_password" class = "form-control" placeholder ="Enter Email Address">
+                                    <input type ="password" name ="confirm_password" class = "form-control" placeholder ="Confirm New Password">
                                 </div>
                                 <div class="form-group mb-3">
                                 <button type ="submit" name ="password_update" class = "btn btn-primary">Submit</button>
