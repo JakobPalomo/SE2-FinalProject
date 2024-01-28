@@ -18,11 +18,11 @@ $num=mysqli_fetch_array($sql);
 if($num>0)
 {
  $con=mysqli_query($con,"update admin set password='".md5($_POST['newpassword'])."', updationDate='$currentTime' where username='".$_SESSION['alogin']."'");
-$_SESSION['msg']="Password Changed Successfully !!";
+$_SESSION['msg']="Password Changed Successfully!";
 }
 else
 {
-$_SESSION['msg']="Old Password not match !!";
+$_SESSION['msg']="Old Password not match!";
 }
 }
 ?>
@@ -42,25 +42,25 @@ function valid()
 {
 if(document.chngpwd.password.value=="")
 {
-alert("Current Password Filed is Empty !!");
+alert("Current Password Filed is Empty!");
 document.chngpwd.password.focus();
 return false;
 }
 else if(document.chngpwd.newpassword.value=="")
 {
-alert("New Password Filed is Empty !!");
+alert("New Password Filed is Empty!");
 document.chngpwd.newpassword.focus();
 return false;
 }
 else if(document.chngpwd.confirmpassword.value=="")
 {
-alert("Confirm Password Filed is Empty !!");
+alert("Confirm Password Filed is Empty!");
 document.chngpwd.confirmpassword.focus();
 return false;
 }
 else if(document.chngpwd.newpassword.value!= document.chngpwd.confirmpassword.value)
 {
-alert("Password and Confirm Password Field do not match  !!");
+alert("Password and Confirm Password Field do not match!");
 document.chngpwd.confirmpassword.focus();
 return false;
 }
