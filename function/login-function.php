@@ -21,6 +21,7 @@ if (isset($_POST['login_now_btn'])) {
                     // Add other admin fields as needed
                 ];
 
+                $_SESSION['alogin'] = $admin_row['username'];
                 header("Location: ../admin/insert-product.php");
                 exit(0);
             } else {
@@ -50,7 +51,11 @@ if (isset($_POST['login_now_btn'])) {
                 if ($_SESSION['status'] = "Logged in Successfully") {
                     header("Location: ../index.php");
                     exit(0);
-                } 
+                } else {
+                    $_SESSION['status'] = "Logged in Successfully";
+                    header("Location: ../index.php");
+                    exit(0);
+                }
             } else {
                 $_SESSION['status'] = "Account Not Verified";
                 header("Location: ../login.php");
