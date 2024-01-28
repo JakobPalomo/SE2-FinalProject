@@ -1,3 +1,6 @@
+<?php
+include('dbcon.php');
+?> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -41,19 +44,19 @@
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
           <?php if(!isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
-              <a class="navbutton" aria-current="page" href="../login.php">Login</a>
+              <a class="navbutton" aria-current="page" href="./login.php">Login</a>
             </li>
             <li class="nav-item">
-              <a class="navbutton" aria-current="page" href="../register.php">Register</a>
+              <a class="navbutton" aria-current="page" href="./register.php">Register</a>
             </li>
             <?php endif?>
             <?php if(isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
-              <a class="navbutton" aria-current="page" href="../logout.php">Logout</a>
+              <a class="navbutton" aria-current="page" href="./logout.php">Logout</a>
             </li>
             <?php endif?>
             <li class="nav-item">
-              <a class="navbutton" href="../menupage.php">Menu</a>
+              <a class="navbutton" href="category.php?cid=8">Menu</a>
             </li>
             <li class="nav-item">
               <a class="navbutton" href="#">FAQs</a>

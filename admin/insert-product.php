@@ -150,7 +150,7 @@ while($row=mysqli_fetch_array($query))
 </div>
 </div>
 <div class="control-group">
-<label class="control-label" for="basicinput">Item Price</label>
+<label class="control-label" for="basicinput">Item Price Before Discount</label>
 <div class="controls">
 <input type="text"    name="productpricebd"  placeholder="Enter Item Price Before Discount" class="span8 tip" required>
 </div>

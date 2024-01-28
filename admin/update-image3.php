@@ -17,7 +17,7 @@ if(isset($_POST['submit']))
 
 	move_uploaded_file($_FILES["productimage3"]["tmp_name"],"productimages/$pid/".$_FILES["productimage3"]["name"]);
 	$sql=mysqli_query($con,"update  products set productImage3='$productimage3' where id='$pid' ");
-$_SESSION['msg']="Product Image Updated Successfully !!";
+$_SESSION['msg']="Item Image Updated Successfully!";
 
 }
 

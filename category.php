@@ -1,5 +1,6 @@
 <?php
 include('dbcon.php');
+$cid=intval($_GET['cid']);
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -52,45 +53,38 @@ include('dbcon.php');
         <?php
         }
         ?>
-</div>
+      </div>
 
     <div class="list">
 
-      <div class="menu-item">
-        <img src="img/food.jpg" alt="food" class="menu-display" />
-        <div class="detail-field">
-          <p class="food-name">Longganisa</p>
-          <p class="food-price">₱250</p>
-        </div>
-        <div class="desc-field">
-          <p class="food-desc">This is a traditional food item now available</p>
-        </div>
-        <center><button class="add-item">Add Item</button></center>
-      </div>
+          <?php
+          $ret = mysqli_query($con, "select * from products where category='$cid'");
+          $num = mysqli_num_rows($ret);
 
-      <div class="menu-item">
-        <img src="img/food.jpg" alt="food" class="menu-display" />
-        <div class="detail-field">
-          <p class="food-name">Longganisa</p>
-          <p class="food-price">₱250</p>
-        </div>
-        <div class="desc-field">
-          <p class="food-desc">This is a traditional food item now available</p>
-        </div>
-        <center><button class="add-item">Add Item</button></center>
-      </div>
-
-      <div class="menu-item">
-        <img src="img/food.jpg" alt="food" class="menu-display" />
-        <div class="detail-field">
-          <p class="food-name">Longganisa</p>
-          <p class="food-price">₱250</p>
-        </div>
-        <div class="desc-field">
-          <p class="food-desc">This is a traditional food item now available</p>
-        </div>
-        <center><button class="add-item">Add Item</button></center>
-      </div>
+          if ($num > 0) {
+              while ($row = mysqli_fetch_array($ret)) {
+          ?>
+                  <div class="menu-item">
+                      <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
+                      <div class="detail-field">
+                          <p class="food-name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']); ?>"><?php echo htmlentities($row['productName']); ?></a></p>
+                          <p class="food-price">₱<?php echo htmlentities($row['productPrice']); ?></p>
+                      </div>
+                      <div class="desc-field">
+                          <p class="food-desc"><?php echo htmlentities($row['productDescription']); ?></p>
+                      </div>
+                      <center><button class="add-item">Add to Cart</button></center>
+                  </div>
+          <?php
+                    }
+                } else {
+                ?>
+                   
+                 <p class="food-name">No Products Found</p>
+            
+                <?php
+                }
+                ?>
     </div>
 
     <!--Menu item-->
