@@ -12,14 +12,25 @@ if(isset($_POST['submit']))
 {
 	$productname=$_POST['productName'];
 	$productimage1=$_FILES["productimage1"]["name"];
-//$dir="productimages";
-//unlink($dir.'/'.$pimage);
+	
+	$targetDirectory = "productimages/$pid/";
 
+    // Create the target directory if it doesn't exist
+    if (!file_exists($targetDirectory)) {
+        mkdir($targetDirectory, 0777, true);
+    }
 
-	move_uploaded_file($_FILES["productimage1"]["tmp_name"],"productimages/$pid/".$_FILES["productimage1"]["name"]);
-	$sql=mysqli_query($con,"update  products set productImage1='$productimage1' where id='$pid' ");
-$_SESSION['msg']="Item Image Updated Successfully!";
+    $targetPath = $targetDirectory . $_FILES["productimage1"]["name"];
 
+    // Move the uploaded file to the target directory
+    if (move_uploaded_file($_FILES["productimage1"]["tmp_name"], $targetPath)) {
+        // Update the database with the new image path
+        $sql = mysqli_query($con, "UPDATE products SET productImage1='$productimage1' WHERE id='$pid'");
+        $_SESSION['msg'] = "Item Image Updated Successfully!";
+    } else {
+        // Handle the case where the file couldn't be moved
+        echo "Error moving file.";
+    }
 }
 
 
@@ -29,7 +40,7 @@ $_SESSION['msg']="Item Image Updated Successfully!";
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin| Update Product Image</title>
+	<title>Admin | Update Product Image</title>
 	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">

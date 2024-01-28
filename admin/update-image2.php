@@ -12,15 +12,25 @@ if(isset($_POST['submit']))
 {
 	$productname=$_POST['productName'];
 	$productimage2=$_FILES["productimage2"]["name"];
+	
+	$targetDirectory = "productimages/$pid/";
 
-//dir="productimages";
-//unlink($dir.'/'.$pimage);
+    // Create the target directory if it doesn't exist
+    if (!file_exists($targetDirectory)) {
+        mkdir($targetDirectory, 0777, true);
+    }
 
+    $targetPath = $targetDirectory . $_FILES["productimage1"]["name"];
 
-	move_uploaded_file($_FILES["productimage2"]["tmp_name"],"productimages/$pid/".$_FILES["productimage2"]["name"]);
-	$sql=mysqli_query($con,"update  products set productImage2='$productimage2' where id='$pid' ");
-$_SESSION['msg']="Item Image Updated Successfully!";
-
+    // Move the uploaded file to the target directory
+    if (move_uploaded_file($_FILES["productimage1"]["tmp_name"], $targetPath)) {
+        // Update the database with the new image path
+        $sql = mysqli_query($con, "UPDATE products SET productImage1='$productimage1' WHERE id='$pid'");
+        $_SESSION['msg'] = "Item Image Updated Successfully!";
+    } else {
+        // Handle the case where the file couldn't be moved
+        echo "Error moving file.";
+    }
 }
 
 
