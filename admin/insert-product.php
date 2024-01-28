@@ -2,7 +2,7 @@
 <?php
 session_start();
 include('include/config.php');
-if(($_SESSION['auth_user'])==1)
+if(strlen($_SESSION['alogin'])==0)
 	{	
 header('location:index.php');
 }
