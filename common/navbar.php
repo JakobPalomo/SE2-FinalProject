@@ -53,7 +53,7 @@
             </li>
             <?php endif?>
             <li class="nav-item">
-              <a class="navbutton" href="#">Menu</a>
+              <a class="navbutton" href="menupage.php">Menu</a>
             </li>
             <li class="nav-item">
               <a class="navbutton" href="#">FAQs</a>
