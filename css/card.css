@@ -1,0 +1,46 @@
+html,
+body {
+  height: 100%;
+  margin: 0;
+  padding: 0;
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+}
+.sidebar {
+  background-color: #cbcbcb;
+  width: 240px;
+  height: 100%;
+}
+.card-field {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+.card-place {
+  background-color: white;
+  width: 85%;
+  height: 85%;
+  border-radius: 9px;
+  border-style: solid;
+  border-width: 2.8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+}
+.card-title {
+  background-color: #ffb000;
+  padding: 18px;
+  border-top-right-radius: 6px;
+  border-top-left-radius: 6px;
+  display: flex;
+  justify-content: center;
+}
+.card-title h1 {
+  color: #101010;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: bolder;
+  font-size: 24px;
+}
