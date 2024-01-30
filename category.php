@@ -68,7 +68,8 @@ $cid=intval($_GET['cid']);
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                       <div class="detail-field">
                           <p class="food-name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']); ?>"><?php echo htmlentities($row['productName']); ?></a></p>
-                          <p class="food-price">₱<?php echo htmlentities($row['productPrice']); ?></p>
+                          <p class="food-price">View Prices</p>
+                          
                       </div>
                       <div class="desc-field">
                           <p class="food-desc"><?php echo htmlentities($row['productDescription']); ?></p>

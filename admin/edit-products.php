@@ -8,19 +8,25 @@ header('location:index.php');
 }
 else{
 	$pid=intval($_GET['id']);// product id
+
+	
 if(isset($_POST['submit']))
 {
 	$category=$_POST['category'];
 	$subcat=$_POST['subcategory'];
 	$productname=$_POST['productName'];
-	$productsize=$_POST['productSize'];
-	$productprice=$_POST['productprice'];
-	$productpricebd=$_POST['productpricebd'];
+	$mediumPrice=$_POST['mediumPrice'];
+	$largePrice=$_POST['largePrice'];
+	$xlPrice=$_POST['xlPrice'];
+	$xxlPrice=$_POST['xxlPrice'];
 	$productdescription=$_POST['productDescription'];
-	$productscharge=$_POST['productShippingcharge'];
 	$productavailability=$_POST['productAvailability'];
+	$productimage1=$_FILES["productimage1"]["name"];
+	$productimage2=$_FILES["productimage2"]["name"];
+	$productimage3=$_FILES["productimage3"]["name"];
 	
-$sql=mysqli_query($con,"update  products set category='$category',subCategory='$subcat',productName='$productname',productSize='$productsize',productPrice='$productprice',productDescription='$productdescription',shippingCharge='$productscharge',productAvailability='$productavailability',productPriceBeforeDiscount='$productpricebd' where id='$pid' ");
+	$sql = mysqli_query($con, "UPDATE products SET category='$category', subCategory='$subcat', productName='$productname', mediumPrice='$mediumPrice', largePrice='$largePrice', xlPrice='$xlPrice', xxlPrice='$xxlPrice', productDescription='$productdescription', productAvailability='$productavailability' WHERE id='$pid'");
+
 $_SESSION['msg']="Item Updated Successfully!";
 
 }
@@ -149,23 +155,33 @@ while($rw=mysqli_fetch_array($query))
 </div>
 </div>
 
+
+
 <div class="control-group">
-<label class="control-label" for="basicinput">Item Size</label>
+<label class="control-label" for="basicinput">Medium Price</label>
 <div class="controls">
-<input type="text"    name="productSize"  placeholder="Enter Item Size" value="<?php echo htmlentities($row['productSize']);?>" class="span8 tip" required>
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="basicinput">Item Price Before Discount</label>
-<div class="controls">
-<input type="text"    name="productpricebd"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['productPriceBeforeDiscount']);?>"  class="span8 tip" required>
+<input type="text"    name="mediumPrice"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['mediumPrice']);?>" class="span8 tip" required>
 </div>
 </div>
 
 <div class="control-group">
-<label class="control-label" for="basicinput">Item Selling Price</label>
+<label class="control-label" for="basicinput">Large Price</label>
 <div class="controls">
-<input type="text"    name="productprice"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['productPrice']);?>" class="span8 tip" required>
+<input type="text"   name="largePrice"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['largePrice']);?>" class="span8 tip" required>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="basicinput">XL Price</label>
+<div class="controls">
+<input type="text"   name="xlPrice"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['xlPrice']);?>" class="span8 tip" required>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="basicinput">XXL Price</label>
+<div class="controls">
+<input type="text"    name="xxlPrice"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['xxlPrice']);?>" class="span8 tip" required>
 </div>
 </div>
 
@@ -178,12 +194,7 @@ while($rw=mysqli_fetch_array($query))
 </div>
 </div>
 
-<div class="control-group">
-<label class="control-label" for="basicinput">Item Shipping Charge</label>
-<div class="controls">
-<input type="text"    name="productShippingcharge"  placeholder="Enter Product Shipping Charge" value="<?php echo htmlentities($row['shippingCharge']);?>" class="span8 tip" required>
-</div>
-</div>
+
 
 <div class="control-group">
 <label class="control-label" for="basicinput">Item Availability</label>
@@ -199,28 +210,47 @@ while($rw=mysqli_fetch_array($query))
 
 
 <div class="control-group">
-<label class="control-label" for="basicinput">Item Image1</label>
-<div class="controls">
-<img src="productimages/<?php echo htmlentities($pid);?>/<?php echo htmlentities($row['productImage1']);?>" width="200" height="100"> <a href="update-image1.php?id=<?php echo $row['id'];?>">Change Image</a>
+    <label class="control-label" for="basicinput">Item Image1</label>
+    <div class="controls">
+        <?php
+        if (isset($row['productImage1']) && !empty($row['productImage1'])) {
+            echo '<img src="productimages/' . htmlentities($pid) . '/' . htmlentities($row['productImage1']) . '" width="200" height="100">';
+            echo '<a href="update-image1.php?id=' . $row['id'] . '">Change Image</a>';
+        } else {
+            echo 'No Image Available';
+        }
+        ?>
+    </div>
 </div>
-</div>
-
-
-<div class="control-group">
-<label class="control-label" for="basicinput">Item Image2</label>
-<div class="controls">
-<img src="productimages/<?php echo htmlentities($pid);?>/<?php echo htmlentities($row['productImage2']);?>" width="200" height="100"> <a href="update-image2.php?id=<?php echo $row['id'];?>">Change Image</a>
-</div>
-</div>
-
-
 
 <div class="control-group">
-<label class="control-label" for="basicinput">Item Image3</label>
-<div class="controls">
-<img src="productimages/<?php echo htmlentities($pid);?>/<?php echo htmlentities($row['productImage3']);?>" width="200" height="100"> <a href="update-image3.php?id=<?php echo $row['id'];?>">Change Image</a>
+    <label class="control-label" for="basicinput">Item Image2</label>
+    <div class="controls">
+        <?php
+        if (isset($row['productImage2']) && !empty($row['productImage2'])) {
+            echo '<img src="productimages/' . htmlentities($pid) . '/' . htmlentities($row['productImage2']) . '" width="200" height="100">';
+            echo '<a href="update-image2.php?id=' . $row['id'] . '">Change Image</a>';
+        } else {
+            echo 'No Image Available';
+        }
+        ?>
+    </div>
 </div>
+
+<div class="control-group">
+    <label class="control-label" for="basicinput">Item Image3</label>
+    <div class="controls">
+        <?php
+        if (isset($row['productImage3']) && !empty($row['productImage3'])) {
+            echo '<img src="productimages/' . htmlentities($pid) . '/' . htmlentities($row['productImage3']) . '" width="200" height="100">';
+            echo '<a href="update-image3.php?id=' . $row['id'] . '">Change Image</a>';
+        } else {
+            echo 'No Image Available';
+        }
+        ?>
+    </div>
 </div>
+
 <?php } ?>
 	<div class="control-group">
 											<div class="controls">

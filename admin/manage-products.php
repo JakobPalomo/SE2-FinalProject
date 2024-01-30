@@ -62,7 +62,10 @@ if(isset($_GET['del']))
 											<th>Item Name</th>
 											<th>Category </th>
 											<th>Subcategory</th>
-											<th>Item Size</th>
+											<th>Medium Price</th>
+											<th>Large Price</th>
+											<th>XL Price</th>
+											<th>XXL Price</th>
 											<th>Item Creation Date</th>
 											<th>Action</th>
 										</tr>
@@ -79,7 +82,10 @@ while($row=mysqli_fetch_array($query))
 											<td><?php echo htmlentities($row['productName']);?></td>
 											<td><?php echo htmlentities($row['categoryName']);?></td>
 											<td> <?php echo htmlentities($row['subcategory']);?></td>
-											<td><?php echo htmlentities($row['productSize']);?></td>
+											<td><?php echo htmlentities($row['mediumPrice']);?></td>
+											<td><?php echo htmlentities($row['largePrice']);?></td>
+											<td><?php echo htmlentities($row['xlPrice']);?></td>
+											<td><?php echo htmlentities($row['xxlPrice']);?></td>
 											<td><?php echo htmlentities($row['postingDate']);?></td>
 											<td>
 											<a href="edit-products.php?id=<?php echo $row['id']?>" ><i class="icon-edit"></i></a>
