@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 30, 2024 at 02:33 PM
+-- Generation Time: Jan 30, 2024 at 03:21 PM
 -- Server version: 10.4.25-MariaDB
 -- PHP Version: 8.1.10
 
@@ -123,7 +123,9 @@ CREATE TABLE `products` (
 --
 
 INSERT INTO `products` (`id`, `category`, `subCategory`, `productName`, `mediumPrice`, `largePrice`, `xlPrice`, `xxlPrice`, `productDescription`, `productImage1`, `productImage2`, `productImage3`, `productAvailability`, `postingDate`, `updationDate`) VALUES
-(1, '8', '14', 'Chicken Parm', '100.00', '200.00', '300.00', '400.00', 'Yummers', 'Chicken-Parmesan-1.jpg', '', '', 'In Stock', '2024-01-30 13:31:36', '2024-01-30 13:31:36');
+(1, '8', '14', 'Chicken Parmesan', '3000.00', '200.00', '3000.00', '500.00', 'Yummers', 'project.jpg', '', '', 'In Stock', '2024-01-30 13:31:36', '2024-01-30 14:06:59'),
+(2, '8', '14', 'Chicken Inasal', '100.00', '200.00', '300.00', '400.00', 'Yummerz', 'download.jfif', '', '', 'In Stock', '2024-01-30 14:16:08', '2024-01-30 14:16:08'),
+(3, '8', '14', 'Orange Chicken', '100.00', '200.00', '300.00', '400.00', 'yummerz', 'download (1).jfif', '', '', 'In Stock', '2024-01-30 14:16:34', '2024-01-30 14:16:34');
 
 -- --------------------------------------------------------
 
@@ -287,7 +289,7 @@ ALTER TABLE `ordertrackhistory`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `subcategory`

@@ -1,4 +1,5 @@
 <?php
+session_start();
 include('dbcon.php');
 $cid=intval($_GET['cid']);
 ?> 
