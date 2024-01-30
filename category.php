@@ -75,19 +75,103 @@ $cid=intval($_GET['cid']);
                       <div class="desc-field">
                           <p class="food-desc"><?php echo htmlentities($row['productDescription']); ?></p>
                       </div>
-                      <center><button class="add-item">Add to Cart</button></center>
-                  </div>
-          <?php
-                    }
-                } else {
-                ?>
-                   
-                 <p class="food-name">No Products Found</p>
-            
-                <?php
-                }
-                ?>
-    </div>
+                      <center>
+                    <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>">Add to Cart</button>
+                </center>
+                  <!-- Modal -->
+                  <div class="modal fade" id="addToCartModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                        <div class="modal-content">
+                            <div class="modal-header">
+                                <h5 class="modal-title" id="addToCartModalLabel">Add to Cart</h5>
+                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                            </div>
+                            <div class="modal-body">
+                                <form id="addToCartForm">
+                                    <label for="quantity">Quantity:</label>
+                                    <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+
+                                    <label for="size">Size:</label>
+                                    <select id="size" name="size" required>
+                                        <option value="M">M</option>
+                                        <option value="L">L</option>
+                                        <option value="XL">XL</option>
+                                        <option value="XXL">XXL</option>
+                                    </select>
+
+                                    <p id="priceDisplay">Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
+
+                                    <p id="totalPriceDisplay">Total Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
+
+                                    <input type="hidden" id="productId" name="productId" value="<?php echo $row['id']; ?>">
+                                </form>
+                            </div>
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                <button type="button" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+    <?php
+        }
+    } else {
+    ?>
+        <p class="food-name">No Products Found</p>
+    <?php
+    }
+    ?>
+</div>
+
+<script>
+    // Function to update price and total price based on selected size and quantity
+    function updateTotalPrice() {
+    console.log("Function called");
+
+    var size = document.getElementById('size').value;
+    var quantity = document.getElementById('quantity').value;
+    var productId = document.getElementById('productId').value;
+
+    console.log("Size: " + size);
+    console.log("Quantity: " + quantity);
+    console.log("Product ID: " + productId);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open('GET', 'get_price.php?productId=' + productId + '&size=' + size, true);
+    xhr.onreadystatechange = function() {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            console.log("Response received: " + xhr.responseText);
+
+            var price = parseFloat(xhr.responseText);
+            console.log("Parsed Price: " + price);
+
+            var totalPrice = price * quantity;
+            console.log("Total Price: " + totalPrice);
+
+            document.getElementById('priceDisplay').innerHTML = 'Price: $' + price.toFixed(2);
+            document.getElementById('totalPriceDisplay').innerHTML = 'Total Price: $' + totalPrice.toFixed(2);
+        }
+    };
+    xhr.send();
+}
+
+    // Add event listeners for quantity and size
+    document.getElementById('quantity').addEventListener('change', updateTotalPrice);
+    document.getElementById('size').addEventListener('change', updateTotalPrice);
+
+    // Function to handle adding to cart
+    function addToCart() {
+        // You can use JavaScript to submit the form or perform additional actions
+        // For simplicity, let's just close the modal for now
+        var addToCartForm = document.getElementById('addToCartForm');
+        addToCartForm.submit(); // You can use AJAX to submit the form without refreshing the page
+
+        // Close the modal
+        var modal = new bootstrap.Modal(document.getElementById('addToCartModal'));
+        modal.hide();
+    }
+</script>
 
     <!--Menu item-->
 
