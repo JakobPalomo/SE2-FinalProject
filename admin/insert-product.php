@@ -13,11 +13,11 @@ if(isset($_POST['submit']))
 	$category=$_POST['category'];
 	$subcat=$_POST['subcategory'];
 	$productname=$_POST['productName'];
-	$productsize=$_POST['productSize'];
-	$productprice=$_POST['productprice'];
-	$productpricebd=$_POST['productpricebd'];
+	$mediumPrice=$_POST['mediumPrice'];
+	$largePrice=$_POST['largePrice'];
+	$xlPrice=$_POST['xlPrice'];
+	$xxlPrice=$_POST['xxlPrice'];
 	$productdescription=$_POST['productDescription'];
-	$productscharge=$_POST['productShippingcharge'];
 	$productavailability=$_POST['productAvailability'];
 	$productimage1=$_FILES["productimage1"]["name"];
 	$productimage2=$_FILES["productimage2"]["name"];
@@ -34,7 +34,7 @@ if(!is_dir($dir)){
 	move_uploaded_file($_FILES["productimage1"]["tmp_name"],"productimages/$productid/".$_FILES["productimage1"]["name"]);
 	move_uploaded_file($_FILES["productimage2"]["tmp_name"],"productimages/$productid/".$_FILES["productimage2"]["name"]);
 	move_uploaded_file($_FILES["productimage3"]["tmp_name"],"productimages/$productid/".$_FILES["productimage3"]["name"]);
-$sql=mysqli_query($con,"insert into products(category,subCategory,productName,productSize,productPrice,productDescription,shippingCharge,productAvailability,productImage1,productImage2,productImage3,productPriceBeforeDiscount) values('$category','$subcat','$productname','$productsize','$productprice','$productdescription','$productscharge','$productavailability','$productimage1','$productimage2','$productimage3','$productpricebd')");
+$sql=mysqli_query($con,"insert into products(category,subCategory,productName,mediumPrice,largePrice,xlPrice,xxlPrice,productDescription,productAvailability,productImage1,productImage2,productImage3) values('$category','$subcat','$productname','$mediumPrice','$largePrice','$xlPrice','$xxlPrice','$productdescription','$productavailability','$productimage1','$productimage2','$productimage3')");
 $_SESSION['msg']="Item Added Successfully!";
 
 }
@@ -143,23 +143,32 @@ while($row=mysqli_fetch_array($query))
 </div>
 </div>
 
+
 <div class="control-group">
-<label class="control-label" for="basicinput">Item Size</label>
+<label class="control-label" for="basicinput">Medium Price</label>
 <div class="controls">
-<input type="text"    name="productSize"  placeholder="Enter Item Size" class="span8 tip" required>
-</div>
-</div>
-<div class="control-group">
-<label class="control-label" for="basicinput">Item Price Before Discount</label>
-<div class="controls">
-<input type="text"    name="productpricebd"  placeholder="Enter Item Price Before Discount" class="span8 tip" required>
+<input type="text"    name="mediumPrice"  placeholder="Enter Item Price Before Discount" class="span8 tip" required>
 </div>
 </div>
 
 <div class="control-group">
-<label class="control-label" for="basicinput">Item Selling Price</label>
+<label class="control-label" for="basicinput">Large Price</label>
 <div class="controls">
-<input type="text"    name="productprice"  placeholder="Enter Item Selling Price" class="span8 tip" required>
+<input type="text"    name="largePrice"  placeholder="Enter Item Selling Price" class="span8 tip" required>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="basicinput">XL Price</label>
+<div class="controls">
+<input type="text"    name="xlPrice"  placeholder="Enter Item Selling Price" class="span8 tip" required>
+</div>
+</div>
+
+<div class="control-group">
+<label class="control-label" for="basicinput">XXL Price</label>
+<div class="controls">
+<input type="text"    name="xxlPrice"  placeholder="Enter Item Selling Price" class="span8 tip" required>
 </div>
 </div>
 
@@ -168,13 +177,6 @@ while($row=mysqli_fetch_array($query))
 <div class="controls">
 <textarea  name="productDescription"  placeholder="Enter Product Description" rows="6" class="span8 tip">
 </textarea>  
-</div>
-</div>
-
-<div class="control-group">
-<label class="control-label" for="basicinput">Item Shipping Charge</label>
-<div class="controls">
-<input type="text"    name="productShippingcharge"  placeholder="Enter Product Shipping Charge" class="span8 tip" required>
 </div>
 </div>
 
@@ -188,7 +190,6 @@ while($row=mysqli_fetch_array($query))
 </select>
 </div>
 </div>
-
 
 
 <div class="control-group">
