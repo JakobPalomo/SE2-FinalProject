@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 27, 2024 at 12:59 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Jan 30, 2024 at 02:33 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `admin` (
   `password` varchar(255) NOT NULL,
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
@@ -54,7 +54,7 @@ CREATE TABLE `category` (
   `categoryDescription` longtext DEFAULT NULL,
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `category`
@@ -78,7 +78,7 @@ CREATE TABLE `orders` (
   `orderDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `paymentMethod` varchar(50) DEFAULT NULL,
   `orderStatus` varchar(55) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -92,7 +92,7 @@ CREATE TABLE `ordertrackhistory` (
   `status` varchar(255) DEFAULT NULL,
   `remark` mediumtext DEFAULT NULL,
   `postingDate` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -102,28 +102,28 @@ CREATE TABLE `ordertrackhistory` (
 
 CREATE TABLE `products` (
   `id` int(11) NOT NULL,
-  `category` int(11) NOT NULL,
-  `subCategory` int(11) DEFAULT NULL,
-  `productName` varchar(255) DEFAULT NULL,
-  `productSize` varchar(255) DEFAULT NULL,
-  `productPrice` int(11) DEFAULT NULL,
-  `productPriceBeforeDiscount` int(11) DEFAULT NULL,
-  `productDescription` longtext DEFAULT NULL,
-  `productImage1` varchar(255) DEFAULT NULL,
+  `category` varchar(255) NOT NULL,
+  `subCategory` varchar(255) NOT NULL,
+  `productName` varchar(255) NOT NULL,
+  `mediumPrice` decimal(10,2) NOT NULL,
+  `largePrice` decimal(10,2) NOT NULL,
+  `xlPrice` decimal(10,2) NOT NULL,
+  `xxlPrice` decimal(10,2) NOT NULL,
+  `productDescription` text NOT NULL,
+  `productImage1` varchar(255) NOT NULL,
   `productImage2` varchar(255) DEFAULT NULL,
   `productImage3` varchar(255) DEFAULT NULL,
-  `shippingCharge` int(11) DEFAULT NULL,
-  `productAvailability` varchar(255) DEFAULT NULL,
-  `postingDate` timestamp NULL DEFAULT current_timestamp(),
-  `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+  `productAvailability` varchar(50) NOT NULL,
+  `postingDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `products`
 --
 
-INSERT INTO `products` (`id`, `category`, `subCategory`, `productName`, `productSize`, `productPrice`, `productPriceBeforeDiscount`, `productDescription`, `productImage1`, `productImage2`, `productImage3`, `shippingCharge`, `productAvailability`, `postingDate`, `updationDate`) VALUES
-(25, 8, 14, 'BIRYANI', 'Large', 2400, 3200, 'Chicken with biryani', 'Hyderabadi-chicken-Biryani.jpg', '', '', 0, 'In Stock', '2024-01-27 10:55:25', NULL);
+INSERT INTO `products` (`id`, `category`, `subCategory`, `productName`, `mediumPrice`, `largePrice`, `xlPrice`, `xxlPrice`, `productDescription`, `productImage1`, `productImage2`, `productImage3`, `productAvailability`, `postingDate`, `updationDate`) VALUES
+(1, '8', '14', 'Chicken Parm', '100.00', '200.00', '300.00', '400.00', 'Yummers', 'Chicken-Parmesan-1.jpg', '', '', 'In Stock', '2024-01-30 13:31:36', '2024-01-30 13:31:36');
 
 -- --------------------------------------------------------
 
@@ -137,7 +137,7 @@ CREATE TABLE `subcategory` (
   `subcategory` varchar(255) DEFAULT NULL,
   `creationDate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `subcategory`
@@ -168,7 +168,7 @@ CREATE TABLE `userinfo` (
   `billingPincode` int(11) DEFAULT NULL,
   `regDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `userinfo`
@@ -188,19 +188,20 @@ CREATE TABLE `users` (
   `fname` varchar(255) DEFAULT NULL,
   `lname` varchar(255) DEFAULT NULL,
   `email` varchar(255) DEFAULT NULL,
-  `contact` varchar(20) DEFAULT NULL,
-  `address` text DEFAULT NULL,
+  `contact` varchar(255) DEFAULT NULL,
+  `address` varchar(255) DEFAULT NULL,
   `password` varchar(255) DEFAULT NULL,
   `verify_token` varchar(255) DEFAULT NULL,
   `verify_status` tinyint(4) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 --
 -- Dumping data for table `users`
 --
 
 INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `contact`, `address`, `password`, `verify_token`, `verify_status`) VALUES
-(0, 'Rico', 'Nieto', 'riconieto669@gmail.com', '09270376718', '#34 Osiem West', '1234', '6e1f5f9a0ac52b3239801de34b6d3d24', 1);
+(1, 'Ezequiel', 'Gonzalez', 'ezequiel.gonzalez.cics@ust.edu.ph', '09762909844', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', '$2y$10$COzseFcNWv6ZZcxFQQ.eXOW6/2pxrYqxT.XyqKc5TQsaNqrqeyRqG', '6f8b2d7f049bde59a2711ad6da5386b6', 1),
+(2, 'Ezequiel', 'Gonzalez', 'ezequielg070901@gmail.com', '09762909844', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', '$2y$10$2ATrOmDqWzccJzV7C7t5bOqZF9eOf3GKbnhDq9.KTCjRM/jFblpPy', '4a4ff1462bb2aef4b87f5054d2397224', 1);
 
 --
 -- Indexes for dumped tables
@@ -286,19 +287,25 @@ ALTER TABLE `ordertrackhistory`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `subcategory`
 --
 ALTER TABLE `subcategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=15;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `users`
+--
+ALTER TABLE `users`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
