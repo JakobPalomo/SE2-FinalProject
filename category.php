@@ -39,7 +39,7 @@ $cid=intval($_GET['cid']);
     <div class="topdiv">
       <img src="img/logo.png" alt="Logo" />
       <div class="search-container">
-        <input type="text" class="search-input" placeholder="Search..." />
+        <input type="text" class="search-input" placeholder="Search..." id="searchInput" oninput="filterProducts()"/>
         <div class="search-icon">&#128269;</div>
       </div>
     </div>
@@ -72,7 +72,7 @@ $cid=intval($_GET['cid']);
                   <div class="menu-item">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                       <div class="detail-field">
-                          <p class="food-name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']); ?>"><?php echo htmlentities($row['productName']); ?></a></p>
+                          <p class="food-name"><a href="item-detail.php?pid=<?php echo htmlentities($row['id']); ?>"><?php echo htmlentities($row['productName']); ?></a></p>
                           <p class="food-price">M | L | XL | XXL</p>
                           
                       </div>
@@ -94,6 +94,7 @@ $cid=intval($_GET['cid']);
                         </div>
                         <div class="modal-body">
                             <form id="addToCartForm<?php echo $productId; ?>">
+                                <h6 class="ms-auto"><?php echo htmlentities($row['productName']); ?></h6> <br>
                                 <label for="quantity">Quantity:</label>
                                 <input type="number" id="quantity<?php echo $productId; ?>" name="quantity" value="1" min="1" onchange="updatePriceAndTotal(<?php echo $productId; ?>, <?php echo htmlentities($row['mediumPrice']); ?>, <?php echo htmlentities($row['largePrice']); ?>, <?php echo htmlentities($row['xlPrice']); ?>, <?php echo htmlentities($row['xxlPrice']); ?>)">
 
@@ -157,6 +158,39 @@ $cid=intval($_GET['cid']);
 
         document.getElementById("priceDisplay" + productId).innerText = "Price: $" + price;
         document.getElementById("totalPriceDisplay" + productId).innerText = "Total Price: $" + totalPrice;
+    }
+
+     function preventFormSubmission(event) {
+        if (event.key === 'Enter') {
+            event.preventDefault();
+            // Optionally, you can trigger the updatePriceAndTotal function here as well
+            // Just uncomment the line below if needed
+            // updatePriceAndTotal(productId, mediumPrice, largePrice, xlPrice, xxlPrice);
+        }
+    }
+
+    // Attach the function to the form's keydown event
+    document.addEventListener('keydown', function (event) {
+        preventFormSubmission(event);
+    });
+
+
+
+    function filterProducts() {
+        var input, filter, menuItems, item, productName;
+        input = document.getElementById("searchInput");
+        filter = input.value.toUpperCase();
+        menuItems = document.getElementsByClassName("menu-item");
+
+        for (var i = 0; i < menuItems.length; i++) {
+            item = menuItems[i];
+            productName = item.querySelector(".food-name a").innerText.toUpperCase();
+            if (productName.indexOf(filter) > -1) {
+                item.style.display = "";
+            } else {
+                item.style.display = "none";
+            }
+        }
     }
 </script>
 

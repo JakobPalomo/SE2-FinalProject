@@ -55,7 +55,7 @@ if(isset($_POST['submit']))
 		<meta name="author" content="">
 	    <meta name="keywords" content="MediaCenter, Template, eCommerce">
 	    <meta name="robots" content="all">
-	    <title>Product Details</title>
+	    <title>Item Detail</title>
 	    <link rel="stylesheet" href="assets/css/bootstrap.min.css">
 	    <link rel="stylesheet" href="assets/css/main.css">
 	    <link rel="stylesheet" href="assets/css/green.css">
@@ -287,10 +287,10 @@ while($row=mysqli_fetch_array($ret))
 					<div class='col-sm-6 col-md-7 product-info-block'>
 						<div class="product-info">
 							<h1 class="name"><?php echo htmlentities($row['productName']);?></h1>
-<?php $rt=mysqli_query($con,"select * from productreviews where productId='$pid'");
-$num=mysqli_num_rows($rt);
-{
-?>		
+							<?php $rt=mysqli_query($con,"select * from productreviews where productId='$pid'");
+								$num=mysqli_num_rows($rt);
+									{
+										?>		
 							<div class="rating-reviews m-t-20">
 								<div class="row">
 									<div class="col-sm-3">
@@ -303,7 +303,7 @@ $num=mysqli_num_rows($rt);
 									</div>
 								</div><!-- /.row -->		
 							</div><!-- /.rating-reviews -->
-<?php } ?>
+								<?php } ?>
 							<div class="stock-container info-container m-t-10">
 								<div class="row">
 									<div class="col-sm-3">

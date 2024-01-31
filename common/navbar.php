@@ -28,7 +28,7 @@ include('dbcon.php');
   <body style="background-color: #f5f5dc">
     <nav class="navbar navbar-expand-lg">
       <div class="container-fluid">
-        <a class="brand" href="#">Chef's Daughter</a>
+        <a class="brand" href="index.php">Chef's Daughter</a>
         <button
           class="navbar-toggler"
           type="button"
