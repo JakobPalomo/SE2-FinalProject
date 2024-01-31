@@ -31,6 +31,16 @@ $cid=intval($_GET['cid']);
     />
   </head>
   <body style="background-color: #f5f5dc">
+  <style>
+    .menu-item {
+            transition: transform 0.3s;
+        }
+
+        .menu-item:hover {
+            transform: scale(1.05);
+        }
+
+  </style>
 
 
   <?php include('common/navbar.php');?>
