@@ -21,13 +21,13 @@ if(isset($_POST['submit']))
 	$xxlPrice=$_POST['xxlPrice'];
 	$productdescription=$_POST['productDescription'];
 	$productavailability=$_POST['productAvailability'];
-	$productimage1=$_FILES["productimage1"]["name"];
-	$productimage2=$_FILES["productimage2"]["name"];
-	$productimage3=$_FILES["productimage3"]["name"];
+	$productimage1 = isset($_FILES["productimage1"]["name"]) ? $_FILES["productimage1"]["name"] : null;
+	$productimage2 = isset($_FILES["productimage2"]["name"]) ? $_FILES["productimage2"]["name"] : null;
+	$productimage3 = isset($_FILES["productimage3"]["name"]) ? $_FILES["productimage3"]["name"] : null;
 	
 	$sql = mysqli_query($con, "UPDATE products SET category='$category', subCategory='$subcat', productName='$productname', mediumPrice='$mediumPrice', largePrice='$largePrice', xlPrice='$xlPrice', xxlPrice='$xxlPrice', productDescription='$productdescription', productAvailability='$productavailability' WHERE id='$pid'");
 
-$_SESSION['msg']="Item Updated Successfully!";
+	$_SESSION['msg']="Item Updated Successfully!";
 
 }
 
@@ -38,7 +38,7 @@ $_SESSION['msg']="Item Updated Successfully!";
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin| Insert Product</title>
+	<title>Admin | Insert Product</title>
 	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -78,7 +78,7 @@ $("#suggesstion-box").hide();
 
 						<div class="module">
 							<div class="module-head">
-								<h3>Insert Product</h3>
+								<h3>Edit Product</h3>
 							</div>
 							<div class="module-body">
 
@@ -160,28 +160,28 @@ while($rw=mysqli_fetch_array($query))
 <div class="control-group">
 <label class="control-label" for="basicinput">Medium Price</label>
 <div class="controls">
-<input type="text"    name="mediumPrice"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['mediumPrice']);?>" class="span8 tip" required>
+<input type="text"    name="mediumPrice"  placeholder="Enter Medium Item Price" value="<?php echo htmlentities($row['mediumPrice']);?>" class="span8 tip" required>
 </div>
 </div>
 
 <div class="control-group">
 <label class="control-label" for="basicinput">Large Price</label>
 <div class="controls">
-<input type="text"   name="largePrice"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['largePrice']);?>" class="span8 tip" required>
+<input type="text"   name="largePrice"  placeholder="Enter Large Item Price" value="<?php echo htmlentities($row['largePrice']);?>" class="span8 tip" required>
 </div>
 </div>
 
 <div class="control-group">
 <label class="control-label" for="basicinput">XL Price</label>
 <div class="controls">
-<input type="text"   name="xlPrice"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['xlPrice']);?>" class="span8 tip" required>
+<input type="text"   name="xlPrice"  placeholder="Enter XL Item Price" value="<?php echo htmlentities($row['xlPrice']);?>" class="span8 tip" required>
 </div>
 </div>
 
 <div class="control-group">
 <label class="control-label" for="basicinput">XXL Price</label>
 <div class="controls">
-<input type="text"    name="xxlPrice"  placeholder="Enter Item Price" value="<?php echo htmlentities($row['xxlPrice']);?>" class="span8 tip" required>
+<input type="text"    name="xxlPrice"  placeholder="Enter XXL Item Price" value="<?php echo htmlentities($row['xxlPrice']);?>" class="span8 tip" required>
 </div>
 </div>
 
@@ -217,7 +217,7 @@ while($rw=mysqli_fetch_array($query))
             echo '<img src="productimages/' . htmlentities($pid) . '/' . htmlentities($row['productImage1']) . '" width="200" height="100">';
             echo '<a href="update-image1.php?id=' . $row['id'] . '">Change Image</a>';
         } else {
-            echo 'No Image Available';
+            echo '<input type="file" name="productimage1"  class="span8 tip">';
         }
         ?>
     </div>
@@ -231,7 +231,7 @@ while($rw=mysqli_fetch_array($query))
             echo '<img src="productimages/' . htmlentities($pid) . '/' . htmlentities($row['productImage2']) . '" width="200" height="100">';
             echo '<a href="update-image2.php?id=' . $row['id'] . '">Change Image</a>';
         } else {
-            echo 'No Image Available';
+            echo '<input type="file" name="productimage2"  class="span8 tip">';
         }
         ?>
     </div>
@@ -244,8 +244,9 @@ while($rw=mysqli_fetch_array($query))
         if (isset($row['productImage3']) && !empty($row['productImage3'])) {
             echo '<img src="productimages/' . htmlentities($pid) . '/' . htmlentities($row['productImage3']) . '" width="200" height="100">';
             echo '<a href="update-image3.php?id=' . $row['id'] . '">Change Image</a>';
-        } else {
-            echo 'No Image Available';
+        } 
+		else {
+            echo '<input type="file" name="productimage3"  class="span8 tip">';
         }
         ?>
     </div>

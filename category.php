@@ -31,6 +31,8 @@ $cid=intval($_GET['cid']);
     />
   </head>
   <body style="background-color: #f5f5dc">
+
+
   <?php include('common/navbar.php');?>
     <!-- Code zone -->
     <!-- top part of the menupage after the navbar -->
@@ -56,6 +58,7 @@ $cid=intval($_GET['cid']);
         ?>
       </div>
 
+      
     <div class="list">
 
           <?php
@@ -64,12 +67,13 @@ $cid=intval($_GET['cid']);
 
           if ($num > 0) {
               while ($row = mysqli_fetch_array($ret)) {
+                $productId = $row['id'];
           ?>
                   <div class="menu-item">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                       <div class="detail-field">
                           <p class="food-name"><a href="product-details.php?pid=<?php echo htmlentities($row['id']); ?>"><?php echo htmlentities($row['productName']); ?></a></p>
-                          <p class="food-price">View Prices</p>
+                          <p class="food-price">M | L | XL | XXL</p>
                           
                       </div>
                       <div class="desc-field">
@@ -78,100 +82,84 @@ $cid=intval($_GET['cid']);
                       <center>
                     <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>">Add to Cart</button>
                 </center>
-                  <!-- Modal -->
-                  <div class="modal fade" id="addToCartModal<?php echo $row['id']; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel" aria-hidden="true">
-                    <div class="modal-dialog">
-                        <div class="modal-content">
-                            <div class="modal-header">
-                                <h5 class="modal-title" id="addToCartModalLabel">Add to Cart</h5>
-                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                            </div>
-                            <div class="modal-body">
-                                <form id="addToCartForm">
-                                    <label for="quantity">Quantity:</label>
-                                    <input type="number" id="quantity" name="quantity" value="1" min="1" required>
+            </div>
 
-                                    <label for="size">Size:</label>
-                                    <select id="size" name="size" required>
-                                        <option value="M">M</option>
-                                        <option value="L">L</option>
-                                        <option value="XL">XL</option>
-                                        <option value="XXL">XXL</option>
-                                    </select>
+            <!-- Modal -->
+            <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="addToCartModalLabel<?php echo $productId; ?>">Add to Cart</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form id="addToCartForm<?php echo $productId; ?>">
+                                <label for="quantity">Quantity:</label>
+                                <input type="number" id="quantity<?php echo $productId; ?>" name="quantity" value="1" min="1" onchange="updatePriceAndTotal(<?php echo $productId; ?>, <?php echo htmlentities($row['mediumPrice']); ?>, <?php echo htmlentities($row['largePrice']); ?>, <?php echo htmlentities($row['xlPrice']); ?>, <?php echo htmlentities($row['xxlPrice']); ?>)">
 
-                                    <p id="priceDisplay">Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
+                                <label for="size">Size:</label>
+                                <select id="size<?php echo $productId; ?>" name="size" onchange="updatePriceAndTotal(<?php echo $productId; ?>, <?php echo htmlentities($row['mediumPrice']); ?>, <?php echo htmlentities($row['largePrice']); ?>, <?php echo htmlentities($row['xlPrice']); ?>, <?php echo htmlentities($row['xxlPrice']); ?>)">
+                                    <option value="M">M</option>
+                                    <option value="L">L</option>
+                                    <option value="XL">XL</option>
+                                    <option value="XXL">XXL</option>
+                                </select>
 
-                                    <p id="totalPriceDisplay">Total Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
+                                <p id="priceDisplay<?php echo $productId; ?>">Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
 
-                                    <input type="hidden" id="productId" name="productId" value="<?php echo $row['id']; ?>">
-                                </form>
-                            </div>
-                            <div class="modal-footer">
-                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                                <button type="button" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
-                            </div>
+                                <p id="totalPriceDisplay<?php echo $productId; ?>">Total Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
+
+                                <input type="hidden" id="productId<?php echo $productId; ?>" name="productId" value="<?php echo $productId; ?>">
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                            <button type="button" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
                         </div>
                     </div>
                 </div>
             </div>
-    <?php
+        <?php
         }
-    } else {
-    ?>
+        } else {
+        ?>
         <p class="food-name">No Products Found</p>
-    <?php
-    }
-    ?>
-</div>
-
-<script>
-    // Function to update price and total price based on selected size and quantity
-    function updateTotalPrice() {
-    console.log("Function called");
-
-    var size = document.getElementById('size').value;
-    var quantity = document.getElementById('quantity').value;
-    var productId = document.getElementById('productId').value;
-
-    console.log("Size: " + size);
-    console.log("Quantity: " + quantity);
-    console.log("Product ID: " + productId);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open('GET', 'get_price.php?productId=' + productId + '&size=' + size, true);
-    xhr.onreadystatechange = function() {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            console.log("Response received: " + xhr.responseText);
-
-            var price = parseFloat(xhr.responseText);
-            console.log("Parsed Price: " + price);
-
-            var totalPrice = price * quantity;
-            console.log("Total Price: " + totalPrice);
-
-            document.getElementById('priceDisplay').innerHTML = 'Price: $' + price.toFixed(2);
-            document.getElementById('totalPriceDisplay').innerHTML = 'Total Price: $' + totalPrice.toFixed(2);
+        <?php
         }
-    };
-    xhr.send();
-}
+        ?>
+    </div>
 
-    // Add event listeners for quantity and size
-    document.getElementById('quantity').addEventListener('change', updateTotalPrice);
-    document.getElementById('size').addEventListener('change', updateTotalPrice);
+    <script>
+    function updatePriceAndTotal(productId, mediumPrice, largePrice, xlPrice, xxlPrice) {
+        var size = document.getElementById("size" + productId).value;
+        var quantity = document.getElementById("quantity" + productId).value;
+        var price = 0;
 
-    // Function to handle adding to cart
-    function addToCart() {
-        // You can use JavaScript to submit the form or perform additional actions
-        // For simplicity, let's just close the modal for now
-        var addToCartForm = document.getElementById('addToCartForm');
-        addToCartForm.submit(); // You can use AJAX to submit the form without refreshing the page
+        switch (size) {
+            case 'M':
+                price = mediumPrice;
+                break;
+            case 'L':
+                price = largePrice;
+                break;
+            case 'XL':
+                price = xlPrice;
+                break;
+            case 'XXL':
+                price = xxlPrice;
+                break;
+            default:
+                price = 0;
+                break;
+        }
 
-        // Close the modal
-        var modal = new bootstrap.Modal(document.getElementById('addToCartModal'));
-        modal.hide();
+        var totalPrice = price * quantity;
+
+        document.getElementById("priceDisplay" + productId).innerText = "Price: $" + price;
+        document.getElementById("totalPriceDisplay" + productId).innerText = "Total Price: $" + totalPrice;
     }
 </script>
+
 
     <!--Menu item-->
 

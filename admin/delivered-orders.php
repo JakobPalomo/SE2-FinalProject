@@ -82,7 +82,8 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 <tbody>
 <?php 
 $st='Delivered';
-$query=mysqli_query($con,"select userinfo.name as username,userinfo.email as useremail,userinfo.contactno as usercontact,userinfo.shippingAddress as shippingaddress,userinfo.shippingCity as shippingcity,userinfo.shippingState as shippingstate,userinfo.shippingPincode as shippingpincode,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join userinfo on  orders.userId=userinfo.id join products on products.id=orders.productId where orders.orderStatus='$st'");
+// $query=mysqli_query($con,"select userinfo.name as username,userinfo.email as useremail,userinfo.contactno as usercontact,userinfo.shippingAddress as shippingaddress,userinfo.shippingCity as shippingcity,userinfo.shippingState as shippingstate,userinfo.shippingPincode as shippingpincode,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join userinfo on  orders.userId=userinfo.id join products on products.id=orders.productId where orders.orderStatus='$st'");
+$query=mysqli_query($con,"select userinfo.name as username,userinfo.email as useremail,userinfo.contactno as usercontact,userinfo.shippingAddress as shippingaddress,userinfo.shippingCity as shippingcity,userinfo.shippingState as shippingstate,userinfo.shippingPincode as shippingpincode,products.productName as productname, orders.quantity as quantity, orders.orderDate as orderdate, orders.id as id  from orders join userinfo on  orders.userId=userinfo.id join products on products.id=orders.productId where orders.orderStatus='$st'");
 $cnt=1;
 while($row=mysqli_fetch_array($query))
 {

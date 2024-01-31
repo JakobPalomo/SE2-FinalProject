@@ -22,6 +22,7 @@ if(isset($_POST['submit']))
 	$productimage1=$_FILES["productimage1"]["name"];
 	$productimage2=$_FILES["productimage2"]["name"];
 	$productimage3=$_FILES["productimage3"]["name"];
+	
 //for getting product id
 $query=mysqli_query($con,"select max(id) as pid from products");
 	$result=mysqli_fetch_array($query);
@@ -147,28 +148,28 @@ while($row=mysqli_fetch_array($query))
 <div class="control-group">
 <label class="control-label" for="basicinput">Medium Price</label>
 <div class="controls">
-<input type="text"    name="mediumPrice"  placeholder="Enter Item Price Before Discount" class="span8 tip" required>
+<input type="text"    name="mediumPrice"  placeholder="Enter Medium Item Price" class="span8 tip" required>
 </div>
 </div>
 
 <div class="control-group">
 <label class="control-label" for="basicinput">Large Price</label>
 <div class="controls">
-<input type="text"    name="largePrice"  placeholder="Enter Item Selling Price" class="span8 tip" required>
+<input type="text"    name="largePrice"  placeholder="Enter Large Item Price" class="span8 tip" required>
 </div>
 </div>
 
 <div class="control-group">
 <label class="control-label" for="basicinput">XL Price</label>
 <div class="controls">
-<input type="text"    name="xlPrice"  placeholder="Enter Item Selling Price" class="span8 tip" required>
+<input type="text"    name="xlPrice"  placeholder="Enter XL Item Price" class="span8 tip" required>
 </div>
 </div>
 
 <div class="control-group">
 <label class="control-label" for="basicinput">XXL Price</label>
 <div class="controls">
-<input type="text"    name="xxlPrice"  placeholder="Enter Item Selling Price" class="span8 tip" required>
+<input type="text"    name="xxlPrice"  placeholder="Enter XXL Item Price" class="span8 tip" required>
 </div>
 </div>
 
