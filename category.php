@@ -2,6 +2,9 @@
 session_start();
 include('dbcon.php');
 $cid=intval($_GET['cid']);
+if (!isset($_SESSION['cart'])) {
+    $_SESSION['cart'] = array();
+}
 ?> 
 <!DOCTYPE html>
 <html lang="en">
@@ -41,6 +44,36 @@ $cid=intval($_GET['cid']);
         }
 
   </style>
+
+<script>
+function addToCart(productId, productName) {
+    var size = document.getElementById("size" + productId).value;
+    var quantity = document.getElementById("quantity" + productId).value;
+
+    var item = {
+        productId: productId,
+        productName: productName,
+        size: size,
+        quantity: quantity,
+    };
+
+    var itemJSON = JSON.stringify(item);
+
+    var xhr = new XMLHttpRequest();
+    xhr.open("POST", "./function/addToCart.php", true);
+    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
+    xhr.onreadystatechange = function () {
+        if (xhr.readyState == 4 && xhr.status == 200) {
+            alert("Item added to the cart!");
+            // Use Bootstrap modal method to hide the modal
+            $('#addToCartModal' + productId).modal('hide');
+            // Reset any modal state here if necessary
+        }
+    };
+    xhr.send("item=" + encodeURIComponent(itemJSON));
+}
+
+</script>
 
 
   <?php include('common/navbar.php');?>
@@ -124,8 +157,10 @@ $cid=intval($_GET['cid']);
                             </form>
                         </div>
                         <div class="modal-footer">
-                            <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                            <button type="button" class="btn btn-primary" onclick="addToCart()">Add to Cart</button>
+                        <button type="button" class="btn btn-primary" onclick="addToCart(<?php echo $row['id']; ?>, '<?php echo htmlentities($row['productName']); ?>', <?php echo htmlentities($row['mediumPrice']); ?>)">Add to Cart</button>
+
+
+
                         </div>
                     </div>
                 </div>
@@ -203,6 +238,10 @@ $cid=intval($_GET['cid']);
         }
     }
 </script>
+
+
+
+
 
 
     <!--Menu item-->

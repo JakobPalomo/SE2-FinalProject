@@ -61,9 +61,11 @@ include('dbcon.php');
             <li class="nav-item">
               <a class="navbutton" href="#">FAQs</a>
             </li>
+            <?php if(isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
-              <a class="navbutton" href="#">My Cart</a>
+              <a class="navbutton" href="./cart.php">My Cart</a>
             </li>
+            <?php endif?>
           </ul>
         </div>
       </div>
