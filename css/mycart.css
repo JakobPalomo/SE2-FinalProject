@@ -104,12 +104,13 @@ body {
 /* END OF SUBTITLE */
 
 /* FOOTER */
-footer {
-  background-color: #ffffff; /* White background color */
+.footer {
+  background-color: #ffffff;
   text-align: center;
   position: fixed;
   bottom: 0;
   width: 100%;
+  padding: 15px 0;
 }
 
 .footer-columns {
@@ -117,14 +118,13 @@ footer {
   justify-content: space-between;
   max-width: 1200px;
   margin: 0 auto;
-  margin-top: 15px;
 }
 
 .footer-column {
   font-family: "Plus Jakarta Sans", sans-serif;
-  flex: 1;
   text-align: left;
   padding: 10px;
+  flex: 1;
 }
 
 .footer-column:nth-child(1) {
@@ -187,23 +187,6 @@ footer {
 
 .custom-checkbox:checked + .checkmark {
   display: block;
-}
-
-/* Add this CSS for better modal styling */
-.modal {
-  display: none;
-  position: fixed;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  z-index: 1;
-  width: 400px; /* Set the width of the modal as per your design */
-  background-color: 20px;
-  box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.1);
-}
-
-.modal-content {
-  width: 100%;
 }
 
 .close {

@@ -8,20 +8,23 @@ include('./dbcon.php');
 
 <head>
     <meta charset="UTF-8" />
+    <title>My Cart</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="./css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="./css/mycart.css" />
     <link rel="stylesheet" type="text/css" href="./css/menuelement.css" />
-    <title>Document</title>
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
-    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous" />
     <link href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap" rel="stylesheet" />
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+
+
     <script>
     function updateAddress() {
         console.log('Update address function called');
@@ -52,7 +55,9 @@ include('./dbcon.php');
         $('.subtitle-txt-bg-2').text(updatedAddress);
 
         // Close the modal
-        $('#changeAddressModal').modal('hide');
+        document.getElementById('changeAddressModal').style.display = 'none';
+        $('body').removeClass('modal-open');
+        $('.modal-backdrop').remove();
 
         console.log('End of updateAddress function');
     }
@@ -120,6 +125,7 @@ include('./dbcon.php');
 
 <body style="background-color: #f5f5dc">
     <?php include('common/navbar.php'); ?>
+
     <div class="maintitle">
         <p class="title">My Cart</p>
     </div>
@@ -207,14 +213,13 @@ include('./dbcon.php');
         </div>
 
         <!-- FOOTER -->
-        <footer>
+        <footer class="footer">
+        <div class="container">
             <div class="footer-columns">
-                <!-- TOTAL PRICE -->
                 <div class="footer-column">
-                    <h8> Total Price</h8>
+                    <h8>Total Price</h8>
                     <p class="subtitle-txt-2"><?php echo number_format($totalPrice, 2); ?></p>
                 </div>
-                <!-- CHECKBOXES -->
                 <div class="footer-column">
                     <div class="checkbox-container">
                         <label class="checkbox-label" for="deliveryCheckbox">
@@ -226,6 +231,8 @@ include('./dbcon.php');
                             <input type="checkbox" id="pickupCheckbox" class="custom-checkbox" onclick="handleCheckboxClick('pickupCheckbox')" />
                             <div class="checkmark"></div> Pickup</label>
                     </div>
+                </div>
+                <div class="footer-column">
                     <div class="subtitle">
                         <p class="subtitle-txt-2">Payment Options</p>
                     </div>
@@ -242,13 +249,14 @@ include('./dbcon.php');
                         </div>
                     </div>
                 </div>
-                <!-- CHECKOUT BUTTON -->
                 <div class="footer-column">
                     <div class="cart-checkout">
-                    <button class="cart-checkout-btn" id="placeOrderBtn">Place Order</button>
+                        <button class="cart-checkout-btn" id="placeOrderBtn">Place Order</button>
                     </div>
                 </div>
             </div>
+        </div>
+    </footer>
             <!-- END OF FOOTER -->
 
             <!-- JAVASCRIPT FOR CHECKBOX -->
@@ -270,7 +278,6 @@ include('./dbcon.php');
                     });
                 }
             </script>
-        </footer>
 
     </div>
     <script>
@@ -331,6 +338,8 @@ include('./dbcon.php');
 
 
 </body>
+
+<!-- Modal Change Address -->
 <div class="modal" id="changeAddressModal" tabindex="-1" aria-labelledby="changeAddressModalLabel" aria-hidden="true">
     <div class="modal-dialog">
         <div class="modal-content">

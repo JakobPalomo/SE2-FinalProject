@@ -6,6 +6,7 @@ if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
 ?> 
+
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,6 +35,7 @@ if (!isset($_SESSION['cart'])) {
     />
   </head>
   <body style="background-color: #f5f5dc">
+
   <style>
     .menu-item {
             transition: transform 0.3s;
@@ -44,6 +46,7 @@ if (!isset($_SESSION['cart'])) {
         }
 
   </style>
+
 
 <script>
 function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxlPrice) {
@@ -98,14 +101,13 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
     };
     xhr.send("item=" + encodeURIComponent(itemJSON));
 }
-
-
-
-
 </script>
 
 
   <?php include('common/navbar.php');?>
+
+
+
     <!-- Code zone -->
     <!-- top part of the menupage after the navbar -->
     <div class="topdiv">
@@ -187,9 +189,6 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
                         </div>
                         <div class="modal-footer">
                         <button type="button" class="btn btn-primary" onclick="addToCart(<?php echo $row['id']; ?>, '<?php echo htmlentities($row['productName']); ?>', <?php echo htmlentities($row['mediumPrice']); ?>)">Add to Cart</button>
-
-
-
                         </div>
                     </div>
                 </div>
@@ -238,7 +237,6 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
         if (event.key === 'Enter') {
             event.preventDefault();
             // Optionally, you can trigger the updatePriceAndTotal function here as well
-            // Just uncomment the line below if needed
             // updatePriceAndTotal(productId, mediumPrice, largePrice, xlPrice, xxlPrice);
         }
     }
