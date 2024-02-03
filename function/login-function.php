@@ -45,7 +45,7 @@ if (isset($_POST['login_now_btn'])) {
                     'lname' => $user_row['lname'],
                     'email' => $user_row['email'],
                     'contact' => $user_row['contact'],
-                    'address' => $user_row['contact'],
+                    'address' => $user_row['address'],
                 ];
 
                 if ($_SESSION['status'] = "Logged in Successfully") {
