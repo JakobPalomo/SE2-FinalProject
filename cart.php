@@ -126,7 +126,7 @@ include('./dbcon.php');
 
     <div class="order-list">
         <?php
-        // Example cart display code
+              $totalPrice = 0;
         if (!empty($_SESSION['cart'])) {
             foreach ($_SESSION['cart'] as $index => $item) {
                 $productId = $item['productId'];
@@ -156,6 +156,7 @@ include('./dbcon.php');
                             $price = 0;
                             break;
                     }
+                    $totalPrice += $price * $item['quantity'];
                 } else {
                     $productName = "Product not found";
                     $price = 0;
@@ -210,8 +211,8 @@ include('./dbcon.php');
             <div class="footer-columns">
                 <!-- TOTAL PRICE -->
                 <div class="footer-column">
-                    <h8>Total Price</h8>
-                    <p class="subtitle-txt-2">P 1,000.00</p>
+                    <h8> Total Price</h8>
+                    <p class="subtitle-txt-2"><?php echo number_format($totalPrice, 2); ?></p>
                 </div>
                 <!-- CHECKBOXES -->
                 <div class="footer-column">
@@ -244,7 +245,7 @@ include('./dbcon.php');
                 <!-- CHECKOUT BUTTON -->
                 <div class="footer-column">
                     <div class="cart-checkout">
-                        <button class="cart-checkout-btn">Place Order</button>
+                    <button class="cart-checkout-btn" id="placeOrderBtn">Place Order</button>
                     </div>
                 </div>
             </div>
@@ -290,7 +291,44 @@ include('./dbcon.php');
             });
         });
  </script>
-       
+
+<script>
+    $(document).ready(function () {
+        // Handle the "Place Order" button click
+        $('#placeOrderBtn').on('click', function () {
+            // Get the total price value
+            var totalPrice = <?php echo $totalPrice; ?>;
+
+            // Check if totalPrice is a valid number
+            if (!isNaN(totalPrice)) {
+                // Call the placeOrder.php script using AJAX
+                $.ajax({
+                    type: 'POST',
+                    url: './function/placeOrder.php',
+                    data: {
+                        paymentOption: $('input[name="paymentOption"]:checked').val(),
+                        deliveryCheckbox: $('#deliveryCheckbox').prop('checked'),
+                        pickupCheckbox: $('#pickupCheckbox').prop('checked'),
+                        preparationDate: $('#datepicker').val(),
+                        totalPrice: totalPrice  // Pass the total price
+                    },
+                    success: function (response) {
+                        // Display the response (you can update this part based on your UI requirements)
+                        alert(response);
+                    },
+                    error: function (error) {
+                        console.error('Error placing order:', error);
+                    }
+                });
+            } else {
+                alert('Invalid total price format');
+            }
+        });
+    });
+</script>
+
+
+
 
 </body>
 <div class="modal" id="changeAddressModal" tabindex="-1" aria-labelledby="changeAddressModalLabel" aria-hidden="true">

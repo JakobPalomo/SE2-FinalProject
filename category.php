@@ -46,16 +46,42 @@ if (!isset($_SESSION['cart'])) {
   </style>
 
 <script>
-function addToCart(productId, productName) {
+function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxlPrice) {
     var size = document.getElementById("size" + productId).value;
     var quantity = document.getElementById("quantity" + productId).value;
+    
+
+    // Calculate total price based on size and quantity
+    var price = 0;
+
+    switch (size) {
+        case 'M':
+            price = mediumPrice;
+            break;
+        case 'L':
+            price = largePrice;
+            break;
+        case 'XL':
+            price = xlPrice;
+            break;
+        case 'XXL':
+            price = xxlPrice;
+            break;
+        default:
+            price = 0;
+            break;
+    }
+
+    var IndivPrice = price * quantity;
 
     var item = {
         productId: productId,
         productName: productName,
         size: size,
         quantity: quantity,
+        totalIndivudalPrice: IndivPrice
     };
+    console.log("Item added to cart:", item);
 
     var itemJSON = JSON.stringify(item);
 
@@ -72,6 +98,9 @@ function addToCart(productId, productName) {
     };
     xhr.send("item=" + encodeURIComponent(itemJSON));
 }
+
+
+
 
 </script>
 
