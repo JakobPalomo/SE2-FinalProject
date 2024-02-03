@@ -29,8 +29,9 @@
   width: 550px;
   border-radius: 12px;
   border-width: 2.5px;
-  padding: 12px;
+  padding: 3px;
   font-size: 12px;
+  font-weight: bold;
 }
 .inputs {
   display: flex;
@@ -89,15 +90,14 @@ form {
 }
 
 .food-name {
-  margin-top: 12px;
-  margin-right: 12px;
   color: #000000;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   font-family: "Plus Jakarta Sans", sans-serif;
   border-radius: 6px;
   width: 62%;
   padding: 12px;
+  padding-left: 3px;
 }
 
 .food-price {
@@ -109,11 +109,44 @@ form {
   border-radius: 6px;
   width: 35%;
   padding: 12px;
+
+  text-align: right;
+}
+.container {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.btn {
+  cursor: pointer;
+  height: 56px;
 }
 
 .buttons {
   display: flex;
   justify-content: center;
+}
+.check-button {
+  display: inline-block;
+  padding: 8px 16px;
+  margin: 5px;
+  border: 2px solid #ccc;
+  background-color: #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  color: #000;
+  font-size: 11px;
+}
+
+.check-button input[type="checkbox"] {
+  display: none;
+}
+
+.check-button.checked {
+  background-color: #ffb000;
+  border-color: #ffb000;
+  color: #fff;
 }
 
 /* Media query for screens with a maximum width of 600px (typical mobile screens) */
