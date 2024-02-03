@@ -47,6 +47,42 @@ include('dbcon.php');
         });
     }
 </script>
+<script>
+  function updateCartItem(index, newSize, newQuantity) {
+    $.ajax({
+      type: 'POST',
+      url: './function/updateCartItem.php', // Update the URL to the server-side script
+      data: { index: index, newSize: newSize, newQuantity: newQuantity },
+      success: function(response) {
+        // Update the cart on the client side (update the item's details)
+        // Assuming the server sends back updated details, you can parse and update accordingly
+        var updatedDetails = JSON.parse(response);
+        var updatedPrice = updatedDetails.price * updatedDetails.quantity;
+        $('#cart-item-' + index + ' .total-price').text('₱' + updatedPrice.toFixed(2));
+      },
+      error: function(error) {
+        console.error('Error updating item:', error);
+      }
+    });
+  }
+  function incrementQuantity(index, size) {
+    var quantityDisplay = $('#cart-item-' + index + ' .quantity-display');
+    var currentQuantity = parseInt(quantityDisplay.text(), 10);
+    updateCartItem(index, size, currentQuantity + 1);
+    quantityDisplay.text(currentQuantity + 1);
+}
+
+function decrementQuantity(index, size) {
+    var quantityDisplay = $('#cart-item-' + index + ' .quantity-display');
+    var currentQuantity = parseInt(quantityDisplay.text(), 10);
+    if (currentQuantity > 1) {
+        updateCartItem(index, size, currentQuantity - 1);
+        quantityDisplay.text(currentQuantity - 1);
+    }
+}
+
+</script>
+
 </head>
 
 
@@ -95,19 +131,29 @@ include('dbcon.php');
             }
 
             // Display cart item details
-            echo '<div class="cart-item" id="cart-item-' . $index . '">';
-            echo '<img src="admin/productimages/' . $productId . '/' . $productImage . '" alt="food" class="cart-display" />';
-            echo '<div class="detail-cart">';
-            echo "<p class=\"foodcart-name\">{$productName}</p>";
-            echo "<p class=\"foodcart-name\">";
-            echo '<button class="amount">-</button> ' . $item['quantity'] . ' <button class="amount">+</button>';
-            echo '</p>';
-            echo '</div>';
-            echo '<div class="price">';
-            echo "<p class=\"total-price\">₱" . number_format($price * $item['quantity'], 2) . '</p>';
-            echo '<img src="./img/cross-circle (2).png" alt="food" width="24px" height="24px" style="cursor: pointer;" onclick="removeCartItem(' . $index . ')" />';
-            echo '</div>';
-            echo '</div>';
+         // Display cart item details with quantity buttons
+        echo '<div class="cart-item" id="cart-item-' . $index . '">';
+        echo '<img src="admin/productimages/' . $productId . '/' . $productImage . '" alt="food" class="cart-display" />';
+        echo '<div class="detail-cart">';
+        echo "<p class=\"foodcart-name\">{$productName}</p>";
+        
+        echo '<button onclick="decrementQuantity(' . $index . ', \'' . $item['size'] . '\')">-</button>';
+        echo '<span class="quantity-display">' . $item['quantity'] . '</span>';
+        echo '<button onclick="incrementQuantity(' . $index . ', \'' . $item['size'] . '\')">+</button>';
+       
+        echo '<select class="size-dropdown" onchange="updateCartItem(' . $index . ', this.value, ' . $item['quantity'] . ')">';
+        echo '<option value="M" ' . ($item['size'] === 'M' ? 'selected' : '') . '>M</option>';
+        echo '<option value="L" ' . ($item['size'] === 'L' ? 'selected' : '') . '>L</option>';
+        echo '<option value="XL" ' . ($item['size'] === 'XL' ? 'selected' : '') . '>XL</option>';
+        echo '<option value="XXL" ' . ($item['size'] === 'XXL' ? 'selected' : '') . '>XXL</option>';
+        echo '</select>';
+        echo '</div>';
+        echo '<div class="price">';
+        echo "<p class=\"total-price\">₱" . number_format($price * $item['quantity'], 2) . '</p>';
+        echo '<img src="./img/cross-circle (2).png" alt="food" width="24px" height="24px" style="cursor: pointer;" onclick="removeCartItem(' . $index . ')" />';
+        echo '</div>';
+        echo '</div>';
+
         }
     } else {
         echo "<p>Your cart is empty.</p>";
