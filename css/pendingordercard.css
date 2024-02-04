@@ -1,0 +1,45 @@
+.orderno {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: bolder;
+    font-size: 25px;
+    padding: 30px 0px 0px 120px;
+}
+
+.ordername {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: #00894D;
+    padding: 0px 0px 0px 120px;
+}
+
+.orderstat {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    color: #00894D;
+    text-align: center;
+    padding: 30px 0px 0px 0px;
+}
+
+.orderprice {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    text-align: center;
+    padding: 0px 0px 0px 0px;
+}
+
+.orderfood {
+    font-family: "Plus Jakarta Sans", sans-serif;
+    font-weight: bold;
+    font-size: 16px;
+    color: #00894D;
+    padding: 0px 0px 0px 120px;
+}
+
+
+.table-order {
+    width: 100%;
+    border-bottom: 2px solid;
+}
