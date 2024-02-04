@@ -44,3 +44,48 @@ body {
   font-weight: bolder;
   font-size: 24px;
 }
+
+.w3-sidebar.w3-bar-block.w3-card.w3-animate-left {
+  padding: 2%;
+}
+.w3-button.w3-xlarge {
+  background-color: #004225;
+  color: #ffb000;
+  font-weight: bolder;
+}
+
+.arrow {
+  display: inline-block;
+  width: 20px;
+  height: 20px;
+  line-height: 20px;
+  text-align: center;
+  border-radius: 50%;
+}
+
+.icon {
+  height: 24px;
+  margin-right: 12px;
+}
+
+.add-item {
+  width: max-content;
+  height: 32px;
+  margin-bottom: 24px;
+  font-size: 1em;
+  margin-top: 10px;
+  margin-right: 12px;
+  border-radius: 8px;
+  border: none;
+  color: #ffffff;
+  font-weight: bold;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #ffb000;
+  align-self: center;
+}
+
+.w3-bar-item.w3-button {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: bold;
+  font-size: 1rem;
+}
