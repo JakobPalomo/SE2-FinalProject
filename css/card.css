@@ -24,11 +24,12 @@ body {
 .card-place {
   background-color: white;
   width: 85%;
-  height: 85%;
+  height: 95%;
   border-radius: 9px;
   border-style: solid;
   border-width: 2.8px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.8);
+  margin-top: 100px;
 }
 .card-title {
   background-color: #ffb000;
@@ -88,4 +89,31 @@ body {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bold;
   font-size: 1rem;
+}
+
+.navbar {
+  z-index: 2; /* Set a higher z-index to keep the navbar on top */
+}
+
+.w3-sidebar {
+  height: 100%;
+  width: 25%;
+  position: fixed;
+  top: 56px; /* Adjust the top position to match the navbar height */
+  left: 0;
+  background-color: #004225;
+  overflow-x: hidden;
+  transition: 0.5s;
+  padding-top: 10px; /* Adjust padding-top to create space between navbar and sidebar */
+  display: flex;
+  flex-direction: column;
+  z-index: 1; /* Set a lower z-index to position it behind the navbar */
+}
+
+.dashboard {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  margin-left: 25%; /* Adjust margin-left to make space for the sidebar */
+  transition: margin-left 0.5s; /* Add a transition for smooth animation */
 }
