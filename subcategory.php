@@ -92,20 +92,27 @@ if (!isset($_SESSION['cart'])) {
         $num=mysqli_num_rows($ret);
         if($num>0)
             {
-                while ($row=mysqli_fetch_array($ret)) 
-            {?>				
-                  <div class="menu-item">
+                while ($row=mysqli_fetch_array($ret)) {
+                    $productId = $row['id'];
+                    $availability = $row['productAvailability'];
+                    $menuClass = ($availability == 'Out of Stock') ? 'menu-item-unavailable' : '';
+                ?>				
+                  <div class="menu-item <?php echo $menuClass; ?>">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                       <div class="detail-field">
                           <p class="food-name"><a href="item-detail.php?pid=<?php echo htmlentities($row['id']); ?>"><?php echo htmlentities($row['productName']); ?></a></p>
-                          <p class="food-price">M | L | XL | XXL</p>
+                          <p class="food-price">Sizes</p>
                           
                       </div>
                       <div class="desc-field">
                           <p class="food-desc"><?php echo htmlentities($row['productDescription']); ?></p>
                       </div>
                       <center>
+                      <?php if($availability != 'Out of Stock'): ?>
                     <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>">Add to Cart</button>
+                        <?php else: ?>
+                             <button class="add-item disabled" disabled>Add to Cart</button>
+                        <?php endif; ?>
                 </center>
             </div>
 

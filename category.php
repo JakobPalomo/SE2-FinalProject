@@ -5,7 +5,19 @@ $cid=intval($_GET['cid']);
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
+
+if(isset($_POST['add_to_cart'])) {
+    // Check if the user is authenticated
+    if(!isset($_SESSION['authenticated'])) {
+        $_SESSION['status'] = "Please Login to Add Items to Cart";
+        header('Location: authentication.php');
+        exit(0);
+    }
+
+}
 ?> 
+
+
 
 <!DOCTYPE html>
 <html lang="en">

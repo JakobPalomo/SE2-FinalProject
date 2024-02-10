@@ -1,6 +1,7 @@
-<?php 
-include('./function/authentication.php')
-?>
+<?php
+session_start();
+include('dbcon.php');
+?> 
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -34,7 +35,7 @@ include('./function/authentication.php')
     <!-- top part of the homepage after the navbar -->
     <div class="topdiv">
       <img src="./img/logo.png" alt="Logo" />
-      <a href="#" class="order-button">Order Now</a>
+      <a href="category.php?cid=8" class="order-button">Order Now</a>
     </div>
 
     <!-- middle part where how to order is located -->
