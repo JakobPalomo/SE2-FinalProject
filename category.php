@@ -304,7 +304,7 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
 
         for (var i = 0; i < menuItems.length; i++) {
             item = menuItems[i];
-            productName = item.querySelector(".food-name a").innerText.toUpperCase();
+            productName = item.querySelector(".food-name").innerText.toUpperCase();
             if (productName.indexOf(filter) > -1) {
                 item.style.display = "";
             } else {
