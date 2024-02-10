@@ -69,25 +69,16 @@ body {
 .subcategorydiv {
   padding-top: 4vh;
   display: flex;
-  align-items: flex-start;
+  float: left;
+  flex-direction: column; /* Stack elements vertically */
+  align-items: flex-start; /* Align items to the left side */
+  margin-right: 24px; /* Add margin to create space between the subcategorydiv and the list */
 }
 
 .subcatbutton {
-  margin-left: 1vh;
-  margin-right: 1vh;
-  padding: 1vh 1.5vh;
-  font-family: "Plus Jakarta Sans", sans-serif;
-  font-size: 2.1vh;
-  text-decoration: none;
-  color: black;
-  font-weight: bolder;
-  border-radius: 35px;
-  transition: background-color 0.3s ease-in-out;
-}
-
-.subcatbutton:hover {
-  background-color: #004225; /* Change the hover color as needed */
-  color: #ccc;
+  display: flex;
+  flex-direction: column; /* Ensure buttons stack on top of each other */
+  align-items: flex-start; /* Align buttons to the left side */
 }
 
 .categorybutton {

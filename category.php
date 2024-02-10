@@ -143,20 +143,20 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
         ?>
       </div>
 
-       <!-- div for subcat buttons-->
+     <!-- div for subcat buttons-->
       <div class="subcategorydiv">
          <div class="food-name">Sub Categories</div>
+            <div class="subcatbutton">
             <?php 
             $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
              while ($row = mysqli_fetch_array($sql)) { ?>
-                <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="subcatbutton">
+                <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton">
                     <?php echo $row['subcategory'];?> 
                 </a>
             <?php } ?>
           </div>
        </div>
 
-     
     <!-- div for menu item list-->
     <div class="list">
           <?php
