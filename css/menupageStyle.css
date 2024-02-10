@@ -68,10 +68,10 @@ body {
 
 .subcategorydiv {
   width: 15%;
-  background-color: #ffffff;
-  border: #b0b0b0;
+  padding-top: 18px;
   border-width: 2px;
-  border: solid;
+  border: solid #888888;
+  border-top: 0ch;
   display: flex;
   flex-direction: column;
 }
@@ -126,4 +126,8 @@ body {
 .place-order-button:hover {
   transform: scale(1.1); /* Enlarge the button on hover */
   transform-origin: center; /* Set the transform origin to the center */
+}
+
+.main-menu {
+  width: 100%;
 }
