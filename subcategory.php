@@ -75,7 +75,7 @@ if (!isset($_SESSION['cart'])) {
         <?php
         }
         ?>
-      </div>
+    </div>
 
       <?php $sql=mysqli_query($con,"select subcategory  from subcategory where id='$cid'");
         while($row=mysqli_fetch_array($sql)){?>
@@ -86,8 +86,7 @@ if (!isset($_SESSION['cart'])) {
 		<?php } ?>
 
     <div class="list">
-
-    <?php
+     <?php
         $ret=mysqli_query($con,"select * from products where subCategory='$cid'");
         $num=mysqli_num_rows($ret);
         if($num>0)
@@ -96,25 +95,43 @@ if (!isset($_SESSION['cart'])) {
                     $productId = $row['id'];
                     $availability = $row['productAvailability'];
                     $menuClass = ($availability == 'Out of Stock') ? 'menu-item-unavailable' : '';
-                ?>				
-                  <div class="menu-item <?php echo $menuClass; ?>">
+                ?>		
+
+                 <div class="menu-item <?php echo $menuClass; ?>" onclick="navigateToItemDetail(<?php echo $row['id']; ?>)">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                       <div class="detail-field">
-                          <p class="food-name"><a href="item-detail.php?pid=<?php echo htmlentities($row['id']); ?>"><?php echo htmlentities($row['productName']); ?></a></p>
-                          <p class="food-price">Sizes</p>
-                          
+                          <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>
+                          <p class="food-price">Sizes</p>            
                       </div>
                       <div class="desc-field">
                           <p class="food-desc"><?php echo htmlentities($row['productDescription']); ?></p>
                       </div>
-                      <center>
-                      <?php if($availability != 'Out of Stock'): ?>
-                    <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>">Add to Cart</button>
+                        <center>
+                             <?php if($availability != 'Out of Stock'): ?>
+                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCart(<?php echo $row['id']; ?>)">Add to Cart</button>
+                            <?php else: ?>
+                            <button class="add-item disabled" disabled>Add to Cart</button>
+                            <?php endif; ?>
+                        </center>
+                    </div>
+
+                    <script>
+                        function navigateToItemDetail(productId) {
+                          window.location.href = "item-detail.php?pid=" + productId;
+                        }
+                    </script>
+                
+                <script>
+                    function addToCart(productId) {
+                        event.stopPropagation();
+                        <?php if(!isset($_SESSION['authenticated'])): ?>
+                            window.location.href = './function/authentication.php';
                         <?php else: ?>
-                             <button class="add-item disabled" disabled>Add to Cart</button>
+                            event.stopPropagation();
+                            var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
                         <?php endif; ?>
-                </center>
-            </div>
+                    }
+                </script>
 
             <!-- Modal -->
             <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true">

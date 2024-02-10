@@ -13,7 +13,7 @@
   height: 260px;
   background-color: white;
   border-radius: 18px;
-  margin: 24px;
+  margin: 24px 24px 8px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
   filter: grayscale(100%);
 }

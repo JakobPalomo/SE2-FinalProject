@@ -46,8 +46,9 @@ if(isset($_POST['add_to_cart'])) {
       rel="stylesheet"
     />
   </head>
-  <body style="background-color: #f5f5dc">
 
+ <!-- inline style-->
+  <body style="background-color: #f5f5dc">
   <style>
     .menu-item {
             transition: transform 0.3s;
@@ -56,7 +57,6 @@ if(isset($_POST['add_to_cart'])) {
         .menu-item:hover {
             transform: scale(1.05);
         }
-
   </style>
 
 
@@ -65,7 +65,6 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
     var size = document.getElementById("size" + productId).value;
     var quantity = document.getElementById("quantity" + productId).value;
     
-
     // Calculate total price based on size and quantity
     var price = 0;
 
@@ -144,21 +143,22 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
         ?>
       </div>
 
+       <!-- div for subcat buttons-->
       <div class="subcategorydiv">
-        <div>Sub Categories</div>
+         <div class="food-name">Sub Categories</div>
             <?php 
             $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
-             while ($row = mysqli_fetch_array($sql)) { 
-            ?>
-                <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="subcategory-button">
-                <?php echo $row['subcategory'];?>
-                 </a>
+             while ($row = mysqli_fetch_array($sql)) { ?>
+                <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="subcatbutton">
+                    <?php echo $row['subcategory'];?> 
+                </a>
             <?php } ?>
-        </div>
+          </div>
+       </div>
 
-      
+     
+    <!-- div for menu item list-->
     <div class="list">
-
           <?php
           $ret = mysqli_query($con, "select * from products where category='$cid'");
           $num = mysqli_num_rows($ret);
@@ -169,24 +169,42 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
                 $availability = $row['productAvailability'];
                 $menuClass = ($availability == 'Out of Stock') ? 'menu-item-unavailable' : ''; // Add class if product is out of stock
           ?>
-                  <div class="menu-item <?php echo $menuClass; ?>">
+               
+                  <div class="menu-item <?php echo $menuClass; ?>" onclick="navigateToItemDetail(<?php echo $row['id']; ?>)">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                       <div class="detail-field">
-                          <p class="food-name"><a href="item-detail.php?pid=<?php echo htmlentities($row['id']); ?>"><?php echo htmlentities($row['productName']); ?></a></p>
-                          <p class="food-price">Sizes</p>
-                          
+                          <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>
+                          <p class="food-price">Sizes</p>            
                       </div>
                       <div class="desc-field">
                           <p class="food-desc"><?php echo htmlentities($row['productDescription']); ?></p>
                       </div>
-                      <center>
-                      <?php if($availability != 'Out of Stock'): ?>
-                    <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>">Add to Cart</button>
-                     <?php else: ?>
-                        <button class="add-item disabled" disabled>Add to Cart</button>
+                        <center>
+                             <?php if($availability != 'Out of Stock'): ?>
+                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCart(<?php echo $row['id']; ?>)">Add to Cart</button>
+                            <?php else: ?>
+                            <button class="add-item disabled" disabled>Add to Cart</button>
+                            <?php endif; ?>
+                        </center>
+                    </div>
+
+                    <script>
+                        function navigateToItemDetail(productId) {
+                          window.location.href = "item-detail.php?pid=" + productId;
+                        }
+                    </script>
+                
+                <script>
+                    function addToCart(productId) {
+                        event.stopPropagation();
+                        <?php if(!isset($_SESSION['authenticated'])): ?>
+                            window.location.href = './function/authentication.php';
+                        <?php else: ?>
+                            event.stopPropagation();
+                            var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
                         <?php endif; ?>
-                </center>
-            </div>
+                    }
+                </script>
 
             <!-- Modal -->
             <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true">
