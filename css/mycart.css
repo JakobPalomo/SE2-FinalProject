@@ -74,6 +74,7 @@ body {
   font-size: 18px;
   color: black;
   font-weight: bold;
+  line-break: normal;
 }
 
 .subtitle-txt-bg {
@@ -97,7 +98,7 @@ body {
   font-weight: bold;
   background-color: #ffffff;
   border-radius: 10px;
-  width: 250px;
+  width: 200px;
   padding: 10px;
   box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); /* Box shadow property */
 }
@@ -128,7 +129,15 @@ body {
 }
 
 .footer-column:nth-child(1) {
-  flex: 60%;
+  flex: 70%;
+}
+
+.footer-column:nth-child(2) {
+  flex: 20%;
+}
+
+.footer-column:nth-child(3) {
+  flex: 20%;
 }
 
 .cart-checkout-btn {
@@ -194,6 +203,18 @@ body {
   top: 10px;
   right: 10px;
   cursor: pointer;
+}
+
+.change-btn {
+  background-color: #ffb000;
+  width: 100px;
+  height: 25px;
+  font-size: 12px;
+  border: 0px;
+  border-radius: 10px;
+  color: white;
+  font-weight: bold;
+  padding: 0px;
 }
 
 /* Add this CSS to style the form inside the modal */

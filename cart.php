@@ -165,8 +165,8 @@ include('./dbcon.php');
 
         <!-- Address Field -->
         <div class="subtitle">
-            <p class="subtitle-txt-2">Delivery Address</p>
-            <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#changeAddressModal">Change</button>
+            <span class="linebreak"><p class="subtitle-txt-2">Delivery Address</p></span>
+            <span class="linebreak"><button class="change-btn" data-bs-toggle="modal" data-bs-target="#changeAddressModal">Change</button></span>
         </div>
         <div class="subtitle" style="margin-bottom: 20px">
             <p class="subtitle-txt-bg-2"><?php echo $_SESSION['auth_user']['address']; ?></p>
@@ -176,10 +176,13 @@ include('./dbcon.php');
         <footer class="footer">
         <div class="container">
             <div class="footer-columns">
+
+            <!-- COLUMN 1 -->
                 <div class="footer-column">
                     <h8>Total Price</h8>
                     <p class="subtitle-txt-2"><?php echo number_format($totalPrice, 2); ?></p>
                 </div>
+                <!-- COLUMN 2 -->
                 <div class="footer-column">
                     <div class="checkbox-container">
                         <label class="checkbox-label" for="deliveryCheckbox">
@@ -192,10 +195,23 @@ include('./dbcon.php');
                             <div class="checkmark"></div> Pickup</label>
                     </div>
                 </div>
+                <!-- COLUMN 3 -->
+
                 <div class="footer-column">
-                    <div class="subtitle">
-                        <p class="subtitle-txt-2">Payment Options</p>
+                    <div class="checkbox-container">
+                        <label class="checkbox-label" for="deliveryCheckbox">
+                            <input type="checkbox" id="deliveryCheckbox" class="custom-checkbox"" />
+                            <div class="checkmark"></div> Cash on Delivery</label>
                     </div>
+                    <div class="checkbox-container">
+                        <label class="checkbox-label" for="pickupCheckbox">
+                            <input type="checkbox" id="pickupCheckbox" class="custom-checkbox" />
+                            <div class="checkmark"></div> GCash</label>
+                    </div>
+                </div>
+
+<!-- 
+                <div class="footer-column">
                     <div class="subtitle" style="margin-bottom: 20px">
                         <div class="checkbox-container">
                             <label class="checkbox-label" for="codCheckbox">
@@ -208,7 +224,8 @@ include('./dbcon.php');
                                 <div class="checkmark"></div> Gcash</label>
                         </div>
                     </div>
-                </div>
+                </div> -->
+                <!-- COLUMN 4 -->
                 <div class="footer-column">
                     <div class="cart-checkout">
                         <button class="cart-checkout-btn" id="placeOrderBtn">Place Order</button>
