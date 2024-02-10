@@ -10,6 +10,7 @@ body {
   flex-direction: row;
   height: 100%;
 }
+
 .sidebar {
   background-color: #cbcbcb;
   width: 240px;

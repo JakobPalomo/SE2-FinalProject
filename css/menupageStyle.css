@@ -67,12 +67,14 @@ body {
 }
 
 .subcategorydiv {
-  padding-top: 4vh;
-  display: flex;
-  float: left;
-  flex-direction: column; /* Stack elements vertically */
-  align-items: flex-start; /* Align items to the left side */
-  margin-right: 24px; /* Add margin to create space between the subcategorydiv and the list */
+  position: fixed; /* Fix the position of the sidebar */
+  top: 0; /* Align the sidebar to the top */
+  left: 0; /* Align the sidebar to the left */
+  height: 100%; /* Make the sidebar cover the entire height of the viewport */
+  width: 200px; /* Set the width of the sidebar */
+  background-color: #f0f0f0; /* Add background color */
+  padding: 20px; /* Add padding for content inside the sidebar */
+  overflow-y: auto;
 }
 
 .subcatbutton {
