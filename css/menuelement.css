@@ -1,3 +1,7 @@
+body {
+  height: 100%;
+}
+
 .menu-item {
   width: 240px;
   height: 260px;
@@ -124,6 +128,13 @@
     width: 90%; /* Make it fill the width of the viewport */
     max-width: none; /* Remove max-width for smaller screens */
   }
+  .subcategorydiv {
+    width: 20%;
+  }
+
+  .list {
+    width: 70%;
+  }
 }
 
 .cart-display {
@@ -206,4 +217,11 @@
   padding: 10px;
   cursor: pointer;
   border: none;
+}
+
+.side-by-side {
+  display: flex;
+  flex-direction: row;
+  height: 100%;
+  width: 100%;
 }

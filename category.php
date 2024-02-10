@@ -129,6 +129,24 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
       </div>
     </div>
 
+
+<!--to make the side bar -->
+      <div class="side-by-side">  
+            <!-- div for subcat buttons-->
+      <div class="subcategorydiv">
+         <div class="food-name" style=" margin-bottom: 12px; font-size:10px">Sub Categories</div>
+            <div class="subcatbutton">
+            <?php 
+            $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
+             while ($row = mysqli_fetch_array($sql)) { ?>
+                <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton"  style=" font-weight: bolder;">
+                    <?php echo $row['subcategory'];?> 
+                </a>
+            <?php } ?>
+          </div>
+       </div>
+
+       <div class="main-menu">
     <!-- div for the category buttons-->
     <div class="categorydiv">    
         <?php
@@ -142,23 +160,7 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
         }
         ?>
       </div>
-
-     <!-- div for subcat buttons-->
-      <div class="subcategorydiv">
-         <div class="food-name">Sub Categories</div>
-            <div class="subcatbutton">
-            <?php 
-            $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
-             while ($row = mysqli_fetch_array($sql)) { ?>
-                <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton">
-                    <?php echo $row['subcategory'];?> 
-                </a>
-            <?php } ?>
-          </div>
-       </div>
-
-    <!-- div for menu item list-->
-    <div class="list">
+           <div class="list">
           <?php
           $ret = mysqli_query($con, "select * from products where category='$cid'");
           $num = mysqli_num_rows($ret);
@@ -249,7 +251,13 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
         <?php
         }
         ?>
-    </div>
+    </div> 
+       </div>
+
+    <!-- div for menu item list-->
+
+      </div>
+
 
     <script>
     function updatePriceAndTotal(productId, mediumPrice, largePrice, xlPrice, xxlPrice) {
