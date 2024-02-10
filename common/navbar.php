@@ -56,7 +56,7 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
               <a class="navbutton" href="category.php?cid=8">Menu</a>
             </li>
             <li class="nav-item">
-              <a class="navbutton" href="#">FAQs</a>
+              <a class="navbutton" href="./faqs.php">FAQs</a>
             </li>
             <?php if(!isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
@@ -68,17 +68,17 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
             <?php endif?>
             <?php if(isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
-              <a class="navbutton" aria-current="page" href="./logout.php">Logout</a>
-            </li>
-            <?php endif?>
-            <?php if(isset($_SESSION['authenticated'])) :?>
-            <li class="nav-item">
               <a class="navbutton" href="./user-account.php">My Account</a>
             </li>
             <?php endif?>
             <?php if(isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
               <a class="navbutton" href="./cart.php">My Cart</a>
+            </li>
+            <?php endif?>
+            <?php if(isset($_SESSION['authenticated'])) :?>
+            <li class="nav-item">
+              <a class="navbutton" aria-current="page" href="./logout.php">Logout</a>
             </li>
             <?php endif?>
           </ul>
