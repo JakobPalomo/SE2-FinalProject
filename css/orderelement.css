@@ -127,6 +127,7 @@ form {
   display: flex;
   justify-content: center;
 }
+
 .check-button {
   display: inline-block;
   padding: 8px 16px;
@@ -139,7 +140,7 @@ form {
   font-size: 11px;
 }
 
-.check-button input[type="checkbox"] {
+.check-button input[type="radio"] {
   display: none;
 }
 

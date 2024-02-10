@@ -104,9 +104,6 @@ if ($result->num_rows == 1) {
           <div class="card-title"><h1>My Profile</h1></div>
           <!-- Place Content of card here -->
           <div class="inner-card">
-            <div class="logo-container">
-              <img src="./img/logo.png" alt="Logo" />
-            </div>
             <table>
               <!-- Row 1: Name and Sample Name -->
               <tr>

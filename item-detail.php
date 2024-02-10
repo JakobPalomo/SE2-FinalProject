@@ -2,17 +2,22 @@
 session_start();
 include('dbcon.php');
 $pid=intval($_GET['pid']);
-?> 
+$ret = mysqli_query($con, "SELECT p.*, c.categoryName, s.subcategory
+                            FROM products p
+                            INNER JOIN category c ON p.category = c.id
+                            INNER JOIN subcategory s ON p.subCategory = s.id
+                            WHERE p.id='$pid'");
+while ($row = mysqli_fetch_array($ret)) {
+?>
 
 <!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="css/navbar.css" />
-    <link rel="stylesheet" href="css/menupageStyle.css" />
-    <!-- <link rel="stylesheet" type="text/css" href="css/menuelement.css" /> -->
-    <title>Menu</title>
+    <link rel="stylesheet" type="text/css" href="./css/navbar.css" />
+    <link rel="stylesheet" type="text/css" href="./css/orderelement.css" />
+    <title><?php echo htmlentities($row['productName']); ?></title>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
       integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
@@ -33,108 +38,148 @@ $pid=intval($_GET['pid']);
   </head>
   <body style="background-color: #f5f5dc">
   <style>
-        body {
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-            background-color: #f5f5f5;
-        }
-
-        .menu-container {
-            display: flex;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin: 20px;
-        }
-
-        .menu-item {
-            background-color: #fff;
-            border-radius: 8px;
-            box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-            margin: 15px;
-            padding: 20px;
-            text-align: center;
-            width: 500px;
-            transition: transform 0.3s;
-        }
-
-        .menu-item:hover {
-            transform: scale(1.05);
-        }
-
-        .menu-display {
-            max-width: 100%;
-            height: auto;
-            border-radius: 8px;
-            margin-bottom: 10px;
-        }
-
-        .food-name {
-            font-size: 1.5em;
-            margin-bottom: 5px;
-        }
-
-        .food-price {
-            font-size: 1.2em;
-            color: #333;
-            margin-bottom: 10px;
-        }
-
-        .food-desc {
-            color: #555;
-            font-size: 1em;
-            margin-bottom: 10px;
-        }
-
-        .availability {
-            color: #777;
-            font-size: 0.9em;
-            margin-bottom: 10px;
-        }
-
-        .category,
-        .sub-category {
-            color: #777;
-            font-size: 0.9em;
+    .check-button input[type="radio"] {
+        display: none;
         }
     </style>
-
-
   <?php include('common/navbar.php');?>
+    <!-- Code zone -->
 
-  <?php
-$ret = mysqli_query($con, "SELECT p.*, c.categoryName, s.subcategory
-                            FROM products p
-                            INNER JOIN category c ON p.category = c.id
-                            INNER JOIN subcategory s ON p.subCategory = s.id
-                            WHERE p.id='$pid'");
-while ($row = mysqli_fetch_array($ret)) {
-?>
-    <div class="menu-container">
-    <div class="menu-item">
-                <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
-                <div class="detail-field">
-                    <p class="food-name"><?php echo htmlentities($row['productName']); ?></a></p>
-                    <p class="food-price">
-                        <?php
-                        echo "M: $" . htmlentities($row['mediumPrice']) . " | ";
-                        echo "L: $" . htmlentities($row['largePrice']) . " | ";
-                        echo "XL: $" . htmlentities($row['xlPrice']) . " | ";
-                        echo "XXL: $" . htmlentities($row['xxlPrice']);
-                        ?>
-                    </p>
-                </div>
-                <div class="desc-field">
-                    <p class="food-desc"><?php echo htmlentities($row['productDescription']); ?></p>
-                </div>
-                <div class="availability-field">
-                    <p class="availability"><?php echo "Availability: " . htmlentities($row['productAvailability']); ?></p>
-                </div>
-                <div class="category-field">
-                    <p class="category"><?php echo "Category: " . htmlentities($row['categoryName']); ?></p>
-                </div>
-                <div class="sub-category-field">
-                    <p class="sub-category"><?php echo "Subcategory: " . htmlentities($row['subcategory']); ?></p>
-                </div>
+    <div class="order-list">
+      <div class="order-item">
+        <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="item-display" />
+
+        <div class="details">
+          <form action="/action_page.php">
+            <div class="labels">
+              <!-- <p style="margin-right: 59%; margin-left: 2px">Name</p> -->
+              <!-- <p>Price</p> -->
             </div>
+            <div style="display: flex">
+              <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>
+              <p class="food-price">PHP <?php echo number_format($row['mediumPrice'], 2); ?></p>
+            </div>
+
+            <div class="labels">
+              <!-- <p
+                style="margin-right: 56%; margin-left: 2px; margin-bottom: 12px"
+              >
+                Description
+              </p> -->
+            </div>
+            <p class="description">
+             <?php echo htmlentities($row['productDescription']); ?>
+            </p>
+            <div class="buttons">
+              <br />
+              <img
+                src="./img/minus-circle.png"
+                alt="Decrease"
+                class="btn"
+                onclick="decrease()"
+              />
+              <input
+                type="text"
+                id="numberField"
+                value="1"
+                readonly
+                style="width: 50px; text-align: center; border-radius: 14px"
+              />
+              <img
+                src="./img/add.png"
+                alt="Increase"
+                class="btn"
+                onclick="increase()"
+              />
+            </div>
+            <br />
+            <div class="buttons">
+              <div class="button-group">
+                <!-- Set the medium button as checked by default -->
+                <label class="check-button checked" id="medium">
+                  <input type="radio" name="size" checked data-price="<?php echo htmlentities($row['mediumPrice']); ?>" onchange="toggleCheck('medium', <?php echo htmlentities($row['mediumPrice']); ?>)" />
+                  Medium
+                </label>
+                <label class="check-button" id="large">
+                  <input type="radio" name="size" data-price="<?php echo htmlentities($row['largePrice']); ?>" onchange="toggleCheck('large', <?php echo htmlentities($row['largePrice']); ?>)" />
+                  Large
+                </label>
+                <label class="check-button" id="xlarge">
+                  <input type="radio" name="size"  data-price="<?php echo htmlentities($row['xlPrice']); ?>" onchange="toggleCheck('xlarge', <?php echo htmlentities($row['xlPrice']); ?>)" />
+                  XLarge
+                </label>
+                <label class="check-button" id="xxlarge">
+                  <input type="radio" name="size" data-price="<?php echo htmlentities($row['xxlPrice']); ?>" onchange="toggleCheck('xxlarge', <?php echo htmlentities($row['xxlPrice']); ?>)" />
+                  XXLarge
+                </label>
+              </div>
+            </div>
+            <div class="buttons">
+              <input type="button" value="Cancel" class="add-item" onclick="goBack()" />
+              <input type="submit" value="Place Order" class="add-item" />
+            </div>
+          </form>
+        </div>
+      </div>
     </div>
+
+
+    <script>
+function goBack() {
+    window.history.back();
+}
+</script>
+
+    <script>
+function decrease() {
+    var numberField = document.getElementById("numberField");
+    var currentValue = parseInt(numberField.value);
+    if (!isNaN(currentValue) && currentValue > 1) {
+        numberField.value = currentValue - 1;
+        updatePrice(); // Call updatePrice() to update the total price
+    }
+}
+
+function increase() {
+    var numberField = document.getElementById("numberField");
+    var currentValue = parseInt(numberField.value);
+    if (!isNaN(currentValue)) {
+        numberField.value = currentValue + 1;
+        updatePrice(); // Call updatePrice() to update the total price
+    }
+}
+
+function toggleCheck(size, price) {
+    var checkbox = document.getElementById(size);
+    var checkboxes = document.querySelectorAll(".check-button");
+
+    for (var i = 0; i < checkboxes.length; i++) {
+        checkboxes[i].classList.remove("checked");
+    }
+
+    if (checkbox.querySelector("input").checked) {
+        checkbox.classList.add("checked");
+        // Update the price display based on the selected size and quantity
+        updatePrice(price);
+    }
+}
+
+function updatePrice() {
+    var numberField = document.getElementById("numberField");
+    var quantity = parseInt(numberField.value);
+    var foodPrice = document.querySelector(".food-price");
+
+    var selectedSize = document.querySelector('.check-button.checked');
+    if (!selectedSize) return; // Exit if no size is selected
+
+    var basePrice = parseFloat(selectedSize.querySelector('input').getAttribute('data-price'));
+    if (isNaN(basePrice)) return; // Exit if base price is not valid
+
+    var totalPrice = basePrice * quantity;
+    foodPrice.textContent = "PHP " + totalPrice.toFixed(2); // Format price with 2 decimal places
+}
+</script>
+    <!-- End Code -->
+  </body>
+</html>
 <?php } ?>
