@@ -66,6 +66,31 @@ body {
   align-items: center; /* Center items vertically */
 }
 
+.subcategorydiv {
+  padding-top: 4vh;
+  display: flex;
+  flex-direction: column; /* Display subcategories in a column */
+  align-items: flex-start; /* Align items to the start (left) of the container */
+}
+
+.subcategory-button {
+  margin: 8px; /* Add margin between subcategories for spacing */
+  padding: 8px 12px; /* Add padding to subcategory links */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 2.1vh;
+  text-decoration: none;
+  color: black;
+  font-weight: bolder;
+  border-radius: 35px;
+  transition: background-color 0.3s ease-in-out;
+  display: block; /* Display subcategory buttons as block elements */
+}
+
+.subcategory-button:hover {
+  background-color: #004225; /* Change the hover color as needed */
+  color: #ccc;
+}
+
 .categorybutton {
   margin-left: 1vh;
   margin-right: 1vh;

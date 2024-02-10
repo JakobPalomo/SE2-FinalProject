@@ -1,7 +1,7 @@
 <?php
 session_start();
 include('dbcon.php');
-$cid=intval($_GET['cid']);
+$cid=intval($_GET['scid']);
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
@@ -48,61 +48,6 @@ if (!isset($_SESSION['cart'])) {
   </style>
 
 
-<script>
-function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxlPrice) {
-    var size = document.getElementById("size" + productId).value;
-    var quantity = document.getElementById("quantity" + productId).value;
-    
-
-    // Calculate total price based on size and quantity
-    var price = 0;
-
-    switch (size) {
-        case 'M':
-            price = mediumPrice;
-            break;
-        case 'L':
-            price = largePrice;
-            break;
-        case 'XL':
-            price = xlPrice;
-            break;
-        case 'XXL':
-            price = xxlPrice;
-            break;
-        default:
-            price = 0;
-            break;
-    }
-
-    var IndivPrice = price * quantity;
-
-    var item = {
-        productId: productId,
-        productName: productName,
-        size: size,
-        quantity: quantity,
-        totalIndivudalPrice: IndivPrice
-    };
-    console.log("Item added to cart:", item);
-
-    var itemJSON = JSON.stringify(item);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "./function/addToCart.php", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            alert("Item added to the cart!");
-            // Use Bootstrap modal method to hide the modal
-            $('#addToCartModal' + productId).modal('hide');
-            // Reset any modal state here if necessary
-        }
-    };
-    xhr.send("item=" + encodeURIComponent(itemJSON));
-}
-</script>
-
 
   <?php include('common/navbar.php');?>
 
@@ -132,29 +77,23 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
         ?>
       </div>
 
-      <div class="subcategorydiv">
-        <div>Sub Categories</div>
-            <?php 
-            $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
-             while ($row = mysqli_fetch_array($sql)) { 
-            ?>
-                <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="subcategory-button">
-                <?php echo $row['subcategory'];?>
-                 </a>
-            <?php } ?>
-        </div>
+      <?php $sql=mysqli_query($con,"select subcategory  from subcategory where id='$cid'");
+        while($row=mysqli_fetch_array($sql)){?>
 
-      
+			<div class="food-name" style="text-align: center; font-size: 20px;">
+				<?php echo htmlentities($row['subcategory']);?>
+			</div>
+		<?php } ?>
+
     <div class="list">
 
-          <?php
-          $ret = mysqli_query($con, "select * from products where category='$cid'");
-          $num = mysqli_num_rows($ret);
-
-          if ($num > 0) {
-              while ($row = mysqli_fetch_array($ret)) {
-                $productId = $row['id'];
-          ?>
+    <?php
+        $ret=mysqli_query($con,"select * from products where subCategory='$cid'");
+        $num=mysqli_num_rows($ret);
+        if($num>0)
+            {
+                while ($row=mysqli_fetch_array($ret)) 
+            {?>				
                   <div class="menu-item">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                       <div class="detail-field">
@@ -214,6 +153,7 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
         }
         ?>
     </div>
+
 
     <script>
     function updatePriceAndTotal(productId, mediumPrice, largePrice, xlPrice, xxlPrice) {
