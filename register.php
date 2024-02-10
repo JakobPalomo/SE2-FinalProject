@@ -37,15 +37,16 @@ session_start();
   <br/>
     <div class="container">
       <div class="box form-box">
-      <div class="alert">
-                    <?php
-                    if(isset($_SESSION['status']))
-                    {
-                        echo"<h4>" .$_SESSION['status']."<h4>";
-                        unset($_SESSION['status']); 
-                    }
-                    ?>
-                </div>
+      <?php
+if(isset($_SESSION['status']))
+{
+    echo '<div class="alert">';
+    echo "<h4>" .$_SESSION['status']. "</h4>";
+    unset($_SESSION['status']); 
+    echo '</div>';
+}
+?>
+
         <header>Create your Account</header>
         <form name="registrationForm" action="./function/register-function.php" method="POST" onsubmit="return validateForm()">
 

@@ -40,3 +40,8 @@ body {
     max-width: none; /* Remove max-width for smaller screens */
   }
 }
+
+.alert {
+  color: rgb(168, 50, 50);
+  font-size: 12px;
+}
