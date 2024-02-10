@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.0
+-- version 5.2.1
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Feb 03, 2024 at 06:50 PM
--- Server version: 10.4.25-MariaDB
--- PHP Version: 8.1.10
+-- Generation Time: Feb 10, 2024 at 12:40 PM
+-- Server version: 10.4.28-MariaDB
+-- PHP Version: 8.2.4
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -33,7 +33,7 @@ CREATE TABLE `admin` (
   `password` varchar(255) NOT NULL,
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `admin`
@@ -54,7 +54,7 @@ CREATE TABLE `category` (
   `categoryDescription` longtext DEFAULT NULL,
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `category`
@@ -71,30 +71,14 @@ INSERT INTO `category` (`id`, `categoryName`, `categoryDescription`, `creationDa
 --
 
 CREATE TABLE `orders` (
-  `order_id` int(11) NOT NULL,
-  `user_session_id` varchar(255) DEFAULT NULL,
-  `items` text DEFAULT NULL,
-  `delivery_address` text DEFAULT NULL,
-  `total_price` decimal(10,2) DEFAULT NULL,
-  `payment_option` varchar(50) DEFAULT NULL,
-  `delivery_option` varchar(50) DEFAULT NULL,
-  `preparation_date` date DEFAULT NULL,
-  `status` varchar(50) DEFAULT 'pending',
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
-
---
--- Dumping data for table `orders`
---
-
-INSERT INTO `orders` (`order_id`, `user_session_id`, `items`, `delivery_address`, `total_price`, `payment_option`, `delivery_option`, `preparation_date`, `status`, `created_at`) VALUES
-(4, '1', 'a:3:{i:0;a:4:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:1;a:4:{s:9:\"productId\";i:2;s:11:\"productName\";s:14:\"Chicken Inasal\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:2;a:4:{s:9:\"productId\";i:3;s:11:\"productName\";s:14:\"Orange Chicken\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', '600.00', '', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:19:25'),
-(5, '1', 'a:3:{i:0;a:4:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:1;a:4:{s:9:\"productId\";i:2;s:11:\"productName\";s:14:\"Chicken Inasal\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:2;a:4:{s:9:\"productId\";i:3;s:11:\"productName\";s:14:\"Orange Chicken\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', '600.00', 'COD', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:19:39'),
-(6, '1', 'a:3:{i:0;a:4:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:1;a:4:{s:9:\"productId\";i:2;s:11:\"productName\";s:14:\"Chicken Inasal\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:2;a:4:{s:9:\"productId\";i:3;s:11:\"productName\";s:14:\"Orange Chicken\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', '600.00', 'Gcash', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:19:52'),
-(7, '1', 'a:2:{i:0;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";s:10:\"totalPrice\";i:100;}i:1;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', '2600.00', 'COD', 'Delivery', '2024-02-16', 'pending', '2024-02-03 17:29:47'),
-(8, '1', 'a:3:{i:0;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";s:10:\"totalPrice\";i:100;}i:1;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}i:2;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', '5100.00', '', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:31:58'),
-(9, '1', 'a:2:{i:0;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";s:10:\"totalPrice\";i:100;}i:1;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', '5100.00', '', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:32:38'),
-(10, '1', 'a:1:{i:0;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', '4900.00', '', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:33:32');
+  `id` int(11) NOT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `productId` varchar(255) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `orderDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `paymentMethod` varchar(50) DEFAULT NULL,
+  `orderStatus` varchar(55) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -108,7 +92,7 @@ CREATE TABLE `ordertrackhistory` (
   `status` varchar(255) DEFAULT NULL,
   `remark` mediumtext DEFAULT NULL,
   `postingDate` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 -- --------------------------------------------------------
 
@@ -132,16 +116,17 @@ CREATE TABLE `products` (
   `productAvailability` varchar(50) NOT NULL,
   `postingDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `products`
 --
 
 INSERT INTO `products` (`id`, `category`, `subCategory`, `productName`, `mediumPrice`, `largePrice`, `xlPrice`, `xxlPrice`, `productDescription`, `productImage1`, `productImage2`, `productImage3`, `productAvailability`, `postingDate`, `updationDate`) VALUES
-(1, '8', '14', 'Chicken Parmesan', '100.00', '200.00', '300.00', '500.00', 'Yummers', 'project.jpg', '', '', 'In Stock', '2024-01-30 13:31:36', '2024-01-30 15:40:12'),
-(2, '8', '14', 'Chicken Inasal', '100.00', '200.00', '300.00', '400.00', 'Yummerz', 'download.jfif', '', '', 'In Stock', '2024-01-30 14:16:08', '2024-01-30 14:16:08'),
-(3, '8', '14', 'Orange Chicken', '200.00', '400.00', '600.00', '800.00', 'yummerz', 'download (1).jfif', '', '', 'In Stock', '2024-01-30 14:16:34', '2024-01-30 16:06:30');
+(1, '8', '14', 'Chicken Parmesan', 100.00, 200.00, 300.00, 500.00, 'Yummers', 'project.jpg', '', '', 'Out of Stock', '2024-01-30 13:31:36', '2024-02-10 06:42:16'),
+(2, '8', '14', 'Chicken Inasal', 100.00, 200.00, 300.00, 400.00, 'Yummerz', 'download.jfif', '', '', 'In Stock', '2024-01-30 14:16:08', '2024-01-30 14:16:08'),
+(3, '8', '14', 'Orange Chicken', 200.00, 400.00, 600.00, 800.00, 'yummerz', 'download (1).jfif', '', '', 'In Stock', '2024-01-30 14:16:34', '2024-01-30 16:06:30'),
+(4, '8', '16', 'Baked Feta Pasta', 100.00, 120.00, 130.00, 150.00, 'ITS BAKED FETA PASTA BRO', 'baked-feta.jpeg', '', '', 'In Stock', '2024-02-10 04:55:22', '2024-02-10 04:55:22');
 
 -- --------------------------------------------------------
 
@@ -155,14 +140,15 @@ CREATE TABLE `subcategory` (
   `subcategory` varchar(255) DEFAULT NULL,
   `creationDate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `subcategory`
 --
 
 INSERT INTO `subcategory` (`id`, `categoryid`, `subcategory`, `creationDate`, `updationDate`) VALUES
-(14, 8, 'Chicken', '2024-01-27 08:38:05', '27-01-2024 04:12:39 PM');
+(14, 8, 'Chicken', '2024-01-27 08:38:05', '27-01-2024 04:12:39 PM'),
+(16, 8, 'Pasta', '2024-02-10 04:54:35', NULL);
 
 -- --------------------------------------------------------
 
@@ -186,7 +172,7 @@ CREATE TABLE `userinfo` (
   `billingPincode` int(11) DEFAULT NULL,
   `regDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
 
 --
 -- Dumping data for table `userinfo`
@@ -194,6 +180,38 @@ CREATE TABLE `userinfo` (
 
 INSERT INTO `userinfo` (`id`, `name`, `email`, `contactno`, `password`, `shippingAddress`, `shippingState`, `shippingCity`, `shippingPincode`, `billingAddress`, `billingState`, `billingCity`, `billingPincode`, `regDate`, `updationDate`) VALUES
 (1, 'test', 'test@gmail.com', 9009857868, 'f925916e2754e5e03f75dd58a5733251', 'Test', 'Test', 'Test', 110001, 'Test', 'Test Manila', 'Test Manila', 110092, '2024-02-26 22:58:24', '');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userorders`
+--
+
+CREATE TABLE `userorders` (
+  `order_id` int(11) NOT NULL,
+  `user_session_id` varchar(255) DEFAULT NULL,
+  `items` text DEFAULT NULL,
+  `delivery_address` text DEFAULT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL,
+  `payment_option` varchar(50) DEFAULT NULL,
+  `delivery_option` varchar(50) DEFAULT NULL,
+  `preparation_date` date DEFAULT NULL,
+  `status` varchar(50) DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `userorders`
+--
+
+INSERT INTO `userorders` (`order_id`, `user_session_id`, `items`, `delivery_address`, `total_price`, `payment_option`, `delivery_option`, `preparation_date`, `status`, `created_at`) VALUES
+(4, '1', 'a:3:{i:0;a:4:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:1;a:4:{s:9:\"productId\";i:2;s:11:\"productName\";s:14:\"Chicken Inasal\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:2;a:4:{s:9:\"productId\";i:3;s:11:\"productName\";s:14:\"Orange Chicken\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', 600.00, '', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:19:25'),
+(5, '1', 'a:3:{i:0;a:4:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:1;a:4:{s:9:\"productId\";i:2;s:11:\"productName\";s:14:\"Chicken Inasal\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:2;a:4:{s:9:\"productId\";i:3;s:11:\"productName\";s:14:\"Orange Chicken\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', 600.00, 'COD', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:19:39'),
+(6, '1', 'a:3:{i:0;a:4:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:1;a:4:{s:9:\"productId\";i:2;s:11:\"productName\";s:14:\"Chicken Inasal\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}i:2;a:4:{s:9:\"productId\";i:3;s:11:\"productName\";s:14:\"Orange Chicken\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', 600.00, 'Gcash', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:19:52'),
+(7, '1', 'a:2:{i:0;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";s:10:\"totalPrice\";i:100;}i:1;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', 2600.00, 'COD', 'Delivery', '2024-02-16', 'pending', '2024-02-03 17:29:47'),
+(8, '1', 'a:3:{i:0;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";s:10:\"totalPrice\";i:100;}i:1;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}i:2;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', 5100.00, '', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:31:58'),
+(9, '1', 'a:2:{i:0;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:1:\"M\";s:8:\"quantity\";s:1:\"1\";s:10:\"totalPrice\";i:100;}i:1;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', 5100.00, '', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:32:38'),
+(10, '1', 'a:1:{i:0;a:5:{s:9:\"productId\";i:1;s:11:\"productName\";s:16:\"Chicken Parmesan\";s:4:\"size\";s:3:\"XXL\";s:8:\"quantity\";s:1:\"5\";s:10:\"totalPrice\";N;}}', '06, Purok Centro, Sta Lucia,, LUBAO, PAMPANGA, 2005', 4900.00, '', 'Delivery', '0000-00-00', 'pending', '2024-02-03 17:33:32');
 
 -- --------------------------------------------------------
 
@@ -211,7 +229,7 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `verify_token` varchar(255) DEFAULT NULL,
   `verify_status` tinyint(4) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Dumping data for table `users`
@@ -241,7 +259,7 @@ ALTER TABLE `category`
 -- Indexes for table `orders`
 --
 ALTER TABLE `orders`
-  ADD PRIMARY KEY (`order_id`);
+  ADD PRIMARY KEY (`id`);
 
 --
 -- Indexes for table `ordertrackhistory`
@@ -266,6 +284,12 @@ ALTER TABLE `subcategory`
 --
 ALTER TABLE `userinfo`
   ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `userorders`
+--
+ALTER TABLE `userorders`
+  ADD PRIMARY KEY (`order_id`);
 
 --
 -- Indexes for table `users`
@@ -293,7 +317,7 @@ ALTER TABLE `category`
 -- AUTO_INCREMENT for table `orders`
 --
 ALTER TABLE `orders`
-  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ordertrackhistory`
@@ -305,19 +329,25 @@ ALTER TABLE `ordertrackhistory`
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT for table `subcategory`
 --
 ALTER TABLE `subcategory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT for table `userinfo`
 --
 ALTER TABLE `userinfo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT for table `userorders`
+--
+ALTER TABLE `userorders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT for table `users`
