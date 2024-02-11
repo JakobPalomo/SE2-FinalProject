@@ -226,3 +226,28 @@ body {
   height: 100%;
   width: 100%;
 }
+.modal-content {
+  box-shadow: none;
+  border: none;
+}
+
+/* Adjust modal body styles */
+.modal-body {
+  padding: 0; /* Remove default padding */
+}
+
+/* Adjust modal header styles */
+.modal-header {
+  border-bottom: none; /* Remove border */
+  padding: 0.5rem 1rem; /* Add padding */
+}
+
+/* Optional: Adjust modal title styles */
+.modal-title {
+  margin-bottom: 0; /* Remove margin */
+}
+
+/* Optional: Adjust modal close button styles */
+.btn-close {
+  padding: 0.5rem 0.75rem; /* Add padding */
+}

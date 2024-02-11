@@ -27,6 +27,7 @@ if(isset($_POST['add_to_cart'])) {
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
     <link rel="stylesheet" href="css/menupageStyle.css" />
     <link rel="stylesheet" type="text/css" href="css/menuelement.css" />
+    <link rel="stylesheet" type="text/css" href="./css/orderelement.css" />
     <title>Menu</title>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -45,6 +46,9 @@ if(isset($_POST['add_to_cart'])) {
       href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap"
       rel="stylesheet"
     />
+    
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
   </head>
 
  <!-- inline style-->
@@ -60,59 +64,6 @@ if(isset($_POST['add_to_cart'])) {
   </style>
 
 
-<script>
-function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxlPrice) {
-    var size = document.getElementById("size" + productId).value;
-    var quantity = document.getElementById("quantity" + productId).value;
-    
-    // Calculate total price based on size and quantity
-    var price = 0;
-
-    switch (size) {
-        case 'M':
-            price = mediumPrice;
-            break;
-        case 'L':
-            price = largePrice;
-            break;
-        case 'XL':
-            price = xlPrice;
-            break;
-        case 'XXL':
-            price = xxlPrice;
-            break;
-        default:
-            price = 0;
-            break;
-    }
-
-    var IndivPrice = price * quantity;
-
-    var item = {
-        productId: productId,
-        productName: productName,
-        size: size,
-        quantity: quantity,
-        totalIndivudalPrice: IndivPrice
-    };
-    console.log("Item added to cart:", item);
-
-    var itemJSON = JSON.stringify(item);
-
-    var xhr = new XMLHttpRequest();
-    xhr.open("POST", "./function/addToCart.php", true);
-    xhr.setRequestHeader("Content-type", "application/x-www-form-urlencoded");
-    xhr.onreadystatechange = function () {
-        if (xhr.readyState == 4 && xhr.status == 200) {
-            alert("Item added to the cart!");
-            // Use Bootstrap modal method to hide the modal
-            $('#addToCartModal' + productId).modal('hide');
-            // Reset any modal state here if necessary
-        }
-    };
-    xhr.send("item=" + encodeURIComponent(itemJSON));
-}
-</script>
 
 
   <?php include('common/navbar.php');?>
@@ -172,7 +123,7 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
                 $menuClass = ($availability == 'Out of Stock') ? 'menu-item-unavailable' : ''; // Add class if product is out of stock
           ?>
                
-                  <div class="menu-item <?php echo $menuClass; ?>" onclick="navigateToItemDetail(<?php echo $row['id']; ?>)">
+                  <div class="menu-item <?php echo $menuClass; ?>">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                       <div class="detail-field">
                           <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>
@@ -183,21 +134,17 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
                       </div>
                         <center>
                              <?php if($availability != 'Out of Stock'): ?>
-                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCart(<?php echo $row['id']; ?>)">Add to Cart</button>
+                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAuthenticate(<?php echo $row['id']; ?>)">Add to Cart</button>
                             <?php else: ?>
                             <button class="add-item disabled" disabled>Add to Cart</button>
                             <?php endif; ?>
                         </center>
                     </div>
 
-                    <script>
-                        function navigateToItemDetail(productId) {
-                          window.location.href = "item-detail.php?pid=" + productId;
-                        }
-                    </script>
+                  
                 
                 <script>
-                    function addToCart(productId) {
+                    function addToCartAuthenticate(productId) {
                         event.stopPropagation();
                         <?php if(!isset($_SESSION['authenticated'])): ?>
                             window.location.href = './function/authentication.php';
@@ -206,43 +153,185 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
                             var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
                         <?php endif; ?>
                     }
+                   
                 </script>
 
             <!-- Modal -->
-            <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addToCartModalLabel<?php echo $productId; ?>">Add to Cart</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="addToCartForm<?php echo $productId; ?>">
-                                <h6 class="ms-auto"><?php echo htmlentities($row['productName']); ?></h6> <br>
-                                <label for="quantity">Quantity:</label>
-                                <input type="number" id="quantity<?php echo $productId; ?>" name="quantity" value="1" min="1" onchange="updatePriceAndTotal(<?php echo $productId; ?>, <?php echo htmlentities($row['mediumPrice']); ?>, <?php echo htmlentities($row['largePrice']); ?>, <?php echo htmlentities($row['xlPrice']); ?>, <?php echo htmlentities($row['xxlPrice']); ?>)">
+    <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+        
+          
+                <div class="order-list">
+                    <div class="order-item">
+                        <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="item-display" />
+                        <div class="details">
+                            <form>
+                                <div class="labels"></div>
+                                <div style="display: flex">
+                                    <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>
+                                    <p class="food-price">PHP <span id="totalPrice<?php echo $productId; ?>"><?php echo number_format($row['mediumPrice'], 2); ?></span></p>
+                                </div>
+                                <div class="labels"></div>
+                                <p class="description"><?php echo htmlentities($row['productDescription']); ?></p>
+                                <div class="buttons">
+                                    <br />
+                                    <img src="./img/minus-circle.png" alt="Decrease" class="btn" onclick="decrease('<?php echo $productId; ?>')" />
+                                    <input type="text" id="numberField<?php echo $productId; ?>" value="1" readonly style="width: 50px; text-align: center; border-radius: 14px" />
+                                    <img src="./img/add.png" alt="Increase" class="btn" onclick="increase('<?php echo $productId; ?>')" />
+                                </div>
+                                <br />
+                                <div class="buttons">
+                                    <div class="button-group">
+                                    <?php
+$sizes = array("medium", "large", "xl", "xxl"); // Add your sizes here
+foreach ($sizes as $size) {
+    $price = $row[$size . 'Price'];
+    $checkboxId = $productId . '_' . $size; // Unique ID for each checkbox
+    echo '<label class="check-button" id="' . $checkboxId . '" onclick="toggleCheck(\'' . $checkboxId . '\', ' . htmlentities($price) . ')">';
+    echo '<input type="radio" name="size' . $productId . '" data-price="' . htmlentities($price) . '" />';
+    echo ucfirst($size) . ' - PHP ' . number_format($price, 2);
+    echo '</label>';
+}
+?>
 
-                                <label for="size">Size:</label>
-                                <select id="size<?php echo $productId; ?>" name="size" onchange="updatePriceAndTotal(<?php echo $productId; ?>, <?php echo htmlentities($row['mediumPrice']); ?>, <?php echo htmlentities($row['largePrice']); ?>, <?php echo htmlentities($row['xlPrice']); ?>, <?php echo htmlentities($row['xxlPrice']); ?>)">
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
-
-                                <p id="priceDisplay<?php echo $productId; ?>">Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
-
-                                <p id="totalPriceDisplay<?php echo $productId; ?>">Total Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
-
-                                <input type="hidden" id="productId<?php echo $productId; ?>" name="productId" value="<?php echo $productId; ?>">
+                                    </div>
+                                </div>
+                                <div class="buttons">
+                                <input type="button" value="Close" class="add-item" data-bs-dismiss="modal" onclick="resetModal('<?php echo $productId; ?>')" />
+                                    <input type="button" value="Confirm" class="add-item" onclick="addToCart('<?php echo $productId; ?>')" />
+                                </div>
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="addToCart(<?php echo $row['id']; ?>, '<?php echo htmlentities($row['productName']); ?>', <?php echo htmlentities($row['mediumPrice']); ?>)">Add to Cart</button>
                         </div>
                     </div>
                 </div>
             </div>
+        </div>
+    </div>
+
+
+    <script>
+    function resetModal(productId) {
+        // Unselect all sizes
+        var checkboxes = document.querySelectorAll("[id^='" + productId + "_']");
+        checkboxes.forEach(function(checkbox) {
+            checkbox.classList.remove("checked");
+        });
+
+        // Reset total price to 0
+        var foodPrice = document.getElementById("totalPrice" + productId);
+        foodPrice.textContent = "0.00";
+
+        // Reset quantity to 1
+        var numberField = document.getElementById("numberField" + productId);
+        numberField.value = "1";
+    }
+
+    function decrease(productId) {
+        var numberField = document.getElementById("numberField" + productId);
+        var currentValue = parseInt(numberField.value);
+        if (!isNaN(currentValue) && currentValue > 1) {
+            numberField.value = currentValue - 1;
+            updatePrice(productId);
+        }
+    }
+
+    function increase(productId) {
+        var numberField = document.getElementById("numberField" + productId);
+        var currentValue = parseInt(numberField.value);
+        if (!isNaN(currentValue)) {
+            numberField.value = currentValue + 1;
+            updatePrice(productId);
+        }
+    }
+
+    function toggleCheck(size, price) {
+        var parts = size.split('_');
+        var productId = parts[0];
+        var checkboxes = document.querySelectorAll("[id^='" + productId + "_']");
+        checkboxes.forEach(function(checkbox) {
+            checkbox.classList.remove("checked");
+        });
+        var checkbox = document.getElementById(size);
+        checkbox.classList.add("checked");
+        updatePrice(productId);
+    }
+
+    function updatePrice(productId) {
+        var numberField = document.getElementById("numberField" + productId);
+        var quantity = parseInt(numberField.value);
+        var selectedSize = document.querySelector('.check-button.checked');
+        if (!selectedSize) return;
+        var basePrice = parseFloat(selectedSize.querySelector('input').getAttribute('data-price'));
+        if (isNaN(basePrice)) return;
+        var totalPrice = basePrice * quantity;
+        var foodPrice = document.getElementById("totalPrice" + productId);
+        foodPrice.textContent = totalPrice.toFixed(2);
+    }
+
+    
+    function addToCart(productId) {
+    var productImage = document.querySelector('#addToCartModal' + productId + ' .item-display').getAttribute('src');
+    var productName = document.querySelector('#addToCartModal' + productId + ' .food-name').textContent;
+    var quantity = parseInt(document.querySelector('#numberField' + productId).value);
+    var selectedSize = document.querySelector('.check-button.checked');
+    var totalPrice = parseFloat(document.getElementById("totalPrice" + productId).textContent);
+    var sizePrice = parseFloat(selectedSize.querySelector('input').getAttribute('data-price')); // Fetch size price
+
+    if (!selectedSize) {
+        alert('Please select a size.');
+        return;
+    }
+    
+    var size = selectedSize.textContent.split('-')[0].trim();
+    
+    var newItem = {
+        productId: productId,
+        productImage: productImage,
+        productName: productName,
+        quantity: quantity,
+        size: size,
+        sizePrice: sizePrice, // Include size price in the item object
+        totalPrice: totalPrice
+    };
+
+    console.log('New Item:', newItem);
+
+    // Retrieve existing cart items from session storage
+    var existingCartItems = JSON.parse(sessionStorage.getItem('cart')) || [];
+    
+    // Add the new item to the existing cart items
+    existingCartItems.push(newItem);
+
+    // Store the updated cart items back in session storage
+    sessionStorage.setItem('cart', JSON.stringify(existingCartItems));
+
+    // Show confirmation message
+    alert('Item added to cart!');
+
+    // Close modal
+    $('#addToCartModal' + productId).modal('hide');
+}
+
+
+</script>
+
+
+
+
+
+
+    
+</script>
+
+
+
+
+
+
+
+
+
         <?php
         }
         } else {
@@ -260,49 +349,6 @@ function addToCart(productId, productName, mediumPrice, largePrice, xlPrice, xxl
 
 
     <script>
-    function updatePriceAndTotal(productId, mediumPrice, largePrice, xlPrice, xxlPrice) {
-        var size = document.getElementById("size" + productId).value;
-        var quantity = document.getElementById("quantity" + productId).value;
-        var price = 0;
-
-        switch (size) {
-            case 'M':
-                price = mediumPrice;
-                break;
-            case 'L':
-                price = largePrice;
-                break;
-            case 'XL':
-                price = xlPrice;
-                break;
-            case 'XXL':
-                price = xxlPrice;
-                break;
-            default:
-                price = 0;
-                break;
-        }
-
-        var totalPrice = price * quantity;
-
-        document.getElementById("priceDisplay" + productId).innerText = "Price: $" + price;
-        document.getElementById("totalPriceDisplay" + productId).innerText = "Total Price: $" + totalPrice;
-    }
-
-     function preventFormSubmission(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            // Optionally, you can trigger the updatePriceAndTotal function here as well
-            // updatePriceAndTotal(productId, mediumPrice, largePrice, xlPrice, xxlPrice);
-        }
-    }
-
-    // Attach the function to the form's keydown event
-    document.addEventListener('keydown', function (event) {
-        preventFormSubmission(event);
-    });
-
-
 
     function filterProducts() {
         var input, filter, menuItems, item, productName;

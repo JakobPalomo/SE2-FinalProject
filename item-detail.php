@@ -116,7 +116,7 @@ while ($row = mysqli_fetch_array($ret)) {
             </div>
             <div class="buttons">
               <input type="button" value="Cancel" class="add-item" onclick="goBack()" />
-              <input type="submit" value="Place Order" class="add-item" />
+              <input type="submit" value="Add To Cart" class="add-item" />
             </div>
           </form>
         </div>

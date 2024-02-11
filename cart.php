@@ -23,7 +23,7 @@ include('./dbcon.php');
     <script src="https://code.jquery.com/jquery-3.6.4.min.js"></script>
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
-
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script>
     function updateAddress() {
@@ -131,70 +131,30 @@ include('./dbcon.php');
     </div>
 
     <div class="order-list">
-        <?php
-              $totalPrice = 0;
-        if (!empty($_SESSION['cart'])) {
-            foreach ($_SESSION['cart'] as $index => $item) {
-                $productId = $item['productId'];
-                $query = "SELECT productName, mediumPrice, largePrice, xlPrice, xxlPrice, productImage1 FROM products WHERE id = $productId";
-                $result = mysqli_query($con, $query);
-
-                if ($result && mysqli_num_rows($result) > 0) {
-                    $productDetails = mysqli_fetch_assoc($result);
-                    $productName = $productDetails['productName'];
-                    $productImage = $productDetails['productImage1'];
-
-                    // Modify to dynamically select price based on size
-                    switch ($item['size']) {
-                        case 'M':
-                            $price = $productDetails['mediumPrice'];
-                            break;
-                        case 'L':
-                            $price = $productDetails['largePrice'];
-                            break;
-                        case 'XL':
-                            $price = $productDetails['xlPrice'];
-                            break;
-                        case 'XXL':
-                            $price = $productDetails['xxlPrice'];
-                            break;
-                        default:
-                            $price = 0;
-                            break;
-                    }
-                    $totalPrice += $price * $item['quantity'];
-                } else {
-                    $productName = "Product not found";
-                    $price = 0;
-                }
-
-                // Display cart item details
-                echo '<div class="cart-item" id="cart-item-' . $index . '">';
-                echo '<img src="admin/productimages/' . $productId . '/' . $productImage . '" alt="food" class="cart-display" />';
-                echo '<div class="detail-cart">';
-                echo "<p class=\"foodcart-name\">{$productName}</p>";
-
-                echo '<button onclick="decrementQuantity(' . $index . ', \'' . $item['size'] . '\')">-</button>';
-                echo '<span class="quantity-display">' . $item['quantity'] . '</span>';
-                echo '<button onclick="incrementQuantity(' . $index . ', \'' . $item['size'] . '\')">+</button>';
-
-                echo '<select class="size-dropdown" onchange="updateCartItem(' . $index . ', this.value, ' . $item['quantity'] . ')">';
-                echo '<option value="M" ' . ($item['size'] === 'M' ? 'selected' : '') . '>M</option>';
-                echo '<option value="L" ' . ($item['size'] === 'L' ? 'selected' : '') . '>L</option>';
-                echo '<option value="XL" ' . ($item['size'] === 'XL' ? 'selected' : '') . '>XL</option>';
-                echo '<option value="XXL" ' . ($item['size'] === 'XXL' ? 'selected' : '') . '>XXL</option>';
-                echo '</select>';
-                echo '</div>';
-                echo '<div class="price">';
-                echo "<p class=\"total-price\">₱" . number_format($price * $item['quantity'], 2) . '</p>';
-                echo '<img src="./img/cross-circle (2).png" alt="food" width="24px" height="24px" style="cursor: pointer;" onclick="removeCartItem(' . $index . ')" />';
-                echo '</div>';
-                echo '</div>';
-            }
-        } else {
-            echo "<p>Your cart is empty.</p>";
+    <?php
+    $totalPrice = 0;
+    if (!empty($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $index => $item) {
+            echo '<div class="cart-item" id="cart-item-' . $index . '">';
+            echo '<img src="' . $item['productImage'] . '" alt="food" class="cart-display" />';
+            echo '<div class="detail-cart">';
+            echo '<p class="foodcart-name">' . $item['productName'] . '</p>';
+            echo '<p class="foodcart-name">' . $item['quantity'] . ' - ' . $item['size'] . ' ($' . $item['sizePrice'] . ')</p>';
+            echo '</div>';
+            echo '<div class="price">';
+            echo '<p class="total-price">₱' . $item['totalPrice'] . '</p>';
+            echo '<img src="./img/cross-circle (2).png" alt="food" width="24px" height="24px" style="cursor: pointer;" onclick="removeCartItem(' . $index . ')" />';
+            echo '</div>';
+            echo '</div>';
+            
+            // Calculate total price
+            $totalPrice += $item['totalPrice'];
         }
-        ?>
+    } else {
+        echo "<p>Your cart is empty.</p>";
+    }
+?>
+
         <!-- Datepicker -->
         <div class="subtitle">
             <p class="subtitle-txt-2">Date of Preparation</p>
