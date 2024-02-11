@@ -29,14 +29,6 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
   </head>
   <body style="background-color: #f5f5dc">
     <nav class="navbar navbar-expand-lg <?php echo $fixedTop; ?>">
-    <?php if(isset($includeButton) && $includeButton): ?>
-      <button id="openNav" class="w3-button w3-xlarge" onclick="w3_open()">
-        <div class="arrow">></div>
-      </button>
-      <button id="closeNav" class="w3-button w3-xlarge" onclick="w3_close()">
-        <div class="arrow">&#60;</div>
-      </button>
-    <?php endif; ?>
       <div class="container-fluid">
         <a class="brand" href="index.php">Chef's Daughter</a>
         <button

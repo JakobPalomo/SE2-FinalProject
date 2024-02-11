@@ -15,24 +15,16 @@ if (!isset($_SESSION['cart'])) {
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
     <link rel="stylesheet" href="css/menupageStyle.css" />
     <link rel="stylesheet" type="text/css" href="css/menuelement.css" />
+    <link rel="stylesheet" type="text/css" href="css/ordermodal.css" />
     <title>Menu</title>
     <script
-      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
-      integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL"
-      crossorigin="anonymous"
-    ></script>
-    <link
-      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css"
-      rel="stylesheet"
-      integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN"
-      crossorigin="anonymous"
-    />
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous">
+    </script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous"/>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap"
-      rel="stylesheet"
-    />
+    <link href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap" rel="stylesheet"/>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
   <body style="background-color: #f5f5dc">
 
@@ -76,6 +68,7 @@ if (!isset($_SESSION['cart'])) {
         }
         ?>
     </div>
+    
 
       <?php $sql=mysqli_query($con,"select subcategory  from subcategory where id='$cid'");
         while($row=mysqli_fetch_array($sql)){?>
@@ -96,33 +89,34 @@ if (!isset($_SESSION['cart'])) {
                     $availability = $row['productAvailability'];
                     $menuClass = ($availability == 'Out of Stock') ? 'menu-item-unavailable' : '';
                 ?>		
-
-                 <div class="menu-item <?php echo $menuClass; ?>" onclick="navigateToItemDetail(<?php echo $row['id']; ?>)">
+                    <div class="menu-item <?php echo $menuClass; ?>">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                       <div class="detail-field">
-                          <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>
-                          <p class="food-price">Sizes</p>            
+                          <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>  
+                          <?php if ($availability == 'Out of Stock'): ?>
+                          <p class="food-name"><?php echo htmlentities($availability); ?></p>  
+                          <?php endif; ?>
                       </div>
-                      <div class="desc-field">
-                          <p class="food-desc"><?php echo htmlentities($row['productDescription']); ?></p>
+                      <div class="desc-field"> 
+                                <?php if ($availability != 'Out of Stock'): ?>
+                             <p class="food-desc"><?php echo htmlentities($row['mediumPrice']); ?></p>
+                             <p class="food-desc"><?php echo htmlentities($row['largePrice']); ?></p>
+                             <p class="food-desc"><?php echo htmlentities($row['xlPrice']); ?></p>
+                             <p class="food-desc"><?php echo htmlentities($row['xxlPrice']); ?></p>
+                                 <?php endif; ?>
                       </div>
                         <center>
                              <?php if($availability != 'Out of Stock'): ?>
-                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCart(<?php echo $row['id']; ?>)">Add to Cart</button>
+                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAuthenticate(<?php echo $row['id']; ?>)">Add to Cart</button>
                             <?php else: ?>
                             <button class="add-item disabled" disabled>Add to Cart</button>
                             <?php endif; ?>
                         </center>
                     </div>
 
-                    <script>
-                        function navigateToItemDetail(productId) {
-                          window.location.href = "item-detail.php?pid=" + productId;
-                        }
-                    </script>
                 
-                <script>
-                    function addToCart(productId) {
+                    <script>
+                    function addToCartAuthenticate(productId) {
                         event.stopPropagation();
                         <?php if(!isset($_SESSION['authenticated'])): ?>
                             window.location.href = './function/authentication.php';
@@ -130,100 +124,184 @@ if (!isset($_SESSION['cart'])) {
                             event.stopPropagation();
                             var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
                         <?php endif; ?>
-                    }
+                    }             
                 </script>
 
-            <!-- Modal -->
-            <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true">
-                <div class="modal-dialog">
-                    <div class="modal-content">
-                        <div class="modal-header">
-                            <h5 class="modal-title" id="addToCartModalLabel<?php echo $productId; ?>">Add to Cart</h5>
-                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                        </div>
-                        <div class="modal-body">
-                            <form id="addToCartForm<?php echo $productId; ?>">
-                                <h6 class="ms-auto"><?php echo htmlentities($row['productName']); ?></h6> <br>
-                                <label for="quantity">Quantity:</label>
-                                <input type="number" id="quantity<?php echo $productId; ?>" name="quantity" value="1" min="1" onchange="updatePriceAndTotal(<?php echo $productId; ?>, <?php echo htmlentities($row['mediumPrice']); ?>, <?php echo htmlentities($row['largePrice']); ?>, <?php echo htmlentities($row['xlPrice']); ?>, <?php echo htmlentities($row['xxlPrice']); ?>)">
+     <!-- Modal -->
+     <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="order-list">
+                    <div class="order-item">
+                        <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="item-display" />
+                        <div class="details">
+                            <form>
+                                <div class="labels"></div>
+                                <div style="display: flex">
+                                    <p class="food-namemod"><?php echo htmlentities($row['productName']); ?></p>
+                                    <p class="food-price">PHP <span id="totalPrice<?php echo $productId; ?>"><?php echo number_format($row['mediumPrice'], 2); ?></span></p>
+                                </div>
+                                <div class="labels"></div>
+                                <p class="description"><?php echo htmlentities($row['productDescription']); ?></p>
+                                <div class="buttons">
+                                    <br />
+                                    <img src="./img/minus-circle.png" alt="Decrease" class="btn" onclick="decrease('<?php echo $productId; ?>')" />
+                                    <input type="text" id="numberField<?php echo $productId; ?>" value="1" readonly style="width: 50px; text-align: center; border-radius: 14px" />
+                                    <img src="./img/add.png" alt="Increase" class="btn" onclick="increase('<?php echo $productId; ?>')" />
+                                </div>
+                                <br />
+                                <div class="buttons">
+                                    <div class="button-group">
+                                    <?php
+                                        $sizes = array("medium", "large", "xl", "xxl"); // Add your sizes here
+                                        foreach ($sizes as $size) {
+                                            $price = $row[$size . 'Price'];
+                                            $checkboxId = $productId . '_' . $size; // Unique ID for each checkbox
+                                                echo '<label class="check-button" id="' . $checkboxId . '" onclick="toggleCheck(\'' . $checkboxId . '\', ' . htmlentities($price) . ')">';
+                                                echo '<input type="radio" name="size' . $productId . '" data-price="' . htmlentities($price) . '" />';
+                                                echo ucfirst($size) . ' - PHP ' . number_format($price, 2);
+                                                echo '</label>'; } ?>
+                                    </div>
+                                </div>
 
-                                <label for="size">Size:</label>
-                                <select id="size<?php echo $productId; ?>" name="size" onchange="updatePriceAndTotal(<?php echo $productId; ?>, <?php echo htmlentities($row['mediumPrice']); ?>, <?php echo htmlentities($row['largePrice']); ?>, <?php echo htmlentities($row['xlPrice']); ?>, <?php echo htmlentities($row['xxlPrice']); ?>)">
-                                    <option value="M">M</option>
-                                    <option value="L">L</option>
-                                    <option value="XL">XL</option>
-                                    <option value="XXL">XXL</option>
-                                </select>
+                                <div class="buttons">
+                                <input type="button" value="Close" class="add-itemmod" data-bs-dismiss="modal" onclick="resetModal('<?php echo $productId; ?>')" />
+                                    <input type="button" value="Confirm" class="add-itemmod" onclick="addToCart('<?php echo $productId; ?>')" />
+                                </div>
 
-                                <p id="priceDisplay<?php echo $productId; ?>">Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
-
-                                <p id="totalPriceDisplay<?php echo $productId; ?>">Total Price: $<?php echo htmlentities($row['mediumPrice']); ?></p>
-
-                                <input type="hidden" id="productId<?php echo $productId; ?>" name="productId" value="<?php echo $productId; ?>">
                             </form>
-                        </div>
-                        <div class="modal-footer">
-                        <button type="button" class="btn btn-primary" onclick="addToCart(<?php echo $row['id']; ?>, '<?php echo htmlentities($row['productName']); ?>', <?php echo htmlentities($row['mediumPrice']); ?>)">Add to Cart</button>
                         </div>
                     </div>
                 </div>
             </div>
-        <?php
-        }
-        } else {
-        ?>
-        <p class="food-name">No Products Found</p>
-        <?php
-        }
-        ?>
+        </div>
     </div>
 
 
     <script>
-    function updatePriceAndTotal(productId, mediumPrice, largePrice, xlPrice, xxlPrice) {
-        var size = document.getElementById("size" + productId).value;
-        var quantity = document.getElementById("quantity" + productId).value;
-        var price = 0;
+    function resetModal(productId) {
+        // Unselect all sizes
+        var checkboxes = document.querySelectorAll("[id^='" + productId + "_']");
+        checkboxes.forEach(function(checkbox) {
+            checkbox.classList.remove("checked");
+        });
 
-        switch (size) {
-            case 'M':
-                price = mediumPrice;
-                break;
-            case 'L':
-                price = largePrice;
-                break;
-            case 'XL':
-                price = xlPrice;
-                break;
-            case 'XXL':
-                price = xxlPrice;
-                break;
-            default:
-                price = 0;
-                break;
-        }
+        // Reset total price to 0
+        var foodPrice = document.getElementById("totalPrice" + productId);
+        foodPrice.textContent = "0.00";
 
-        var totalPrice = price * quantity;
-
-        document.getElementById("priceDisplay" + productId).innerText = "Price: $" + price;
-        document.getElementById("totalPriceDisplay" + productId).innerText = "Total Price: $" + totalPrice;
+        // Reset quantity to 1
+        var numberField = document.getElementById("numberField" + productId);
+        numberField.value = "1";
     }
 
-     function preventFormSubmission(event) {
-        if (event.key === 'Enter') {
-            event.preventDefault();
-            // Optionally, you can trigger the updatePriceAndTotal function here as well
-            // updatePriceAndTotal(productId, mediumPrice, largePrice, xlPrice, xxlPrice);
+    function decrease(productId) {
+        var numberField = document.getElementById("numberField" + productId);
+        var currentValue = parseInt(numberField.value);
+        if (!isNaN(currentValue) && currentValue > 1) {
+            numberField.value = currentValue - 1;
+            updatePrice(productId);
         }
     }
 
-    // Attach the function to the form's keydown event
-    document.addEventListener('keydown', function (event) {
-        preventFormSubmission(event);
+    function increase(productId) {
+        var numberField = document.getElementById("numberField" + productId);
+        var currentValue = parseInt(numberField.value);
+        if (!isNaN(currentValue)) {
+            numberField.value = currentValue + 1;
+            updatePrice(productId);
+        }
+    }
+
+    function toggleCheck(size, price) {
+        var parts = size.split('_');
+        var productId = parts[0];
+        var checkboxes = document.querySelectorAll("[id^='" + productId + "_']");
+        checkboxes.forEach(function(checkbox) {
+            checkbox.classList.remove("checked");
+        });
+        var checkbox = document.getElementById(size);
+        checkbox.classList.add("checked");
+        updatePrice(productId);
+    }
+
+    function updatePrice(productId) {
+        var numberField = document.getElementById("numberField" + productId);
+        var quantity = parseInt(numberField.value);
+        var selectedSize = document.querySelector('.check-button.checked');
+        if (!selectedSize) return;
+        var basePrice = parseFloat(selectedSize.querySelector('input').getAttribute('data-price'));
+        if (isNaN(basePrice)) return;
+        var totalPrice = basePrice * quantity;
+        var foodPrice = document.getElementById("totalPrice" + productId);
+        foodPrice.textContent = totalPrice.toFixed(2);
+    }
+
+    
+    function addToCart(productId) {
+    var productImage = document.querySelector('#addToCartModal' + productId + ' .item-display').getAttribute('src');
+    var productName = document.querySelector('#addToCartModal' + productId + ' .food-namemod').textContent;
+    var quantity = parseInt(document.querySelector('#numberField' + productId).value);
+    var selectedSize = document.querySelector('.check-button.checked');
+    var totalPrice = parseFloat(document.getElementById("totalPrice" + productId).textContent);
+    var sizePrice = parseFloat(selectedSize.querySelector('input').getAttribute('data-price')); // Fetch size price
+
+    if (!selectedSize) {
+        alert('Please select a size.');
+        return;
+    }
+    
+    var size = selectedSize.textContent.split('-')[0].trim();
+    
+    var item = {
+        productId: productId,
+        productImage: productImage,
+        productName: productName,
+        quantity: quantity,
+        size: size,
+        sizePrice: sizePrice, // Include size price in the item object
+        totalPrice: totalPrice
+    };
+
+    console.log('Item:', item);
+    
+    // Send data to server using AJAX
+    $.ajax({
+        type: 'POST',
+        url: './function/addToCart.php',
+        data: { item: JSON.stringify(item) },
+        success: function(response) {
+            // Handle success
+            console.log('Item added to cart successfully!');
+            // Show confirmation message
+            alert('Item added to cart!');
+            // Close modal
+            $('#addToCartModal' + productId).modal('hide');
+        },
+        error: function(error) {
+            // Handle error
+            console.error('Error adding item to cart:', error);
+        }
     });
+}
+</script>
 
-
-
+        <?php
+            }
+                } else {?>
+        <p class="food-name">No Products Found</p>
+        <style>
+        .subcategorydiv {
+            display: none;
+        }
+        </style>
+        <?php } ?>
+        </div> 
+    </div>
+ </div>
+ </script>
+ 
+ <script>
     function filterProducts() {
         var input, filter, menuItems, item, productName;
         input = document.getElementById("searchInput");
@@ -241,10 +319,6 @@ if (!isset($_SESSION['cart'])) {
         }
     }
 </script>
-
-
-
-
 
 
     <!--Menu item-->

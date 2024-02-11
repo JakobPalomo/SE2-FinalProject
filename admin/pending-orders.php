@@ -68,8 +68,8 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 										<tr>
 											<th>#</th>
 											<th> Name</th>
-											<th width="50">Email /Contact no</th>
-											<th>Shipping Address</th>
+											<th width="50">Contact no</th>
+											<th>Products</th>
 											<th>Product </th>
 											<th>Qty </th>
 											<th>Amount </th>
@@ -79,7 +79,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 										
 										</tr>
 									</thead>
-								
+
 <tbody>
 <?php 
 $status='Delivered';
