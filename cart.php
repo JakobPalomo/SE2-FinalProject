@@ -82,45 +82,7 @@ include('./dbcon.php');
             });
         }
     </script>
-    <script>
-        function updateCartItem(index, newSize, newQuantity) {
-            $.ajax({
-                type: 'POST',
-                url: './function/updateCartItem.php', // Update the URL to the server-side script
-                data: {
-                    index: index,
-                    newSize: newSize,
-                    newQuantity: newQuantity
-                },
-                success: function (response) {
-                    // Update the cart on the client side (update the item's details)
-                    // Assuming the server sends back updated details, you can parse and update accordingly
-                    var updatedDetails = JSON.parse(response);
-                    var updatedPrice = updatedDetails.price * updatedDetails.quantity;
-                    $('#cart-item-' + index + ' .total-price').text('₱' + updatedPrice.toFixed(2));
-                },
-                error: function (error) {
-                    console.error('Error updating item:', error);
-                }
-            });
-        }
 
-        function incrementQuantity(index, size) {
-            var quantityDisplay = $('#cart-item-' + index + ' .quantity-display');
-            var currentQuantity = parseInt(quantityDisplay.text(), 10);
-            updateCartItem(index, size, currentQuantity + 1);
-            quantityDisplay.text(currentQuantity + 1);
-        }
-
-        function decrementQuantity(index, size) {
-            var quantityDisplay = $('#cart-item-' + index + ' .quantity-display');
-            var currentQuantity = parseInt(quantityDisplay.text(), 10);
-            if (currentQuantity > 1) {
-                updateCartItem(index, size, currentQuantity - 1);
-                quantityDisplay.text(currentQuantity - 1);
-            }
-        }
-    </script>
 </head>
 
 <body style="background-color: #f5f5dc">
@@ -198,16 +160,24 @@ include('./dbcon.php');
                 <!-- COLUMN 3 -->
 
                 <div class="footer-column">
-                    <div class="checkbox-container">
-                        <label class="checkbox-label" for="deliveryCheckbox">
-                            <input type="checkbox" id="deliveryCheckbox" class="custom-checkbox"" />
-                            <div class="checkmark"></div> Cash on Delivery</label>
-                    </div>
-                    <div class="checkbox-container">
-                        <label class="checkbox-label" for="pickupCheckbox">
-                            <input type="checkbox" id="pickupCheckbox" class="custom-checkbox" />
-                            <div class="checkmark"></div> GCash</label>
-                    </div>
+                <div class="footer-column">
+    <div class="checkbox-container">
+        <label class="checkbox-label" for="codCheckbox">
+            <input type="checkbox" id="codCheckbox" class="custom-checkbox" name="paymentOption" onclick="handlePaymentCheckboxClick('codCheckbox')" value="COD" />
+            <div class="checkmark"></div> Cash on Delivery
+        </label>
+    </div>
+
+    <!-- Checkbox for Gcash -->
+    <div class="checkbox-container">
+        <label class="checkbox-label" for="gcashCheckbox">
+            <input type="checkbox" id="gcashCheckbox" class="custom-checkbox" name="paymentOption" onclick="handlePaymentCheckboxClick('gcashCheckbox')" value="Gcash" />
+            <div class="checkmark"></div> Gcash
+        </label>
+    </div>
+</div>
+
+
                 </div>
 
 <!-- 
@@ -254,6 +224,22 @@ include('./dbcon.php');
                         }
                     });
                 }
+                function handlePaymentCheckboxClick(clickedCheckboxId) {
+        const checkboxes = ["codCheckbox", "gcashCheckbox"];
+
+        checkboxes.forEach((checkboxId) => {
+            const checkbox = document.getElementById(checkboxId);
+            const checkmark = checkbox.nextElementSibling;
+
+            if (checkboxId === clickedCheckboxId) {
+                checkbox.checked = true;
+                checkmark.style.display = "block";
+            } else {
+                checkbox.checked = false;
+                checkmark.style.display = "none";
+            }
+        });
+    }
             </script>
 
     </div>
@@ -277,38 +263,58 @@ include('./dbcon.php');
  </script>
 
 <script>
-    $(document).ready(function () {
-        // Handle the "Place Order" button click
-        $('#placeOrderBtn').on('click', function () {
-            // Get the total price value
-            var totalPrice = <?php echo $totalPrice; ?>;
-
-            // Check if totalPrice is a valid number
-            if (!isNaN(totalPrice)) {
-                // Call the placeOrder.php script using AJAX
-                $.ajax({
-                    type: 'POST',
-                    url: './function/placeOrder.php',
-                    data: {
-                        paymentOption: $('input[name="paymentOption"]:checked').val(),
-                        deliveryCheckbox: $('#deliveryCheckbox').prop('checked'),
-                        pickupCheckbox: $('#pickupCheckbox').prop('checked'),
-                        preparationDate: $('#datepicker').val(),
-                        totalPrice: totalPrice  // Pass the total price
-                    },
-                    success: function (response) {
-                        // Display the response (you can update this part based on your UI requirements)
-                        alert(response);
-                    },
-                    error: function (error) {
-                        console.error('Error placing order:', error);
-                    }
-                });
-            } else {
-                alert('Invalid total price format');
+  $(document).ready(function () {
+    // Handle the "Place Order" button click
+    $('#placeOrderBtn').on('click', function () {
+        // Get the total price value
+        var totalPrice = <?php echo $totalPrice; ?>;
+        // Check if totalPrice is a valid number
+        if (!isNaN(totalPrice)) {
+            // Check if the date field is empty
+            var preparationDate = $('#datepicker').val();
+            if (!preparationDate) {
+                alert('Please select a preparation date.');
+                return;
             }
-        });
+
+            // Check if only one payment option is selected
+            var paymentOption = $('input[name="paymentOption"]:checked').val();
+            if (!paymentOption) {
+                alert('Please select a payment option.');
+                return;
+            }
+
+            // Call the placeOrder.php script using AJAX
+            $.ajax({
+                type: 'POST',
+                url: './function/placeOrder.php',
+                data: {
+                    paymentOption: paymentOption,
+                    deliveryCheckbox: $('#deliveryCheckbox').prop('checked'),
+                    pickupCheckbox: $('#pickupCheckbox').prop('checked'),
+                    preparationDate: $('#datepicker').val(),
+                    totalPrice: totalPrice  // Pass the total price
+                },
+                success: function (response) {
+                    // Display the response (you can update this part based on your UI requirements)
+                    alert(response);
+                },
+                error: function (error) {
+                    console.error('Error placing order:', error);
+                }
+            });
+        } else {
+            alert('Invalid total price format');
+        }
     });
+
+    // Handle checkbox clicks for payment options
+    $('input[name="paymentOption"]').on('change', function () {
+        console.log('Selected payment option:', $(this).val());
+    });
+});
+
+
 </script>
 
 

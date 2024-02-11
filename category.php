@@ -285,7 +285,7 @@ foreach ($sizes as $size) {
     
     var size = selectedSize.textContent.split('-')[0].trim();
     
-    var newItem = {
+    var item = {
         productId: productId,
         productImage: productImage,
         productName: productName,
@@ -295,23 +295,29 @@ foreach ($sizes as $size) {
         totalPrice: totalPrice
     };
 
-    console.log('New Item:', newItem);
-
-    // Retrieve existing cart items from session storage
-    var existingCartItems = JSON.parse(sessionStorage.getItem('cart')) || [];
+    console.log('Item:', item);
     
-    // Add the new item to the existing cart items
-    existingCartItems.push(newItem);
-
-    // Store the updated cart items back in session storage
-    sessionStorage.setItem('cart', JSON.stringify(existingCartItems));
-
-    // Show confirmation message
-    alert('Item added to cart!');
-
-    // Close modal
-    $('#addToCartModal' + productId).modal('hide');
+    // Send data to server using AJAX
+    $.ajax({
+        type: 'POST',
+        url: './function/addToCart.php',
+        data: { item: JSON.stringify(item) },
+        success: function(response) {
+            // Handle success
+            console.log('Item added to cart successfully!');
+            // Show confirmation message
+            alert('Item added to cart!');
+            // Close modal
+            $('#addToCartModal' + productId).modal('hide');
+        },
+        error: function(error) {
+            // Handle error
+            console.error('Error adding item to cart:', error);
+        }
+    });
 }
+
+
 
 
 </script>
