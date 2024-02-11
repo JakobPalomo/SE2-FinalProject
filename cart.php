@@ -85,7 +85,7 @@ include('./dbcon.php');
 
 </head>
 
-<body style="background-color: #f5f5dc">
+<body style="background-color: #f5f5dc;  margin-bottom: 200px;">
     <?php include('common/navbar.php'); ?>
 
     <div class="maintitle">
