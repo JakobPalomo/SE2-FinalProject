@@ -5,7 +5,7 @@ body {
 
 .menu-item {
   width: 240px;
-  height: 260px;
+  height: 270px;
   background-color: white;
   border-radius: 18px;
   margin: 24px;
@@ -15,7 +15,7 @@ body {
 
 .menu-item-unavailable {
   width: 240px;
-  height: 260px;
+  height: 270px;
   background-color: white;
   border-radius: 18px;
   margin: 24px 24px 8px;
@@ -84,6 +84,7 @@ body {
   justify-content: space-between;
   height: 54px;
   width: 240px;
+  margin-bottom: 12px;
 }
 
 .food-name {

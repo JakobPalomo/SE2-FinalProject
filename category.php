@@ -135,10 +135,11 @@ if(isset($_POST['add_to_cart'])) {
                       </div>
                       <div class="desc-field"> 
                                 <?php if ($availability != 'Out of Stock'): ?>
-                             <p class="food-desc"><?php echo htmlentities($row['mediumPrice']); ?></p>
-                             <p class="food-desc"><?php echo htmlentities($row['largePrice']); ?></p>
-                             <p class="food-desc"><?php echo htmlentities($row['xlPrice']); ?></p>
-                             <p class="food-desc"><?php echo htmlentities($row['xxlPrice']); ?></p>
+                             <p class="food-desc">M- ₱<strong><?php echo htmlentities($row['mediumPrice']); ?></strong> </br>
+                              L- ₱<strong><?php echo htmlentities($row['largePrice']); ?></strong></br>
+                             XL- ₱<strong><?php echo htmlentities($row['xlPrice']); ?></strong></br>
+                              XXL- ₱<strong><?php echo htmlentities($row['xxlPrice']); ?></strong></p>
+                         
                                  <?php endif; ?>
                       </div>
                         <center>
