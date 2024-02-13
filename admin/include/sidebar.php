@@ -14,17 +14,17 @@
 										<a href="todays-orders.php">
 											<i class="icon-tasks"></i>
 											Today's Orders
-  <?php
-  $f1="00:00:00";
-$from=date('Y-m-d')." ".$f1;
-$t1="23:59:59";
-$to=date('Y-m-d')." ".$t1;
- $result = mysqli_query($con,"SELECT * FROM Orders where orderDate Between '$from' and '$to'");
-$num_rows1 = mysqli_num_rows($result);
-{
-?>
+											<?php
+												date_default_timezone_set('Asia/Manila'); 
+												$from = date('Y-m-d 00:00:00');
+												$to = date('Y-m-d 23:59:59');
+												
+												// Query to get the count of pending orders made today
+												$result = mysqli_query($con, "SELECT COUNT(id) AS num_rows1 FROM pending WHERE preparation_date BETWEEN '$from' AND '$to'");
+												$row = mysqli_fetch_assoc($result);
+												$num_rows1 = $row['num_rows1'];
+											?>
 											<b class="label orange pull-right"><?php echo htmlentities($num_rows1); ?></b>
-											<?php } ?>
 										</a>
 									</li>
 									<li>
@@ -33,8 +33,9 @@ $num_rows1 = mysqli_num_rows($result);
 											Pending Orders
 										<?php	
 	$status='Delivered';									 
-$ret = mysqli_query($con,"SELECT * FROM Orders where orderStatus!='$status' || orderStatus is null ");
-$num = mysqli_num_rows($ret);
+	$ret = mysqli_query($con,"SELECT COUNT(*) AS num_pending FROM pending WHERE status = 'Pending'");
+	$row = mysqli_fetch_assoc($ret);
+	$num = $row['num_pending'];
 {?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
 <?php } ?>
 										</a>

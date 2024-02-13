@@ -174,11 +174,13 @@ if(isset($_POST['add_to_cart'])) {
                         <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="item-display" />
                         <div class="details">
                             <form>
+                                
                                 <div class="labels"></div>
                                 <div style="display: flex">
                                     <p class="food-namemod"><?php echo htmlentities($row['productName']); ?></p>
                                     <p class="food-price">PHP <span id="totalPrice<?php echo $productId; ?>"><?php echo number_format($row['mediumPrice'], 2); ?></span></p>
                                 </div>
+
                                 <div class="labels"></div>
                                 <p class="description"><?php echo htmlentities($row['productDescription']); ?></p>
                                 <div class="buttons">
@@ -188,6 +190,7 @@ if(isset($_POST['add_to_cart'])) {
                                     <img src="./img/add.png" alt="Increase" class="btn" onclick="increase('<?php echo $productId; ?>')" />
                                 </div>
                                 <br />
+
                                 <div class="buttons">
                                     <div class="button-group">
                                     <?php

@@ -7,7 +7,7 @@ if(strlen($_SESSION['alogin'])==0)
 header('location:index.php');
 }
 else{
-date_default_timezone_set('Asia/Kolkata');// change according timezone
+date_default_timezone_set('Asia/Manila');// change according timezone
 $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 
@@ -17,7 +17,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin| Pending Orders</title>
+	<title>Admin | Today's Orders</title>
 	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
@@ -48,7 +48,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 
 	<div class="module">
 							<div class="module-head">
-								<h3>Pending Orders</h3>
+								<h3>Today's Orders</h3>
 							</div>
 							<div class="module-body table">
 	<?php if(isset($_GET['del']))
@@ -61,55 +61,107 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 
 									<br />
 
-							
-			<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display table-responsive" >
+
+	<?php
+	date_default_timezone_set('Asia/Manila');
+    $status = 'Delivered';
+	$startOfDay = date('Y-m-d 00:00:00');
+    $endOfDay = date('Y-m-d 23:59:59');
+    $query = mysqli_query($con, "SELECT pending.id AS id, pending.name AS username, pending.email AS useremail, pending.contact AS usercontact, pending.preparation_date AS orderdate, pending.items AS products, pending.payment_option AS payment_option, pending.delivery_option AS delivery_option, pending.total_price AS total_price 
+        FROM pending 
+        LEFT JOIN orders ON pending.id = orders.productId 
+        WHERE (orders.orderStatus != '$status' OR orders.orderStatus IS NULL) 
+        AND DATE(pending.preparation_date) = CURDATE()");
+
+    $orderProducts = []; // Associative array to store products grouped by order ID
+
+    while ($row = mysqli_fetch_array($query)) {
+        $orderId = $row['id'];
+        // Unserialize the products array
+        $products = unserialize($row['products']);
+
+        // If products for this order ID are not added yet, initialize an array
+        if (!isset($orderProducts[$orderId])) {
+            $orderProducts[$orderId] = [
+                'username' => $row['username'],
+                'usercontact' => $row['usercontact'],
+                'useremail' => $row['useremail'],
+                'payment_option' => $row['payment_option'],
+                'delivery_option' => $row['delivery_option'],
+                'orderdate' => $row['orderdate'],
+                'total_price' => $row['total_price'],
+                'products' => []
+            ];
+        }
+
+        // Add products to the array for this order ID
+        foreach ($products as $product) {
+            $orderProducts[$orderId]['products'][] = [
+                'productName' => $product['productName'],
+                'quantity' => $product['quantity'] . ' ' . $product['size'],
+                'sizePrice' => $product['sizePrice'],
+                'totalPrice' => $product['totalPrice']
+            ];
+        }
+    }
+
+    // Now $orderProducts contains products grouped by order ID
+?>
+
+							<div class="tabling">
+								<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped display table-responsive">
 									<thead>
 										<tr>
-											<th>#</th>
-											<th> Name</th>
-											<th width="50">Email /Contact no</th>
-											<th>Shipping Address</th>
-											<th>Product </th>
-											<th>Qty </th>
-											<th>Amount </th>
+											<th>Order ID</th>
+											<th>Name</th>
+											<th width="70">Contact no</th>
+											<th>Email</th>
+											<th>Product</th>
+											<th>Qty</th>
+											<th>Price</th>
+											<th>Total</th>
+											<th>Total All</th>
+											<th>Payment</th>
+											<th>Dlvry Option</th>
 											<th>Order Date</th>
 											<th>Action</th>
-											
-										
 										</tr>
 									</thead>
-								
-<tbody>
-<?php 
- $f1="00:00:00";
-$from=date('Y-m-d')." ".$f1;
-$t1="23:59:59";
-$to=date('Y-m-d')." ".$t1;
-//$query=mysqli_query($con,"select userinfo.name as username,userinfo.email as useremail,userinfo.contactno as usercontact,userinfo.shippingAddress as shippingaddress,userinfo.shippingCity as shippingcity,userinfo.shippingState as shippingstate,userinfo.shippingPincode as shippingpincode,products.productName as productname,products.shippingCharge as shippingcharge,orders.quantity as quantity,orders.orderDate as orderdate,products.productPrice as productprice,orders.id as id  from orders join userinfo on  orders.userId=userinfo.id join products on products.id=orders.productId where orders.orderDate Between '$from' and '$to'");
-$query=mysqli_query($con,"select userinfo.name as username,userinfo.email as useremail,userinfo.contactno as usercontact,userinfo.shippingAddress as shippingaddress,userinfo.shippingCity as shippingcity,userinfo.shippingState as shippingstate,userinfo.shippingPincode as shippingpincode,products.productName as productname,orders.quantity as quantity,orders.orderDate as orderdate,orders.id as id  from orders join userinfo on  orders.userId=userinfo.id join products on products.id=orders.productId where orders.orderDate Between '$from' and '$to'");
-$cnt=1;
-while($row=mysqli_fetch_array($query))
-{
-?>										
-										<tr>
-											<td><?php echo htmlentities($cnt);?></td>
-											<td><?php echo htmlentities($row['username']);?></td>
-											<td><?php echo htmlentities($row['useremail']);?>/<?php echo htmlentities($row['usercontact']);?></td>
-										
-											<td><?php echo htmlentities($row['shippingaddress'].",".$row['shippingcity'].",".$row['shippingstate']."-".$row['shippingpincode']);?></td>
-											<td><?php echo htmlentities($row['productname']);?></td>
-											<td><?php echo htmlentities($row['quantity']);?></td>
-											<td><?php echo htmlentities($row['quantity']*$row['productprice']+$row['shippingcharge']);?></td>
-											<td><?php echo htmlentities($row['orderdate']);?></td>
-											<td>    <a href="updateorder.php?oid=<?php echo htmlentities($row['id']);?>" title="Update order" target="_blank"><i class="icon-edit"></i></a>
-											</td>
-											</tr>
-
-										<?php $cnt=$cnt+1; } ?>
-										</tbody>
+									<tbody>
+										<?php
+											$cnt = 1;
+											foreach ($orderProducts as $orderId => $order) {
+												foreach ($order['products'] as $index => $product) {
+										?>
+													<tr>
+														<?php if ($index === 0): ?>
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($orderId); ?></td>
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['username']); ?></td>
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['usercontact']); ?></td>
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['useremail']); ?></td>
+														<?php endif; ?>
+														<td><?php echo isset($product['productName']) ? htmlentities($product['productName']) : ''; ?></td>
+														<td><?php echo isset($product['quantity']) ? htmlentities($product['quantity']) : ''; ?></td>
+														<td><?php echo isset($product['sizePrice']) ? htmlentities($product['sizePrice']) : ''; ?></td>
+														<td><?php echo isset($product['totalPrice']) ? htmlentities($product['totalPrice']) : ''; ?></td>
+														<?php if ($index === 0): ?>
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['total_price']); ?></td>
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['payment_option']); ?></td>
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_option']); ?></td>
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['orderdate']); ?></td>
+															<td rowspan="<?php echo count($order['products']); ?>"><a href="updateorder.php?oid=<?php echo htmlentities($orderId); ?>" title="Update order" target="_blank"><i class="icon-edit"></i></a></td>
+														<?php endif; ?>
+													</tr>
+										<?php
+													$cnt++;
+												}
+											}
+										?>
+									</tbody>
 								</table>
 							</div>
-						</div>						
+						</div>
+					</div>						
 
 						
 						

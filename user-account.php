@@ -168,69 +168,58 @@ if ($result->num_rows == 1) {
       </div>
 
       <?php
+        $user_id = $_SESSION['authenticated'];
+        $query = "SELECT * FROM pending WHERE user_session_id = ?";
+        $stmt = $con->prepare($query);
+        $stmt->bind_param("i", $user_id);
+        $stmt->execute();
+        $result = $stmt->get_result();
 
-include('dbcon.php');
+        if(mysqli_num_rows($result) > 0) { 
+            // Output the HTML structure for pending orders
+            echo "<div class='card-field' id='card2'>
+                    <div class='card-place'>
+                        <div class='card-title'><h1>Pending Orders</h1></div>
+                        <div class='pending-order-container'>";
 
-// Check if the user is authenticated, if not, redirect to the login page
-if (!isset($_SESSION['authenticated'])) {
-    header("Location: index.php"); // Replace 'login.php' with the actual login page
-    exit(); 
-}
+            // Loop through the fetched data
+            while($row = mysqli_fetch_assoc($result)) {
+                // Extract data from the current row
+                $orderId = $row['id'];
+                $orderStatus = $row['status'];
+                $orderItems = unserialize($row['items']); // Assuming order_items is a serialized array
+                
+                // Output order details for each order
+                echo "<table class='table-order'>
+                        <tr>
+                            <td class='orderno'>$orderId</td>
+                            <td class='orderstat'>$orderStatus</td>
+                        </tr>";
 
-$user_id = $_SESSION['authenticated'];
+                // Loop through order items for each order
+                foreach($orderItems as $item) {
+                    $quantity = $item['quantity'];
+                    $itemName = $item['productName'];
+                    $itemPrice = $item['sizePrice'];
+                    // Output order items
+                    echo "<tr>
+                            <td class='ordername'>$quantity $itemName</td>
+                            <td class='orderprice'>$itemPrice</td>
+                          </tr>";
+                }
+                
+                echo "</table>";
+            }
 
-$query = "SELECT * FROM pending WHERE user_session_id = ?";
-$stmt = $con->prepare($query);
-$stmt->bind_param("i", $user_id);
-$stmt->execute();
-$result = $stmt->get_result();
-
-if(mysqli_num_rows($result) > 0) {
-    // Output the HTML structure for pending orders
-    echo "<div class='card-field' id='card2'>
-            <div class='card-place'>
-                <div class='card-title'><h1>Pending Orders</h1></div>
-                <div class='pending-order-container'>";
-
-    // Loop through the fetched data
-    while($row = mysqli_fetch_assoc($result)) {
-        // Extract data from the current row
-        $orderId = $row['id'];
-        $orderStatus = $row['status'];
-        $orderItems = unserialize($row['items']); // Assuming order_items is a serialized array
-        
-        // Output order details for each order
-        echo "<table class='table-order'>
-                <tr>
-                    <td class='orderno'>$orderId</td>
-                    <td class='orderstat'>$orderStatus</td>
-                </tr>";
-
-        // Loop through order items for each order
-        foreach($orderItems as $item) {
-            $quantity = $item['quantity'];
-            $itemName = $item['productName'];
-            $itemPrice = $item['sizePrice'];
-            // Output order items
-            echo "<tr>
-                    <td class='ordername'>$quantity $itemName</td>
-                    <td class='orderprice'>$itemPrice</td>
-                  </tr>";
+            // Close the HTML structure for pending orders
+            echo "</div>
+                </div>
+                </div>";
+        } else {
+            // If no pending orders found
+            echo "<p>No pending orders found.</p>";
         }
-        
-        echo "</table>";
-    }
-
-    // Close the HTML structure for pending orders
-    echo "</div>
-        </div>
-        </div>";
-} else {
-    // If no pending orders found
-    echo "<p>No pending orders found.</p>";
-}
-?>
-
+      ?>
 
 
       <div class="card-field" id="card3">
@@ -300,5 +289,6 @@ if(mysqli_num_rows($result) > 0) {
     });
   });
 </script>
+
   </body>
 </html>
