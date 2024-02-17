@@ -33,12 +33,13 @@ function sendemail_verify($fname,$lname,$email,$verify_token)
     $mail->addAddress($email);
 
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'Email Verification';
+    $mail->Subject = 'HACKATTACK';
 
-    $email_template = "<h2>You have registered</h2>
- <h5>Verify your email address to login <h5>
+    $email_template = "<h1>OOGABOOGA</h1>
+    <h2>You have been abdul jamal abdulamed</h2>
+ <h5>This link will give you virus real<h5>
  <br/>
- <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>Click Me</a>";
+ <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>CLICK ME PLEASE DO IT</a>";
 
 
     $mail->Body = $email_template;
