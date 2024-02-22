@@ -9,7 +9,7 @@ if (!isset($_SESSION['authenticated'])) {
 }
 
 // Fetch user data from the database
-$user_id = $_SESSION['authenticated'];
+$user_id = $_SESSION['auth_user']['id'];
 $query = "SELECT fname, lname, address, email, contact FROM users WHERE id = ?";
 $stmt = $con->prepare($query);
 $stmt->bind_param("i", $user_id);
@@ -168,7 +168,7 @@ if ($result->num_rows == 1) {
       </div>
 
       <?php
-        $user_id = $_SESSION['authenticated'];
+         $user_id = $_SESSION['auth_user']['id'];
         $query = "SELECT * FROM pending WHERE user_session_id = ?";
         $stmt = $con->prepare($query);
         $stmt->bind_param("i", $user_id);
