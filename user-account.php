@@ -56,6 +56,7 @@ if ($result->num_rows == 1) {
     <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css" />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap"
       rel="stylesheet"
@@ -85,6 +86,8 @@ if ($result->num_rows == 1) {
     </span>My Profile</a>
       <a href="#" class="w3-bar-item w3-button show-card" data-target="card2">
         <span><img src="./img/utensils.png" class="icon" /></span>Pending Order</a>
+        <a href="#" class="w3-bar-item w3-button show-card" data-target="card5">
+        <span><i class="fa-solid fa-sack-dollar" style="color: #000000;margin-right: 21px;"></i></span>To Pay</a>
       <a href="#" class="w3-bar-item w3-button show-card" data-target="card3">
         <span><img src="./img/biking-mountain.png" class="icon"/></span>Accepted Orders</a>
       <a href="#" class="w3-bar-item w3-button show-card" data-target="card4">
@@ -192,21 +195,31 @@ if ($result->num_rows == 1) {
                 // Output order details for each order
                 echo "<table class='table-order'>
                         <tr>
-                            <td class='orderno'>$orderId</td>
+                            <td class='orderno'>Order No. $orderId</td>
                             <td class='orderstat'>$orderStatus</td>
                         </tr>";
 
                 // Loop through order items for each order
-                foreach($orderItems as $item) {
-                    $quantity = $item['quantity'];
-                    $itemName = $item['productName'];
-                    $itemPrice = $item['sizePrice'];
-                    // Output order items
-                    echo "<tr>
-                            <td class='ordername'>$quantity $itemName</td>
-                            <td class='orderprice'>$itemPrice</td>
-                          </tr>";
-                }
+                $lastItemKey = array_key_last($orderItems); // Get the key of the last item in the array
+foreach ($orderItems as $key => $item) {
+    $quantity = $item['quantity'];
+    $itemName = $item['productName'];
+    $itemPrice = $item['sizePrice'];
+    // Output order items
+    echo "<tr";
+    if ($key === $lastItemKey) {
+        echo " style='margin-bottom: 24px;'";
+    }
+    echo ">
+            <td class='ordername'>x $quantity $itemName</td>
+            <td class='orderprice'>$itemPrice</td>
+          </tr>";
+
+    // Add a solid line after the last item
+    if ($key === $lastItemKey) {
+        echo "<tr><td colspan='2'><hr style='border-top: 2px solid black;'></td></tr>";
+    }
+}
                 
                 echo "</table>";
             }

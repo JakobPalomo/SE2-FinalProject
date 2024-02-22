@@ -8,8 +8,11 @@ th,
 td {
   min-width: fit-content;
   border: 1px solid black;
-  padding: 15px;
   text-align: left;
+  height: 12px;
+}
+tr {
+  height: 12px;
 }
 
 table img {
@@ -49,6 +52,7 @@ table img {
   justify-content: center;
   align-items: center;
   flex-direction: column; /* Set the flex-direction to column */
+  margin-left: 48px;
 }
 
 .logo-container {
