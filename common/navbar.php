@@ -22,6 +22,7 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap"
       rel="stylesheet"
@@ -45,32 +46,32 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
         <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
             <li class="nav-item">
-              <a class="navbutton" href="category.php?cid=8">Menu</a>
+            <a class="navbutton" href="category.php?cid=8">Menu</a>
             </li>
             <li class="nav-item">
-              <a class="navbutton" href="./faqs.php">FAQs</a>
+            <a class="navbutton" href="./faqs.php">FAQs</a>
             </li>
             <?php if(!isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
-              <a class="navbutton" aria-current="page" href="./login.php">Login</a>
+            <a class="navbutton" aria-current="page" href="./login.php">Login</a>
             </li>
             <li class="nav-item">
-              <a class="navbutton" aria-current="page" href="./register.php">Register</a>
-            </li>
-            <?php endif?>
-            <?php if(isset($_SESSION['authenticated'])) :?>
-            <li class="nav-item">
-              <a class="navbutton" href="./user-account.php">My Account</a>
+            <a class="navbutton" aria-current="page" href="./register.php">Register</a>
             </li>
             <?php endif?>
             <?php if(isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
-              <a class="navbutton" href="./cart.php">My Cart</a>
+            <a class="navbutton" href="./user-account.php">My Account</a>
             </li>
             <?php endif?>
             <?php if(isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
-              <a class="navbutton" aria-current="page" href="./logout.php">Logout</a>
+            <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i><a class="navbutton" href="./cart.php">My Cart</a>
+            </li>
+            <?php endif?>
+            <?php if(isset($_SESSION['authenticated'])) :?>
+            <li class="nav-item">
+            <a class="navbutton" aria-current="page" href="./logout.php">Logout</a>
             </li>
             <?php endif?>
           </ul>

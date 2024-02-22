@@ -46,7 +46,7 @@ if(isset($_POST['add_to_cart'])) {
       href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap"
       rel="stylesheet"
     />
-    
+    <script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
   </head>
@@ -76,7 +76,7 @@ if(isset($_POST['add_to_cart'])) {
       <img src="img/logo.png" alt="Logo" />
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search..." id="searchInput" oninput="filterProducts()"/>
-        <div class="search-icon">&#128269;</div>
+        <div class="search-icon"><i class="fa-solid fa-magnifying-glass" style="color: #262626;"></i></div>
       </div>
     </div>
 
@@ -84,33 +84,61 @@ if(isset($_POST['add_to_cart'])) {
 <!--to make the side bar -->
       <div class="side-by-side">  
             <!-- div for subcat buttons-->
-      <div class="subcategorydiv">
-         <div class="food-name" style=" margin-bottom: 12px; font-size:10px">Sub Categories</div>
-            <div class="subcatbutton">
-            <?php 
-            $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
-             while ($row = mysqli_fetch_array($sql)) { ?>
-                <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton"  style=" font-weight: bolder;">
-                    <?php echo $row['subcategory'];?> 
-                </a>
-            <?php } ?>
-          </div>
-       </div>
+            <div class="subcategorydiv">
+    <div class="food-name subcat" style="margin-bottom: 12px; font-size: 10px">Sub Categories</div>
+    <div class="subcatbutton">
+        <?php 
+        $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
+        while ($row = mysqli_fetch_array($sql)) {
+            $subcategory = $row['subcategory'];
+            $iconClass = '';
+
+            // Set the icon class based on the subcategory
+            if (strtolower($subcategory) == 'pasta') {
+                $iconClass = 'fa-plate-wheat'; // Pasta icon
+            } elseif (strpos(strtolower($subcategory), 'chicken') !== false) {
+                $iconClass = 'fa-drumstick-bite'; // Chicken icon
+            }else {
+                $iconClass = 'fa-utensils'; // Default utensils icon
+            }
+            
+        ?>
+        <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton" style="font-weight: bolder;">
+            <span><i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626;"></i> </span><?php echo $subcategory;?> 
+        </a>
+        <?php } ?>
+    </div>
+</div>
+
 
        <div class="main-menu">
     <!-- div for the category buttons-->
     <div class="categorydiv">    
-        <?php
-        $sql = mysqli_query($con, "SELECT id, categoryName FROM category LIMIT 6");
-        while ($row = mysqli_fetch_array($sql)) {
-        ?>
-            <a href="category.php?cid=<?php echo $row['id']; ?>" class="categorybutton">
-                <?php echo $row['categoryName']; ?>
-            </a>
-        <?php
+    <?php
+    $sql = mysqli_query($con, "SELECT id, categoryName FROM category LIMIT 6");
+    while ($row = mysqli_fetch_array($sql)) {
+        $categoryId = $row['id'];
+        $categoryName = $row['categoryName'];
+        $iconClass = '';
+
+        // Set the icon class based on the category name
+        if (strtolower($categoryName) == 'short order') {
+            $iconClass = 'fa-bowl-food'; // Bowl food icon
+        }elseif (strtolower($categoryName) == 'bulk order') {
+            $iconClass = 'fa-truck-moving'; // Bowl food icon
         }
-        ?>
-      </div>
+    ?>
+        <a href="category.php?cid=<?php echo $categoryId; ?>" class="categorybutton">
+            <?php if (!empty($iconClass)) { ?>
+                <i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626;"></i>
+            <?php } ?> 
+            <?php echo $categoryName; ?>
+        </a>
+    <?php
+    }
+    ?>
+</div>
+
 
 
         <div class="list">

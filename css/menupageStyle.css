@@ -1,5 +1,6 @@
 body {
   margin-bottom: 56px;
+  height: 100%;
 }
 
 .list {
@@ -12,7 +13,7 @@ body {
 }
 
 .topdiv {
-  height: 60vh;
+  height: 30vh;
   background-image: url("../img/buffetbg.jpg");
   background-size: cover;
   background-position: center;
@@ -34,11 +35,13 @@ body {
   width: 100%; /* Adjust the width to 100% */
   max-width: 300px; /* Add a max-width to prevent it from becoming too wide on larger screens */
   position: relative;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .search-container {
   position: relative;
   width: 300px;
+  opacity: 0.95;
 }
 
 .search-input {
@@ -48,6 +51,7 @@ body {
   border-radius: 5px;
   box-sizing: border-box;
   font-size: 16px;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .search-icon {
@@ -69,17 +73,20 @@ body {
 .subcategorydiv {
   width: 15%;
   padding-top: 18px;
-  border-width: 2px;
-  border: solid #888888;
   border-top: 0ch;
   display: flex;
   flex-direction: column;
+  background-color: rgb(253, 253, 253);
+  box-shadow: 2px 2px 4px rgba(0, 0, 0, 0.4);
+  text-align: center;
 }
 
 .subcatbutton {
   display: flex;
   flex-direction: column; /* Ensure buttons stack on top of each other */
   align-items: flex-start; /* Align buttons to the left side */
+  margin-left: 3%;
+  margin-right: 3%;
 }
 
 .categorybutton {
