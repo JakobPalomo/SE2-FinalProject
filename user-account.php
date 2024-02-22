@@ -289,6 +289,19 @@ if ($result->num_rows == 1) {
     });
   });
 </script>
+<script>
+$(document).ready(function () {
+    // Check if the URL contains the scrollToCard2 query parameter
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.has('scrollToCard2')) {
+        // Scroll to the card2 element
+        const card2Element = document.getElementById('card2');
+        if (card2Element) {
+            card2Element.scrollIntoView({ behavior: 'smooth' });
+        }
+    }
+});
+</script>
 
   </body>
 </html>

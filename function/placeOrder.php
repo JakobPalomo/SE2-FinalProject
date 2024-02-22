@@ -16,23 +16,24 @@ function placeOrder() {
         $name = $_SESSION['auth_user']['fname'] . " " . $_SESSION['auth_user']['lname']; // Concatenate using dot (.)
         $contact = $_SESSION['auth_user']['contact']; // Assuming contact details are stored separately
         $email = $_SESSION['auth_user']['email'];
-        $deliveryAddress = $_SESSION['auth_user']['address'];
+        $deliveryAddress = isset($_POST['userAddress']) ? $_POST['userAddress'] : '';
         $totalPrice = isset($_POST['totalPrice']) ? $_POST['totalPrice'] : 0;  // Retrieve total price
         $paymentOption = isset($_POST['paymentOption']) ? $_POST['paymentOption'] : '';
-        $deliveryOption = isset($_POST['deliveryCheckbox']) ? 'Delivery' : (isset($_POST['pickupCheckbox']) ? 'Pickup' : '');
+        $deliveryOption =  isset($_POST['deliveryOption']) ? $_POST['deliveryOption'] : '';
         $preparationDate = isset($_POST['preparationDate']) ? $_POST['preparationDate'] : '';
-
+        $deliveryTime = isset($_POST['deliveryTime']) ? $_POST['deliveryTime'] : '';
         // Prepare the SQL statement with parameterized queries to prevent SQL injection
-        $query = "INSERT INTO pending (user_session_id, name, contact, email, items, delivery_address, total_price, payment_option, delivery_option, preparation_date)
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO pending (user_session_id, name, contact, email, items, delivery_address, total_price, payment_option, delivery_option, preparation_date,delivery_time)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?,?)";
 
         // Prepare and bind the statement
         if ($stmt = mysqli_prepare($con, $query)) {
-            mysqli_stmt_bind_param($stmt, "isssssdsss", $userSessionId, $name, $contact, $email, $items, $deliveryAddress, $totalPrice, $paymentOption, $deliveryOption, $preparationDate);
+            mysqli_stmt_bind_param($stmt, "isssssdssss", $userSessionId, $name, $contact, $email, $items, $deliveryAddress, $totalPrice, $paymentOption, $deliveryOption, $preparationDate,$deliveryTime);
 
             // Execute the statement
             if (mysqli_stmt_execute($stmt)) {
                 // Order placed successfully, you can perform additional actions if needed
+                unset($_SESSION['cart']); // Unset the cart
                 echo "Order placed successfully!";
             } else {
                 echo "Error placing order: " . mysqli_stmt_error($stmt);

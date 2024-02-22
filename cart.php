@@ -125,13 +125,20 @@ include('./dbcon.php');
             <input type="date" id="datepicker" name="preparationDate" class="subtitle-txt-bg-2">
         </div>
 
+        <div class="subtitle">
+    <p class="subtitle-txt-2">Time of Delivery</p>
+</div>
+<div class="subtitle" style="margin-bottom: 20px">
+    <input type="time" id="timepicker" name="preparationTime" class="subtitle-txt-bg-2">
+</div>
+
         <!-- Address Field -->
         <div class="subtitle">
             <span class="linebreak"><p class="subtitle-txt-2">Delivery Address</p></span>
             <span class="linebreak"><button class="change-btn" data-bs-toggle="modal" data-bs-target="#changeAddressModal">Change</button></span>
         </div>
         <div class="subtitle" style="margin-bottom: 20px">
-            <p class="subtitle-txt-bg-2"><?php echo $_SESSION['auth_user']['address']; ?></p>
+            <p class="subtitle-txt-bg-2" id="userAddress" ><?php echo $_SESSION['auth_user']['address']; ?></p>
         </div>
 
         <!-- FOOTER -->
@@ -145,30 +152,29 @@ include('./dbcon.php');
                     <p class="subtitle-txt-2"><?php echo number_format($totalPrice, 2); ?></p>
                 </div>
                 <!-- COLUMN 2 -->
-                <div class="footer-column">
-                    <div class="checkbox-container">
-                        <label class="checkbox-label" for="deliveryCheckbox">
-                            <input type="checkbox" id="deliveryCheckbox" class="custom-checkbox" onclick="handleCheckboxClick('deliveryCheckbox')" />
-                            <div class="checkmark"></div> Delivery</label>
-                    </div>
-                    <div class="checkbox-container">
-                        <label class="checkbox-label" for="pickupCheckbox">
-                            <input type="checkbox" id="pickupCheckbox" class="custom-checkbox" onclick="handleCheckboxClick('pickupCheckbox')" />
-                            <div class="checkmark"></div> Pickup</label>
-                    </div>
-                </div>
-                <!-- COLUMN 3 -->
+               
+<div class="footer-column">
+    <div class="checkbox-container">
+        <label class="checkbox-label" for="deliveryCheckbox">
+            <input type="checkbox" id="deliveryCheckbox" class="custom-checkbox" name="deliveryOption" onclick="handleCheckboxClick('deliveryCheckbox')" value="Delivery" />
+            <div class="checkmark"></div> Delivery
+        </label>
+    </div>
+    <div class="checkbox-container">
+        <label class="checkbox-label" for="pickupCheckbox">
+            <input type="checkbox" id="pickupCheckbox" class="custom-checkbox" name="deliveryOption" onclick="handleCheckboxClick('pickupCheckbox')" value="Pickup"/>
+            <div class="checkmark"></div> Pickup
+        </label>
+    </div>
+</div>
 
-                <div class="footer-column">
-                <div class="footer-column">
+<div class="footer-column">
     <div class="checkbox-container">
         <label class="checkbox-label" for="codCheckbox">
             <input type="checkbox" id="codCheckbox" class="custom-checkbox" name="paymentOption" onclick="handlePaymentCheckboxClick('codCheckbox')" value="COD" />
             <div class="checkmark"></div> Cash on Delivery
         </label>
     </div>
-
-    <!-- Checkbox for Gcash -->
     <div class="checkbox-container">
         <label class="checkbox-label" for="gcashCheckbox">
             <input type="checkbox" id="gcashCheckbox" class="custom-checkbox" name="paymentOption" onclick="handlePaymentCheckboxClick('gcashCheckbox')" value="Gcash" />
@@ -178,23 +184,7 @@ include('./dbcon.php');
 </div>
 
 
-                </div>
-
-<!-- 
-                <div class="footer-column">
-                    <div class="subtitle" style="margin-bottom: 20px">
-                        <div class="checkbox-container">
-                            <label class="checkbox-label" for="codCheckbox">
-                                <input type="checkbox" id="codCheckbox" class="custom-checkbox" name="paymentOption" value="COD" />
-                                <div class="checkmark"></div> Cash on Delivery</label>
-                        </div>
-                        <div class="checkbox-container">
-                            <label class="checkbox-label" for="gcashCheckbox">
-                                <input type="checkbox" id="gcashCheckbox" class="custom-checkbox" name="paymentOption" value="Gcash" />
-                                <div class="checkmark"></div> Gcash</label>
-                        </div>
-                    </div>
-                </div> -->
+             
                 <!-- COLUMN 4 -->
                 <div class="footer-column">
                     <div class="cart-checkout">
@@ -208,29 +198,33 @@ include('./dbcon.php');
 
             <!-- JAVASCRIPT FOR CHECKBOX -->
             <script>
-                function handleCheckboxClick(clickedCheckboxId) {
-                    const checkboxes = ["deliveryCheckbox", "pickupCheckbox"];
+            function handleCheckboxClick(clickedCheckboxId) {
+        const checkboxes = ["deliveryCheckbox", "pickupCheckbox"];
+        checkboxes.forEach((checkboxId) => {
+            if (checkboxId !== clickedCheckboxId) {
+                const checkbox = document.getElementById(checkboxId);
+                const checkmark = checkbox.nextElementSibling;
+                checkbox.checked = false;
+                checkmark.style.display = "none";
+            }
+        });
 
-                    checkboxes.forEach((checkboxId) => {
-                        const checkbox = document.getElementById(checkboxId);
-                        const checkmark = checkbox.nextElementSibling;
+        const clickedCheckbox = document.getElementById(clickedCheckboxId);
+        const checkmark = clickedCheckbox.nextElementSibling;
+        clickedCheckbox.checked = true;
+        checkmark.style.display = "block";
 
-                        if (checkboxId === clickedCheckboxId) {
-                            checkbox.checked = true;
-                            checkmark.style.display = "block";
-                        } else {
-                            checkbox.checked = false;
-                            checkmark.style.display = "none";
-                        }
-                    });
-                }
-                function handlePaymentCheckboxClick(clickedCheckboxId) {
+        console.log('Selected delivery option:', clickedCheckbox.value);
+    }
+
+
+
+
+    function handlePaymentCheckboxClick(clickedCheckboxId) {
         const checkboxes = ["codCheckbox", "gcashCheckbox"];
-
         checkboxes.forEach((checkboxId) => {
             const checkbox = document.getElementById(checkboxId);
             const checkmark = checkbox.nextElementSibling;
-
             if (checkboxId === clickedCheckboxId) {
                 checkbox.checked = true;
                 checkmark.style.display = "block";
@@ -240,6 +234,7 @@ include('./dbcon.php');
             }
         });
     }
+
             </script>
 
     </div>
@@ -255,10 +250,19 @@ include('./dbcon.php');
                 }
             });
 
+            $('#timepicker').timepicker({
+            timeFormat: 'HH:mm',    // Change the time format if needed
+            step: 15                // Set the time step to 15 minutes
+        });
+
             // Handle checkbox clicks for payment options
             $('input[name="paymentOption"]').on('change', function () {
                 console.log('Selected payment option:', $(this).val());
             });
+
+            $('input[name="deliveryOption"]').on('change', function () {
+            console.log('Selected delivery option:', $(this).val());
+        });
         });
  </script>
 
@@ -276,13 +280,24 @@ include('./dbcon.php');
                 alert('Please select a preparation date.');
                 return;
             }
-
+            var deliveryTime = $('#timepicker').val();
+            if (!deliveryTime) {
+                alert('Please select a time for delivery.');
+                return;
+            }
+            var deliveryOption = $('input[name="deliveryOption"]:checked').val();
+            if (!deliveryOption) {
+                alert('Please select a delivery option.');
+                return;
+            }
             // Check if only one payment option is selected
             var paymentOption = $('input[name="paymentOption"]:checked').val();
             if (!paymentOption) {
                 alert('Please select a payment option.');
                 return;
             }
+            var userAddress = $('#userAddress').text();
+           
 
             // Call the placeOrder.php script using AJAX
             $.ajax({
@@ -290,14 +305,16 @@ include('./dbcon.php');
                 url: './function/placeOrder.php',
                 data: {
                     paymentOption: paymentOption,
-                    deliveryCheckbox: $('#deliveryCheckbox').prop('checked'),
-                    pickupCheckbox: $('#pickupCheckbox').prop('checked'),
+                    deliveryOption: deliveryOption,
                     preparationDate: $('#datepicker').val(),
-                    totalPrice: totalPrice  // Pass the total price
+                    deliveryTime:$('#timepicker').val(),
+                    totalPrice: totalPrice ,
+                    userAddress: userAddress
                 },
                 success: function (response) {
                     // Display the response (you can update this part based on your UI requirements)
                     alert(response);
+                    window.location.href = 'user-account.php?scrollToCard2=true';
                 },
                 error: function (error) {
                     console.error('Error placing order:', error);
@@ -312,6 +329,7 @@ include('./dbcon.php');
     $('input[name="paymentOption"]').on('change', function () {
         console.log('Selected payment option:', $(this).val());
     });
+    
 });
 
 
