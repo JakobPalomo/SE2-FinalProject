@@ -27,20 +27,21 @@ function resend_email_verify($name,$email,$verify_token)
       
     $mail->Port       = 587;           
     
-    $mail->setFrom("cdemailverify@gmail.com", $name);
+    $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
     $mail->addAddress($email);
 
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Resend Email Verification';
 
-    $email_template = "<h2>You have registered</h2>
- <h5>Verify your email address to login <h5>
+    $email_template = "<h1>Account Verified</h1>
+    <h2>Your account has been verified!</h2>
+ <h5>You can now use Chef's Daughter Website<h5>
  <br/>
- <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>Click Me</a>";
+ <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>CLICK ME PLEASE DO IT</a>";
 
 
     $mail->Body = $email_template;
-    $mail->send();
+  
     if(!$mail->send()) {
         echo "Mailer Error: " . $mail->ErrorInfo;
     } else {

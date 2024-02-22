@@ -29,26 +29,26 @@ function sendemail_verify($fname,$lname,$email,$verify_token)
       
     $mail->Port       = 587;           
     
-    $mail->setFrom("cdemailverify@gmail.com", $name);
+    $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
     $mail->addAddress($email);
 
     $mail->isHTML(true);                                  //Set email format to HTML
-    $mail->Subject = 'HACKATTACK';
+    $mail->Subject = 'Email Verification';
 
-    $email_template = "<h1>OOGABOOGA</h1>
-    <h2>You have been abdul jamal abdulamed</h2>
- <h5>This link will give you virus real<h5>
+    $email_template = "<h1>Account Verified</h1>
+    <h2>Your account has been verified!</h2>
+ <h5>You can now use Chef's Daughter Website<h5>
  <br/>
  <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>CLICK ME PLEASE DO IT</a>";
 
 
     $mail->Body = $email_template;
-    $mail->send();
     if(!$mail->send()) {
         echo "Mailer Error: " . $mail->ErrorInfo;
     } else {
         echo "Message has been sent";
     }
+    
     
     
 }
