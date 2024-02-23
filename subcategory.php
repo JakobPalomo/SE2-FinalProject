@@ -55,19 +55,35 @@ if (!isset($_SESSION['cart'])) {
       </div>
     </div>
 
-    <!-- div for the category buttons-->
-    <div class="categorydiv">    
-        <?php
-        $sql = mysqli_query($con, "SELECT id, categoryName FROM category LIMIT 6");
-        while ($row = mysqli_fetch_array($sql)) {
-        ?>
-            <a href="category.php?cid=<?php echo $row['id']; ?>" class="categorybutton">
-                <?php echo $row['categoryName']; ?>
-            </a>
-        <?php
-        }
-        ?>
-    </div>
+
+    <div class="main-menu">
+            <!-- div for the category buttons-->
+            <div class="categorydiv">    
+            <?php
+            $sql = mysqli_query($con, "SELECT id, categoryName FROM category LIMIT 6");
+            while ($row = mysqli_fetch_array($sql)) {
+                $categoryId = $row['id'];
+                $categoryName = $row['categoryName'];
+                $iconClass = '';
+
+                // Set the icon class based on the category name
+                if (strtolower($categoryName) == 'short order') {
+                    $iconClass = 'fa-bowl-food'; // Bowl food icon
+                }elseif (strtolower($categoryName) == 'bulk order') {
+                    $iconClass = 'fa-truck-moving'; // Bowl food icon
+                }
+            ?>
+                <a href="category.php?cid=<?php echo $categoryId; ?>" class="categorybutton">
+                    <?php if (!empty($iconClass)) { ?>
+                        <i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626;"></i>
+                    <?php } ?> 
+                    <?php echo $categoryName; ?>
+                </a>
+            <?php
+            }
+            ?>
+        </div>
+
     
 
       <?php $sql=mysqli_query($con,"select subcategory  from subcategory where id='$cid'");
@@ -99,10 +115,11 @@ if (!isset($_SESSION['cart'])) {
                       </div>
                       <div class="desc-field"> 
                                 <?php if ($availability != 'Out of Stock'): ?>
-                             <p class="food-desc"><?php echo htmlentities($row['mediumPrice']); ?></p>
-                             <p class="food-desc"><?php echo htmlentities($row['largePrice']); ?></p>
-                             <p class="food-desc"><?php echo htmlentities($row['xlPrice']); ?></p>
-                             <p class="food-desc"><?php echo htmlentities($row['xxlPrice']); ?></p>
+                             <p class="food-desc">M- ₱<strong><?php echo htmlentities($row['mediumPrice']); ?></strong> </br>
+                              L- ₱<strong><?php echo htmlentities($row['largePrice']); ?></strong></br>
+                             XL- ₱<strong><?php echo htmlentities($row['xlPrice']); ?></strong></br>
+                              XXL- ₱<strong><?php echo htmlentities($row['xxlPrice']); ?></strong></p>
+                         
                                  <?php endif; ?>
                       </div>
                         <center>

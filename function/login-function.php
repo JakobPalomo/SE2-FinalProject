@@ -48,14 +48,13 @@ if (isset($_POST['login_now_btn'])) {
                     'address' => $user_row['address'],
                 ];
 
-                if ($_SESSION['status'] = "Logged in Successfully") {
-                    header("Location: ../index.php");
-                    exit(0);
-                } else {
-                    $_SESSION['status'] = "Logged in Successfully";
-                    header("Location: ../index.php");
-                    exit(0);
-                }
+                $_SESSION['status'] = "Logged in Successfully";
+                header("Location: ../index.php");
+                exit(0);
+            } elseif (!password_verify($password, $user_row['password'])) {
+                $_SESSION['status'] = "Invalid Email or Password";
+                header("Location: ../login.php");
+                exit(0);
             } else {
                 $_SESSION['status'] = "Account Not Verified";
                 header("Location: ../login.php");
@@ -66,10 +65,6 @@ if (isset($_POST['login_now_btn'])) {
             header("Location: ../login.php");
             exit(0);
         }
-    } else {
-        $_SESSION['status'] = "All Fields are Mandatory";
-        header("Location: ../login.php");
-        exit(0);
     }
 }
 ?>

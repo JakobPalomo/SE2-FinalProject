@@ -100,7 +100,7 @@ if ($result->num_rows == 1) {
   function redirectToCategory() {
     window.location.href = 'category.php?cid=8';
   }
-</script>
+    </script>
 
 
     <div class="dashboard" id="main">
@@ -170,70 +170,56 @@ if ($result->num_rows == 1) {
         </div>
       </div>
 
-      <?php
-         $user_id = $_SESSION['auth_user']['id'];
-        $query = "SELECT * FROM pending WHERE user_session_id = ?";
-        $stmt = $con->prepare($query);
-        $stmt->bind_param("i", $user_id);
-        $stmt->execute();
-        $result = $stmt->get_result();
+          <?php
+            $user_id = $_SESSION['auth_user']['id'];
+            $query = "SELECT * FROM pending WHERE user_session_id = ?";
+            $stmt = $con->prepare($query);
+            $stmt->bind_param("i", $user_id);
+            $stmt->execute();
+            $result = $stmt->get_result();
+            ?>
 
-        if(mysqli_num_rows($result) > 0) { 
-            // Output the HTML structure for pending orders
-            echo "<div class='card-field' id='card2'>
-                    <div class='card-place'>
-                        <div class='card-title'><h1>Pending Orders</h1></div>
-                        <div class='pending-order-container'>";
+            <div class='card-field' id='card2'>
+                <div class='card-place'>
+                    <div class='card-title'><h1>Pending Orders</h1></div>
+                    <div class='pending-order-container'>
+                        <table class='table-order'>
 
-            // Loop through the fetched data
-            while($row = mysqli_fetch_assoc($result)) {
-                // Extract data from the current row
-                $orderId = $row['id'];
-                $orderStatus = $row['status'];
-                $orderItems = unserialize($row['items']); // Assuming order_items is a serialized array
-                
-                // Output order details for each order
-                echo "<table class='table-order'>
-                        <tr>
-                            <td class='orderno'>Order No. $orderId</td>
-                            <td class='orderstat'>$orderStatus</td>
-                        </tr>";
+            <?php if(mysqli_num_rows($result) > 0): ?>
+                <?php while($row = mysqli_fetch_assoc($result)): ?>
+                    <?php
+                    $orderId = $row['id'];
+                    $orderStatus = $row['status'];
+                    $orderItems = unserialize($row['items']);
+                    ?>
+                    <tr>
+                        <td class='orderno'>Order No. <?php echo $orderId; ?></td>
+                        <td class='orderstat'><?php echo $orderStatus; ?></td>
+                    </tr>
+                    <?php
+                    $lastItemKey = array_key_last($orderItems);
+                    foreach ($orderItems as $key => $item):
+                        $quantity = $item['quantity'];
+                        $itemName = $item['productName'];
+                        $itemPrice = $item['sizePrice'];
+                        ?>
+                        <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
+                            <td class='ordername'>x <?php echo $quantity . ' ' . $itemName; ?></td>
+                            <td class='orderprice'><?php echo $itemPrice; ?></td>
+                        </tr>
+                        <?php if ($key === $lastItemKey): ?>
+                            <tr><td colspan='2'><hr style='border-top: 2px solid black;'></td></tr>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                <?php endwhile; ?>
+            <?php else: ?>
+              <tr><td class='orderno' colspan='2' style='text-align: center;'>No Orders Found</td></tr>
+            <?php endif; ?>
 
-                // Loop through order items for each order
-                $lastItemKey = array_key_last($orderItems); // Get the key of the last item in the array
-foreach ($orderItems as $key => $item) {
-    $quantity = $item['quantity'];
-    $itemName = $item['productName'];
-    $itemPrice = $item['sizePrice'];
-    // Output order items
-    echo "<tr";
-    if ($key === $lastItemKey) {
-        echo " style='margin-bottom: 24px;'";
-    }
-    echo ">
-            <td class='ordername'>x $quantity $itemName</td>
-            <td class='orderprice'>$itemPrice</td>
-          </tr>";
-
-    // Add a solid line after the last item
-    if ($key === $lastItemKey) {
-        echo "<tr><td colspan='2'><hr style='border-top: 2px solid black;'></td></tr>";
-    }
-}
-                
-                echo "</table>";
-            }
-
-            // Close the HTML structure for pending orders
-            echo "</div>
+                        </table>
+                    </div>
                 </div>
-                </div>";
-        } else {
-            // If no pending orders found
-            echo "<p>No pending orders found.</p>";
-        }
-      ?>
-
+            </div>
 
       <div class="card-field" id="card3">
         <div class="card-place">
@@ -253,10 +239,23 @@ foreach ($orderItems as $key => $item) {
         </div>
       </div>
 
+
+      <div class="card-field" id="card5">
+        <div class="card-place">
+          <div class="card-title"><h1>To Pay</h1></div>
+          <!-- Place Content of card here -->
+
+          <!-- End of content card -->
+        </div>
+      </div>
         <!-- Add more card-fields with unique ids -->
     </div>
 
     <!-- End Code -->
+
+
+
+
     <script>
       function w3_open() {
         document.getElementById("main").style.marginLeft = "25%";
@@ -275,6 +274,8 @@ foreach ($orderItems as $key => $item) {
         w3_open();
       });
     </script>
+
+
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -302,6 +303,9 @@ foreach ($orderItems as $key => $item) {
     });
   });
 </script>
+
+
+
 <script>
 $(document).ready(function () {
     // Check if the URL contains the scrollToCard2 query parameter

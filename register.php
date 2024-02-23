@@ -119,7 +119,7 @@ if(isset($_SESSION['status']))
                 </div>
 
                 <div class="links">
-                    Have an Account?<a href="SignIn.html"> Login</a>
+                    Have an Account?<a href="login.php"> Login</a>
                 </div>
 
         </form>

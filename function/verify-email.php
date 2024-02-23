@@ -18,7 +18,7 @@ if(isset($_GET['token']))
 
             if($update_query_run)
             {
-                $_SESSION['status'] =  "Account Verified Successfuly";
+                $_SESSION['status'] =  "Account Verified Successfully";
                 header("Location: ../login.php");
                 exit(0);
 
