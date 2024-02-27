@@ -13,7 +13,7 @@ $status=$_POST['status'];
 $remark=$_POST['remark'];//space char
 
 $query=mysqli_query($con,"insert into ordertrackhistory(orderId,status,remark) values('$oid','$status','$remark')");
-$sql=mysqli_query($con,"update orders set orderStatus='$status' where id='$oid'");
+$sql=mysqli_query($con,"update pending set status='$status' where id='$oid'");
 echo "<script>alert('Order updated sucessfully...');</script>";
 //}
 }
@@ -56,9 +56,6 @@ $ret = mysqli_query($con,"SELECT * FROM ordertrackhistory WHERE orderId='$oid'")
      while($row=mysqli_fetch_array($ret))
       {
      ?>
-		
-    
-    
       <tr height="20">
       <td class="fontkink1" ><b>At Date:</b></td>
       <td  class="fontkink"><?php echo $row['postingDate'];?></td>
@@ -76,13 +73,17 @@ $ret = mysqli_query($con,"SELECT * FROM ordertrackhistory WHERE orderId='$oid'")
     <tr>
       <td colspan="2"><hr /></td>
     </tr>
+
+
    <?php } ?>
+
+
    <?php 
 $st='Delivered';
-   $rt = mysqli_query($con,"SELECT * FROM orders WHERE id='$oid'");
+   $rt = mysqli_query($con,"SELECT * FROM pending WHERE id='$oid'");
      while($num=mysqli_fetch_array($rt))
      {
-     $currrentSt=$num['orderStatus'];
+     $currrentSt=$num['status'];
    }
      if($st==$currrentSt)
      { ?>
@@ -96,7 +97,7 @@ $st='Delivered';
       <td  class="fontkink"><span class="fontkink1" >
         <select name="status" class="fontkink" required="required" >
           <option value="">Select Status</option>
-                 <option value="in Process">In Process</option>
+                 <option value="Accepted">Accepted</option>
                   <option value="Delivered">Delivered</option>
         </select>
         </span></td>
