@@ -1,39 +1,89 @@
 <?php
 session_start();
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
+use PHPMailer\PHPMailer\Exception;
+
+// Load Composer's autoloader
+require '../vendor/autoload.php';
 
 include_once 'include/config.php';
-if(strlen($_SESSION['alogin'])==0)
-  { 
-header('location:index.php');
-}
-else{
-$oid=intval($_GET['oid']);
-if(isset($_POST['submit2'])){
-$status=$_POST['status'];
-$remark=$_POST['remark'];//space char
 
-$query=mysqli_query($con,"insert into ordertrackhistory(orderId,status,remark) values('$oid','$status','$remark')");
-$sql=mysqli_query($con,"update pending set status='$status' where id='$oid'");
-echo "<script>alert('Order updated sucessfully...');</script>";
-//}
+if(strlen($_SESSION['alogin']) == 0) { 
+    header('location:index.php');
+    exit(); // Stop further execution
 }
 
- ?>
-<script language="javascript" type="text/javascript">
-function f2()
-{
-window.close();
-}ser
-function f3()
-{
-window.print(); 
+$oid = intval($_GET['oid']);
+
+if(isset($_POST['submit2'])) {
+    $status = $_POST['status'];
+    $remark = $_POST['remark'];
+
+    // Insert order tracking history
+    $query = mysqli_query($con, "INSERT INTO ordertrackhistory(orderId,status,remark) VALUES('$oid','$status','$remark')");
+
+    if($query) {
+        // Update order status
+        $sql = mysqli_query($con, "UPDATE pending SET status='$status' WHERE id='$oid'");
+
+        if($sql) {
+            // Order updated successfully
+            echo "<script>alert('Order updated successfully...');</script>";
+
+            // Check if the status is "Declined"
+            if ($status == "Declined") {
+                // Fetch user email associated with the order
+                $getUserEmailQuery = mysqli_query($con, "SELECT email FROM users WHERE id IN (SELECT user_session_id FROM pending WHERE id='$oid') LIMIT 1");
+                $userEmailRow = mysqli_fetch_array($getUserEmailQuery);
+                $userEmail = $userEmailRow['email'];
+
+                // Send email to the user
+                $mail = new PHPMailer(true);
+
+                try {
+                    // SMTP configuration
+                    $mail->isSMTP();
+                    $mail->Host = 'smtp.gmail.com';
+                    $mail->SMTPAuth = true;
+                    $mail->Username = 'cdemailverify@gmail.com'; // Your Gmail email address
+                    $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
+                    $mail->SMTPSecure = 'tls';
+                    $mail->Port = 587;
+
+                    // Sender and recipient settings
+                    $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+                    $mail->addAddress($userEmail);
+
+                    // Email content
+                    $mail->isHTML(true);
+                    $mail->Subject = 'Order Declined';
+                    $mail->Body = 'Sorry, we have declined your order.';
+
+                    // Send email
+                    $mail->send();
+                    echo "<script>alert('Email sent to user: Order Declined');</script>";
+                } catch (Exception $e) {
+                    echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+                }
+            }
+        } else {
+            // Error occurred while updating order
+            echo "<script>alert('Error updating order');</script>";
+        }
+    } else {
+        // Error occurred while inserting order tracking history
+        echo "<script>alert('Error inserting order tracking history');</script>";
+    }
 }
-</script>
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
-<html xmlns="http://www.w3.org/1999/xhtml">
+
+?>
+
+<!DOCTYPE html>
+<html lang="en">
 <head>
-<meta http-equiv="Content-Type" content="text/html; charset=iso-8859-1" />
-<title>Update Compliant</title>
+<meta charset="UTF-8">
+<title>Update Order</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
 <link href="anuj.css" rel="stylesheet" type="text/css">
 </head>
@@ -42,89 +92,81 @@ window.print();
 <div style="margin-left:50px;">
  <form name="updateticket" id="updateticket" method="post"> 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
-
     <tr height="50">
-      <td colspan="2" class="fontkink2" style="padding-left:0px;"><div class="fontpink2"> <b>Update Order !</b></div></td>
-      
+      <td colspan="2" class="fontkink2" style="padding-left:0px;">
+          <div class="fontpink2"> <b>Update Order !</b></div>
+      </td>
     </tr>
     <tr height="30">
       <td  class="fontkink1"><b>order Id:</b></td>
       <td  class="fontkink"><?php echo $oid;?></td>
     </tr>
     <?php 
-$ret = mysqli_query($con,"SELECT * FROM ordertrackhistory WHERE orderId='$oid'");
-     while($row=mysqli_fetch_array($ret))
-      {
-     ?>
-      <tr height="20">
+    $ret = mysqli_query($con,"SELECT * FROM ordertrackhistory WHERE orderId='$oid'");
+    while($row=mysqli_fetch_array($ret)) {
+    ?>
+    <tr height="20">
       <td class="fontkink1" ><b>At Date:</b></td>
       <td  class="fontkink"><?php echo $row['postingDate'];?></td>
     </tr>
-     <tr height="20">
+    <tr height="20">
       <td  class="fontkink1"><b>Status:</b></td>
       <td  class="fontkink"><?php echo $row['status'];?></td>
     </tr>
-     <tr height="20">
+    <tr height="20">
       <td  class="fontkink1"><b>Remark:</b></td>
       <td  class="fontkink"><?php echo $row['remark'];?></td>
     </tr>
-
-   
     <tr>
       <td colspan="2"><hr /></td>
     </tr>
-
-
-   <?php } ?>
-
-
-   <?php 
-$st='Delivered';
-   $rt = mysqli_query($con,"SELECT * FROM pending WHERE id='$oid'");
-     while($num=mysqli_fetch_array($rt))
-     {
-     $currrentSt=$num['status'];
-   }
-     if($st==$currrentSt)
-     { ?>
-   <tr><td colspan="2"><b>
-      Product Delivered </b></td>
-   <?php }else  {
-      ?>
-   
-    <tr height="50">
-      <td class="fontkink1">Status: </td>
-      <td  class="fontkink"><span class="fontkink1" >
-        <select name="status" class="fontkink" required="required" >
-          <option value="">Select Status</option>
-                 <option value="Accepted">Accepted</option>
-                  <option value="Delivered">Delivered</option>
-        </select>
-        </span></td>
-    </tr>
-
-     <tr style=''>
-      <td class="fontkink1" >Remark:</td>
-      <td class="fontkink" align="justify" ><span class="fontkink">
-        <textarea cols="50" rows="7" name="remark"  required="required" ></textarea>
-        </span></td>
-    </tr>
-    <tr>
-      <td class="fontkink1">&nbsp;</td>
-      <td  >&nbsp;</td>
-    </tr>
-    <tr>
-      <td class="fontkink">       </td>
-      <td  class="fontkink"> <input type="submit" name="submit2"  value="update"   size="40" style="cursor: pointer;" /> &nbsp;&nbsp;   
-      <input name="Submit2" type="submit" class="txtbox4" value="Close this Window " onClick="return f2();" style="cursor: pointer;"  /></td>
-    </tr>
-<?php } ?>
+    <?php } ?>
+    <?php 
+    $st = 'Delivered';
+    $rt = mysqli_query($con,"SELECT * FROM pending WHERE id='$oid'");
+    while($num=mysqli_fetch_array($rt)) {
+        $currrentSt=$num['status'];
+    }
+    if($st == $currrentSt) { ?>
+        <tr><td colspan="2"><b>Product Delivered </b></td>
+    <?php } else  { ?>
+        <tr height="50">
+          <td class="fontkink1">Status: </td>
+          <td  class="fontkink">
+              <span class="fontkink1">
+                  <select name="status" class="fontkink" required="required" >
+                      <option value="">Select Status</option>
+                      <option value="Accepted">Accepted</option>
+                      <option value="Delivered">Delivered</option>
+                      <option value="Declined">Declined</option>
+                  </select>
+              </span>
+          </td>
+        </tr>
+        <tr style=''>
+          <td class="fontkink1" >Remark:</td>
+          <td class="fontkink" align="justify" >
+              <span class="fontkink">
+                  <textarea cols="50" rows="7" name="remark"  required="required" ></textarea>
+              </span>
+          </td>
+        </tr>
+        <tr>
+          <td class="fontkink1">&nbsp;</td>
+          <td>&nbsp;</td>
+        </tr>
+        <tr>
+          <td class="fontkink"></td>
+          <td class="fontkink">
+              <input type="submit" name="submit2" value="Update" size="40" style="cursor: pointer;" />
+              &nbsp;&nbsp;   
+              <input name="Submit2" type="submit" class="txtbox4" value="Close this Window " onClick="return f2();" style="cursor: pointer;"  />
+          </td>
+        </tr>
+    <?php } ?>
 </table>
  </form>
 </div>
 
 </body>
 </html>
-<?php } ?>
-
-     

@@ -67,10 +67,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
     $status = 'Delivered';
 	$startOfDay = date('Y-m-d 00:00:00');
     $endOfDay = date('Y-m-d 23:59:59');
-    $query = mysqli_query($con, "SELECT pending.id AS id, pending.name AS username, pending.email AS useremail, pending.contact AS usercontact, pending.preparation_date AS orderdate, pending.items AS products, pending.payment_option AS payment_option, pending.delivery_option AS delivery_option, pending.total_price AS total_price 
-        FROM pending 
-        LEFT JOIN orders ON pending.id = orders.productId 
-        WHERE (orders.orderStatus != '$status' OR orders.orderStatus IS NULL) 
+	$query = mysqli_query($con, "SELECT pending.id AS id, pending.name AS username, pending.email AS useremail, pending.contact AS usercontact, pending.preparation_date AS orderdate, pending.items AS products, pending.payment_option AS payment_option, pending.delivery_option AS delivery_option, pending.total_price AS total_price, pending.delivery_address AS delivery_address FROM pending WHERE pending.status != 'Delivered'
         AND DATE(pending.preparation_date) = CURDATE()");
 
     $orderProducts = []; // Associative array to store products grouped by order ID
@@ -90,6 +87,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
                 'delivery_option' => $row['delivery_option'],
                 'orderdate' => $row['orderdate'],
                 'total_price' => $row['total_price'],
+				'delivery_address' => $row['delivery_address'],
                 'products' => []
             ];
         }
@@ -123,6 +121,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 											<th>Total All</th>
 											<th>Payment</th>
 											<th>Dlvry Option</th>
+											<th>Address</th>
 											<th>Order Date</th>
 											<th>Action</th>
 										</tr>
@@ -148,6 +147,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['total_price']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['payment_option']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_option']); ?></td>
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_address']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['orderdate']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><a href="updateorder.php?oid=<?php echo htmlentities($orderId); ?>" title="Update order" target="_blank"><i class="icon-edit"></i></a></td>
 														<?php endif; ?>

@@ -37,7 +37,7 @@ function resend_email_verify($name,$email,$verify_token)
     <h2>Your account has been verified!</h2>
  <h5>You can now use Chef's Daughter Website<h5>
  <br/>
- <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>CLICK ME PLEASE DO IT</a>";
+ <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>Click to Verify</a>";
 
 
     $mail->Body = $email_template;

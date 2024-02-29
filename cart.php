@@ -94,28 +94,28 @@ include('./dbcon.php');
 
     <div class="order-list">
     <?php
-    $totalPrice = 0;
-    if (!empty($_SESSION['cart'])) {
-        foreach ($_SESSION['cart'] as $index => $item) {
-            echo '<div class="cart-item" id="cart-item-' . $index . '">';
-            echo '<img src="' . $item['productImage'] . '" alt="food" class="cart-display" />';
-            echo '<div class="detail-cart">';
-            echo '<p class="foodcart-name">' . $item['productName'] . '</p>';
-            echo '<p class="foodcart-name">' . $item['quantity'] . ' - ' . $item['size'] . ' ($' . $item['sizePrice'] . ')</p>';
-            echo '</div>';
-            echo '<div class="price">';
-            echo '<p class="total-price">₱' . $item['totalPrice'] . '</p>';
-            echo '<img src="./img/cross-circle (2).png" alt="food" width="24px" height="24px" style="cursor: pointer;" onclick="removeCartItem(' . $index . ')" />';
-            echo '</div>';
-            echo '</div>';
-            
-            // Calculate total price
-            $totalPrice += $item['totalPrice'];
+        $totalPrice = 0;
+        if (!empty($_SESSION['cart'])) {
+            foreach ($_SESSION['cart'] as $index => $item) { ?>
+                <div class="cart-item" id="cart-item-<?php echo $index; ?>">
+                    <img src="<?php echo $item['productImage']; ?>" alt="food" class="cart-display" />
+                    <div class="detail-cart">
+                        <p class="foodcart-name"><?php echo $item['productName']; ?></p>
+                        <p class="foodcart-name"><?php echo $item['quantity']; ?> - <?php echo $item['size']; ?> ($<?php echo $item['sizePrice']; ?>)</p>
+                    </div>
+                    <div class="price">
+                        <p class="total-price">₱<?php echo $item['totalPrice']; ?></p>
+                        <img src="./img/cross-circle (2).png" alt="food" width="24px" height="24px" style="cursor: pointer;" onclick="removeCartItem(<?php echo $index; ?>)" />
+                    </div>
+                </div>
+        <?php
+                // Calculate total price
+                $totalPrice += $item['totalPrice'];
+            }
+        } else {
+            echo "<p>Your cart is empty.</p>";
         }
-    } else {
-        echo "<p>Your cart is empty.</p>";
-    }
-?>
+    ?>
 
         <!-- Datepicker -->
         <div class="subtitle">
@@ -126,11 +126,11 @@ include('./dbcon.php');
         </div>
 
         <div class="subtitle">
-    <p class="subtitle-txt-2">Time of Delivery</p>
-</div>
-<div class="subtitle" style="margin-bottom: 20px">
-    <input type="time" id="timepicker" name="preparationTime" class="subtitle-txt-bg-2">
-</div>
+            <p class="subtitle-txt-2">Time of Delivery</p>
+        </div>
+        <div class="subtitle" style="margin-bottom: 20px">
+            <input type="time" id="timepicker" name="preparationTime" class="subtitle-txt-bg-2">
+        </div>
 
         <!-- Address Field -->
         <div class="subtitle">
@@ -151,8 +151,8 @@ include('./dbcon.php');
                     <h8>Total Price</h8>
                     <p class="subtitle-txt-2"><?php echo number_format($totalPrice, 2); ?></p>
                 </div>
-                <!-- COLUMN 2 -->
-               
+
+                <!-- COLUMN 2 -->           
 <div class="footer-column">
     <div class="checkbox-container">
         <label class="checkbox-label" for="deliveryCheckbox">
@@ -331,11 +331,7 @@ include('./dbcon.php');
     });
     
 });
-
-
 </script>
-
-
 
 
 </body>

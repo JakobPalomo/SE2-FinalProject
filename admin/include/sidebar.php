@@ -28,28 +28,55 @@
 										</a>
 									</li>
 									<li>
+										<a href="all-orders.php">
+											<i class="icon-tasks"></i>
+											All Orders except Delivered (debug)
+											<?php	
+													$status='Delivered';									 
+													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_all FROM pending WHERE status != 'Delivered'");
+													$row = mysqli_fetch_assoc($ret);
+													$num = $row['num_all'];
+												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
+											<?php } ?>
+										</a>
+									</li>
+									<li>
 										<a href="pending-orders.php">
 											<i class="icon-tasks"></i>
 											Pending Orders
-										<?php	
-	$status='Delivered';									 
-	$ret = mysqli_query($con,"SELECT COUNT(*) AS num_pending FROM pending WHERE status = 'Pending'");
-	$row = mysqli_fetch_assoc($ret);
-	$num = $row['num_pending'];
-{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
-<?php } ?>
+											<?php	
+													$status='Delivered';									 
+													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_pending FROM pending WHERE status = 'Pending'");
+													$row = mysqli_fetch_assoc($ret);
+													$num = $row['num_pending'];
+												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
+											<?php } ?>
+										</a>
+									</li>
+									<li>
+										<a href="accepted-orders.php">
+											<i class="icon-tasks"></i>
+											Accepted Orders
+											<?php	
+													$status='Delivered';									 
+													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_accepted FROM pending WHERE status = 'Accepted'");
+													$row = mysqli_fetch_assoc($ret);
+													$num = $row['num_accepted'];
+												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
+											<?php } ?>
 										</a>
 									</li>
 									<li>
 										<a href="delivered-orders.php">
 											<i class="icon-inbox"></i>
 											Delivered Orders
-								<?php	
-	$status='Delivered';									 
-$rt = mysqli_query($con,"SELECT * FROM Orders where orderStatus='$status'");
-$num1 = mysqli_num_rows($rt);
-{?><b class="label green pull-right"><?php echo htmlentities($num1); ?></b>
-<?php } ?>
+											<?php	
+													$status='Delivered';									 
+													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_delivered FROM pending WHERE status = 'Delivered'");
+													$row = mysqli_fetch_assoc($ret);
+													$num = $row['num_delivered'];
+												{?><b class="label green pull-right"><?php echo htmlentities($num); ?></b>
+											<?php } ?>
 
 										</a>
 									</li>

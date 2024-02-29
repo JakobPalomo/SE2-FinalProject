@@ -183,23 +183,25 @@ if ($result->num_rows == 1) {
         }
       ?>
 
-    <div class='card-field' id='card2'>
-        <div class='card-place' style='display: flex; flex-direction: column;'>
-            <div class='card-title'><h1>Pending Orders</h1></div>
-            <div class='pending-order-container' style='flex-grow: 1; overflow-y: auto;'>
-                <table class='table-order'>
-                    <?php
-                    foreach ($orders as $row):
+<div class="card-field" id="card2">
+    <div class="card-place">
+        <div class="card-title"><h1>Pending Orders</h1></div>
+        <div class="pending-order-container" style="flex-grow: 1; overflow-y: auto;">
+            <?php if (empty($orders)): ?>
+                <div class="orderstat" style="text-align: center;">No Orders Found</div>
+            <?php else: ?>
+                <table class="table-order">
+                    <?php foreach ($orders as $row):
                         $orderId = $row['id'];
                         $orderStatus = $row['status'];
                         $orderItems = unserialize($row['items']);
 
-                        // Check if order status is not "Accepted"
-                        if ($orderStatus !== "Accepted"):
+                        // Check if order status is "Pending"
+                        if ($orderStatus === "Pending"):
                     ?>
                             <tr>
-                                <td class='orderno'>Order No. <?php echo $orderId; ?></td>
-                                <td class='orderstat'><?php echo $orderStatus; ?></td>
+                                <td class="orderno">Order No. <?php echo $orderId; ?></td>
+                                <td class="orderstat"><?php echo $orderStatus; ?></td>
                             </tr>
                             <?php
                             $lastItemKey = array_key_last($orderItems);
@@ -209,78 +211,152 @@ if ($result->num_rows == 1) {
                                 $itemPrice = $item['sizePrice'];
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
-                                    <td class='ordername'>x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class='orderprice'><?php echo $itemPrice; ?></td>
+                                    <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
+                                    <td class="orderprice"><?php echo $itemPrice; ?></td>
                                 </tr>
                                 <?php if ($key === $lastItemKey): ?>
-                                    <tr><td colspan='2'><hr style='border-top: 2px solid black;'></td></tr>
+                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
-            </div>
+            <?php endif; ?>
         </div>
     </div>
+</div>
 
-      <div class='card-field' id='card3'>
-          <div class='card-place' style='display: flex; flex-direction: column;'>
-              <div class='card-title'><h1>Accepted Orders</h1></div>
-              <div class='pending-order-container' style='flex-grow: 1; overflow-y: auto;'>
-                  <table class='table-order'>
-                      <?php
-                      foreach ($orders as $row):
-                          $orderId = $row['id'];
-                          $orderStatus = $row['status'];
-                          $orderItems = unserialize($row['items']);
+    <div class="card-field" id="card3">
+    <div class="card-place">
+        <div class="card-title"><h1>Accepted Orders</h1></div>
+        <div class="pending-order-container" style="flex-grow: 1; overflow-y: auto;">
+            <?php if (empty($orders)): ?>
+                <div class="orderstat" style="text-align: center;">No Orders Found</div>
+            <?php else: ?>
+                <table class="table-order">
+                    <?php foreach ($orders as $row):
+                        $orderId = $row['id'];
+                        $orderStatus = $row['status'];
+                        $orderItems = unserialize($row['items']);
 
-                          // Check if order status is "Accepted"
-                          if ($orderStatus === "Accepted"):
-                      ?>
-                              <tr>
-                                  <td class='orderno'>Order No. <?php echo $orderId; ?></td>
-                                  <td class='orderstat'><?php echo $orderStatus; ?></td>
-                              </tr>
-                              <?php
-                              $lastItemKey = array_key_last($orderItems);
-                              foreach ($orderItems as $key => $item):
-                                  $quantity = $item['quantity'];
-                                  $itemName = $item['productName'];
-                                  $itemPrice = $item['sizePrice'];
-                              ?>
-                                  <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
-                                      <td class='ordername'>x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                      <td class='orderprice'><?php echo $itemPrice; ?></td>
-                                  </tr>
-                                  <?php if ($key === $lastItemKey): ?>
-                                      <tr><td colspan='2'><hr style='border-top: 2px solid black;'></td></tr>
-                                  <?php endif; ?>
-                              <?php endforeach; ?>
-                          <?php endif; ?>
-                      <?php endforeach; ?>
-                  </table>
-              </div>
-          </div>
-      </div>
-
-      <div class="card-field" id="card4">
-        <div class="card-place">
-          <div class="card-title"><h1>Past Orders</h1></div>
-          <!-- Place Content of card here -->
-
-          <!-- End of content card -->
+                        
+                        if ($orderStatus === "Accepted"):
+                    ?>
+                            <tr>
+                                <td class="orderno">Order No. <?php echo $orderId; ?></td>
+                                <td class="orderstat"><?php echo $orderStatus; ?></td>
+                            </tr>
+                            <?php
+                            $lastItemKey = array_key_last($orderItems);
+                            foreach ($orderItems as $key => $item):
+                                $quantity = $item['quantity'];
+                                $itemName = $item['productName'];
+                                $itemPrice = $item['sizePrice'];
+                            ?>
+                                <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
+                                    <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
+                                    <td class="orderprice"><?php echo $itemPrice; ?></td>
+                                </tr>
+                                <?php if ($key === $lastItemKey): ?>
+                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </table>
+            <?php endif; ?>
         </div>
-      </div>
+    </div>
+</div>
 
+    <div class="card-field" id="card4">
+    <div class="card-place">
+        <div class="card-title"><h1>Past Orders</h1></div>
+        <div class="pending-order-container" style="flex-grow: 1; overflow-y: auto;">
+            <?php if (empty($orders)): ?>
+                <div class="orderstat" style="text-align: center;">No Orders Found</div>
+            <?php else: ?>
+                <table class="table-order">
+                    <?php foreach ($orders as $row):
+                        $orderId = $row['id'];
+                        $orderStatus = $row['status'];
+                        $orderItems = unserialize($row['items']);
 
-      <div class="card-field" id="card5">
-        <div class="card-place">
-          <div class="card-title"><h1>To Pay</h1></div>
-          <!-- Place Content of card here -->
-
-          <!-- End of content card -->
+    
+                        if ($orderStatus === "Delivered"):
+                    ?>
+                            <tr>
+                                <td class="orderno">Order No. <?php echo $orderId; ?></td>
+                                <td class="orderstat"><?php echo $orderStatus; ?></td>
+                            </tr>
+                            <?php
+                            $lastItemKey = array_key_last($orderItems);
+                            foreach ($orderItems as $key => $item):
+                                $quantity = $item['quantity'];
+                                $itemName = $item['productName'];
+                                $itemPrice = $item['sizePrice'];
+                            ?>
+                                <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
+                                    <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
+                                    <td class="orderprice"><?php echo $itemPrice; ?></td>
+                                </tr>
+                                <?php if ($key === $lastItemKey): ?>
+                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </table>
+            <?php endif; ?>
         </div>
-      </div>
+    </div>
+</div>
+
+<div class="card-field" id="card5">
+    <div class="card-place">
+        <div class="card-title"><h1>To Pay</h1></div>
+        <div class="pending-order-container" style="flex-grow: 1; overflow-y: auto;">
+            <?php if (empty($orders)): ?>
+                <div class="orderstat" style="text-align: center;">No Orders Found</div>
+            <?php else: ?>
+                <table class="table-order">
+                    <?php foreach ($orders as $row):
+                        $orderId = $row['id'];
+                        $orderStatus = $row['status'];
+                        $orderItems = unserialize($row['items']);
+
+                 
+                        if ($orderStatus === "To Pay"):
+                    ?>
+                            <tr>
+                                <td class="orderno">Order No. <?php echo $orderId; ?></td>
+                                <td class="orderstat"><?php echo $orderStatus; ?></td>
+                                <td class="checkout-btn"><a href="checkout.php?id=<?php echo $orderId; ?>" class="btn">Checkout</a></td>
+                            </tr>
+                            <?php
+                            $lastItemKey = array_key_last($orderItems);
+                            foreach ($orderItems as $key => $item):
+                                $quantity = $item['quantity'];
+                                $itemName = $item['productName'];
+                                $itemPrice = $item['sizePrice'];
+                            ?>
+                                <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
+                                    <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
+                                    <td class="orderprice"><?php echo $itemPrice; ?></td>
+                                </tr>
+                                <?php if ($key === $lastItemKey): ?>
+                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
+                                <?php endif; ?>
+                            <?php endforeach; ?>
+                        <?php endif; ?>
+                    <?php endforeach; ?>
+                </table>
+            <?php endif; ?>
+        </div>
+    </div>
+</div>
+
+
         <!-- Add more card-fields with unique ids -->
     </div>
 
