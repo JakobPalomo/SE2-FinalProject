@@ -209,10 +209,11 @@ if ($result->num_rows == 1) {
                                 $quantity = $item['quantity'];
                                 $itemName = $item['productName'];
                                 $itemPrice = $item['sizePrice'];
+                                $totalPrice = $quantity * $itemPrice; 
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice"><?php echo $itemPrice; ?></td>
+                                    <td class="orderprice"><?php echo $totalPrice; ?></td>
                                 </tr>
                                 <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
@@ -252,10 +253,11 @@ if ($result->num_rows == 1) {
                                 $quantity = $item['quantity'];
                                 $itemName = $item['productName'];
                                 $itemPrice = $item['sizePrice'];
+                                $totalPrice = $quantity * $itemPrice; 
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice"><?php echo $itemPrice; ?></td>
+                                    <td class="orderprice"><?php echo $totalPrice; ?></td>
                                 </tr>
                                 <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
@@ -295,10 +297,11 @@ if ($result->num_rows == 1) {
                                 $quantity = $item['quantity'];
                                 $itemName = $item['productName'];
                                 $itemPrice = $item['sizePrice'];
+                                $totalPrice = $quantity * $itemPrice; 
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice"><?php echo $itemPrice; ?></td>
+                                    <td class="orderprice"><?php echo $totalPrice; ?></td>
                                 </tr>
                                 <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
@@ -325,13 +328,14 @@ if ($result->num_rows == 1) {
                         $orderStatus = $row['status'];
                         $orderItems = unserialize($row['items']);
 
-                 
                         if ($orderStatus === "To Pay"):
                     ?>
                             <tr>
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
                                 <td class="orderstat"><?php echo $orderStatus; ?></td>
-                                <td class="checkout-btn"><a href="checkout.php?id=<?php echo $orderId; ?>" class="btn">Checkout</a></td>
+                                <td class="checkout-btn">
+                                    <a href="checkout.php?id=<?php echo $orderId; ?>" class="btn btn-primary">Checkout</a>
+                                </td>
                             </tr>
                             <?php
                             $lastItemKey = array_key_last($orderItems);
@@ -339,10 +343,11 @@ if ($result->num_rows == 1) {
                                 $quantity = $item['quantity'];
                                 $itemName = $item['productName'];
                                 $itemPrice = $item['sizePrice'];
+                                $totalPrice = $quantity * $itemPrice; 
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice"><?php echo $itemPrice; ?></td>
+                                    <td class="orderprice"><?php echo $totalPrice; ?></td>
                                 </tr>
                                 <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
