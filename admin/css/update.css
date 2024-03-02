@@ -1,0 +1,77 @@
+/* CSS for Update Order page */
+body {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #f5f5dc;
+}
+
+textarea {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+table {
+  width: 100%;
+}
+
+.fontkink2 {
+  padding-left: 0px;
+}
+
+.fontpink2 {
+  font-weight: bold;
+  color: #f0f0f0;
+}
+
+.fontkink1 {
+  font-weight: bold;
+}
+
+.fontkink {
+  color: #000000;
+}
+
+textarea {
+  width: 100%;
+  resize: vertical;
+}
+
+input[type="submit"] {
+  background-color: #ffb000;
+  color: #ffffff;
+  border: none;
+  padding: 10px;
+  cursor: pointer;
+}
+
+input[type="submit"]:hover {
+  background-color: #ff9900;
+}
+
+.txtbox4 {
+  background-color: #ffffff;
+  border: 1px solid #000000;
+  padding: 10px;
+  cursor: pointer;
+}
+
+.txtbox4:hover {
+  background-color: #f0f0f0;
+}
+
+hr {
+  border: none;
+  border-top: 1px solid #dddddd;
+  margin: 10px 0;
+}
+
+select {
+  width: 100%;
+  padding: 8px;
+  border-radius: 5px;
+  border: 1px solid #ccc;
+  box-sizing: border-box;
+}
+
+select:focus {
+  outline: none;
+  border-color: #ffb000;
+  box-shadow: 0 0 5px #ffb000;
+}

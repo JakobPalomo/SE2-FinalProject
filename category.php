@@ -85,7 +85,7 @@ if(isset($_POST['add_to_cart'])) {
       <div class="side-by-side">  
             <!-- div for subcat buttons-->
             <div class="subcategorydiv">
-    <div class="food-name subcat" style="margin-bottom: 12px; font-size: 10px">Sub Categories</div>
+    <div class="food-name subcat" style="margin-bottom: 12px; font-size: 10px; padding-left: 12px;">Sub Categories</div>
     <div class="subcatbutton">
         <?php 
         $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");

@@ -85,20 +85,24 @@ if(isset($_POST['submit2'])) {
 <meta charset="UTF-8">
 <title>Update Order</title>
 <link href="style.css" rel="stylesheet" type="text/css" />
-<link href="anuj.css" rel="stylesheet" type="text/css">
+<link href="css/update.css" rel="stylesheet" type="text/css">
+<link
+      href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap"
+      rel="stylesheet"
+    />
 </head>
 <body>
 
-<div style="margin-left:50px;">
+<div style="margin-left:18%; margin-right:18%;">
  <form name="updateticket" id="updateticket" method="post"> 
-<table width="100%" border="0" cellspacing="0" cellpadding="0">
+<table width="50%" border="0" cellspacing="0" cellpadding="0">
     <tr height="50">
-      <td colspan="2" class="fontkink2" style="padding-left:0px;">
-          <div class="fontpink2"> <b>Update Order !</b></div>
+      <td colspan="2" class="fontkink2" style="padding-left:0px;height: 60%;">
+          <div class="fontpink2" style=" background-color: #004225; height: 36px;  color: #f0f0f0;  text-align: center; border-radius: 12px;"> <b>Update Order !</b></div>
       </td>
     </tr>
     <tr height="30">
-      <td  class="fontkink1"><b>order Id:</b></td>
+      <td  class="fontkink1"><b>Order Id:</b></td>
       <td  class="fontkink"><?php echo $oid;?></td>
     </tr>
     <?php 
@@ -145,9 +149,10 @@ if(isset($_POST['submit2'])) {
         </tr>
         <tr style=''>
           <td class="fontkink1" >Remark:</td>
-          <td class="fontkink" align="justify" >
+          <td class="fontkink" >
               <span class="fontkink">
-                  <textarea cols="50" rows="7" name="remark"  required="required" ></textarea>
+              <textarea cols="50" rows="6" name="remark" required="required" style="border-radius: 8px; font-family: 'Jakarta Sans', sans-serif; padding: 12px;"></textarea>
+
               </span>
           </td>
         </tr>
@@ -158,9 +163,9 @@ if(isset($_POST['submit2'])) {
         <tr>
           <td class="fontkink"></td>
           <td class="fontkink">
-              <input type="submit" name="submit2" value="Update" size="40" style="cursor: pointer;" />
+              <input type="submit" name="submit2" value="Update" size="40" style="cursor: pointer;border-radius: 8px;" />
               &nbsp;&nbsp;   
-              <input name="Submit2" type="submit" class="txtbox4" value="Close this Window " onClick="return f2();" style="cursor: pointer;"  />
+              <input name="Submit2" type="submit" class="txtbox4" value="Close this Window " onClick="return f2();" style="cursor: pointer;border-radius: 8px;"  />
           </td>
         </tr>
     <?php } ?>
