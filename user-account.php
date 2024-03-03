@@ -81,7 +81,7 @@ if ($result->num_rows == 1) {
 
     <!-- Code zone -->
     <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" id="mySidebar">
-      <center><button class="add-item mt-5" onclick="redirectToCategory()">ORDER NOW</button></center>
+      <center><button class="add-item mt-5" style=" padding-bottom: 34px;margin-bottom:12px" onclick="redirectToCategory()"> <i class="fa-solid fa-utensils" style="color: #004225;"></i>  Order Now</button></center>
       <a href="#" class="w3-bar-item w3-button show-card" data-target="card1"><span><img src="./img/profile.png" class="icon" />
     </span>My Profile</a>
       <a href="#" class="w3-bar-item w3-button show-card" data-target="card2">
@@ -109,63 +109,54 @@ if ($result->num_rows == 1) {
           <div class="card-title"><h1>My Profile</h1></div>
           <!-- Place Content of card here -->
           <div class="inner-card">
-            <table>
-              <!-- Row 1: Name and Sample Name -->
-              <tr>
-                <td>
-                  <div class="column-container">
-                    <img src="./img/nameicon.png" alt="Name Image" />
-                    <div class="info-container">
-                      <p class="info-label">Name</p>
-                      <p class="info"><?php echo $fname . ' ' . $lname; ?></p>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 2: Address and Sample Address -->
-              <tr>
-                <td>
-                  <div class="column-container">
-                    <img src="./img/addressicon.png" alt="Address Image" />
-                    <div class="info-container">
-                      <p class="info-label">Address</p>
-                      <p class="info"><?php echo $address; ?></p>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 3: Email and Sample Email -->
-              <tr>
-                <td>
-                  <div class="column-container">
-                    <img src="./img/emailicon.png" alt="Email Image" />
-                    <div class="info-container">
-                      <p class="info-label">Email</p>
-                      <p class="info"><?php echo $email; ?></p>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-
-              <!-- Row 4: Contact number and Sample Contact Number -->
-              <tr>
-                <td>
-                  <div class="column-container">
-                    <img
-                      src="./img/contactnoicon.png"
-                      alt="Contact Number Image"
-                    />
-                    <div class="info-container">
-                      <p class="info-label">Contact number</p>
-                      <p class="info"><?php echo $contact; ?></p>
-                    </div>
-                  </div>
-                </td>
-              </tr>
-            </table>
+  <table>
+    <tr>
+      <td>
+        <div class="column-container">
+          <img src="./img/nameicon.png" alt="Name Image" />
+          <div class="info-container">
+            <p class="info-label">Name</p>
+            <p class="info"><?php echo $fname . ' ' . $lname; ?></p>
           </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="column-container">
+          <img src="./img/addressicon.png" alt="Address Image" />
+          <div class="info-container">
+            <p class="info-label">Address</p>
+            <p class="info"><?php echo $address; ?></p>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="column-container">
+          <img src="./img/emailicon.png" alt="Email Image" />
+          <div class="info-container">
+            <p class="info-label">Email</p>
+            <p class="info"><?php echo $email; ?></p>
+          </div>
+        </div>
+      </td>
+    </tr>
+    <tr>
+      <td>
+        <div class="column-container">
+          <img src="./img/contactnoicon.png" alt="Contact Number Image" />
+          <div class="info-container">
+            <p class="info-label">Contact number</p>
+            <p class="info"><?php echo $contact; ?></p>
+          </div>
+        </div>
+      </td>
+    </tr>
+  </table>
+</div>
+
           <!-- End of content card -->
         </div>
       </div>
@@ -214,7 +205,9 @@ if ($result->num_rows == 1) {
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
                                     <td class="orderprice"><?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">&nbsp;</td>
                                 </tr>
+                          
                                 <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
                                 <?php endif; ?>
@@ -258,6 +251,7 @@ if ($result->num_rows == 1) {
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
                                     <td class="orderprice"><?php echo $totalPrice; ?></td>
+                                    <td>&nbsp;</td>
                                 </tr>
                                 <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
@@ -334,7 +328,7 @@ if ($result->num_rows == 1) {
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
                                 <td class="orderstat"><?php echo $orderStatus; ?></td>
                                 <td class="checkout-btn">
-                                    <a href="checkout.php?id=<?php echo $orderId; ?>" class="btn btn-primary">Checkout</a>
+                                    <center><a href="checkout.php?id=<?php echo $orderId; ?>" class="add-item mt-5"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Checkout</a></center>
                                 </td>
                             </tr>
                             <?php
@@ -350,7 +344,7 @@ if ($result->num_rows == 1) {
                                     <td class="orderprice"><?php echo $totalPrice; ?></td>
                                 </tr>
                                 <?php if ($key === $lastItemKey): ?>
-                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
+                                    <tr><td colspan="3"><hr style="border-top: 2px solid black;"></td></tr>
                                 <?php endif; ?>
                             <?php endforeach; ?>
                         <?php endif; ?>

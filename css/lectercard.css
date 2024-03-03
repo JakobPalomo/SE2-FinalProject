@@ -4,12 +4,15 @@ table {
   border-collapse: collapse;
 }
 
+.inner-card table tr {
+  height: 20px; /* Adjust the height as needed */
+}
+
 th,
 td {
   min-width: fit-content;
   border: 1px solid black;
   text-align: left;
-  height: 12px;
 }
 tr {
   height: 12px;
@@ -37,16 +40,20 @@ table img {
 }
 
 .info {
-  color: #000000;
+  color: #ffffff;
+  font-weight: bold;
+  background-color: #688176;
+  border-radius: 8px;
+  padding: 9px;
 }
 .info-label {
   color: gray;
+  font-weight: bold;
 }
 
 .inner-card {
-  min-width: fit-content;
-  min-height: fit-content;
-  height: 90%;
+  margin-top: 84px;
+  height: 50%;
   width: 100%;
   display: flex;
   justify-content: center;

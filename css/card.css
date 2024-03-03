@@ -5,6 +5,10 @@ body {
   padding: 0;
 }
 
+td {
+  margin-right: 12px;
+}
+
 .dashboard {
   display: flex;
   flex-direction: row;
@@ -70,13 +74,14 @@ body {
   margin-right: 12px;
 }
 
+.info {
+  height: 36px;
+}
+
 .add-item {
   width: max-content;
   height: 32px;
-  margin-bottom: 24px;
   font-size: 1em;
-  margin-top: 10px;
-  margin-right: 12px;
   border-radius: 8px;
   border: none;
   color: #ffffff;
@@ -84,6 +89,9 @@ body {
   font-family: "Plus Jakarta Sans", sans-serif;
   background-color: #ffb000;
   align-self: center;
+  padding: 12px;
+
+  text-decoration: none;
 }
 
 .w3-bar-item.w3-button {
@@ -94,6 +102,11 @@ body {
 
 .navbar {
   z-index: 2; /* Set a higher z-index to keep the navbar on top */
+}
+
+.checkout-btn {
+  justify-content: center;
+  align-self: flex-end;
 }
 
 .w3-sidebar {

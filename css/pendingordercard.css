@@ -2,7 +2,7 @@
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bolder;
   font-size: 25px;
-  padding: 30px 0px 0px 48px;
+  padding-left: 48px;
 }
 
 .pending-order-container .ordername {
@@ -16,10 +16,13 @@
 .pending-order-container .orderstat {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bold;
-  font-size: 25px;
-  color: #00894d;
+  font-size: 12px;
+  color: whitesmoke;
+  background-color: #20b474;
   text-align: center;
-  padding: 30px 0px 0px 0px;
+  padding: none;
+  margin-right: 12px;
+  border-radius: 24px; /* Adjust the value as needed */
 }
 
 .pending-order-container .orderprice {
@@ -40,4 +43,5 @@
 
 .pending-order-container .table-order {
   width: 100%;
+  margin-top: 12px;
 }
