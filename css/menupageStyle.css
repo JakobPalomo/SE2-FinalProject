@@ -107,6 +107,12 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
+@media only screen and (max-width: 720px) {
+  .categorybutton {
+    font-size: 75%;
+  }
+}
+
 .categorybutton:hover {
   background-color: #004225; /* Change the hover color as needed */
   color: #ccc;
