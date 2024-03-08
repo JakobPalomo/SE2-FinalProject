@@ -22,13 +22,14 @@ function placeOrder() {
         $deliveryOption =  isset($_POST['deliveryOption']) ? $_POST['deliveryOption'] : '';
         $preparationDate = isset($_POST['preparationDate']) ? $_POST['preparationDate'] : '';
         $deliveryTime = isset($_POST['deliveryTime']) ? $_POST['deliveryTime'] : '';
+        $status = 'Pending';
         
-         // Set the status based on the payment option
-         if ($paymentOption === 'Gcash') {
-            $status = 'To Pay';
-        } else {
-            $status = 'Pending';
-        }
+        //  // Set the status based on the payment option
+        //  if ($paymentOption === 'Gcash') {
+        //     $status = 'To Pay';
+        // } else {
+        //     $status = 'Pending';
+        // }
 
         // Prepare the SQL statement with parameterized queries to prevent SQL injection
         $query = "INSERT INTO pending (user_session_id, name, contact, email, items, delivery_address, total_price, payment_option, delivery_option, preparation_date,delivery_time, status)

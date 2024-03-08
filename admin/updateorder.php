@@ -141,6 +141,7 @@ if(isset($_POST['submit2'])) {
                   <select name="status" class="fontkink" required="required" >
                       <option value="">Select Status</option>
                       <option value="Accepted">Accepted</option>
+                      <option value="To Pay">Pay Online</option>
                       <option value="Delivered">Delivered</option>
                       <option value="Declined">Declined</option>
                   </select>

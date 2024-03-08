@@ -11,6 +11,19 @@
 								</a>
 								<ul id="togglePages" class="collapse unstyled">
 									<li>
+										<a href="all-orders.php">
+											<i class="icon-tasks"></i>
+											All Orders except Delivered (debug)
+											<?php	
+													$status='Delivered';									 
+													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_all FROM pending WHERE status != 'Delivered'");
+													$row = mysqli_fetch_assoc($ret);
+													$num = $row['num_all'];
+												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
+											<?php } ?>
+										</a>
+									</li>
+									<li>
 										<a href="todays-orders.php">
 											<i class="icon-tasks"></i>
 											Today's Orders
@@ -28,19 +41,6 @@
 										</a>
 									</li>
 									<li>
-										<a href="all-orders.php">
-											<i class="icon-tasks"></i>
-											All Orders except Delivered (debug)
-											<?php	
-													$status='Delivered';									 
-													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_all FROM pending WHERE status != 'Delivered'");
-													$row = mysqli_fetch_assoc($ret);
-													$num = $row['num_all'];
-												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
-											<?php } ?>
-										</a>
-									</li>
-									<li>
 										<a href="pending-orders.php">
 											<i class="icon-tasks"></i>
 											Pending Orders
@@ -49,6 +49,32 @@
 													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_pending FROM pending WHERE status = 'Pending'");
 													$row = mysqli_fetch_assoc($ret);
 													$num = $row['num_pending'];
+												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
+											<?php } ?>
+										</a>
+									</li>
+									<li>
+										<a href="topay-orders.php">
+											<i class="icon-tasks"></i>
+											To Pay Orders
+											<?php	
+													$status='Delivered';									 
+													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_topay FROM pending WHERE status = 'To Pay'");
+													$row = mysqli_fetch_assoc($ret);
+													$num = $row['num_topay'];
+												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
+											<?php } ?>
+										</a>
+									</li>
+									<li>
+										<a href="paid-orders.php">
+											<i class="icon-tasks"></i>
+											Paid Orders
+											<?php	
+													$status='Delivered';									 
+													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_paid FROM pending WHERE status = 'Paid'");
+													$row = mysqli_fetch_assoc($ret);
+													$num = $row['num_paid'];
 												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
 											<?php } ?>
 										</a>
