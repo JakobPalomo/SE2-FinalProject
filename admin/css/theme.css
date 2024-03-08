@@ -11,7 +11,7 @@ All Rights Reserved.
 /* 
 new adds */
 .span9 {
-  width: 80%;
+  width: 70%;
 }
 .container {
   width: 90%;
@@ -22,13 +22,13 @@ new adds */
 .navbar .brand {
   text-shadow: none;
 }
-@media only screen and (max-width: 1000px) {
+@media only screen and (max-width: 720px) {
   .span9 {
     width: 100%;
   }
 }
 th {
-  max-width: 150px;
+  max-width: 120px;
   word-wrap: break-word;
 }
 
