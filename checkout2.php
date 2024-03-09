@@ -80,6 +80,7 @@ if ($items !== false) {
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
     <link
       href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap"
       rel="stylesheet"
@@ -87,21 +88,20 @@ if ($items !== false) {
   </head>
   <body style="background-color: #f5f5dc">
   <?php include('common/navbar.php');?>
-
-    <!-- Order Details -->
-    <div class="container mt-5">
-        <h2>Order Details</h2>
-        <p><strong>Order ID:</strong> <?php echo $order['id']; ?></p>
-        <p><strong>Total Amount:</strong> <?php echo number_format($total_amount, 2); ?> PHP</p>
+<div class="contain">
+<div class="container mt-5">
+        <h2 class="Details-head">Order Details</h2>
+        <p class="Details"><strong>Order ID:</strong> <?php echo $order['id']; ?></p>
+        <p class="Details"><strong>Total Amount: <?php echo number_format($total_amount, 2); ?> PHP</strong></p>
         <hr>
-        <h3>Items:</h3>
-        <ul>
+        <h3 class="Details">Items:</h3>
+        <ul class="detail-list">
             <?php foreach ($line_items as $item): ?>
                 <li>
-                    <p><strong>Name:</strong> <?php echo $item['name']; ?></p>
-                    <p><strong>Quantity:</strong> <?php echo $item['quantity']; ?></p>
-                    <p><strong>Amount:</strong> <?php echo number_format($item['amount'] / 100, 2); ?> PHP</p>
-                    <p><strong>Description:</strong> <?php echo $item['description']; ?></p>
+                    <p class="Details"><strong>Name:</strong> <?php echo $item['name']; ?></p>
+                    <p class="Details"><strong>Quantity:</strong> <?php echo $item['quantity']; ?></p>
+                    <p class="Details"><strong>Amount:</strong> <?php echo number_format($item['amount'] / 100, 2); ?> PHP</p>
+                    <p class="Details"><strong>Description:</strong> <?php echo $item['description']; ?></p>
                 </li>
             <?php endforeach; ?>
         </ul>
@@ -109,15 +109,19 @@ if ($items !== false) {
     <!-- End Order Details -->
 
     <!-- Image and Button Section -->
-    <div class="container mt-3">
-        <!-- Image -->
-        <img src="img/Gcash.jpg" alt="Your Image" style="width: 100%; max-width: 500px; height: auto;">
+    <div class="contain">
+        
         
         <!-- Button -->
         <form method="POST">
-            <button type="submit" name="paid" class="btn btn-primary mt-3">Paid</button>
+            <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Paid</button>
         </form>
-        
+        <!-- Image -->
+        <img src="img/Gcash.jpg" alt="Your Image" style="width: 100%; max-width: 500px; height: auto;">
     </div>
+
+</div>
+    <!-- Order Details -->
+    
   </body>
 </html>
