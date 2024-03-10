@@ -10,9 +10,26 @@ All Rights Reserved.
 
 /* 
 new adds */
-
+.span9 {
+  width: 70%;
+}
+.container {
+  width: 90%;
+}
+.table-bordered thead:first-child tr:first-child th {
+  max-width: 40px;
+}
 .navbar .brand {
   text-shadow: none;
+}
+@media only screen and (max-width: 720px) {
+  .span9 {
+    width: 100%;
+  }
+}
+th {
+  max-width: 120px;
+  word-wrap: break-word;
 }
 
 /* end of adds */

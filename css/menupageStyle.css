@@ -3,6 +3,36 @@ body {
   height: 100%;
 }
 
+.Details-head {
+  background-color: #004225;
+  color: whitesmoke;
+  width: max-content;
+  padding: 9px;
+  border-radius: 12px;
+}
+.Details {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+.contain {
+  display: flex;
+  align-items: center;
+  flex-direction: column;
+}
+.detail-list {
+  background-color: rgb(255, 255, 255);
+  padding: 12px;
+  padding-left: 34px;
+  border-radius: 12px;
+}
+.highlight {
+  background-color: #1269cc;
+  color: white;
+  border-radius: 36px;
+  width: max-content;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  padding: 12px;
+}
+
 .list {
   margin: 24px;
   align-items: center;
@@ -107,6 +137,12 @@ body {
   transition: background-color 0.3s ease-in-out;
 }
 
+@media only screen and (max-width: 720px) {
+  .categorybutton {
+    font-size: 75%;
+  }
+}
+
 .categorybutton:hover {
   background-color: #004225; /* Change the hover color as needed */
   color: #ccc;
@@ -132,6 +168,25 @@ body {
   border-radius: 10px;
   cursor: pointer;
   transition: transform 0.3s;
+}
+
+.pay {
+  width: 20%; /* Adjust the width as needed */
+  min-width: 20vh;
+  max-width: 6%; /* Set a maximum width if necessary */
+  min-height: 4vh;
+  max-height: 4vh;
+
+  background-color: #ffb000; /* Updated color */
+  color: #004225; /* Updated text color */
+  text-decoration: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 1.8vh;
+  border: none;
+  border-radius: 10px;
+  cursor: pointer;
+  transition: transform 0.3s;
+  font-weight: bold;
 }
 
 /* Add some styles to make it visually appealing */
