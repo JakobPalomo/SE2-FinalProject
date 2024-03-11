@@ -118,9 +118,9 @@ if(isset($_POST['submit2'])) {
 <body>
 
 <div style="margin-left:18%; margin-right:18%;">
-
+<form name="updateticket" id="updateticket" method="post">
 <div class="card-field">
-      <div class="card-place">
+      <div class="card-place" style=" margin-bottom: 20%;``">
         
         <div class="card-title"><h1>Update Order</h1></div>
         <!-- Place Content of card here -->
@@ -131,7 +131,7 @@ if(isset($_POST['submit2'])) {
     while($row=mysqli_fetch_array($ret)) {
     ?>
     <tr height="20">
-      <td class="fontkink1" ><b>At Date:</b></td>
+      <td class="fontkink1" style="margin-left: 12px;" ><b>At Date:</b></td>
       <td  class="fontkink"><?php echo $row['postingDate'];?></td>
     </tr>
     <tr height="20">
@@ -146,9 +146,19 @@ if(isset($_POST['submit2'])) {
       <td colspan="2"><hr /></td>
     </tr>
     <?php } ?>
+    
         </table>
-        <p class="order">Order:</p>
+        <p class="order">Order List:</p>
 
+        <!-- Table for Orders -->
+        <table>
+          <!-- Put Order List Here -->
+        <tr>
+        <td  class="OrderItem">Pinoy Ramen</td>
+        </tr>
+        </table>
+        <!-- Table for Orders -->
+        
         <div class="status">
         <?php 
     $st = 'Delivered';
@@ -169,23 +179,31 @@ if(isset($_POST['submit2'])) {
           </select>
         </div>
 
-        <p class="status">Remarks</p>
+        <p class="status" style="padding-left: 24px;">Remarks</p>
         <textarea class="remarks-box" name="remark"></textarea>
 
         <div class="button">
           <input type="submit" value="Update" class="add-item" name="submit2" />
-          <input type="submit" value="Cancel" class="add-item" name="Submit2" onClick="return f2();"/>
+          <input type="submit" value="Cancel" class="add-item" name="Submit2" onClick="closeTab();" />
+
+<script>
+    function closeTab() {
+        window.close();
+    }
+</script>
+
         </div>    <?php } ?>
         <!-- End of content card -->
       </div>
+      </form>
     </div>
 
 
 
 
+<!-- PREVIOUS UPDATE -->
 
-
-
+<!-- 
  <form name="updateticket" id="updateticket" method="post"> 
 <table width="50%" border="0" cellspacing="0" cellpadding="0">
     <tr height="50">
@@ -264,7 +282,7 @@ if(isset($_POST['submit2'])) {
     <?php } ?>
 </table>
  </form>
-</div>
+</div> -->
 
 </body>
 </html>

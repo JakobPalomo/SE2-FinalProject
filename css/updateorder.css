@@ -1,3 +1,6 @@
+body {
+  height: 100%;
+}
 .status {
   padding: 10px;
   margin-right: 500px;
@@ -6,15 +9,23 @@
   font-size: 15px;
 }
 
+.OrderItem {
+  padding-left: 56px;
+  font-weight: bold;
+  font-size: 16px;
+  color: #01aa61;
+}
+
 .status .drop {
   background-color: #e0e0e0;
   border: 1px solid #ccc;
   border-radius: 8px;
-  width: 100%;
+  width: 150px;
   padding: 10px;
   font-size: 12px;
   font-weight: bold;
   font-family: "Plus Jakarta Sans", sans-serif;
+  margin-left: 12px;
 }
 
 label {
@@ -53,7 +64,7 @@ label {
 .remarks-box {
   width: 90%;
   height: 50px;
-  margin-left: 15px;
+  margin-left: 24px;
   padding: 12px;
   background-color: #e0e0e0;
   border-radius: 8px;
