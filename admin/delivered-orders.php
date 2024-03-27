@@ -21,6 +21,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
 	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
 
 	<script language="javascript" type="text/javascript">
@@ -144,7 +145,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_option']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_address']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['orderdate']); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><a href="updateorder.php?oid=<?php echo htmlentities($orderId); ?>" title="Update order" target="_blank"><i class="icon-edit"></i></a></td>
+															<td rowspan="<?php echo count($order['products']); ?>"><a href="updateorder.php?oid=<?php echo htmlentities($orderId); ?>" title="Update order" target="_blank"><i class="fa-regular fa-pen-to-square" style="color: #48BE25;  font-size: 20px"></i></a></td>
 														<?php endif; ?>
 													</tr>
 										<?php
