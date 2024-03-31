@@ -109,13 +109,13 @@ if(isset($_GET['del']))
 							<div class="module-body table">
 								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" width="100%">
 									<thead>
-										<tr>
+										<tr><th>Action</th>
 											<th>#</th>
 											<th>Category</th>
 											<th>Description</th>
 											<th>Creation date</th>
 											<th>Last Updated</th>
-											<th>Action</th>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -125,15 +125,15 @@ $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
 ?>									
-										<tr>
+										<tr><td>
+											<a href="edit-category.php?id=<?php echo $row['id']?>" style="font-size: 22px;" ><i class="fa-regular fa-pen-to-square" style="color: #48BE25;">&nbsp;&nbsp;</i></a>
+											<a style="font-size: 22px;" href="category.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')"><i class="fa-solid fa-circle-xmark" style="color: #ff1a1a;"></i></a></td>
 											<td><?php echo htmlentities($cnt);?></td>
 											<td><?php echo htmlentities($row['categoryName']);?></td>
 											<td><?php echo htmlentities($row['categoryDescription']);?></td>
 											<td> <?php echo htmlentities($row['creationDate']);?></td>
 											<td><?php echo htmlentities($row['updationDate']);?></td>
-											<td>
-											<a href="edit-category.php?id=<?php echo $row['id']?>" style="font-size: 22px;" ><i class="fa-regular fa-pen-to-square" style="color: #48BE25;">&nbsp;&nbsp;</i></a>
-											<a style="font-size: 22px;" href="category.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')"><i class="fa-solid fa-circle-xmark" style="color: #ff1a1a;"></i></a></td>
+											
 										</tr>
 										<?php $cnt=$cnt+1; } ?>
 										
