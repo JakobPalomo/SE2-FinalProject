@@ -94,10 +94,17 @@ td {
   text-decoration: none;
 }
 
+@media only screen and (max-width: 720px) {
+  .add-item {
+    width: 80%;
+    font-size: 0.6em;
+  }
+}
+
 .w3-bar-item.w3-button {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bold;
-  font-size: 1rem;
+  font-size: 0.7rem;
 }
 
 .navbar {
@@ -130,4 +137,7 @@ td {
   height: 100%;
   margin-left: 25%; /* Adjust margin-left to make space for the sidebar */
   transition: margin-left 0.5s; /* Add a transition for smooth animation */
+}
+.w3-bar-block.w3-bar-item {
+  font-size: 10%;
 }

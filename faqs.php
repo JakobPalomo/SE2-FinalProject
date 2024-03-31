@@ -44,7 +44,7 @@ include('./dbcon.php');
 
     <!-- Code zone -->
     <div class="maintitle">
-      <p class="title">Frequently Asked Questions</p>
+      <p class="title" style="margin-left: 24px;">Frequently Asked Questions</p>
     </div>
 
     <div class="centercontainer">

@@ -151,6 +151,14 @@ body {
   padding: 10px;
 }
 
+@media only screen and (max-width: 720px) {
+  .cart-checkout-btn {
+    width: 50px;
+    font-size: 12px;
+    border-radius: 8px;
+  }
+}
+
 /* CHECKBOX */
 .checkbox-container {
   display: flex;

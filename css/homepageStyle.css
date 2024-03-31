@@ -1,6 +1,10 @@
 html {
   background-color: #f5f5dc;
 }
+body {
+  height: 100%;
+  margin-bottom: 24px;
+}
 
 .topdiv {
   height: 60vh; /* 40% of the viewport height */
@@ -110,6 +114,7 @@ html {
   max-height: 50vh;
   display: flex; /* Make the container a flex container to align children vertically */
   flex-direction: column; /* Display children elements vertically */
+  margin-bottom: 90px;
 }
 
 .textandpiccontainer img {
