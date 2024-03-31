@@ -37,7 +37,8 @@ session_start();
       <?php
                     if(isset($_SESSION['status']))
                     {
-                        echo"<h4>" .$_SESSION['status']."<h4>";
+                      echo "<h4 style='color: red; font-size: 18px;'>" . htmlspecialchars($_SESSION['status']) . "</h4>";
+
                         unset($_SESSION['status']); 
                     }
                     ?>
@@ -46,7 +47,7 @@ session_start();
           
 
           <div class="field input">
-            <label for="Email">Email</label>
+            <label for="Email" >Email</label>
             <input type="text" name="email"  atucomplete="off"  required>
           </div>
 
