@@ -36,12 +36,14 @@ include('dbcon.php');
     <!-- top part of the homepage after the navbar -->
     <div class="topdiv">
       <img src="./img/logo.png" alt="Logo" />
-      <a href="category.php?cid=8" class="order-button"><i class="fa-solid fa-utensils" style="color: #004225;"></i> Order Now</a>
+      
     </div>
 
     <!-- middle part where how to order is located -->
     <div class="orderdiv">
-      <h1>How to Order</h1>
+    <a href="category.php?cid=8" class="order-button"><i class="fa-solid fa-utensils" style="color: #004225;"></i> Order Now</a>
+      <br>
+    <h1>How to Order</h1>
       <div class="stepdiv">
         <div class="elementcontainer">
           <a href="#" class="circularnumber">1</a>
@@ -72,7 +74,9 @@ include('dbcon.php');
     </div>
 
     <!-- last part of the homepage -->
+    
     <div class="bottomdiv">
+      <div class="movedown">
       <div class="textandpiccontainer">
         <p>
           Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
@@ -92,6 +96,8 @@ include('dbcon.php');
           accumsan, velit nibh viverra urna,
         </p>
       </div>
+    </div>
+      
     </div>
 
     <!-- End Code -->

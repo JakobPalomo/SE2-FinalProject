@@ -114,9 +114,10 @@ if ($items !== false) {
         
         <!-- Button -->
         <form method="POST">
-            <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Paid</button>
+            <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Done Paying</button>
         </form>
         <!-- Image -->
+        <p class="Details">Use This Gcash Number/QR code to pay</p>
         <img src="img/Gcash.jpg" alt="Your Image" style="width: 100%; max-width: 500px; height: auto;">
     </div>
 

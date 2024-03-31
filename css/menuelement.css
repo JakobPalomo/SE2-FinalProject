@@ -147,6 +147,9 @@ body {
   .list {
     width: 70%;
   }
+  .side-by-side {
+    margin-left: -3%;
+  }
 }
 
 .cart-display {

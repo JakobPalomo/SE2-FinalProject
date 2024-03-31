@@ -40,14 +40,26 @@ table img {
 }
 
 .info {
-  color: #ffffff;
+  color: #000000;
   font-weight: bold;
-  background-color: #688176;
+
   border-radius: 8px;
   padding: 9px;
+  word-break: break-word; /* Add word-break property */
 }
+
+/* Media query for small screens */
+@media screen and (max-width: 720px) {
+  .info {
+    padding: 12px; /* Reduce padding for smaller screens */
+  }
+  .details {
+    margin-left: -30%;
+  }
+}
+
 .info-label {
-  color: gray;
+  color: rgb(175, 175, 175);
   font-weight: bold;
 }
 

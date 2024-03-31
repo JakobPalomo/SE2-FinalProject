@@ -109,7 +109,7 @@ if ($result->num_rows == 1) {
           <div class="card-title"><h1>My Profile</h1></div>
           <!-- Place Content of card here -->
           <div class="inner-card">
-  <table>
+  <table class="details">
     <tr>
       <td>
         <div class="column-container">
