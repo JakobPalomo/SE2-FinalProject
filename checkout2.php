@@ -89,13 +89,14 @@ if ($items !== false) {
   <body style="background-color: #f5f5dc">
   <?php include('common/navbar.php');?>
 <div class="contain">
+  <div class="checkout">
 <div class="container mt-5">
         <h2 class="Details-head">Order Details</h2>
         <p class="Details"><strong>Order ID:</strong> <?php echo $order['id']; ?></p>
         <p class="Details"><strong>Total Amount: <?php echo number_format($total_amount, 2); ?> PHP</strong></p>
         <hr>
         <h3 class="Details">Items:</h3>
-        <ul class="detail-list">
+        <ul class="detail-list" style="background-color: whitesmoke;">
             <?php foreach ($line_items as $item): ?>
                 <li>
                     <p class="Details"><strong>Name:</strong> <?php echo $item['name']; ?></p>
@@ -115,11 +116,11 @@ if ($items !== false) {
         <!-- Button -->
         <form method="POST">
             <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Done Paying</button>
-        </form>
-        <!-- Image -->
+        </form></div>
+        <!-- Image --></div>
         <p class="Details">Use This Gcash Number/QR code to pay</p>
         <img src="img/Gcash.jpg" alt="Your Image" style="width: 100%; max-width: 500px; height: auto;">
-    </div>
+    
 
 </div>
     <!-- Order Details -->

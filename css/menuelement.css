@@ -122,6 +122,14 @@ body {
   margin-left: 18px;
   font-family: "Plus Jakarta Sans", sans-serif;
 }
+.checkout {
+  background-color: white;
+  border-radius: 12px;
+  width: 80%;
+  margin-top: 24px;
+  border: #aca7a7 4px;
+  border-style: solid;
+}
 
 .cart-item {
   display: flex;
