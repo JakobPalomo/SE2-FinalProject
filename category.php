@@ -25,6 +25,7 @@ if(isset($_POST['add_to_cart'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" href="css/menupageStyle.css" />
     <link rel="stylesheet" type="text/css" href="css/menuelement.css" />
     <link rel="stylesheet" type="text/css" href="./css/ordermodal.css" />

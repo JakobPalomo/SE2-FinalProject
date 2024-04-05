@@ -8,6 +8,7 @@ include('dbcon.php');
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" href="css/homepageStyle.css" />
     <script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
     <title>Home</title>

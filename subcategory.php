@@ -15,6 +15,7 @@ if (!isset($_SESSION['cart'])) {
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
     <link rel="stylesheet" href="css/menupageStyle.css" />
     <link rel="stylesheet" type="text/css" href="css/menuelement.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="css/ordermodal.css" />
     <title>Menu</title>
     <script
