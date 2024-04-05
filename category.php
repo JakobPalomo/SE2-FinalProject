@@ -196,7 +196,7 @@ if(isset($_POST['add_to_cart'])) {
 
             <!-- Modal -->
     <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
-     <div class="wrapper">
+     <div class="wrapper" onclick="resetModal('<?php echo $productId; ?>')" >
         <div class="modal-dialog">
    
         <div class="modal-content" style="background-color: transparent; border: none">
