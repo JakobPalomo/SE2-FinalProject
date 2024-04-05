@@ -1,3 +1,6 @@
+<head>
+<link rel="shortcut icon" type="x-icon" href="logomini.png">
+</head>
 <div class="navbar navbar-fixed-top">
 		<div class="navbar-inner">
 			<div class="container">
