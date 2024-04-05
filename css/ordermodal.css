@@ -182,3 +182,13 @@ form {
     width: 30%;
   }
 }
+.wrapper {
+  background-color: rgba(29, 29, 29, 0.5); /* Set gray semi-transparent color */
+  padding: 10px; /* Adjust the padding to control the margin width */
+  height: 100%;
+}
+
+.modal-content {
+  background-color: transparent; /* Set background color to transparent */
+  border: none; /* Remove border */
+}

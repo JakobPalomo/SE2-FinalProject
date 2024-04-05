@@ -196,8 +196,10 @@ if(isset($_POST['add_to_cart'])) {
 
             <!-- Modal -->
     <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
+     <div class="wrapper">
+        <div class="modal-dialog">
+   
+        <div class="modal-content" style="background-color: transparent; border: none">
                 <div class="order-list" >
                     <div class="order-item">
                         <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="item-display" />
@@ -244,7 +246,9 @@ if(isset($_POST['add_to_cart'])) {
                     </div>
                 </div>
             </div>
+ 
         </div>
+     </div>
     </div>
 
 
