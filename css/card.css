@@ -94,6 +94,10 @@ td {
   text-decoration: none;
 }
 
+.add-item:hover {
+  background-color: #b57b00;
+}
+
 @media only screen and (max-width: 720px) {
   .add-item {
     width: 80%;

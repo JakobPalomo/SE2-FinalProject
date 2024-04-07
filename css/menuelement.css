@@ -56,6 +56,10 @@ body {
   background-color: #ffb000;
 }
 
+.add-item:hover {
+  background-color: #b57b00;
+}
+
 .edit-item {
   width: 156px;
   height: 32px;
