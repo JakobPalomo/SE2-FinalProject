@@ -155,7 +155,9 @@ if(isset($_POST['add_to_cart'])) {
           ?>
                
                   <div class="menu-item <?php echo $menuClass; ?>">
+                  <div class="img-container-menu">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
+                      </div>
                       <div class="detail-field">
                           <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>  
                           <?php if ($availability == 'Out of Stock'): ?>
@@ -202,7 +204,9 @@ if(isset($_POST['add_to_cart'])) {
         <div class="modal-content" style="background-color: transparent; border: none">
                 <div class="order-list" >
                     <div class="order-item">
+                        <div class="img-container-modal">
                         <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="item-display" />
+                </div>
                         <div class="details">
                             <form>
                                 
