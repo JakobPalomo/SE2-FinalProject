@@ -196,17 +196,12 @@ if(isset($_POST['add_to_cart'])) {
                     }             
                 </script>
 
-            <!-- Modal -->
-    <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
-     <div class="wrapper">
-        <div class="modal-dialog">
-   
-        <div class="modal-content" style="background-color: transparent; border: none">
-                <div class="order-list" >
+<div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
+    <div class="modal-dialog">
+        <div class="modal-content">
+                <div class="order-list">
                     <div class="order-item">
-                        <div class="img-container-modal">
                         <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="item-display" />
-                </div>
                         <div class="details">
                             <form>
                                 
@@ -250,25 +245,8 @@ if(isset($_POST['add_to_cart'])) {
                     </div>
                 </div>
             </div>
- 
         </div>
-     </div>
     </div>
-
-    <!-- HTML for Bootstrap modal -->
-<div class="modal fade" id="cartMessageModal" tabindex="-1" aria-labelledby="cartMessageModalLabel" aria-hidden="true">
-  <div class="modal-dialog modal-dialog-centered">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="cartMessageModalLabel">Cart Message</h5>
-        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div class="modal-body">
-        <!-- Message content will be placed here -->
-      </div>
-    </div>
-  </div>
-</div>
 
 
     <script>
@@ -360,31 +338,22 @@ if(isset($_POST['add_to_cart'])) {
     
     // Send data to server using AJAX
     $.ajax({
-    type: 'POST',
-    url: './function/addToCart.php',
-    data: { item: JSON.stringify(item) },
-    success: function(response) {
-        // Handle success
-        console.log('Item added to cart successfully!');
-        // Close modal
-        $('#addToCartModal' + productId).modal('hide');
-        // Show success message in modal
-        $('#cartMessageModal .modal-body').html('<p>Item added to cart!</p>');
-        $('#cartMessageModal').modal('show');
-        // Close modal after 2 seconds
-        setTimeout(function() {
-            $('#cartMessageModal').modal('hide');
-        }, 2000);
-    },
-    
-    error: function(xhr, status, error) {
-        // Handle error
-        console.error('Error adding item to cart:', error);
-        // Show error message in modal
-        $('#cartMessageModal .modal-body').html('<p>Error adding item to cart. Please try again later.</p>');
-        $('#cartMessageModal').modal('show');
-    }
-});
+        type: 'POST',
+        url: './function/addToCart.php',
+        data: { item: JSON.stringify(item) },
+        success: function(response) {
+            // Handle success
+            console.log('Item added to cart successfully!');
+            // Show confirmation message
+            alert('Item added to cart!');
+            // Close modal
+            $('#addToCartModal' + productId).modal('hide');
+        },
+        error: function(error) {
+            // Handle error
+            console.error('Error adding item to cart:', error);
+        }
+    });
 }
 </script>
 
