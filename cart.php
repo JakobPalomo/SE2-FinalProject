@@ -261,7 +261,7 @@ include('./dbcon.php');
         var currentDate = new Date();
         var itemCount = <?php echo count($_SESSION['cart']); ?>;
         var minDate;
-        if (itemCount <= 12) {
+        if (itemCount <= 11) {
             minDate = new Date(currentDate.setDate(currentDate.getDate() + 3)); // Add 3 days
         } else {
             minDate = new Date(currentDate.setDate(currentDate.getDate() + 5)); // Add 5 days
@@ -349,16 +349,29 @@ include('./dbcon.php');
 
     // Function to calculate the minimum preparation date based on the number of items
     function getMinPreparationDate() {
-        var currentDate = new Date();
-        var itemCount = <?php echo count($_SESSION['cart']); ?>;
-        var minPreparationDate;
-        if (itemCount <= 12) {
-            minPreparationDate = new Date(currentDate.setDate(currentDate.getDate() + 3)); // Add 3 days
-        } else {
-            minPreparationDate = new Date(currentDate.setDate(currentDate.getDate() + 5)); // Add 5 days
+    var currentDate = new Date();
+    var totalQuantity = 0;
+
+    // Calculate total quantity of items in the cart
+    <?php
+    if (!empty($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $item) {
+            ?>totalQuantity += <?php echo $item['quantity']; ?>;
+            <?php
         }
-        return minPreparationDate;
     }
+    ?>
+
+    var minPreparationDate;
+    if (totalQuantity <= 12) {
+        minPreparationDate = new Date(currentDate.setDate(currentDate.getDate() + 3)); // Add 3 days
+    } else {
+        minPreparationDate = new Date(currentDate.setDate(currentDate.getDate() + 5)); // Add 5 days
+    }
+    return minPreparationDate;
+}
+
+
 
     // Handle checkbox clicks for payment options
     $('input[name="paymentOption"]').on('change', function () {
