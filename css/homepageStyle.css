@@ -8,7 +8,7 @@ body {
 
 .topdiv {
   height: 60vh; /* 40% of the viewport height */
-  background-image: url("../img/cateringbg.jpg"); /* Replace 'cateringbg.jpg' with your actual image file */
+  background-image: url("../img/Cover.png"); /* Replace 'cateringbg.jpg' with your actual image file */
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
@@ -39,6 +39,25 @@ body {
   border-radius: 10px; /* Adjust the border-radius for rounded corners */
   cursor: pointer;
   transition: transform 0.3s; /* Add a smooth transition effect */
+}
+.order-button1 {
+  margin-top: 20px; /* Adjust the margin as needed */
+  padding: 10px 20px;
+  background-color: #ffb000;
+  color: #fff;
+  text-decoration: none;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-weight: bold;
+
+  font-size: 28px; /* Adjust the font size as needed */
+  border: none;
+  border-radius: 10px; /* Adjust the border-radius for rounded corners */
+  cursor: pointer;
+  transition: transform 0.3s; /* Add a smooth transition effect */
+}
+.order-button1:hover {
+  background-color: #b57b00;
+  transform: scale(1.1); /* Enlarge the button on hover */
 }
 
 .order-button:hover {
@@ -107,12 +126,13 @@ body {
   justify-content: center; /* Align items with space around them */
   align-items: center; /* Center items vertically */
   background-color: #f5f5dc;
+  margin-bottom: 48px;
 }
 
 .textandpiccontainer {
   padding-left: 7vh;
-  max-width: 50vh; /* Adjust the max-width based on your design needs */
-  max-height: 50vh;
+  width: 30%; /* Adjust the max-width based on your design needs */
+  height: 30%;
   display: flex; /* Make the container a flex container to align children vertically */
   flex-direction: column; /* Display children elements vertically */
   margin-bottom: 90px;
@@ -128,15 +148,27 @@ body {
   color: #000000; /* Set paragraph color to black */
   font-family: "Plus Jakarta Sans", sans-serif; /* Set the desired font-family */
   text-align: justify; /* Justify the text within the paragraph */
+  font-size: 18px;
+  margin: 12px;
 }
 
 .movedown {
   display: flex;
   flex-direction: row;
+  justify-content: center;
+  align-items: center;
 }
 @media only screen and (max-width: 720px) {
   .movedown {
     flex-direction: column;
     margin-right: 12%;
+  }
+  .textandpiccontainer {
+    padding-left: 7vh;
+    width: 80%;
+    height: 80%;
+  }
+  .bottomdiv {
+    width: 90%;
   }
 }
