@@ -241,30 +241,45 @@ include('./dbcon.php');
     </div>
     <script>
         $(function () {
-            // Initialize datepicker
-            $("#datepicker").datepicker({
-                dateFormat: "MM dd, yy",
-                minDate: 0, // Set the minimum date to today
-                onSelect: function (dateText) {
-                    // You can perform additional actions when a date is selected
-                    console.log("Selected date: " + dateText);
-                }
-            });
+    // Initialize datepicker
+    $("#datepicker").datepicker({
+        dateFormat: "MM dd, yy",
+        minDate: getMinDate(), // Set the minimum date based on the number of items
+        onSelect: function (dateText) {
+            // You can perform additional actions when a date is selected
+            console.log("Selected date: " + dateText);
+        }
+    });
 
-            $('#timepicker').timepicker({
-            timeFormat: 'HH:mm',    // Change the time format if needed
-            step: 15                // Set the time step to 15 minutes
-        });
+    $('#timepicker').timepicker({
+        timeFormat: 'HH:mm',    // Change the time format if needed
+        step: 15                // Set the time step to 15 minutes
+    });
 
-            // Handle checkbox clicks for payment options
-            $('input[name="paymentOption"]').on('change', function () {
-                console.log('Selected payment option:', $(this).val());
-            });
+    // Function to calculate the minimum date based on the number of items
+    function getMinDate() {
+        var currentDate = new Date();
+        var itemCount = <?php echo count($_SESSION['cart']); ?>;
+        var minDate;
+        if (itemCount <= 12) {
+            minDate = new Date(currentDate.setDate(currentDate.getDate() + 3)); // Add 3 days
+        } else {
+            minDate = new Date(currentDate.setDate(currentDate.getDate() + 5)); // Add 5 days
+        }
+        return minDate;
+    }
 
-            $('input[name="deliveryOption"]').on('change', function () {
-            console.log('Selected delivery option:', $(this).val());
-        });
-        });
+    // Handle checkbox clicks for payment options
+    $('input[name="paymentOption"]').on('change', function () {
+        console.log('Selected payment option:', $(this).val());
+    });
+
+    $('input[name="deliveryOption"]').on('change', function () {
+        console.log('Selected delivery option:', $(this).val());
+    });
+});
+
+
  </script>
 
 <script>
@@ -298,7 +313,13 @@ include('./dbcon.php');
                 return;
             }
             var userAddress = $('#userAddress').text();
-           
+
+            // Calculate the minimum preparation date based on the number of items in the cart
+            var minPreparationDate = getMinPreparationDate();
+            if (new Date(preparationDate) < minPreparationDate) {
+                alert('Please select a preparation date at least 3 days in advance for 12 or fewer items, or at least 5 days in advance for more than 12 items.');
+                return;
+            }
 
             // Call the placeOrder.php script using AJAX
             $.ajax({
@@ -307,9 +328,9 @@ include('./dbcon.php');
                 data: {
                     paymentOption: paymentOption,
                     deliveryOption: deliveryOption,
-                    preparationDate: $('#datepicker').val(),
-                    deliveryTime:$('#timepicker').val(),
-                    totalPrice: totalPrice ,
+                    preparationDate: preparationDate,
+                    deliveryTime: deliveryTime,
+                    totalPrice: totalPrice,
                     userAddress: userAddress
                 },
                 success: function (response) {
@@ -326,12 +347,25 @@ include('./dbcon.php');
         }
     });
 
+    // Function to calculate the minimum preparation date based on the number of items
+    function getMinPreparationDate() {
+        var currentDate = new Date();
+        var itemCount = <?php echo count($_SESSION['cart']); ?>;
+        var minPreparationDate;
+        if (itemCount <= 12) {
+            minPreparationDate = new Date(currentDate.setDate(currentDate.getDate() + 3)); // Add 3 days
+        } else {
+            minPreparationDate = new Date(currentDate.setDate(currentDate.getDate() + 5)); // Add 5 days
+        }
+        return minPreparationDate;
+    }
+
     // Handle checkbox clicks for payment options
     $('input[name="paymentOption"]').on('change', function () {
         console.log('Selected payment option:', $(this).val());
     });
-    
 });
+
 </script>
 
 
