@@ -42,7 +42,7 @@ include('dbcon.php');
 
     <!-- middle part where how to order is located -->
     <div class="orderdiv">
-    <a href="category.php?cid=8" class="order-button"><i class="fa-solid fa-utensils" style="color: #004225;"></i> Order Now</a>
+    <a href="category.php?cid=8" class="order-button1"><i class="fa-solid fa-utensils" style="color: #004225;"></i> Order Now</a>
       <br>
     <h1>How to Order</h1>
       <div class="stepdiv">
@@ -80,10 +80,12 @@ include('dbcon.php');
       <div class="movedown">
       <div class="textandpiccontainer">
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-          hendrerit libero odio, eget volutpat neque dapibus in. Suspendisse
-          mattis nec eros et sollicitudin. Vivamus ornare, justo in venenatis
-          accumsan, velit nibh viverra urna,
+         
+      Hello! Thank you for contacting Chef's Daughter. We are an online food business and we offer
+      𝐅𝐑𝐄𝐄 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘 𝐚𝐧𝐲𝐰𝐡𝐞𝐫𝐞 𝐢𝐧 𝐏𝐀𝐌𝐏𝐀𝐍𝐆𝐀. We accept 𝐀𝐃𝐕𝐀𝐍𝐂𝐄, 𝐒𝐇𝐎𝐑𝐓 𝐀𝐍𝐃 𝐁𝐔𝐋𝐊 𝐎𝐑𝐃𝐄𝐑𝐒 that fits on every occasion you celebrate. 
+      Message us and we will be sending you shortly our 𝐅𝐔𝐋𝐋 𝐌𝐄𝐍𝐔 𝐀𝐍𝐃 𝐏𝐑𝐈𝐂𝐄𝐋𝐈𝐒𝐓 for your reference.
+       We are glad to assist you and we look forward in serving you soon! Thank you very much!
+
         </p>
         <img src="./img/pic1.jpg" alt="Pic1" />
       </div>
@@ -91,10 +93,13 @@ include('dbcon.php');
       <div class="textandpiccontainer">
         <img src="./img/pic2.jpg" alt="Pic2" />
         <p>
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. Duis
-          hendrerit libero odio, eget volutpat neque dapibus in. Suspendisse
-          mattis nec eros et sollicitudin. Vivamus ornare, justo in venenatis
-          accumsan, velit nibh viverra urna,
+        Chef's Daughter was born to honor, remember and continue a family's passion in cooking even though 
+        they are now worlds apart. This is my wife’s small food business and since her dad, mom & kuya passed away,
+         cooking has become her therapy and it gives her the comfort and connection with her departed loved ones. 
+         The food offered (chef’s daughter spicy pork & chicken) is a home specialty of the Dantes’ and it is served every 
+         special family occasion. Now that she’s longing to feel the same vibe as before when her family is complete, Chef’s Daughter 
+         thought that its time for other families & people to taste this special food. Giving her full focus & effort every time she prepares and
+          cooks, I am assuring all of you that this food will satisfy, if not, will exceed your expectations. Because in Chef’s Daughter, the secret ingredient is always love. 🦋🦋🦋
         </p>
       </div>
     </div>
