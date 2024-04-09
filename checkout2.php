@@ -154,8 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <!-- Button -->
         <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="paymentScreenshot" accept="image/*">
-            <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Upload Payment Screenshot</button>
+            <input type="file" class="choose"  name="paymentScreenshot" accept="image/*"> <br><br>
+            <center><button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Upload Payment</button></center>
         </form>
 
 </div>
