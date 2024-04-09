@@ -106,7 +106,7 @@ if ($result->num_rows == 1) {
 
     <div class="dashboard" id="main">
       <div class="card-field" id="card1">
-        <div class="card-place">
+        <div class="card-place" style="height: max-content;">
           <div class="card-title"><h1>My Profile</h1></div>
           <!-- Place Content of card here -->
           <div class="inner-card">
@@ -369,6 +369,7 @@ if ($result->num_rows == 1) {
       function w3_open() {
         document.getElementById("main").style.marginLeft = "25%";
         document.getElementById("mySidebar").style.width = "25%";
+        document.getElementById("mySidebar").style.maxWidth = "320px";
         document.getElementById("mySidebar").style.display = "block";
         document.getElementById("openNav").style.display = "none";
         document.getElementById("closeNav").style.display = "inline-block";

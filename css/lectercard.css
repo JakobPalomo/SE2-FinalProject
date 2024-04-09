@@ -31,6 +31,9 @@ table img {
 
 .info-container {
   padding-left: 3vh;
+  height: max-content;
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Display ellipsis (...) for overflowing text */
 }
 
 .info,
@@ -64,7 +67,7 @@ table img {
 }
 
 .inner-card {
-  margin-top: 84px;
+  margin-top: 2%;
   height: 50%;
   width: 100%;
   display: flex;
