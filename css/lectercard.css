@@ -51,16 +51,6 @@ table img {
   word-break: break-word; /* Add word-break property */
 }
 
-/* Media query for small screens */
-@media screen and (max-width: 720px) {
-  .info {
-    padding: 12px; /* Reduce padding for smaller screens */
-  }
-  .details {
-    margin-left: -30%;
-  }
-}
-
 .info-label {
   color: rgb(175, 175, 175);
   font-weight: bold;
@@ -99,3 +89,18 @@ table img {
   }
 
 } */
+
+/* Media query for small screens */
+@media screen and (max-width: 720px) {
+  .info {
+    padding: 12px; /* Reduce padding for smaller screens */
+  }
+  .details {
+    margin-left: -30%;
+    max-width: 280px;
+  }
+
+  .inner-card {
+    max-width: 190px;
+  }
+}

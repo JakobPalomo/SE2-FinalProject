@@ -101,7 +101,8 @@ td {
 @media only screen and (max-width: 720px) {
   .add-item {
     width: 80%;
-    font-size: 0.6em;
+    font-size: 10px;
+    white-space: nowrap;
   }
   .card-place {
     margin-top: 30%;
