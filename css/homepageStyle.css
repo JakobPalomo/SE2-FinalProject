@@ -81,6 +81,18 @@ body {
   padding-bottom: 2vh;
 }
 
+.stepdiv {
+  padding-top: 1vh;
+  padding-bottom: 1vh;
+  background-color: #f5f5dc;
+  display: flex;
+  flex-direction: row; /* Display children elements vertically */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  margin-left: 20px;
+  margin-right: 20px;
+}
+
 .circularnumber {
   display: inline-block; /* Ensures that the anchor behaves like a block-level element */
   width: 40px; /* Adjust the width and height to make it circular */

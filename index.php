@@ -45,6 +45,7 @@ include('dbcon.php');
     <a href="category.php?cid=8" class="order-button1"><i class="fa-solid fa-utensils" style="color: #004225;"></i> Order Now</a>
       <br>
     <h1>How to Order</h1>
+    <div class="stepdiv">
       <div class="stepdiv">
         <div class="elementcontainer">
           <a href="#" class="circularnumber">1</a>
@@ -80,11 +81,10 @@ include('dbcon.php');
       <div class="movedown">
       <div class="textandpiccontainer">
         <p>
-         
-      Hello! Thank you for contacting Chef's Daughter. We are an online food business and we offer
+      We are an online food business and we offer
       𝐅𝐑𝐄𝐄 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘 𝐚𝐧𝐲𝐰𝐡𝐞𝐫𝐞 𝐢𝐧 𝐏𝐀𝐌𝐏𝐀𝐍𝐆𝐀. We accept 𝐀𝐃𝐕𝐀𝐍𝐂𝐄, 𝐒𝐇𝐎𝐑𝐓 𝐀𝐍𝐃 𝐁𝐔𝐋𝐊 𝐎𝐑𝐃𝐄𝐑𝐒 that fits on every occasion you celebrate. 
       Message us and we will be sending you shortly our 𝐅𝐔𝐋𝐋 𝐌𝐄𝐍𝐔 𝐀𝐍𝐃 𝐏𝐑𝐈𝐂𝐄𝐋𝐈𝐒𝐓 for your reference.
-       We are glad to assist you and we look forward in serving you soon! Thank you very much!
+       We are glad to assist you and we look forward in serving you soon! Thank you very much! 
 
         </p>
         <img src="./img/pic1.jpg" alt="Pic1" />
