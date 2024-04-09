@@ -42,6 +42,7 @@ if ($items !== false) {
         $line_items[] = [
             'name' => $item['productName'],
             'quantity' => $item['quantity'],
+            'size' => $item['size'],
             'amount' => $item_total * 100, // Amount should be in cents
             'currency' => 'PHP',
             'description' => $item['productName'],
@@ -195,9 +196,9 @@ if(isset($_POST['submit2'])) {
                                       <br>
                                         <li>
                                             <p class="Details"><strong>Name:</strong> <?php echo $item['name']; ?></p>
+                                            <p class="Details"><strong>Size:</strong> <?php echo $item['size']; ?></p>
                                             <p class="Details"><strong>Quantity:</strong> <?php echo $item['quantity']; ?></p>
                                             <p class="Details"><strong>Amount:</strong> <?php echo number_format($item['amount'] / 100, 2); ?> PHP</p>
-                                            <p class="Details"><strong>Description:</strong> <?php echo $item['description']; ?></p>
                                         </li>
                                     <?php endforeach; ?>
                                 </ul>
