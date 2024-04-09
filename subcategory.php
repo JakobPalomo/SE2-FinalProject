@@ -118,7 +118,7 @@ if (!isset($_SESSION['cart'])) {
       <?php $sql=mysqli_query($con,"select subcategory  from subcategory where id='$cid'");
         while($row=mysqli_fetch_array($sql)){?>
 
-			<div class="food-name" style="text-align: center; font-size: 36px;">
+			<div class="food-name" style="text-align: center; font-size: 36px; margin-left:40px;">
 				<?php echo htmlentities($row['subcategory']);?>
 			</div>
 		<?php } ?>
