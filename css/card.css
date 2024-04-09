@@ -81,7 +81,7 @@ td {
 .add-item {
   width: max-content;
   height: 32px;
-  font-size: 1em;
+  font-size: 18px;
   border-radius: 8px;
   border: none;
   color: #ffffff;
@@ -89,8 +89,8 @@ td {
   font-family: "Plus Jakarta Sans", sans-serif;
   background-color: #ffb000;
   align-self: center;
-  padding: 12px;
-
+  padding: 8px;
+  white-space: nowrap;
   text-decoration: none;
 }
 
