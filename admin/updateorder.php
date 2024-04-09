@@ -16,7 +16,7 @@ if(strlen($_SESSION['alogin']) == 0) {
 $oid = intval($_GET['oid']);
 
 // Fetch order list from the database
-$statement = $con->prepare("SELECT * FROM `pending` WHERE `id` = ?");
+$statement = $con->prepare("SELECT pending.*, gcashpayments.payment_screenshot FROM pending LEFT JOIN gcashpayments ON pending.id = gcashpayments.order_id WHERE pending.id = ?");
 $statement->bind_param("i", $oid);
 $statement->execute();
 $result = $statement->get_result();
@@ -52,6 +52,15 @@ if ($items !== false) {
     echo "Error: Items are null in the database";
     exit;
 }
+
+// Payment screenshot directory
+$payment_screenshot_dir = './admin/payments/';
+
+// Payment screenshot filename from gcashpayments table
+$payment_screenshot_filename = $order['payment_screenshot'];
+
+// Construct the URL to the payment screenshot
+$payment_screenshot_url = $payment_screenshot_dir . $payment_screenshot_filename;
 
 if(isset($_POST['submit2'])) {
     $status = $_POST['status'];
@@ -96,6 +105,19 @@ if(isset($_POST['submit2'])) {
                     $mail->isHTML(true);
                     $mail->Subject = 'Order Declined';
                     $mail->Body = 'Sorry, we have declined your order.';
+                    // Add order details to the email body
+                      $mail->Body .= '<table border="1">';
+                      $mail->Body .= '<tr><th>Product</th><th>Size</th><th>Quantity</th><th>Amount</th></tr>';
+                      foreach ($items as $item) {
+                        $item_total = $item['quantity'] * $item['sizePrice'];
+                          $mail->Body .= '<tr>';
+                          $mail->Body .= '<td>' . $item['productName'] . '</td>';
+                          $mail->Body .= '<td>' . $item['size'] . '</td>';
+                          $mail->Body .= '<td>' . $item['quantity'] . '</td>';
+                          $mail->Body .= '<td>' . number_format($item['amount'] / 100, 2) . ' PHP</td>';
+                          $mail->Body .= '</tr>';
+                      }
+                      $mail->Body .= '</table>';
 
                     // Send email
                     $mail->send();
@@ -104,6 +126,147 @@ if(isset($_POST['submit2'])) {
                     echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
                 }
             }
+            elseif ($status == "Accepted") {
+              // Fetch user email associated with the order
+              $getUserEmailQuery = mysqli_query($con, "SELECT email FROM users WHERE id IN (SELECT user_session_id FROM pending WHERE id='$oid') LIMIT 1");
+              $userEmailRow = mysqli_fetch_array($getUserEmailQuery);
+              $userEmail = $userEmailRow['email'];
+          
+              // Send email to the user
+              $mail = new PHPMailer(true);
+          
+              try {
+                  // SMTP configuration
+                  $mail->isSMTP();
+                  $mail->Host = 'smtp.gmail.com';
+                  $mail->SMTPAuth = true;
+                  $mail->Username = 'cdemailverify@gmail.com'; // Your Gmail email address
+                  $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
+                  $mail->SMTPSecure = 'tls';
+                  $mail->Port = 587;
+          
+                  // Sender and recipient settings
+                  $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+                  $mail->addAddress($userEmail);
+          
+                  // Email content
+                  $mail->isHTML(true);
+                  $mail->Subject = 'Order Accepted';
+                  $mail->Body = 'Your order has been accepted.';
+                  // Add order details to the email body
+                  $mail->Body .= '<table border="1">';
+                  $mail->Body .= '<tr><th>Product</th><th>Size</th><th>Quantity</th><th>Amount</th></tr>';
+                  foreach ($items as $item) {
+                      $mail->Body .= '<tr>';
+                      $mail->Body .= '<td>' . $item['productName'] . '</td>';
+                      $mail->Body .= '<td>' . $item['size'] . '</td>';
+                      $mail->Body .= '<td>' . $item['quantity'] . '</td>';
+                      $mail->Body .= '<td>' . number_format($item['amount'] / 100, 2) . ' PHP</td>';
+                      $mail->Body .= '</tr>';
+                  }
+                  $mail->Body .= '</table>';
+          
+                  // Send email
+                  $mail->send();
+                  echo "<script>alert('Email sent to user: Order Accepted');</script>";
+              } catch (Exception $e) {
+                  echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+              }
+          }
+          elseif ($status == "Delivered") {
+            // Fetch user email associated with the order
+            $getUserEmailQuery = mysqli_query($con, "SELECT email FROM users WHERE id IN (SELECT user_session_id FROM pending WHERE id='$oid') LIMIT 1");
+            $userEmailRow = mysqli_fetch_array($getUserEmailQuery);
+            $userEmail = $userEmailRow['email'];
+        
+            // Send email to the user
+            $mail = new PHPMailer(true);
+        
+            try {
+                // SMTP configuration
+                $mail->isSMTP();
+                $mail->Host = 'smtp.gmail.com';
+                $mail->SMTPAuth = true;
+                $mail->Username = 'cdemailverify@gmail.com'; // Your Gmail email address
+                $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
+                $mail->SMTPSecure = 'tls';
+                $mail->Port = 587;
+        
+                // Sender and recipient settings
+                $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+                $mail->addAddress($userEmail);
+        
+                // Email content
+                $mail->isHTML(true);
+                $mail->Subject = 'Order Delivered';
+                $mail->Body = 'Your order has been delivered.';
+                // Add order details to the email body
+                $mail->Body .= '<table border="1">';
+                $mail->Body .= '<tr><th>Product</th><th>Size</th><th>Quantity</th><th>Amount</th></tr>';
+                foreach ($items as $item) {
+                    $mail->Body .= '<tr>';
+                    $mail->Body .= '<td>' . $item['productName'] . '</td>';
+                    $mail->Body .= '<td>' . $item['size'] . '</td>';
+                    $mail->Body .= '<td>' . $item['quantity'] . '</td>';
+                    $mail->Body .= '<td>' . number_format($item['amount'] / 100, 2) . ' PHP</td>';
+                    $mail->Body .= '</tr>';
+                }
+                $mail->Body .= '</table>';
+        
+                // Send email
+                $mail->send();
+                echo "<script>alert('Email sent to user: Order Accepted');</script>";
+            } catch (Exception $e) {
+                echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+            }
+        }
+        elseif ($status == "To Pay") {
+          // Fetch user email associated with the order
+          $getUserEmailQuery = mysqli_query($con, "SELECT email FROM users WHERE id IN (SELECT user_session_id FROM pending WHERE id='$oid') LIMIT 1");
+          $userEmailRow = mysqli_fetch_array($getUserEmailQuery);
+          $userEmail = $userEmailRow['email'];
+      
+          // Send email to the user
+          $mail = new PHPMailer(true);
+      
+          try {
+              // SMTP configuration
+              $mail->isSMTP();
+              $mail->Host = 'smtp.gmail.com';
+              $mail->SMTPAuth = true;
+              $mail->Username = 'cdemailverify@gmail.com'; // Your Gmail email address
+              $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
+              $mail->SMTPSecure = 'tls';
+              $mail->Port = 587;
+      
+              // Sender and recipient settings
+              $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+              $mail->addAddress($userEmail);
+      
+              // Email content
+              $mail->isHTML(true);
+              $mail->Subject = 'Pay NOW';
+              $mail->Body = 'Your Online Payment Order has been accepted, pay now.';
+              // Add order details to the email body
+              $mail->Body .= '<table border="1">';
+              $mail->Body .= '<tr><th>Product</th><th>Size</th><th>Quantity</th><th>Amount</th></tr>';
+              foreach ($items as $item) {
+                  $mail->Body .= '<tr>';
+                  $mail->Body .= '<td>' . $item['productName'] . '</td>';
+                  $mail->Body .= '<td>' . $item['size'] . '</td>';
+                  $mail->Body .= '<td>' . $item['quantity'] . '</td>';
+                  $mail->Body .= '<td>' . number_format($item['amount'] / 100, 2) . ' PHP</td>';
+                  $mail->Body .= '</tr>';
+              }
+              $mail->Body .= '</table>';
+      
+              // Send email
+              $mail->send();
+              echo "<script>alert('Email sent to user: Order Accepted');</script>";
+          } catch (Exception $e) {
+              echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
+          }
+      }
         } else {
             // Error occurred while updating order
             echo "<script>alert('Error updating order');</script>";
@@ -205,6 +368,12 @@ if(isset($_POST['submit2'])) {
                             </div>
                     <!-- End Order Details -->
 
+ <!-- Display payment screenshot if available -->
+ <?php if (!empty($payment_screenshot_filename)) : ?>
+  <img src="admin/payments/<?php echo htmlentities($payment_screenshot_filename); ?>" alt="Payment Screenshot">
+    <?php endif; ?>
+
+
  
         
         <div class="status">
@@ -247,90 +416,5 @@ if(isset($_POST['submit2'])) {
     </div>
 
 
-
-
-<!-- PREVIOUS UPDATE -->
-
-<!-- 
- <form name="updateticket" id="updateticket" method="post"> 
-<table width="50%" border="0" cellspacing="0" cellpadding="0">
-    <tr height="50">
-      <td colspan="2" class="fontkink2" style="padding-left:0px;height: 60%;">
-          <div class="fontpink2" style=" background-color: #004225; height: 36px;  color: #f0f0f0;  text-align: center; border-radius: 12px;"> <b>Update Order !</b></div>
-      </td>
-    </tr>
-    <tr height="30">
-      <td  class="fontkink1"><b>Order Id:</b></td>
-      <td  class="fontkink"><?php echo $oid;?></td>
-    </tr>
-    <?php 
-    $ret = mysqli_query($con,"SELECT * FROM ordertrackhistory WHERE orderId='$oid'");
-    while($row=mysqli_fetch_array($ret)) {
-    ?>
-    <tr height="20">
-      <td class="fontkink1" ><b>At Date:</b></td>
-      <td  class="fontkink"><?php echo $row['postingDate'];?></td>
-    </tr>
-    <tr height="20">
-      <td  class="fontkink1"><b>Status:</b></td>
-      <td  class="fontkink"><?php echo $row['status'];?></td>
-    </tr>
-    <tr height="20">
-      <td  class="fontkink1"><b>Remark:</b></td>
-      <td  class="fontkink"><?php echo $row['remark'];?></td>
-    </tr>
-    <tr>
-      <td colspan="2"><hr /></td>
-    </tr>
-    <?php } ?>
-    <?php 
-    $st = 'Delivered';
-    $rt = mysqli_query($con,"SELECT * FROM pending WHERE id='$oid'");
-    while($num=mysqli_fetch_array($rt)) {
-        $currrentSt=$num['status'];
-    }
-    if($st == $currrentSt) { ?>
-        <tr><td colspan="2"><b>Product Delivered </b></td>
-    <?php } else  { ?>
-        <tr height="50">
-          <td class="fontkink1">Status: </td>
-          <td  class="fontkink">
-              <span class="fontkink1">
-                  <select name="status" class="fontkink" required="required" >
-                      <option value="">Select Status</option>
-                      <option value="Accepted">Accepted</option>
-                      <option value="To Pay">Pay Online</option>
-                      <option value="Delivered">Delivered</option>
-                      <option value="Declined">Declined</option>
-                  </select>
-              </span>
-          </td>
-        </tr>
-        <tr style=''>
-          <td class="fontkink1" >Remark:</td>
-          <td class="fontkink" >
-              <span class="fontkink">
-              <textarea cols="50" rows="6" name="remark" required="required" style="border-radius: 8px; font-family: 'Jakarta Sans', sans-serif; padding: 12px;"></textarea>
-
-              </span>
-          </td>
-        </tr>
-        <tr>
-          <td class="fontkink1">&nbsp;</td>
-          <td>&nbsp;</td>
-        </tr>
-        <tr>
-          <td class="fontkink"></td>
-          <td class="fontkink">
-              <input type="submit" name="submit2" value="Update" size="40" style="cursor: pointer;border-radius: 8px;" />
-              &nbsp;&nbsp;   
-              <input name="Submit2" type="submit" class="txtbox4" value="Close this Window " onClick="return f2();" style="cursor: pointer;border-radius: 8px;"  />
-          </td>
-        </tr>
-    <?php } ?>
-</table>
- </form>
-</div> -->
-
-</body>
+  </body>
 </html>

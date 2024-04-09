@@ -11,36 +11,6 @@
 								</a>
 								<ul id="togglePages" class="collapse unstyled">
 									<li>
-										<a href="all-orders.php">
-											<i class="icon-tasks"></i>
-											All Orders except Delivered (debug)
-											<?php	
-													$status='Delivered';									 
-													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_all FROM pending WHERE status != 'Delivered'");
-													$row = mysqli_fetch_assoc($ret);
-													$num = $row['num_all'];
-												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
-											<?php } ?>
-										</a>
-									</li>
-									<li>
-										<a href="todays-orders.php">
-											<i class="icon-tasks"></i>
-											Today's Orders
-											<?php
-												date_default_timezone_set('Asia/Manila'); 
-												$from = date('Y-m-d 00:00:00');
-												$to = date('Y-m-d 23:59:59');
-												
-												// Query to get the count of pending orders made today
-												$result = mysqli_query($con, "SELECT COUNT(id) AS num_rows1 FROM pending WHERE preparation_date BETWEEN '$from' AND '$to'");
-												$row = mysqli_fetch_assoc($result);
-												$num_rows1 = $row['num_rows1'];
-											?>
-											<b class="label orange pull-right"><?php echo htmlentities($num_rows1); ?></b>
-										</a>
-									</li>
-									<li>
 										<a href="pending-orders.php">
 											<i class="icon-tasks"></i>
 											Pending Orders
@@ -53,6 +23,7 @@
 											<?php } ?>
 										</a>
 									</li>
+
 									<li>
 										<a href="topay-orders.php">
 											<i class="icon-tasks"></i>
@@ -66,6 +37,7 @@
 											<?php } ?>
 										</a>
 									</li>
+
 									<li>
 										<a href="paid-orders.php">
 											<i class="icon-tasks"></i>
@@ -79,6 +51,7 @@
 											<?php } ?>
 										</a>
 									</li>
+
 									<li>
 										<a href="accepted-orders.php">
 											<i class="icon-tasks"></i>
@@ -92,6 +65,21 @@
 											<?php } ?>
 										</a>
 									</li>
+
+									<li>
+										<a href="declined-orders.php">
+											<i class="icon-tasks"></i>
+											Declined Orders
+											<?php	
+													$status='Delivered';									 
+													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_pending FROM pending WHERE status = 'Declined'");
+													$row = mysqli_fetch_assoc($ret);
+													$num = $row['num_pending'];
+												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
+											<?php } ?>
+										</a>
+									</li>
+
 									<li>
 										<a href="delivered-orders.php">
 											<i class="icon-inbox"></i>
@@ -103,7 +91,6 @@
 													$num = $row['num_delivered'];
 												{?><b class="label green pull-right"><?php echo htmlentities($num); ?></b>
 											<?php } ?>
-
 										</a>
 									</li>
 								</ul>

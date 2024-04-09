@@ -23,7 +23,13 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
+
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+	
 	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
+	
 	<script language="javascript" type="text/javascript">
 		var popUpWin=0;
 		function popUpWindow(URLStr, left, top, width, height)
@@ -35,6 +41,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 		popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status=no,menubar=no,scrollbars=yes,resizable=no,copyhistory=yes,width='+600+',height='+600+',left='+left+', top='+top+',screenX='+left+',screenY='+top+'');
 		}
 </script>
+
 </head>
 
 <body>
@@ -102,8 +109,16 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
     // Now $orderProducts contains products grouped by order ID
 ?>
 
+								<div class="form-group">
+									<label for="searchDate" style="margin-left:10px;">Filter by Date:</label>
+									<div class="d-flex justify-content-between">
+										<input type="text" id="searchDate" class="form-control datepicker" style="margin-left:10px;" placeholder="Select date">
+										<input type="text" id="searchInput" class="form-control" style="margin-left:auto;" placeholder="Search">
+									</div>
+								</div>
+							
 							<div class="tabling">
-								<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped display table-responsive">
+								<table id="orderTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped display table-responsive">
 									<thead>
 										<tr><th>Action</th>
 											<th>Order ID</th>
@@ -175,6 +190,8 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 	<script src="bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
 	<script src="scripts/flot/jquery.flot.js" type="text/javascript"></script>
 	<script src="scripts/datatables/jquery.dataTables.js"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+	<script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
 
 	<script>
 		$(document).ready(function() {
@@ -186,5 +203,56 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 		} );
 	</script>
 
+<script>
+        // Wait for the document to be ready
+        $(document).ready(function(){
+            // Function to perform search
+            function performSearch() {
+                var searchText = $('#searchInput').val().toLowerCase(); // Get the search text
+                $('#orderTable tbody tr').hide(); // Hide all table rows
+                // Loop through each table row
+                $('#orderTable tbody tr').each(function() {
+                    var rowText = $(this).text().toLowerCase(); // Get text of current row
+                    // Check if row text contains search text
+                    if (rowText.indexOf(searchText) !== -1) {
+                        $(this).show(); // Show the row if it matches the search
+                    }
+                });
+            }
+
+            // Call performSearch function when the search input changes
+            $('#searchInput').on('input', performSearch);
+        });
+    </script>
+
+<script>
+    // Function to perform search
+    function performSearch() {
+        var searchDate = $('#searchDate').val(); // Get the selected date
+
+        // Format the searchDate to match the orderdate format (YYYY-MM-DD)
+        var formattedSearchDate = $.datepicker.formatDate('yy-mm-dd', new Date(searchDate));
+		console.log("Formatted search date: ", formattedSearchDate); 
+
+        $('#orderTable tbody tr').hide(); // Hide all table rows
+        // Loop through each table row
+        $('#orderTable tbody tr').each(function() {
+            var rowDate = $(this).find('td:eq(13)').text().trim(); 
+            // Check if row date matches the search date
+            if (rowDate === formattedSearchDate) {
+                $(this).show(); // Show the row if it matches the search
+            }
+        });
+    }
+
+    // Wait for the document to be ready
+    $(document).ready(function(){
+        // Initialize datepicker
+        $('.datepicker').datepicker();
+
+        // Call performSearch function when the search date changes
+        $('#searchDate').on('change', performSearch);
+    });
+</script>
 </body>
 <?php } ?>
