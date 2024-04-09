@@ -32,6 +32,7 @@ if ($items !== false) {
         $line_items[] = [
             'name' => $item['productName'],
             'quantity' => $item['quantity'],
+            'size' => $item['size'],
             'amount' => $item_total * 100, // Amount should be in cents
             'currency' => 'PHP',
             'description' => $item['productName'],
@@ -137,6 +138,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php foreach ($line_items as $item): ?>
                 <li>
                     <p class="Details"><strong>Name:</strong> <?php echo $item['name']; ?></p>
+                    <p class="Details"><strong>Size:</strong> <?php echo $item['size']; ?></p>
                     <p class="Details"><strong>Quantity:</strong> <?php echo $item['quantity']; ?></p>
                     <p class="Details"><strong>Amount:</strong> <?php echo number_format($item['amount'] / 100, 2); ?> PHP</p>
                     <p class="Details"><strong>Description:</strong> <?php echo $item['description']; ?></p>
@@ -152,8 +154,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <!-- Button -->
         <form method="POST" enctype="multipart/form-data">
-            <input type="file" name="paymentScreenshot" accept="image/*">
-            <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Upload Payment Screenshot</button>
+            <input type="file" class="choose"  name="paymentScreenshot" accept="image/*"> <br><br>
+            <center><button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Upload Payment</button></center>
         </form>
 
 </div>

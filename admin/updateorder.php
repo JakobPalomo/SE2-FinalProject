@@ -6,7 +6,6 @@ use PHPMailer\PHPMailer\Exception;
 
 // Load Composer's autoloader
 require '../vendor/autoload.php';
-
 include_once 'include/config.php';
 
 if(strlen($_SESSION['alogin']) == 0) { 
@@ -15,6 +14,44 @@ if(strlen($_SESSION['alogin']) == 0) {
 }
 
 $oid = intval($_GET['oid']);
+
+// Fetch order list from the database
+$statement = $con->prepare("SELECT * FROM `pending` WHERE `id` = ?");
+$statement->bind_param("i", $oid);
+$statement->execute();
+$result = $statement->get_result();
+$order = $result->fetch_assoc();
+
+// Check if the order exists
+if (!$order) {
+    echo "Error: Order not found";
+    exit;
+}
+
+// Extract items from the order
+$items = unserialize($order['items']);
+
+// Check if items are null before unserializing
+if ($items !== false) {
+    // Create the line items array
+    $line_items = [];
+    $total_amount = 0; // Initialize total amount
+    foreach ($items as $item) {
+        $item_total = $item['quantity'] * $item['sizePrice']; // Calculate total for this item
+        $total_amount += $item_total; // Add to the total amount
+        $line_items[] = [
+            'name' => $item['productName'],
+            'quantity' => $item['quantity'],
+            'size' => $item['size'],
+            'amount' => $item_total * 100, // Amount should be in cents
+            'currency' => 'PHP',
+            'description' => $item['productName'],
+        ];
+    }
+} else {
+    echo "Error: Items are null in the database";
+    exit;
+}
 
 if(isset($_POST['submit2'])) {
     $status = $_POST['status'];
@@ -146,18 +183,29 @@ if(isset($_POST['submit2'])) {
       <td colspan="2"><hr /></td>
     </tr>
     <?php } ?>
-    
         </table>
-        <p class="order">Order List:</p>
 
-        <!-- Table for Orders -->
-        <table>
-          <!-- Put Order List Here -->
-        <tr>
-        <td  class="OrderItem">Pinoy Ramen</td>
-        </tr>
-        </table>
-        <!-- Table for Orders -->
+        <!-- Order Details -->
+                            <div class="container mt-5">
+                                <h2 class="Details-head">Order Details</h2>
+                                <p class="Details"><strong>Total Amount: <?php echo number_format($total_amount, 2); ?> PHP</strong></p>
+                                <hr>
+                                <h3 class="Details">Items:</h3>
+                                <ul class="detail-list" style="background-color: whitesmoke;">
+                                    <?php foreach ($line_items as $item): ?>
+                                      <br>
+                                        <li>
+                                            <p class="Details"><strong>Name:</strong> <?php echo $item['name']; ?></p>
+                                            <p class="Details"><strong>Size:</strong> <?php echo $item['size']; ?></p>
+                                            <p class="Details"><strong>Quantity:</strong> <?php echo $item['quantity']; ?></p>
+                                            <p class="Details"><strong>Amount:</strong> <?php echo number_format($item['amount'] / 100, 2); ?> PHP</p>
+                                        </li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                    <!-- End Order Details -->
+
+ 
         
         <div class="status">
         <?php 
