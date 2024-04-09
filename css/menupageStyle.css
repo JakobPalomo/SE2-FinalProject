@@ -94,6 +94,7 @@ body {
 }
 
 .categorydiv {
+  width: 100%;
   padding-top: 4vh;
   display: flex; /* Make the container a flex container to align children horizontally */
   justify-content: center; /* Align items with space around them */
@@ -141,6 +142,9 @@ body {
   .categorybutton {
     font-size: 75%;
     margin-left: -2%;
+  }
+  .main-menu {
+    max-width: 70%;
   }
 }
 
@@ -197,5 +201,10 @@ body {
 }
 
 .main-menu {
-  width: 100%;
+  width: 80%;
+  background-color: rgba(255, 255, 255, 0.726);
+  border-radius: 12px;
+  margin-left: 2%;
+  margin-top: 24px;
+  box-shadow: 8px 9px 20px rgba(0, 0, 0, 0.3);
 }

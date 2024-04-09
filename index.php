@@ -74,9 +74,9 @@ include('dbcon.php');
         </div>
       </div>
     </div>
+    </div>
 
     <!-- last part of the homepage -->
-    
     <div class="bottomdiv">
       <div class="movedown">
       <div class="textandpiccontainer">
@@ -102,9 +102,12 @@ include('dbcon.php');
           cooks, I am assuring all of you that this food will satisfy, if not, will exceed your expectations. Because in Chef’s Daughter, the secret ingredient is always love. 🦋🦋🦋
         </p>
       </div>
+    </div> 
     </div>
-      
-    </div>
+    
+    <footer class="footer">
+      <p>2024 Chef's Daughter. All rights reserved.</p>
+    </footer>
 
     <!-- End Code -->
   </body>
