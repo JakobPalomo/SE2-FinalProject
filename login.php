@@ -8,6 +8,7 @@ session_start();
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="css/register.css" />
     <title>Login</title>
     <script
@@ -37,7 +38,8 @@ session_start();
       <?php
                     if(isset($_SESSION['status']))
                     {
-                        echo"<h4>" .$_SESSION['status']."<h4>";
+                      echo "<h4 style='color: red; font-size: 18px;'>" . htmlspecialchars($_SESSION['status']) . "</h4>";
+
                         unset($_SESSION['status']); 
                     }
                     ?>
@@ -46,7 +48,7 @@ session_start();
           
 
           <div class="field input">
-            <label for="Email">Email</label>
+            <label for="Email" >Email</label>
             <input type="text" name="email"  atucomplete="off"  required>
           </div>
 

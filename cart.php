@@ -12,6 +12,7 @@ include('./dbcon.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="./css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="./css/mycart.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="./css/menuelement.css" />
     <link rel="stylesheet" href="//code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
     <link rel="preconnect" href="https://fonts.googleapis.com" />
@@ -101,7 +102,7 @@ include('./dbcon.php');
                     <img src="<?php echo $item['productImage']; ?>" alt="food" class="cart-display" />
                     <div class="detail-cart">
                         <p class="foodcart-name"><?php echo $item['productName']; ?></p>
-                        <p class="foodcart-name"><?php echo $item['quantity']; ?> - <?php echo $item['size']; ?> ($<?php echo $item['sizePrice']; ?>)</p>
+                        <p class="foodcart-name"><?php echo $item['quantity']; ?> - <?php echo $item['size']; ?> (PHP<?php echo $item['sizePrice']; ?>)</p>
                     </div>
                     <div class="price">
                         <p class="total-price">₱<?php echo $item['totalPrice']; ?></p>
@@ -118,6 +119,8 @@ include('./dbcon.php');
     ?>
 
         <!-- Datepicker -->
+        <br>
+        <br>
         <div class="subtitle">
             <p class="subtitle-txt-2">Date of Preparation</p>
         </div>
@@ -125,6 +128,7 @@ include('./dbcon.php');
             <input type="date" id="datepicker" name="preparationDate" class="subtitle-txt-bg-2">
         </div>
 
+        <br>
         <div class="subtitle">
             <p class="subtitle-txt-2">Time of Delivery</p>
         </div>
@@ -133,6 +137,7 @@ include('./dbcon.php');
         </div>
 
         <!-- Address Field -->
+        <br>
         <div class="subtitle">
             <span class="linebreak"><p class="subtitle-txt-2">Delivery Address</p></span>
             <span class="linebreak"><button class="change-btn" data-bs-toggle="modal" data-bs-target="#changeAddressModal">Change</button></span>
@@ -178,7 +183,7 @@ include('./dbcon.php');
     <div class="checkbox-container">
         <label class="checkbox-label" for="gcashCheckbox">
             <input type="checkbox" id="gcashCheckbox" class="custom-checkbox" name="paymentOption" onclick="handlePaymentCheckboxClick('gcashCheckbox')" value="Gcash" />
-            <div class="checkmark"></div> Gcash
+            <div class="checkmark"></div> GCash
         </label>
     </div>
 </div>
@@ -240,30 +245,45 @@ include('./dbcon.php');
     </div>
     <script>
         $(function () {
-            // Initialize datepicker
-            $("#datepicker").datepicker({
-                dateFormat: "MM dd, yy",
-                minDate: 0, // Set the minimum date to today
-                onSelect: function (dateText) {
-                    // You can perform additional actions when a date is selected
-                    console.log("Selected date: " + dateText);
-                }
-            });
+    // Initialize datepicker
+    $("#datepicker").datepicker({
+        dateFormat: "MM dd, yy",
+        minDate: getMinDate(), // Set the minimum date based on the number of items
+        onSelect: function (dateText) {
+            // You can perform additional actions when a date is selected
+            console.log("Selected date: " + dateText);
+        }
+    });
 
-            $('#timepicker').timepicker({
-            timeFormat: 'HH:mm',    // Change the time format if needed
-            step: 15                // Set the time step to 15 minutes
-        });
+    $('#timepicker').timepicker({
+        timeFormat: 'HH:mm',    // Change the time format if needed
+        step: 15                // Set the time step to 15 minutes
+    });
 
-            // Handle checkbox clicks for payment options
-            $('input[name="paymentOption"]').on('change', function () {
-                console.log('Selected payment option:', $(this).val());
-            });
+    // Function to calculate the minimum date based on the number of items
+    function getMinDate() {
+        var currentDate = new Date();
+        var itemCount = <?php echo count($_SESSION['cart']); ?>;
+        var minDate;
+        if (itemCount <= 11) {
+            minDate = new Date(currentDate.setDate(currentDate.getDate() + 3)); // Add 3 days
+        } else {
+            minDate = new Date(currentDate.setDate(currentDate.getDate() + 5)); // Add 5 days
+        }
+        return minDate;
+    }
 
-            $('input[name="deliveryOption"]').on('change', function () {
-            console.log('Selected delivery option:', $(this).val());
-        });
-        });
+    // Handle checkbox clicks for payment options
+    $('input[name="paymentOption"]').on('change', function () {
+        console.log('Selected payment option:', $(this).val());
+    });
+
+    $('input[name="deliveryOption"]').on('change', function () {
+        console.log('Selected delivery option:', $(this).val());
+    });
+});
+
+
  </script>
 
 <script>
@@ -297,7 +317,13 @@ include('./dbcon.php');
                 return;
             }
             var userAddress = $('#userAddress').text();
-           
+
+            // Calculate the minimum preparation date based on the number of items in the cart
+            var minPreparationDate = getMinPreparationDate();
+            if (new Date(preparationDate) < minPreparationDate) {
+                alert('Please select a preparation date at least 3 days in advance for 12 or fewer items, or at least 5 days in advance for more than 12 items.');
+                return;
+            }
 
             // Call the placeOrder.php script using AJAX
             $.ajax({
@@ -306,9 +332,9 @@ include('./dbcon.php');
                 data: {
                     paymentOption: paymentOption,
                     deliveryOption: deliveryOption,
-                    preparationDate: $('#datepicker').val(),
-                    deliveryTime:$('#timepicker').val(),
-                    totalPrice: totalPrice ,
+                    preparationDate: preparationDate,
+                    deliveryTime: deliveryTime,
+                    totalPrice: totalPrice,
                     userAddress: userAddress
                 },
                 success: function (response) {
@@ -325,12 +351,38 @@ include('./dbcon.php');
         }
     });
 
+    // Function to calculate the minimum preparation date based on the number of items
+    function getMinPreparationDate() {
+    var currentDate = new Date();
+    var totalQuantity = 0;
+
+    // Calculate total quantity of items in the cart
+    <?php
+    if (!empty($_SESSION['cart'])) {
+        foreach ($_SESSION['cart'] as $item) {
+            ?>totalQuantity += <?php echo $item['quantity']; ?>;
+            <?php
+        }
+    }
+    ?>
+
+    var minPreparationDate;
+    if (totalQuantity <= 12) {
+        minPreparationDate = new Date(currentDate.setDate(currentDate.getDate() + 3)); // Add 3 days
+    } else {
+        minPreparationDate = new Date(currentDate.setDate(currentDate.getDate() + 5)); // Add 5 days
+    }
+    return minPreparationDate;
+}
+
+
+
     // Handle checkbox clicks for payment options
     $('input[name="paymentOption"]').on('change', function () {
         console.log('Selected payment option:', $(this).val());
     });
-    
 });
+
 </script>
 
 

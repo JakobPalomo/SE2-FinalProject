@@ -8,6 +8,7 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="./css/navbar.css" />
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -66,9 +67,12 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
             <?php endif?>
             <?php if(isset($_SESSION['authenticated'])) :?>
               <li class="nav-item">
-                <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
-                <a class="navbutton" href="./cart.php">My Cart <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '<span class="badge rounded-pill badge-notification bg-danger">' . count($_SESSION['cart']) . '</span>' : ''; ?></a>
-            </li>
+                <a class="navbutton" href="./cart.php">
+                  <i class="fa-solid fa-cart-shopping" style="color: #ffffff; position: relative;">
+                  <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '<span class="badge rounded-pill badge-notification bg-danger position-absolute top-0 start-100 translate-middle" style="font-size: 0.6em;">' . count($_SESSION['cart']) . '</span>' : ''; ?>
+                 </i>
+                </a>
+              </li>
             <?php endif?>
             <?php if(isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">

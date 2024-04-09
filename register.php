@@ -24,6 +24,8 @@ session_start();
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
+
     <link
       href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap"
       rel="stylesheet"
@@ -137,7 +139,26 @@ if(isset($_SESSION['status']))
       <div class="modal-body">
         <!-- Add your terms and conditions content here -->
         <!-- Example: -->
-        <p>By using this website, you agree to our terms and conditions...</p>
+        <p>Chef's Daughter Terms and Conditions<br/><br/>
+
+1. Order Confirmation
+<br/>
+Once orders are confirmed, any changes shall no longer be allowed.
+<br/>
+2. Food Tray Delivery
+<br/>
+Once food trays are delivered, it is best advised that food trays must be opened to prevent spoilage.
+<br/>
+3. Storage of Food Trays
+<br/>
+Food trays that are not consumed or served an hour after delivery time shall be stored in a cool temperature or area.
+<br/>
+4. Allergies and Special Requests
+<br/>
+
+Inform Chef’s Daughter regarding personal food allergies, if any.
+<br/>
+Special requests (e.g., chicken part request, no use of MSG, no pepper, etc.) must be discussed upon ordering.</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>

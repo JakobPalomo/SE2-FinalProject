@@ -40,6 +40,7 @@ exit();
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
 	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
 </head>
 <body style="background-color: #f5f5dc">

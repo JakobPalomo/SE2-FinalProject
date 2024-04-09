@@ -22,6 +22,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
 	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
 	<script language="javascript" type="text/javascript">
 var popUpWin=0;
@@ -109,7 +110,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 							<div class="tabling">
 								<table cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped display table-responsive">
 									<thead>
-										<tr>
+										<tr><th>Action</th>
 											<th>Order ID</th>
 											<th>Name</th>
 											<th width="70">Contact no</th>
@@ -123,7 +124,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 											<th>Dlvry Option</th>
 											<th>Address</th>
 											<th>Order Date</th>
-											<th>Action</th>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -134,6 +135,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 										?>
 													<tr>
 														<?php if ($index === 0): ?>
+															<td rowspan="<?php echo count($order['products']); ?>"><a href="updateorder.php?oid=<?php echo htmlentities($orderId); ?>" title="Update order" target="_blank"><i class="fa-regular fa-pen-to-square" style="color: #48BE25;  font-size: 20px"></i></a></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($orderId); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['username']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['usercontact']); ?></td>
@@ -149,7 +151,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_option']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_address']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['orderdate']); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><a href="updateorder.php?oid=<?php echo htmlentities($orderId); ?>" title="Update order" target="_blank"><i class="icon-edit"></i></a></td>
+															
 														<?php endif; ?>
 													</tr>
 										<?php

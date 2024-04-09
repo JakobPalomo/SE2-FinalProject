@@ -38,6 +38,7 @@ if ($result->num_rows == 1) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="css/card.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="css/lectercard.css" />
     <link rel="stylesheet" type="text/css" href="css/pendingordercard.css" />
 
@@ -109,7 +110,7 @@ if ($result->num_rows == 1) {
           <div class="card-title"><h1>My Profile</h1></div>
           <!-- Place Content of card here -->
           <div class="inner-card">
-  <table>
+  <table class="details">
     <tr>
       <td>
         <div class="column-container">

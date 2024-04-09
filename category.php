@@ -25,6 +25,7 @@ if(isset($_POST['add_to_cart'])) {
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" href="css/menupageStyle.css" />
     <link rel="stylesheet" type="text/css" href="css/menuelement.css" />
     <link rel="stylesheet" type="text/css" href="./css/ordermodal.css" />
@@ -154,7 +155,9 @@ if(isset($_POST['add_to_cart'])) {
           ?>
                
                   <div class="menu-item <?php echo $menuClass; ?>">
+                  <div class="img-container-menu">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
+                      </div>
                       <div class="detail-field">
                           <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>  
                           <?php if ($availability == 'Out of Stock'): ?>
@@ -195,11 +198,15 @@ if(isset($_POST['add_to_cart'])) {
 
             <!-- Modal -->
     <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-                <div class="order-list">
+     <div class="wrapper">
+        <div class="modal-dialog">
+   
+        <div class="modal-content" style="background-color: transparent; border: none">
+                <div class="order-list" >
                     <div class="order-item">
+                        <div class="img-container-modal">
                         <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="item-display" />
+                </div>
                         <div class="details">
                             <form>
                                 
@@ -243,7 +250,9 @@ if(isset($_POST['add_to_cart'])) {
                     </div>
                 </div>
             </div>
+ 
         </div>
+     </div>
     </div>
 
 

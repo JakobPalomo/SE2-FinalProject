@@ -33,6 +33,7 @@ if(isset($_GET['del']))
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
+	<script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
 	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>
 </head>
 <body>
@@ -114,13 +115,13 @@ while($row=mysqli_fetch_array($query))
 							<div class="module-body table">
 								<table cellpadding="0" cellspacing="0" border="0" class="datatable-1 table table-bordered table-striped	 display" width="100%">
 									<thead>
-										<tr>
+										<tr><th>Action</th>
 											<th>#</th>
 											<th>Category</th>
 											<th>Description</th>
 											<th>Creation date</th>
 											<th>Last Updated</th>
-											<th>Action</th>
+											
 										</tr>
 									</thead>
 									<tbody>
@@ -130,15 +131,15 @@ $cnt=1;
 while($row=mysqli_fetch_array($query))
 {
 ?>									
-										<tr>
+										<tr><td>
+											<a href="edit-subcategory.php?id=<?php echo $row['id']?>" style="font-size: 22px;"><i class="fa-regular fa-pen-to-square" style="color: #48BE25;">&nbsp;&nbsp;</i></a>
+											<a href="subcategory.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')"style="font-size: 22px;"><i class="fa-solid fa-circle-xmark" style="color: #ff1a1a;"></i></a></td>
 											<td><?php echo htmlentities($cnt);?></td>
 											<td><?php echo htmlentities($row['categoryName']);?></td>
 											<td><?php echo htmlentities($row['subcategory']);?></td>
 											<td> <?php echo htmlentities($row['creationDate']);?></td>
 											<td><?php echo htmlentities($row['updationDate']);?></td>
-											<td>
-											<a href="edit-subcategory.php?id=<?php echo $row['id']?>" ><i class="icon-edit"></i></a>
-											<a href="subcategory.php?id=<?php echo $row['id']?>&del=delete" onClick="return confirm('Are you sure you want to delete?')"><i class="icon-remove-sign"></i></a></td>
+											
 										</tr>
 										<?php $cnt=$cnt+1; } ?>
 										

@@ -6,6 +6,7 @@ include('common/navbar.php');?>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="css/register.css" />
     <title>Register</title>
     <script
@@ -28,20 +29,20 @@ include('common/navbar.php');?>
     />
   </head>
 
-  <?php
+
+
+  <div class="container">
+      <div class="box form-box"><?php
                     if(isset($_SESSION['status']))
                     {
-                        echo"<h4>" .$_SESSION['status']."<h4>";
+                        echo"<h4 style='color: red; font-size: 18px;'>" .$_SESSION['status']."<h4>";
                         unset($_SESSION['status']); 
                     }
                     ?>
-
-  <div class="container">
-      <div class="box form-box">
-      <header> Reset Password </header>
+      <header> Reset Password </header>  
       <form action ="./function/password-reset-code.php" method ="POST">
                                 <div class="field input">
-                                <label for="Email">Email Address</label>
+                                <label for="Email" style='font-size: 18px;'>Email Address</label> <br>
                                     <input type ="text" name ="email" class = "form-control" placeholder ="Enter Email Address">
                                 </div>
                                 <div class="field input">

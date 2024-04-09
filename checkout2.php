@@ -5,21 +5,6 @@ include('dbcon.php');
 // Get the ID parameter from the URL
 $id = $_GET['id'];
 
-// Check if the form is submitted
-if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-  // Update the order status to "Paid"
-  $update_statement = $con->prepare("UPDATE `pending` SET `status` = 'Paid' WHERE `id` = ?");
-  $update_statement->bind_param("i", $id);
-  if ($update_statement->execute()) {
-      echo "Order status updated successfully.";
-      // Redirect to user-account.php or any other page after updating the status
-      header("Location: user-account.php");
-      exit;
-  } else {
-      echo "Error updating order status: " . $con->error;
-  }
-}
-
 // Retrieve the order details from the 'pending' table
 $statement = $con->prepare("SELECT * FROM `pending` WHERE `id` = ?");
 $statement->bind_param("i", $id);
@@ -56,8 +41,59 @@ if ($items !== false) {
     echo "Error: Items are null in the database";
     exit;
 }
-    
-?> 
+
+// Check if the form is submitted
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    // Check if a file was uploaded
+    if (isset($_FILES['paymentScreenshot']) && $_FILES['paymentScreenshot']['error'] === UPLOAD_ERR_OK) {
+        // Get the file name
+        $filename = $_FILES['paymentScreenshot']['name'];
+        // Get the file content
+        $fileContent = file_get_contents($_FILES['paymentScreenshot']['tmp_name']);
+
+        // Update the order status to "Paid" and store the payment screenshot in the database
+        $update_statement = $con->prepare("UPDATE `pending` SET `status` = 'Paid' WHERE `id` = ?");
+        $update_statement->bind_param("i", $id);
+        if ($update_statement->execute()) {
+            // Insert the payment screenshot into the database
+            $insert_statement = $con->prepare("INSERT INTO `gcashpayments` (`order_id`, `user_session_id`, `name`, `contact`, `email`, `items`, `delivery_address`, `total_price`, `payment_option`, `delivery_option`, `delivery_time`, `status`, `payment_screenshot`) VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)");
+            $insert_statement->bind_param("issssssdsssss", $order_id, $user_session_id, $name, $contact, $email, $items, $delivery_address, $total_price, $payment_option, $delivery_option, $delivery_time, $status, $filename);
+            $order_id = $id;
+            $user_session_id = $_SESSION['auth_user']['id']; // Updated key
+            $name = $_SESSION['auth_user']['fname'] . ' ' . $_SESSION['auth_user']['lname']; // Updated keys
+            $contact = $_SESSION['auth_user']['contact']; // Updated key
+            $email = $_SESSION['auth_user']['email']; // Updated key
+            $items = serialize($items);
+            $delivery_address = $_SESSION['auth_user']['address']; // Updated key
+            $total_price = $total_amount;
+            $payment_option = 'Gcash';
+            $delivery_option = 'Delivery';
+            $delivery_time = $order['delivery_time'];
+            $status = 'Paid';
+
+            if ($insert_statement->execute()) {
+                // Upload the file
+                $uploadFileDir = 'admin/payments/';
+                $dest_path = $uploadFileDir . $filename;
+                if(move_uploaded_file($_FILES['paymentScreenshot']['tmp_name'], $dest_path)) {
+                    echo "Order status updated successfully. Payment screenshot uploaded.";
+                    // Redirect to user-account.php or any other page after updating the status
+                    header("Location: user-account.php");
+                    exit;
+                } else {
+                    echo "Error uploading payment screenshot file.";
+                }
+            } else {
+                echo "Error inserting payment screenshot: " . $con->error;
+            }
+        } else {
+            echo "Error updating order status: " . $con->error;
+        }
+    } else {
+        echo "Error uploading payment screenshot.";
+    }
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
   <head>
@@ -65,6 +101,7 @@ if ($items !== false) {
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
     <link rel="stylesheet" href="css/menupageStyle.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="css/menuelement.css" />
     <title>Checkout</title>
     <script
@@ -89,13 +126,14 @@ if ($items !== false) {
   <body style="background-color: #f5f5dc">
   <?php include('common/navbar.php');?>
 <div class="contain">
+  <div class="checkout">
 <div class="container mt-5">
         <h2 class="Details-head">Order Details</h2>
         <p class="Details"><strong>Order ID:</strong> <?php echo $order['id']; ?></p>
         <p class="Details"><strong>Total Amount: <?php echo number_format($total_amount, 2); ?> PHP</strong></p>
         <hr>
         <h3 class="Details">Items:</h3>
-        <ul class="detail-list">
+        <ul class="detail-list" style="background-color: whitesmoke;">
             <?php foreach ($line_items as $item): ?>
                 <li>
                     <p class="Details"><strong>Name:</strong> <?php echo $item['name']; ?></p>
@@ -113,12 +151,16 @@ if ($items !== false) {
         
         
         <!-- Button -->
-        <form method="POST">
-            <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Paid</button>
+        <form method="POST" enctype="multipart/form-data">
+            <input type="file" name="paymentScreenshot" accept="image/*">
+            <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Upload Payment Screenshot</button>
         </form>
-        <!-- Image -->
+
+</div>
+        <!-- Image --></div>
+        <p class="Details">Use This Gcash Number/QR code to pay</p>
         <img src="img/Gcash.jpg" alt="Your Image" style="width: 100%; max-width: 500px; height: auto;">
-    </div>
+    
 
 </div>
     <!-- Order Details -->

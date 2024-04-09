@@ -15,6 +15,7 @@ if (!isset($_SESSION['cart'])) {
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
     <link rel="stylesheet" href="css/menupageStyle.css" />
     <link rel="stylesheet" type="text/css" href="css/menuelement.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="css/ordermodal.css" />
     <title>Menu</title>
     <script
@@ -55,6 +56,34 @@ if (!isset($_SESSION['cart'])) {
       </div>
     </div>
 
+    <!--to make the side bar -->
+    <div class="side-by-side">  
+            <!-- div for subcat buttons-->
+            <div class="subcategorydiv">
+    <div class="food-name subcat" style="margin-bottom: 12px; font-size: 10px; padding-left: 12px;">Sub Categories</div>
+    <div class="subcatbutton">
+        <?php 
+        $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory");
+        while ($row = mysqli_fetch_array($sql)) {
+            $subcategory = $row['subcategory'];
+            $iconClass = '';
+
+            // Set the icon class based on the subcategory
+            if (strtolower($subcategory) == 'pasta') {
+                $iconClass = 'fa-plate-wheat'; // Pasta icon
+            } elseif (strpos(strtolower($subcategory), 'chicken') !== false) {
+                $iconClass = 'fa-drumstick-bite'; // Chicken icon
+            }else {
+                $iconClass = 'fa-utensils'; // Default utensils icon
+            }
+            
+        ?>
+        <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton" style="font-weight: bolder;">
+            <span><i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626;"></i> </span><?php echo $subcategory;?> 
+        </a>
+        <?php } ?>
+    </div>
+</div>
 
     <div class="main-menu">
             <!-- div for the category buttons-->
@@ -89,7 +118,7 @@ if (!isset($_SESSION['cart'])) {
       <?php $sql=mysqli_query($con,"select subcategory  from subcategory where id='$cid'");
         while($row=mysqli_fetch_array($sql)){?>
 
-			<div class="food-name" style="text-align: center; font-size: 36px;">
+			<div class="food-name" style="text-align: center; font-size: 36px; margin-left:40px;">
 				<?php echo htmlentities($row['subcategory']);?>
 			</div>
 		<?php } ?>
@@ -98,66 +127,77 @@ if (!isset($_SESSION['cart'])) {
      <?php
         $ret=mysqli_query($con,"select * from products where subCategory='$cid'");
         $num=mysqli_num_rows($ret);
-        if($num>0)
-            {
-                while ($row=mysqli_fetch_array($ret)) {
-                    $productId = $row['id'];
-                    $availability = $row['productAvailability'];
-                    $menuClass = ($availability == 'Out of Stock') ? 'menu-item-unavailable' : '';
-                ?>		
-                    <div class="menu-item <?php echo $menuClass; ?>">
-                      <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
-                      <div class="detail-field">
-                          <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>  
-                          <?php if ($availability == 'Out of Stock'): ?>
-                          <p class="food-name"><?php echo htmlentities($availability); ?></p>  
-                          <?php endif; ?>
-                      </div>
-                      <div class="desc-field"> 
-                                <?php if ($availability != 'Out of Stock'): ?>
-                             <p class="food-desc">M- ₱<strong><?php echo htmlentities($row['mediumPrice']); ?></strong> </br>
-                              L- ₱<strong><?php echo htmlentities($row['largePrice']); ?></strong></br>
-                             XL- ₱<strong><?php echo htmlentities($row['xlPrice']); ?></strong></br>
-                              XXL- ₱<strong><?php echo htmlentities($row['xxlPrice']); ?></strong></p>
-                         
-                                 <?php endif; ?>
-                      </div>
-                        <center>
-                             <?php if($availability != 'Out of Stock'): ?>
-                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAuthenticate(<?php echo $row['id']; ?>)">Add to Cart</button>
-                            <?php else: ?>
-                            <button class="add-item disabled" disabled>Add to Cart</button>
-                            <?php endif; ?>
-                        </center>
+
+        if ($num > 0) {
+            while ($row = mysqli_fetch_array($ret)) {
+              $productId = $row['id'];
+              $availability = $row['productAvailability'];
+              $menuClass = ($availability == 'Out of Stock') ? 'menu-item-unavailable' : ''; // Add class if product is out of stock
+        ?>
+             
+                <div class="menu-item <?php echo $menuClass; ?>">
+                <div class="img-container-menu">
+                    <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
                     </div>
+                    <div class="detail-field">
+                        <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>  
+                        <?php if ($availability == 'Out of Stock'): ?>
+                        <p class="food-name"><?php echo htmlentities($availability); ?></p>  
+                        <?php endif; ?>
+                    </div>
+                    <div class="desc-field"> 
+                              <?php if ($availability != 'Out of Stock'): ?>
+                           <p class="food-desc">M- ₱<strong><?php echo htmlentities($row['mediumPrice']); ?></strong> </br>
+                            L- ₱<strong><?php echo htmlentities($row['largePrice']); ?></strong></br>
+                           XL- ₱<strong><?php echo htmlentities($row['xlPrice']); ?></strong></br>
+                            XXL- ₱<strong><?php echo htmlentities($row['xxlPrice']); ?></strong></p>
+                       
+                               <?php endif; ?>
+                    </div>
+                      <center>
+                           <?php if($availability != 'Out of Stock'): ?>
+                          <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAuthenticate(<?php echo $row['id']; ?>)">Add to Cart</button>
+                          <?php else: ?>
+                          <button class="add-item disabled" disabled>Add to Cart</button>
+                          <?php endif; ?>
+                      </center>
+                  </div>
 
                 
-                    <script>
-                    function addToCartAuthenticate(productId) {
-                        event.stopPropagation();
-                        <?php if(!isset($_SESSION['authenticated'])): ?>
-                            window.location.href = './function/authentication.php';
-                        <?php else: ?>
-                            event.stopPropagation();
-                            var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
-                        <?php endif; ?>
-                    }             
-                </script>
+              
+              <script>
+                  function addToCartAuthenticate(productId) {
+                      event.stopPropagation();
+                      <?php if(!isset($_SESSION['authenticated'])): ?>
+                          window.location.href = './function/authentication.php';
+                      <?php else: ?>
+                          event.stopPropagation();
+                          var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
+                      <?php endif; ?>
+                  }             
+              </script>
 
-     <!-- Modal -->
-     <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
-    <div class="modal-dialog">
-        <div class="modal-content">
-                <div class="order-list">
+
+            <!-- Modal -->
+            <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
+     <div class="wrapper">
+        <div class="modal-dialog">
+   
+        <div class="modal-content" style="background-color: transparent; border: none">
+                <div class="order-list" >
                     <div class="order-item">
+                        <div class="img-container-modal">
                         <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="item-display" />
+                </div>
                         <div class="details">
                             <form>
+                                
                                 <div class="labels"></div>
                                 <div style="display: flex">
                                     <p class="food-namemod"><?php echo htmlentities($row['productName']); ?></p>
                                     <p class="food-price">PHP <span id="totalPrice<?php echo $productId; ?>"><?php echo number_format($row['mediumPrice'], 2); ?></span></p>
                                 </div>
+
                                 <div class="labels"></div>
                                 <p class="description"><?php echo htmlentities($row['productDescription']); ?></p>
                                 <div class="buttons">
@@ -167,6 +207,7 @@ if (!isset($_SESSION['cart'])) {
                                     <img src="./img/add.png" alt="Increase" class="btn" onclick="increase('<?php echo $productId; ?>')" />
                                 </div>
                                 <br />
+
                                 <div class="buttons">
                                     <div class="button-group">
                                     <?php
@@ -191,7 +232,9 @@ if (!isset($_SESSION['cart'])) {
                     </div>
                 </div>
             </div>
+ 
         </div>
+     </div>
     </div>
 
 
@@ -316,9 +359,10 @@ if (!isset($_SESSION['cart'])) {
         </div> 
     </div>
  </div>
- </script>
- 
- <script>
+
+
+
+<script>
     function filterProducts() {
         var input, filter, menuItems, item, productName;
         input = document.getElementById("searchInput");
@@ -336,6 +380,7 @@ if (!isset($_SESSION['cart'])) {
         }
     }
 </script>
+
 
 
     <!--Menu item-->

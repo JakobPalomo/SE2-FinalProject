@@ -1,47 +1,56 @@
-
 <?php
 session_start();
 include('include/config.php');
 if(strlen($_SESSION['alogin'])==0)
-	{	
-header('location:index.php');
+{
+    header('location:index.php');
 }
 else{
-	
-if(isset($_POST['submit']))
-{
-	$category=$_POST['category'];
-	$subcat=$_POST['subcategory'];
-	$productname=$_POST['productName'];
-	$mediumPrice=$_POST['mediumPrice'];
-	$largePrice=$_POST['largePrice'];
-	$xlPrice=$_POST['xlPrice'];
-	$xxlPrice=$_POST['xxlPrice'];
-	$productdescription=$_POST['productDescription'];
-	$productavailability=$_POST['productAvailability'];
-	$productimage1=$_FILES["productimage1"]["name"];
-	$productimage2=$_FILES["productimage2"]["name"];
-	$productimage3=$_FILES["productimage3"]["name"];
-	
-//for getting product id
-$query=mysqli_query($con,"select max(id) as pid from products");
-	$result=mysqli_fetch_array($query);
-	 $productid=$result['pid']+1;
-	$dir="productimages/$productid";
-if(!is_dir($dir)){
-		mkdir("productimages/".$productid);
-	}
+    if(isset($_POST['submit']))
+    {
+        $category=$_POST['category'];
+        $subcat=$_POST['subcategory'];
+        $productname=$_POST['productName'];
+        $mediumPrice=$_POST['mediumPrice'];
+        $largePrice=$_POST['largePrice'];
+        $xlPrice=$_POST['xlPrice'];
+        $xxlPrice=$_POST['xxlPrice'];
+        $productdescription=$_POST['productDescription'];
+        $productavailability=$_POST['productAvailability'];
+        $productimage1=$_FILES["productimage1"]["name"];
+        $productimage2=$_FILES["productimage2"]["name"];
+        $productimage3=$_FILES["productimage3"]["name"];
 
-	move_uploaded_file($_FILES["productimage1"]["tmp_name"],"productimages/$productid/".$_FILES["productimage1"]["name"]);
-	move_uploaded_file($_FILES["productimage2"]["tmp_name"],"productimages/$productid/".$_FILES["productimage2"]["name"]);
-	move_uploaded_file($_FILES["productimage3"]["tmp_name"],"productimages/$productid/".$_FILES["productimage3"]["name"]);
-$sql=mysqli_query($con,"insert into products(category,subCategory,productName,mediumPrice,largePrice,xlPrice,xxlPrice,productDescription,productAvailability,productImage1,productImage2,productImage3) values('$category','$subcat','$productname','$mediumPrice','$largePrice','$xlPrice','$xxlPrice','$productdescription','$productavailability','$productimage1','$productimage2','$productimage3')");
-$_SESSION['msg']="Item Added Successfully!";
+        // Check if image files are uploaded
+        if(isset($_FILES['productimage1']['tmp_name']) && !empty($_FILES['productimage1']['tmp_name'])){
+            // Get file extension
+            $file_extension = pathinfo($_FILES["productimage1"]["name"], PATHINFO_EXTENSION);
+            // Check if file is an image
+            if(!in_array($file_extension, array('jpg', 'jpeg', 'png', 'gif'))){
+                $_SESSION['msg'] = "Please upload only image files.";
+                header('location:insert_product.php');
+                exit();
+            }
+        }
 
-}
+        // for getting product id
+        $query=mysqli_query($con,"select max(id) as pid from products");
+        $result=mysqli_fetch_array($query);
+        $productid=$result['pid']+1;
+        $dir="productimages/$productid";
+        if(!is_dir($dir)){
+            mkdir("productimages/".$productid);
+        }
 
+        move_uploaded_file($_FILES["productimage1"]["tmp_name"],"productimages/$productid/".$_FILES["productimage1"]["name"]);
+        move_uploaded_file($_FILES["productimage2"]["tmp_name"],"productimages/$productid/".$_FILES["productimage2"]["name"]);
+        move_uploaded_file($_FILES["productimage3"]["tmp_name"],"productimages/$productid/".$_FILES["productimage3"]["name"]);
 
+        $sql=mysqli_query($con,"insert into products(category,subCategory,productName,mediumPrice,largePrice,xlPrice,xxlPrice,productDescription,productAvailability,productImage1,productImage2,productImage3) values('$category','$subcat','$productname','$mediumPrice','$largePrice','$xlPrice','$xxlPrice','$productdescription','$productavailability','$productimage1','$productimage2','$productimage3')");
+        $_SESSION['msg']="Item Added Successfully!";
+    }
 ?>
+
 <!DOCTYPE html>
 <html lang="en">
 <head>

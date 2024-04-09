@@ -10,6 +10,7 @@ include('./dbcon.php');
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="./css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="./css/faqs.css" />
+    <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <title>FAQs</title>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -44,20 +45,52 @@ include('./dbcon.php');
 
     <!-- Code zone -->
     <div class="maintitle">
-      <p class="title">Frequently Asked Questions</p>
+      <p class="title" style="margin-left: 24px;">Frequently Asked Questions</p>
     </div>
 
     <div class="centercontainer">
       <div class="itemfaq" onclick="toggleFaqContent(this)">
         <p class="faqcontent">
-          How can I pay for my order?<img
+        Do you offer free delivery?<img
             class="drop"
             src="./img/angle-small-left.png"
           />
         </p>
         <div class="expanded-content">
           <!-- Content to show when the item is expanded -->
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+          Yes, we provide complimentary delivery service to locations within
+           Pampanga up to Balintawak. elivery from Balintawak to your
+            specified address can be arranged through Lalamove. 
+            Please note that the customer is responsible for 
+            covering the Lalamove delivery fee.
+        </div>
+      </div>
+
+      <div class="itemfaq" onclick="toggleFaqContent(this)">
+        <p class="faqcontent">
+        How long will my orders take?<img
+            class="drop"
+            src="./img/angle-small-left.png"
+          />
+        </p>
+        <div class="expanded-content">
+          <!-- Content to show when the item is expanded -->
+          For orders of 12 trays or more, please place your order
+           at least 5 days in advance. For orders of 12 trays or fewer,
+            please allow at least 3 days for order placement.
+        </div>
+      </div>
+
+      <div class="itemfaq" onclick="toggleFaqContent(this)">
+        <p class="faqcontent">
+        Can I choose my preferred delivery time?<img
+            class="drop"
+            src="./img/angle-small-left.png"
+          />
+        </p>
+        <div class="expanded-content">
+          <!-- Content to show when the item is expanded -->
+          Yes, we accommodate delivery times based on the customer's preference.
         </div>
       </div>
 
@@ -70,47 +103,32 @@ include('./dbcon.php');
         </p>
         <div class="expanded-content">
           <!-- Content to show when the item is expanded -->
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+          We accept Cash on Delivery (COD), bank transfers, and Gcash payments.
         </div>
       </div>
 
       <div class="itemfaq" onclick="toggleFaqContent(this)">
         <p class="faqcontent">
-          How can I pay for my order?<img
+        What are the available tray sizes?<img
             class="drop"
             src="./img/angle-small-left.png"
           />
         </p>
         <div class="expanded-content">
           <!-- Content to show when the item is expanded -->
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
+          We offer trays in sizes: Medium (M), Large (L), Extra Large (XL), and Double Extra Large (XXL).
         </div>
       </div>
 
       <div class="itemfaq" onclick="toggleFaqContent(this)">
         <p class="faqcontent">
-          How can I pay for my order?<img
+        How can I reach your business for inquiries?<img
             class="drop"
             src="./img/angle-small-left.png"
           />
         </p>
         <div class="expanded-content">
-          <!-- Content to show when the item is expanded -->
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
-        </div>
-      </div>
-
-      <div class="itemfaq" onclick="toggleFaqContent(this)">
-        <p class="faqcontent">
-          How can I pay for my order?<img
-            class="drop"
-            src="./img/angle-small-left.png"
-          />
-        </p>
-        <div class="expanded-content">
-          <!-- Content to show when the item is expanded -->
-          Lorem ipsum dolor sit amet, consectetur adipiscing elit. ...
-        </div>
+        You can contact us promptly through Facebook Messenger. Our response hours are from 9:00 AM to 9:00 PM.
       </div>
     </div>
 

@@ -5,6 +5,10 @@
   border-radius: 18px;
   margin: 24px;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+  display: flex;
+  flex-direction: column;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
 }
 
 .labels {
@@ -56,12 +60,24 @@ form {
 }
 
 .item-display {
-  width: 700px;
-  height: 360px;
+  max-width: 100%; /* Constrain image width */
+  max-height: 100%; /* Constrain image height */
+  width: auto; /* Allow the image to adjust its width */
+  height: auto; /* Allow the image to adjust its height */
+}
+
+.img-container-modal {
+  max-width: 700px;
+  max-height: 310px;
+
+  overflow: hidden; /* Optional: Hide any overflow from the image */
+  display: flex;
+  justify-content: center;
+  align-items: center;
+
   border-top-right-radius: 18px;
   border-top-left-radius: 18px;
 }
-
 .add-itemmod {
   width: 196px;
   height: 32px;
@@ -74,6 +90,10 @@ form {
   font-weight: bold;
   font-family: "Plus Jakarta Sans", sans-serif;
   background-color: #ffb000;
+}
+
+.add-itemmod:hover {
+  background-color: #b57b00;
 }
 
 .detail-field {
@@ -122,6 +142,10 @@ form {
 .btn {
   cursor: pointer;
   height: 56px;
+}
+
+.btn:hover {
+  background-color: #b57b00;
 }
 
 .buttons {
@@ -181,4 +205,15 @@ form {
   .food-price {
     width: 30%;
   }
+}
+.wrapper {
+  background-color: rgba(29, 29, 29, 0.5); /* Set gray semi-transparent color */
+  padding: 10px; /* Adjust the padding to control the margin width */
+  height: 100%;
+  overflow-y: auto;
+}
+
+.modal-content {
+  background-color: transparent; /* Set background color to transparent */
+  border: none; /* Remove border */
 }
