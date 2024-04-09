@@ -217,4 +217,6 @@ body {
   font-size: 18px;
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
+  width: 95%;
+  margin: 8px;
 }
