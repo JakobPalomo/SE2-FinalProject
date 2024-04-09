@@ -56,6 +56,34 @@ if (!isset($_SESSION['cart'])) {
       </div>
     </div>
 
+    <!--to make the side bar -->
+    <div class="side-by-side">  
+            <!-- div for subcat buttons-->
+            <div class="subcategorydiv">
+    <div class="food-name subcat" style="margin-bottom: 12px; font-size: 10px; padding-left: 12px;">Sub Categories</div>
+    <div class="subcatbutton">
+        <?php 
+        $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory");
+        while ($row = mysqli_fetch_array($sql)) {
+            $subcategory = $row['subcategory'];
+            $iconClass = '';
+
+            // Set the icon class based on the subcategory
+            if (strtolower($subcategory) == 'pasta') {
+                $iconClass = 'fa-plate-wheat'; // Pasta icon
+            } elseif (strpos(strtolower($subcategory), 'chicken') !== false) {
+                $iconClass = 'fa-drumstick-bite'; // Chicken icon
+            }else {
+                $iconClass = 'fa-utensils'; // Default utensils icon
+            }
+            
+        ?>
+        <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton" style="font-weight: bolder;">
+            <span><i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626;"></i> </span><?php echo $subcategory;?> 
+        </a>
+        <?php } ?>
+    </div>
+</div>
 
     <div class="main-menu">
             <!-- div for the category buttons-->
