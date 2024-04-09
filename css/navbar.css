@@ -45,3 +45,7 @@ body {
   color: rgb(168, 50, 50);
   font-size: 12px;
 }
+
+.nav-item .badge {
+  transform: translate(50%, -50%);
+}

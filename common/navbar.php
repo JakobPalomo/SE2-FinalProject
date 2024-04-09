@@ -67,9 +67,12 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
             <?php endif?>
             <?php if(isset($_SESSION['authenticated'])) :?>
               <li class="nav-item">
-                <i class="fa-solid fa-cart-shopping" style="color: #ffffff;"></i>
-                <a class="navbutton" href="./cart.php">My Cart <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '<span class="badge rounded-pill badge-notification bg-danger">' . count($_SESSION['cart']) . '</span>' : ''; ?></a>
-            </li>
+                <a class="navbutton" href="./cart.php">
+                  <i class="fa-solid fa-cart-shopping" style="color: #ffffff; position: relative;">
+                  <?php echo isset($_SESSION['cart']) && count($_SESSION['cart']) > 0 ? '<span class="badge rounded-pill badge-notification bg-danger position-absolute top-0 start-100 translate-middle" style="font-size: 0.6em;">' . count($_SESSION['cart']) . '</span>' : ''; ?>
+                 </i>
+                </a>
+              </li>
             <?php endif?>
             <?php if(isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
