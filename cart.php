@@ -102,7 +102,7 @@ include('./dbcon.php');
                     <img src="<?php echo $item['productImage']; ?>" alt="food" class="cart-display" />
                     <div class="detail-cart">
                         <p class="foodcart-name"><?php echo $item['productName']; ?></p>
-                        <p class="foodcart-name"><?php echo $item['quantity']; ?> - <?php echo $item['size']; ?> ($<?php echo $item['sizePrice']; ?>)</p>
+                        <p class="foodcart-name"><?php echo $item['quantity']; ?> - <?php echo $item['size']; ?> (PHP<?php echo $item['sizePrice']; ?>)</p>
                     </div>
                     <div class="price">
                         <p class="total-price">₱<?php echo $item['totalPrice']; ?></p>
@@ -119,6 +119,8 @@ include('./dbcon.php');
     ?>
 
         <!-- Datepicker -->
+        <br>
+        <br>
         <div class="subtitle">
             <p class="subtitle-txt-2">Date of Preparation</p>
         </div>
@@ -126,6 +128,7 @@ include('./dbcon.php');
             <input type="date" id="datepicker" name="preparationDate" class="subtitle-txt-bg-2">
         </div>
 
+        <br>
         <div class="subtitle">
             <p class="subtitle-txt-2">Time of Delivery</p>
         </div>
@@ -134,6 +137,7 @@ include('./dbcon.php');
         </div>
 
         <!-- Address Field -->
+        <br>
         <div class="subtitle">
             <span class="linebreak"><p class="subtitle-txt-2">Delivery Address</p></span>
             <span class="linebreak"><button class="change-btn" data-bs-toggle="modal" data-bs-target="#changeAddressModal">Change</button></span>
@@ -179,7 +183,7 @@ include('./dbcon.php');
     <div class="checkbox-container">
         <label class="checkbox-label" for="gcashCheckbox">
             <input type="checkbox" id="gcashCheckbox" class="custom-checkbox" name="paymentOption" onclick="handlePaymentCheckboxClick('gcashCheckbox')" value="Gcash" />
-            <div class="checkmark"></div> Gcash
+            <div class="checkmark"></div> GCash
         </label>
     </div>
 </div>

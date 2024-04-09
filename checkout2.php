@@ -5,6 +5,43 @@ include('dbcon.php');
 // Get the ID parameter from the URL
 $id = $_GET['id'];
 
+// Retrieve the order details from the 'pending' table
+$statement = $con->prepare("SELECT * FROM `pending` WHERE `id` = ?");
+$statement->bind_param("i", $id);
+$statement->execute();
+$result = $statement->get_result();
+$order = $result->fetch_assoc();
+
+// Check if the order exists
+if (!$order) {
+    echo "Error: Order not found";
+    exit;
+}
+
+// Extract items from the order
+$items = unserialize($order['items']);
+
+// Check if items are null before unserializing
+if ($items !== false) {
+    // Create the line items array
+    $line_items = [];
+    $total_amount = 0; // Initialize total amount
+    foreach ($items as $item) {
+        $item_total = $item['quantity'] * $item['sizePrice']; // Calculate total for this item
+        $total_amount += $item_total; // Add to the total amount
+        $line_items[] = [
+            'name' => $item['productName'],
+            'quantity' => $item['quantity'],
+            'amount' => $item_total * 100, // Amount should be in cents
+            'currency' => 'PHP',
+            'description' => $item['productName'],
+        ];
+    }
+} else {
+    echo "Error: Items are null in the database";
+    exit;
+}
+
 // Check if the form is submitted
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     // Check if a file was uploaded
@@ -13,43 +50,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $filename = $_FILES['paymentScreenshot']['name'];
         // Get the file content
         $fileContent = file_get_contents($_FILES['paymentScreenshot']['tmp_name']);
-        
-        // Retrieve the order details from the 'pending' table
-        $statement = $con->prepare("SELECT * FROM `pending` WHERE `id` = ?");
-        $statement->bind_param("i", $id);
-        $statement->execute();
-        $result = $statement->get_result();
-        $order = $result->fetch_assoc();
-
-        // Check if the order exists
-        if (!$order) {
-            echo "Error: Order not found";
-            exit;
-        }
-
-        // Extract items from the order
-        $items = unserialize($order['items']);
-
-        // Check if items are null before unserializing
-        if ($items !== false) {
-            // Create the line items array
-            $line_items = [];
-            $total_amount = 0; // Initialize total amount
-            foreach ($items as $item) {
-                $item_total = $item['quantity'] * $item['sizePrice']; // Calculate total for this item
-                $total_amount += $item_total; // Add to the total amount
-                $line_items[] = [
-                    'name' => $item['productName'],
-                    'quantity' => $item['quantity'],
-                    'amount' => $item_total * 100, // Amount should be in cents
-                    'currency' => 'PHP',
-                    'description' => $item['productName'],
-                ];
-            }
-        } else {
-            echo "Error: Items are null in the database";
-            exit;
-        }
 
         // Update the order status to "Paid" and store the payment screenshot in the database
         $update_statement = $con->prepare("UPDATE `pending` SET `status` = 'Paid' WHERE `id` = ?");
@@ -152,9 +152,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         
         <!-- Button -->
         <form method="POST" enctype="multipart/form-data">
-    <input type="file" name="paymentScreenshot" accept="image/*">
-    <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Upload Payment Screenshot</button>
-</form>
+            <input type="file" name="paymentScreenshot" accept="image/*">
+            <button type="submit" name="paid" class="pay" style="margin-bottom: 12px;"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Upload Payment Screenshot</button>
+        </form>
 
 </div>
         <!-- Image --></div>
