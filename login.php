@@ -59,13 +59,13 @@ session_start();
 
           <div class="field">
             <input type="submit"  class="button" name="login_now_btn" value="Login"  required>
-            <a href ="password-reset.php" class="float-end">Forgot Password?</a>
+            <a href ="password-reset.php" class="hyperlink">Forgot Password?</a>
           </div>
           <div class="links">
-            No Account yet?<a href="register.php"> Sign Up Now</a>
+            No Account yet?<a class="hyperlink" href="register.php"> Sign Up Now</a>
           </div>
           <div class="links">
-            Verification Not Sent?<a href="resend-email-verification.php"> Resend</a>
+            Verification Not Sent?<a class="hyperlink" href="resend-email-verification.php"> Resend</a>
           </div>
 
          
@@ -74,6 +74,11 @@ session_start();
         </form>
       </div>
     </div>
+
+    <footer class="footer">
+      <p>2024 Chef's Daughter. All rights reserved.</p>
+    </footer>
+    
     <!-- End Code -->
   </body>
 </html>

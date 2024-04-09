@@ -31,6 +31,9 @@ table img {
 
 .info-container {
   padding-left: 3vh;
+  height: max-content;
+  overflow: hidden; /* Hide overflowing text */
+  text-overflow: ellipsis; /* Display ellipsis (...) for overflowing text */
 }
 
 .info,
@@ -48,23 +51,13 @@ table img {
   word-break: break-word; /* Add word-break property */
 }
 
-/* Media query for small screens */
-@media screen and (max-width: 720px) {
-  .info {
-    padding: 12px; /* Reduce padding for smaller screens */
-  }
-  .details {
-    margin-left: -30%;
-  }
-}
-
 .info-label {
   color: rgb(175, 175, 175);
   font-weight: bold;
 }
 
 .inner-card {
-  margin-top: 84px;
+  margin-top: 2%;
   height: 50%;
   width: 100%;
   display: flex;
@@ -96,3 +89,18 @@ table img {
   }
 
 } */
+
+/* Media query for small screens */
+@media screen and (max-width: 720px) {
+  .info {
+    padding: 12px; /* Reduce padding for smaller screens */
+  }
+  .details {
+    margin-left: -30%;
+    max-width: 280px;
+  }
+
+  .inner-card {
+    max-width: 190px;
+  }
+}

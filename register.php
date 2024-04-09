@@ -114,14 +114,14 @@ if(isset($_SESSION['status']))
                 </div>
 
                 <input type="checkbox" id="checkbox-1" name="checkbox-1" value="1">
-                <label for="checkbox-1">I agree to the terms and conditions.<a href=""> Click to View</a></label>
+                <label for="checkbox-1">I agree to the terms and conditions.<a class="hyperlink" href=""> Click to View</a></label>
 
                 <div class="field">
                     <input type="submit" class="button" name="register_btn" value="Register" required>
                 </div>
 
                 <div class="links">
-                    Have an Account?<a href="login.php"> Login</a>
+                    Have an Account?<a class="hyperlink" href="login.php"> Login</a>
                 </div>
 
         </form>
@@ -170,7 +170,9 @@ Special requests (e.g., chicken part request, no use of MSG, no pepper, etc.) mu
   <script src="./js/termsandcondition.js"></script>
   </body>
   
-  
+  <footer class="footer">
+      <p>2024 Chef's Daughter. All rights reserved.</p>
+    </footer>
   
 </html>
 

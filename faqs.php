@@ -131,6 +131,11 @@ include('./dbcon.php');
         You can contact us promptly through Facebook Messenger. Our response hours are from 9:00 AM to 9:00 PM.
       </div>
     </div>
+    </div>
+    
+    <footer class="footer">
+      <p>2024 Chef's Daughter. All rights reserved.</p>
+    </footer>
 
     <!-- End Code -->
   </body>

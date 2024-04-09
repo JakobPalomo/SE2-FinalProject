@@ -76,3 +76,16 @@ body {
   transform: rotate(-90deg);
   transition: transform 0.3s ease; /* Optional: Add a smooth transition effect */
 }
+
+.footer {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  padding-top: 10px;
+  padding-bottom: 5px;
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #004225;
+  color: #fff;
+  text-align: center;
+}

@@ -82,7 +82,7 @@ if ($result->num_rows == 1) {
 
     <!-- Code zone -->
     <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" id="mySidebar">
-      <center><button class="add-item mt-5" style=" padding-bottom: 34px;margin-bottom:12px" onclick="redirectToCategory()"> <i class="fa-solid fa-utensils" style="color: #004225;"></i>  Order Now</button></center>
+      <center><button class="add-item mt-5" style=" padding-bottom: 34px;margin-bottom:12px;  white-space: wrap;" onclick="redirectToCategory()"> <i class="fa-solid fa-utensils" style="color: #004225;"></i>  Order Now</button></center>
       <a href="#" class="w3-bar-item w3-button show-card" data-target="card1"><span><img src="./img/profile.png" class="icon" />
     </span>My Profile</a>
       <a href="#" class="w3-bar-item w3-button show-card" data-target="card2">
@@ -106,7 +106,7 @@ if ($result->num_rows == 1) {
 
     <div class="dashboard" id="main">
       <div class="card-field" id="card1">
-        <div class="card-place">
+        <div class="card-place" style="height: max-content;">
           <div class="card-title"><h1>My Profile</h1></div>
           <!-- Place Content of card here -->
           <div class="inner-card">
@@ -327,9 +327,9 @@ if ($result->num_rows == 1) {
                     ?>
                             <tr>
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
-                                <td class="orderstat"><?php echo $orderStatus; ?></td>
+                                <td class="orderstat"><?php echo $orderStatus; ?></td>r
                                 <td class="checkout-btn">
-                                    <center><a href="checkout2.php?id=<?php echo $orderId; ?>" class="add-item mt-5"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Checkout</a></center>
+                                    <center><a href="checkout2.php?id=<?php echo $orderId; ?>" class="add-item"  style="font-size: 10px"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Checkout</a></center>
                                 </td>
                             </tr>
                             <?php
@@ -369,6 +369,7 @@ if ($result->num_rows == 1) {
       function w3_open() {
         document.getElementById("main").style.marginLeft = "25%";
         document.getElementById("mySidebar").style.width = "25%";
+        document.getElementById("mySidebar").style.maxWidth = "320px";
         document.getElementById("mySidebar").style.display = "block";
         document.getElementById("openNav").style.display = "none";
         document.getElementById("closeNav").style.display = "inline-block";
