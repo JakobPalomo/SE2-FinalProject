@@ -110,19 +110,46 @@ if(isset($_POST['submit2'])) {
                     $mail->isHTML(true);
                     $mail->Subject = 'Order Declined';
                     $mail->Body = 'Sorry, we have declined your order.';
-                    // Add order details to the email body
-                      $mail->Body .= '<table border="1">';
-                      $mail->Body .= '<tr><th>Product</th><th>Size</th><th>Quantity</th><th>Amount</th></tr>';
-                      foreach ($items as $item) {
+                    $mail->Body = '<div style="font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; font-size: 16px; color: #333;">'; 
+
+                    // Read the image file and encode it as a base64 string
+                    // $imageData = file_get_contents('../img/logo.png');
+                    // $imageBase64 = base64_encode($imageData);
+                    // $imageSrc = 'data:image/png;base64,' . $imageBase64;
+
+                    // // Include the image directly in the HTML body
+                    // $mail->Body .= '<img src="' . $imageSrc . '" alt="Logo">';
+
+                    $mail->Body .= '<p style="color: #333;">Unfortunately, were unable to process your order at this time. We apologize for any inconvenience.</p>';
+
+                    $mail->Body .= '<table style="border-collapse: collapse; width: 100%;">'; 
+                    $mail->Body .= '<tr style="background-color: #b2fba5;">'; 
+                    $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Product</th>'; 
+                    $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Size</th>'; 
+                    $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Quantity</th>'; 
+                    $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Amount</th>'; 
+                    $mail->Body .= '</tr>';
+
+                    $totalAmount = 0;
+
+                    foreach ($items as $item) {
                         $item_total = $item['quantity'] * $item['sizePrice'];
-                          $mail->Body .= '<tr>';
-                          $mail->Body .= '<td>' . $item['productName'] . '</td>';
-                          $mail->Body .= '<td>' . $item['size'] . '</td>';
-                          $mail->Body .= '<td>' . $item['quantity'] . '</td>';
-                          $mail->Body .= '<td>' . number_format($item['amount'] / 100, 2) . ' PHP</td>';
-                          $mail->Body .= '</tr>';
-                      }
-                      $mail->Body .= '</table>';
+                        $totalAmount += $item_total; // Add item total to the total amount
+                        $mail->Body .= '<tr>';
+                        $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['productName'] . '</td>';
+                        $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['size'] . '</td>';
+                        $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['quantity'] . '</td>';
+                        $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . number_format($item_total, 2) . ' PHP</td>';
+                        $mail->Body .= '</tr>';
+                    }
+
+                    $mail->Body .= '</table>';
+
+                    $mail->Body .= '<p style="text-align: right; font-weight: bold; color: #333;">Total Amount: ' . number_format($totalAmount, 2) . ' PHP</p>';
+
+                    $mail->Body .= '<p style="color: red;">This is an automated email. Please do not reply.</p>';
+
+                    $mail->Body .= '</div>';
 
                     // Send email
                     $mail->send();
@@ -157,19 +184,47 @@ if(isset($_POST['submit2'])) {
                   // Email content
                   $mail->isHTML(true);
                   $mail->Subject = 'Order Accepted';
-                  $mail->Body = 'Your order has been accepted.';
-                  // Add order details to the email body
-                  $mail->Body .= '<table border="1">';
-                  $mail->Body .= '<tr><th>Product</th><th>Size</th><th>Quantity</th><th>Amount</th></tr>';
+
+                  $mail->Body = '<div style="font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; font-size: 16px; color: #333;">'; 
+
+                //   // Read the image file and encode it as a base64 string
+                //   $imageData = file_get_contents('../img/logomini.png');
+                //   $imageBase64 = base64_encode($imageData);
+                //   $imageSrc = 'data:image/png;base64,' . $imageBase64;
+
+                //   // Include the image directly in the HTML body
+                //   $mail->Body .= '<img src="' . $imageSrc . '" alt="Logo" style="display: block; margin: 0 auto;">';
+
+                  $mail->Body .= '<p style="color: #333;">Your order has been accepted. Please complete necessary payments and thank you for your purchase.</p>';
+
+                  $mail->Body .= '<table style="border-collapse: collapse; width: 100%;">'; 
+                  $mail->Body .= '<tr style="background-color: #b2fba5;">'; 
+                  $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Product</th>'; 
+                  $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Size</th>'; 
+                  $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Quantity</th>'; 
+                  $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Amount</th>'; 
+                  $mail->Body .= '</tr>';
+
+                  $totalAmount = 0;
+
                   foreach ($items as $item) {
-                      $mail->Body .= '<tr>';
-                      $mail->Body .= '<td>' . $item['productName'] . '</td>';
-                      $mail->Body .= '<td>' . $item['size'] . '</td>';
-                      $mail->Body .= '<td>' . $item['quantity'] . '</td>';
-                      $mail->Body .= '<td>' . number_format($item['amount'] / 100, 2) . ' PHP</td>';
-                      $mail->Body .= '</tr>';
-                  }
+                       $item_total = $item['quantity'] * $item['sizePrice'];
+                       $totalAmount += $item_total; // Add item total to the total amount
+                       $mail->Body .= '<tr>';
+                       $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['productName'] . '</td>';
+                       $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['size'] . '</td>';
+                       $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['quantity'] . '</td>';
+                       $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . number_format($item_total, 2) . ' PHP</td>';
+                       $mail->Body .= '</tr>';
+                   }
+
                   $mail->Body .= '</table>';
+
+                  $mail->Body .= '<p style="text-align: right; font-weight: bold; color: #333;">Total Amount: ' . number_format($totalAmount, 2) . ' PHP</p>';
+
+                  $mail->Body .= '<p style="color: red;">This is an automated email. Please do not reply.</p>';
+
+                  $mail->Body .= '</div>';
           
                   // Send email
                   $mail->send();
@@ -204,19 +259,47 @@ if(isset($_POST['submit2'])) {
                 // Email content
                 $mail->isHTML(true);
                 $mail->Subject = 'Order Delivered';
-                $mail->Body = 'Your order has been delivered.';
-                // Add order details to the email body
-                $mail->Body .= '<table border="1">';
-                $mail->Body .= '<tr><th>Product</th><th>Size</th><th>Quantity</th><th>Amount</th></tr>';
+                
+                $mail->Body = '<div style="font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; font-size: 16px; color: #333;">'; 
+                
+                // Read the image file and encode it as a base64 string
+                // $imageData = file_get_contents('../img/logomini.png');
+                // $imageBase64 = base64_encode($imageData);
+                // $imageSrc = 'data:image/png;base64,' . $imageBase64;
+
+                // // Include the image directly in the HTML body
+                // $mail->Body .= '<img src="' . $imageSrc . '" alt="Logo" style="display: block; margin: 0 auto;">';
+                
+                $mail->Body .= '<p style="color: #333;">Your order has been delivered successfully. We hope you find everything to your satisfaction and have a wonderful day!</p>';
+                
+                $mail->Body .= '<table style="border-collapse: collapse; width: 100%;">'; 
+                $mail->Body .= '<tr style="background-color: #b2fba5;">'; 
+                $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Product</th>'; 
+                $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Size</th>'; 
+                $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Quantity</th>'; 
+                $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Amount</th>'; 
+                $mail->Body .= '</tr>';
+                
+                $totalAmount = 0;
+                
                 foreach ($items as $item) {
+                    $item_total = $item['quantity'] * $item['sizePrice'];
+                    $totalAmount += $item_total; // Add item total to the total amount
                     $mail->Body .= '<tr>';
-                    $mail->Body .= '<td>' . $item['productName'] . '</td>';
-                    $mail->Body .= '<td>' . $item['size'] . '</td>';
-                    $mail->Body .= '<td>' . $item['quantity'] . '</td>';
-                    $mail->Body .= '<td>' . number_format($item['amount'] / 100, 2) . ' PHP</td>';
+                    $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['productName'] . '</td>';
+                    $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['size'] . '</td>';
+                    $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['quantity'] . '</td>';
+                    $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . number_format($item_total, 2) . ' PHP</td>';
                     $mail->Body .= '</tr>';
                 }
+                
                 $mail->Body .= '</table>';
+                
+                $mail->Body .= '<p style="text-align: right; font-weight: bold; color: #333;">Total Amount: ' . number_format($totalAmount, 2) . ' PHP</p>';
+                
+                $mail->Body .= '<p style="color: red;">This is an automated email. Please do not reply.</p>';
+                
+                $mail->Body .= '</div>';
         
                 // Send email
                 $mail->send();
@@ -250,20 +333,49 @@ if(isset($_POST['submit2'])) {
       
               // Email content
               $mail->isHTML(true);
-              $mail->Subject = 'Pay NOW';
-              $mail->Body = 'Your Online Payment Order has been accepted, pay now.';
-              // Add order details to the email body
-              $mail->Body .= '<table border="1">';
-              $mail->Body .= '<tr><th>Product</th><th>Size</th><th>Quantity</th><th>Amount</th></tr>';
+              $mail->Subject = 'Order to be paid';
+              
+              $mail->Body = '<div style="font-family: "Segoe UI", Tahoma, Geneva, Verdana, sans-serif; font-size: 16px; color: #333;">'; 
+             
+              // Read the image file and encode it as a base64 string
+            //   $imageData = file_get_contents('../img/logomini.png');
+            //   $imageBase64 = base64_encode($imageData);
+            //   $imageSrc = 'data:image/png;base64,' . $imageBase64;
+
+            //   // Include the image directly in the HTML body
+            //   $mail->Body .= '<img src="' . $imageSrc . '" alt="Logo" style="display: block; margin: 0 auto;">';
+
+              
+              $mail->Body .= '<p style="color: #333;">Before we process your order, please complete your online payment through GCash.</p>';
+              
+              $mail->Body .= '<table style="border-collapse: collapse; width: 100%;">'; 
+              $mail->Body .= '<tr style="background-color: #b2fba5;">'; 
+              $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Product</th>'; 
+              $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Size</th>'; 
+              $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Quantity</th>'; 
+              $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Amount</th>'; 
+              $mail->Body .= '</tr>';
+              
+              $totalAmount = 0;
+              
               foreach ($items as $item) {
+                  $item_total = $item['quantity'] * $item['sizePrice'];
+                  $totalAmount += $item_total; // Add item total to the total amount
                   $mail->Body .= '<tr>';
-                  $mail->Body .= '<td>' . $item['productName'] . '</td>';
-                  $mail->Body .= '<td>' . $item['size'] . '</td>';
-                  $mail->Body .= '<td>' . $item['quantity'] . '</td>';
-                  $mail->Body .= '<td>' . number_format($item['amount'] / 100, 2) . ' PHP</td>';
+                  $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['productName'] . '</td>';
+                  $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['size'] . '</td>';
+                  $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . $item['quantity'] . '</td>';
+                  $mail->Body .= '<td style="border: 1px solid #dddddd; text-align: left; padding: 8px;">' . number_format($item_total, 2) . ' PHP</td>';
                   $mail->Body .= '</tr>';
               }
+              
               $mail->Body .= '</table>';
+              
+              $mail->Body .= '<p style="text-align: right; font-weight: bold; color: #333;">Total Amount: ' . number_format($totalAmount, 2) . ' PHP</p>';
+              
+              $mail->Body .= '<p style="color: red;">This is an automated email. Please do not reply.</p>';
+              
+              $mail->Body .= '</div>';
       
               // Send email
               $mail->send();
