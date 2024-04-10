@@ -342,7 +342,7 @@ if ($result->num_rows == 1) {
                     ?>
                             <tr>
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
-                                <td class="orderstat"><?php echo $orderStatus; ?></td>r
+                                <td class="orderstat"><?php echo $orderStatus; ?></td>
                                 <td class="checkout-btn">
                                     <center><a href="checkout2.php?id=<?php echo $orderId; ?>" class="add-item"  style="font-size: 10px"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Checkout</a></center>
                                 </td>

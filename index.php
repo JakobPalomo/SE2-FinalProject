@@ -125,7 +125,13 @@ include('dbcon.php');
 </div>
 </div>
     <footer class="footer">
-      <p>2024 Chef's Daughter. All rights reserved.</p>
+<br>
+      <h3>Contact us through</h3><br>
+      <p><i class="fa-brands fa-facebook" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; <a href="https://www.facebook.com/chefsdaughterph" target="_blank"  style="color: inherit; text-decoration: none;">chefsdaughter</a></p>
+      <p><i class="fa-solid fa-phone" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; 0915 121 7129</p>
+      <p><i class="fa-solid fa-envelope" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; chefsdaughterph@gmail.com</p>
+<br>
+      <p style="opacity: .6;">2024 Chef's Daughter. All rights reserved.</p>
     </footer>
 
    <!-- End Code -->

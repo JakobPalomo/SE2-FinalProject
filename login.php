@@ -10,6 +10,7 @@ session_start();
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
     <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="css/register.css" />
+    <link rel="stylesheet" type="text/css" href="./css/faqs.css" />
     <title>Login</title>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -75,7 +76,15 @@ session_start();
       </div>
     </div>
 
-    
+    <footer class="footer">
+<br>
+      <h3>Contact us through</h3><br>
+      <p><i class="fa-brands fa-facebook" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; <a href="https://www.facebook.com/chefsdaughterph" target="_blank"  style="color: inherit; text-decoration: none;">chefsdaughter</a></p>
+      <p><i class="fa-solid fa-phone" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; 0915 121 7129</p>
+      <p><i class="fa-solid fa-envelope" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; chefsdaughterph@gmail.com</p>
+<br>
+      <p style="opacity: .6;">2024 Chef's Daughter. All rights reserved.</p>
+    </footer>
     <!-- End Code -->
   </body>
 </html>

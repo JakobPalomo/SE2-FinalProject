@@ -1,54 +1,52 @@
 html {
-    background-color: #f5f5dc;
-    
+  background-color: #f5f5dc;
 }
-  
-  body {
-    min-height: 100vh; /* Use min-height instead of height for better responsiveness */
-    margin: 0; /* Remove default margin */
-    background-color: #f5f5dc;
-    
-  }
-  
-  .about {
-    color: #ffffff;
-    text-decoration: none;
-    font-family: "Inika", serif;
-    font-weight: bolder;
-    font-size: 6vw; /* Use vw for font size to make it responsive */
-    margin-left: 3vw; /* Use vw for margin for responsiveness */
-  }
-  
-  .topdiv {
-    height: 60vh;
-    width: 100%;
-    background-image: url("../img/blurcover.jpg");
-    background-size: cover;
-    background-position: center;
-    background-repeat: no-repeat;
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-  }
-  
-  .topdiv img {
-    max-width: 100%;
-    height: auto;
-    max-height: 70vh; /* Use vh for responsiveness */
-  }
-  
-  .bottomdiv {
-    padding-top: 4vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background-color: #f5f5dc;
-    margin-bottom: 8vh; /* Use vh for margin for responsiveness */
-  }
-  
- .textandpiccontainer {
+
+body {
+  min-height: 100vh; /* Use min-height instead of height for better responsiveness */
+  margin: 0; /* Remove default margin */
+  background-color: #f5f5dc;
+}
+
+.about {
+  color: #ffffff;
+  text-decoration: none;
+  font-family: "Inika", serif;
+  font-weight: bolder;
+  font-size: 6vw; /* Use vw for font size to make it responsive */
+  margin-left: 3vw; /* Use vw for margin for responsiveness */
+}
+
+.topdiv {
+  height: 60vh;
+  width: 100%;
+  background-image: url("../img/blurcover.jpg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.topdiv img {
+  max-width: 100%;
+  height: auto;
+  max-height: 70vh; /* Use vh for responsiveness */
+}
+
+.bottomdiv {
+  padding-top: 4vh;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background-color: #f5f5dc;
+  margin-bottom: 8vh; /* Use vh for margin for responsiveness */
+}
+
+.textandpiccontainer {
   padding-left: 4vw; /* Use vw for padding for responsiveness */
   width: 60%; /* Adjust the width based on your design needs */
   display: flex;
@@ -69,43 +67,41 @@ html {
   color: #000000;
   font-family: "Plus Jakarta Sans", sans-serif;
   text-align: justify;
-  font-size: 1.3vw; /* Use vw for font size to make it responsive */
+  font-size: 20px; /* Use vw for font size to make it responsive */
   margin: 4vw; /* Use vw for margin for responsiveness */
   margin-bottom: -4%;
 }
-  
+
+.movedown {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  align-items: center;
+}
+
+@media only screen and (max-width: 720px) {
   .movedown {
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
+    flex-direction: column;
+    margin-right: 12%;
   }
-  
-  @media only screen and (max-width: 720px) {
-    .movedown {
-      flex-direction: column;
-      margin-right: 12%;
-    }
-    .textandpiccontainer {
-      padding-left: 2vw;
-      width: 100%;
-      height: auto;
-    }
-    .bottomdiv {
-      width: 90%;
-    }
+  .textandpiccontainer {
+    padding-left: 2vw;
+    width: 100%;
+    height: auto;
   }
-  
-  .footer {
-    padding-top: 0; /* Adjusted to remove extra padding */
-    padding-bottom: 1vh;
-    margin-top: 0; /* Adjusted to remove extra margin */
-    margin-bottom: 200; /* Adjusted to remove extra margin */
-    font-family: "Plus Jakarta Sans", sans-serif;
-    background-color: #004225;
-    color: #f5f5dc;
-    text-align: center;
-    
+  .bottomdiv {
+    width: 90%;
+    flex-direction: column;
   }
-  
-  
+}
+
+.footer {
+  padding-top: 0; /* Adjusted to remove extra padding */
+  padding-bottom: 1vh;
+  margin-top: 0; /* Adjusted to remove extra margin */
+  margin-bottom: 200; /* Adjusted to remove extra margin */
+  font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #004225;
+  color: #f5f5dc;
+  text-align: center;
+}
