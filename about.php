@@ -27,38 +27,7 @@
   </head>
   <body style="background-color: #f5f5dc;">
 
-    <nav class="navbar navbar-expand-lg">
-      <div class="container-fluid">
-        <a class="brand" href="#">Chef's Daughter</a>
-        <button
-          class="navbar-toggler"
-          type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#navbarSupportedContent"
-          aria-controls="navbarSupportedContent"
-          aria-expanded="false"
-          aria-label="Toggle navigation"
-        >
-          <span class="navbar-toggler-icon"></span>
-        </button>
-        <div class="collapse navbar-collapse" id="navbarSupportedContent">
-          <ul class="navbar-nav ms-auto mb-2 mb-lg-0">
-            <li class="nav-item">
-              <a class="navbutton" aria-current="page" href="#">Login</a>
-            </li>
-            <li class="nav-item">
-              <a class="navbutton" href="#">Menu</a>
-            </li>
-            <li class="nav-item">
-              <a class="navbutton" href="#">FAQs</a>
-            </li>
-            <li class="nav-item">
-              <a class="navbutton" href="#">My Cart</a>
-            </li>
-          </ul>
-        </div>
-      </div>
-    </nav>
+  <?php include('common/navbar.php');?>
     <!-- Code of About -->
 
     <!-- top part of the About after the navbar -->
