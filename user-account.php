@@ -41,6 +41,8 @@ if ($result->num_rows == 1) {
     <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
     <link rel="stylesheet" type="text/css" href="css/lectercard.css" />
     <link rel="stylesheet" type="text/css" href="css/pendingordercard.css" />
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+
 
     <title>My Account</title>
     <script
@@ -103,6 +105,14 @@ if ($result->num_rows == 1) {
     window.location.href = 'category.php?cid=1';
   }
     </script>
+
+<script>
+    $(document).ready(function() {
+        $('.order-row').click(function() {
+            $($(this).data('target')).modal('show');
+        });
+    });
+</script>
 
 
     <div class="dashboard" id="main">
@@ -202,12 +212,17 @@ if ($result->num_rows == 1) {
                     <?php foreach ($orders as $row):
                         $orderId = $row['id'];
                         $orderStatus = $row['status'];
+                        $deliveryDate = $row['preparation_date'];
+                        $deliveryTime = $row['delivery_time'];
+                        $deliveryOption = $row['delivery_option'];
+                        $paymentOption = $row['payment_option'];
+                        $deliveryAddress = $row['delivery_address'];
                         $orderItems = unserialize($row['items']);
 
                         // Check if order status is "Pending"
                         if ($orderStatus === "Pending"):
                     ?>
-                            <tr>
+                            <tr class="order-row" data-toggle="modal" data-target="#orderModal_<?php echo $orderId; ?>">
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
                                 <td class="orderstat"><?php echo $orderStatus; ?></td>
                             </tr>
@@ -254,12 +269,17 @@ if ($result->num_rows == 1) {
                     <?php foreach ($orders as $row):
                         $orderId = $row['id'];
                         $orderStatus = $row['status'];
+                        $deliveryDate = $row['preparation_date'];
+                        $deliveryTime = $row['delivery_time'];
+                        $deliveryOption = $row['delivery_option'];
+                        $paymentOption = $row['payment_option'];
+                        $deliveryAddress = $row['delivery_address'];
                         $orderItems = unserialize($row['items']);
 
                         
                         if ($orderStatus === "Accepted"):
                     ?>
-                            <tr>
+                            <tr class="order-row" data-toggle="modal" data-target="#orderModal_<?php echo $orderId; ?>">
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
                                 <td class="orderstat"><?php echo $orderStatus; ?></td>
                             </tr>
@@ -306,12 +326,17 @@ if ($result->num_rows == 1) {
                     <?php foreach ($orders as $row):
                         $orderId = $row['id'];
                         $orderStatus = $row['status'];
+                        $deliveryDate = $row['preparation_date'];
+                        $deliveryTime = $row['delivery_time'];
+                        $deliveryOption = $row['delivery_option'];
+                        $paymentOption = $row['payment_option'];
+                        $deliveryAddress = $row['delivery_address'];
                         $orderItems = unserialize($row['items']);
 
     
                         if ($orderStatus === "Delivered"):
                     ?>
-                            <tr>
+                            <tr class="order-row" data-toggle="modal" data-target="#orderModal_<?php echo $orderId; ?>">
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
                                 <td class="orderstat"><?php echo $orderStatus; ?></td>
                             </tr>
@@ -358,11 +383,16 @@ if ($result->num_rows == 1) {
                     <?php foreach ($orders as $row):
                         $orderId = $row['id'];
                         $orderStatus = $row['status'];
+                        $deliveryDate = $row['preparation_date'];
+                        $deliveryTime = $row['delivery_time'];
+                        $deliveryOption = $row['delivery_option'];
+                        $paymentOption = $row['payment_option'];
+                        $deliveryAddress = $row['delivery_address'];
                         $orderItems = unserialize($row['items']);
 
                         if ($orderStatus === "To Pay"):
                     ?>
-                            <tr>
+                            <tr class="order-row" data-toggle="modal" data-target="#orderModal_<?php echo $orderId; ?>">
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
                                 <td class="checkout-btn">
                                     <center><a href="checkout2.php?id=<?php echo $orderId; ?>" class="add-item"  style="font-size: 15px"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Checkout</a></center>
@@ -406,6 +436,53 @@ if ($result->num_rows == 1) {
 
     <!-- End Code -->
 
+<!-- Modal -->
+<?php foreach ($orders as $row): ?>
+    <?php 
+        $orderId = $row['id'];
+        $deliveryDate = $row['preparation_date'];
+        $deliveryTime = $row['delivery_time'];
+        $deliveryOption = $row['delivery_option'];
+        $paymentOption = $row['payment_option'];
+        $deliveryAddress = $row['delivery_address'];
+        $orderItems = unserialize($row['items']);
+
+        // Calculate subtotal
+        $subtotal = 0;
+        foreach ($orderItems as $item) {
+            $quantity = $item['quantity'];
+            $itemPrice = $item['sizePrice'];
+            $subtotal += $quantity * $itemPrice;
+        }
+    ?>
+    <div class="modal fade" id="orderModal_<?php echo $orderId; ?>" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="orderModalLabel">Order Details - <?php echo $orderId; ?></h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>Delivery Date: <?php echo $deliveryDate; ?></p>
+                    <p>Delivery Time: <?php echo $deliveryTime; ?></p>
+                    <p>Delivery Option: <?php echo $deliveryOption; ?></p>
+                    <p>Payment Option: <?php echo $paymentOption; ?></p>
+                    <p>Delivery Address: <?php echo $deliveryAddress; ?></p>
+                    <hr>
+                    <p>Order Items:</p>
+                    <ul>
+                        <?php foreach ($orderItems as $item): ?>
+                            <li><?php echo $item['quantity'] . ' x ' . $item['productName'] . ' - ₱' . ($item['quantity'] * $item['sizePrice']); ?></li>
+                        <?php endforeach; ?>
+                    </ul>
+                    <p>Total: ₱<?php echo $subtotal; ?></p>
+                </div>
+            </div>
+        </div>
+    </div>
+<?php endforeach; ?>
 
 
 
