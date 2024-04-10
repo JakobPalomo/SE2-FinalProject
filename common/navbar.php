@@ -40,7 +40,7 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
             <a class="navbutton" href="./faqs.php">FAQs</a>
             </li>
             <li class="nav-item">
-            <a class="navbutton" href="./faqs.php">About Us</a>
+            <a class="navbutton" href="./about.php">About Us</a>
             </li>
             <?php if(!isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">

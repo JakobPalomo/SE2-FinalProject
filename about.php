@@ -3,8 +3,8 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <link rel="stylesheet" type="text/css" href="../css/navbar.css" />
-    <link rel="stylesheet" href="../css/aboutus.css" />
+    <link rel="stylesheet" type="text/css" href="./css/navbar.css" />
+    <link rel="stylesheet" href="./css/aboutus.css" />
     <title>Document</title>
     <script
       src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"
@@ -77,11 +77,11 @@
              thought that its time for other families & people to taste this special food. Giving her full focus & effort every time she prepares and
               cooks, I am assuring all of you that this food will satisfy, if not, will exceed your expectations. Because in Chef’s Daughter, the secret ingredient is always love. 🦋🦋🦋
         </p>
-        <img src="../img/cateringbg.jpg" alt="Pic1" />
+        <img src="./img/cateringbg.jpg" alt="Pic1" />
       </div>
 
       <div class="textandpiccontainer">
-        <img src="../img/pic2.jpg" alt="Pic2" />
+        <img src="./img/pic2.jpg" alt="Pic2" />
         <p>
             We are an online food business and we offer
             𝐅𝐑𝐄𝐄 𝐃𝐄𝐋𝐈𝐕𝐄𝐑𝐘 𝐚𝐧𝐲𝐰𝐡𝐞𝐫𝐞 𝐢𝐧 𝐏𝐀𝐌𝐏𝐀𝐍𝐆𝐀. We accept 𝐀𝐃𝐕𝐀𝐍𝐂𝐄, 𝐒𝐇𝐎𝐑𝐓 𝐀𝐍𝐃 𝐁𝐔𝐋𝐊 𝐎𝐑𝐃𝐄𝐑𝐒 that fits on every occasion you celebrate. 
