@@ -157,8 +157,9 @@ if ($result->num_rows == 1) {
       </td>
     </tr>
   </table>
+  
   <center>
-  <a href="editaccount.php">
+  <a style="color: white;" href="editaccount.php">
     <button class="add-item mt-5" style="padding-bottom: 34px; margin-bottom: 12px; white-space: wrap;">
       <i class="fa-solid fa-user-edit" style="color: #004225;"></i> Edit Profile
     </button>

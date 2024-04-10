@@ -107,7 +107,7 @@ if(isset($_POST['add_to_cart'])) {
             
         ?>
         <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton" style="font-weight: bolder;">
-            <span><i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626;"></i> </span><?php echo $subcategory;?> 
+            <span><i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626; margin-right: 7px;"></i> </span><?php echo $subcategory;?> 
         </a>
         <?php } ?>
     </div>
