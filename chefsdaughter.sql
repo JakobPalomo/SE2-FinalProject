@@ -1,11 +1,11 @@
 -- phpMyAdmin SQL Dump
--- version 5.2.1
+-- version 5.2.0
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Apr 10, 2024 at 12:53 PM
--- Server version: 10.4.28-MariaDB
--- PHP Version: 8.2.4
+-- Generation Time: Apr 10, 2024 at 05:00 PM
+-- Server version: 10.4.25-MariaDB
+-- PHP Version: 8.1.10
 
 SET SQL_MODE = "NO_AUTO_VALUE_ON_ZERO";
 START TRANSACTION;
@@ -24,6 +24,28 @@ SET time_zone = "+00:00";
 -- --------------------------------------------------------
 
 --
+-- Table structure for table `accepted`
+--
+
+CREATE TABLE `accepted` (
+  `id` int(11) NOT NULL,
+  `user_session_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `contact` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `items` text NOT NULL,
+  `delivery_address` text NOT NULL,
+  `total_price` decimal(10,2) NOT NULL,
+  `payment_option` varchar(50) NOT NULL,
+  `delivery_option` varchar(50) NOT NULL,
+  `preparation_date` date NOT NULL,
+  `delivery_time` time NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'Accepted'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
 -- Table structure for table `admin`
 --
 
@@ -33,7 +55,7 @@ CREATE TABLE `admin` (
   `password` varchar(255) NOT NULL,
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
 -- Dumping data for table `admin`
@@ -54,7 +76,16 @@ CREATE TABLE `category` (
   `categoryDescription` longtext DEFAULT NULL,
   `creationDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `category`
+--
+
+INSERT INTO `category` (`id`, `categoryName`, `categoryDescription`, `creationDate`, `updationDate`) VALUES
+(1, 'Bulk Orders', 'Food Trays With M,L,XL,XXL Sizing', '2024-04-10 13:28:17', NULL),
+(2, 'Special Deals', '', '2024-04-10 13:34:34', NULL),
+(3, 'Lechon Baboy', '', '2024-04-10 13:34:52', NULL);
 
 -- --------------------------------------------------------
 
@@ -77,7 +108,36 @@ CREATE TABLE `gcashpayments` (
   `delivery_time` datetime NOT NULL,
   `status` varchar(255) NOT NULL,
   `payment_screenshot` varchar(255) NOT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `gcashpayments`
+--
+
+INSERT INTO `gcashpayments` (`id`, `order_id`, `user_session_id`, `name`, `contact`, `email`, `items`, `delivery_address`, `total_price`, `payment_option`, `delivery_option`, `delivery_time`, `status`, `payment_screenshot`) VALUES
+(1, 1, 1, 'Ezequiel Gonzalez', '09762909844', 'ezequiel.gonzalez.cics@ust.edu.ph', 'a:1:{i:0;a:7:{s:9:\"productId\";s:1:\"1\";s:12:\"productImage\";s:39:\"admin/productimages/1/Spicy Chicken.jpg\";s:11:\"productName\";s:13:\"Spicy Chicken\";s:8:\"quantity\";i:1;s:4:\"size\";s:3:\"Xxl\";s:9:\"sizePrice\";i:2200;s:10:\"totalPrice\";i:2200;}}', '06, Purok Centro, Sta Lucia,, Lubao, Pampanga, 2005', '2200.00', 'Gcash', 'Delivery', '0000-00-00 00:00:00', 'Paid', 'image_2024-04-10_223234071.png'),
+(2, 1, 1, 'Ezequiel Gonzalez', '09762909844', 'ezequiel.gonzalez.cics@ust.edu.ph', 'a:1:{i:0;a:7:{s:9:\"productId\";s:1:\"1\";s:12:\"productImage\";s:39:\"admin/productimages/1/Spicy Chicken.jpg\";s:11:\"productName\";s:13:\"Spicy Chicken\";s:8:\"quantity\";i:1;s:4:\"size\";s:3:\"Xxl\";s:9:\"sizePrice\";i:2200;s:10:\"totalPrice\";i:2200;}}', '06, Purok Centro, Sta Lucia,, Lubao, Pampanga, 2005', '2200.00', 'Gcash', 'Delivery', '0000-00-00 00:00:00', 'Paid', 'image_2024-04-10_223234071.png'),
+(3, 1, 1, 'Ezequiel Gonzalez', '09762909844', 'ezequiel.gonzalez.cics@ust.edu.ph', 'a:1:{i:0;a:7:{s:9:\"productId\";s:1:\"1\";s:12:\"productImage\";s:39:\"admin/productimages/1/Spicy Chicken.jpg\";s:11:\"productName\";s:13:\"Spicy Chicken\";s:8:\"quantity\";i:1;s:4:\"size\";s:3:\"Xxl\";s:9:\"sizePrice\";i:2200;s:10:\"totalPrice\";i:2200;}}', '06, Purok Centro, Sta Lucia,, Lubao, Pampanga, 2005', '2200.00', 'Gcash', 'Delivery', '0000-00-00 00:00:00', 'Paid', 'image_2024-04-10_223234071.png'),
+(4, 1, 1, 'Ezequiel Gonzalez', '09762909844', 'ezequiel.gonzalez.cics@ust.edu.ph', 'a:1:{i:0;a:7:{s:9:\"productId\";s:1:\"1\";s:12:\"productImage\";s:39:\"admin/productimages/1/Spicy Chicken.jpg\";s:11:\"productName\";s:13:\"Spicy Chicken\";s:8:\"quantity\";i:1;s:4:\"size\";s:3:\"Xxl\";s:9:\"sizePrice\";i:2200;s:10:\"totalPrice\";i:2200;}}', '06, Purok Centro, Sta Lucia,, Lubao, Pampanga, 2005', '2200.00', 'Gcash', 'Delivery', '0000-00-00 00:00:00', 'Paid', 'image_2024-04-10_223234071.png'),
+(5, 1, 1, 'Ezequiel Gonzalez', '09762909844', 'ezequiel.gonzalez.cics@ust.edu.ph', 'a:1:{i:0;a:7:{s:9:\"productId\";s:1:\"1\";s:12:\"productImage\";s:39:\"admin/productimages/1/Spicy Chicken.jpg\";s:11:\"productName\";s:13:\"Spicy Chicken\";s:8:\"quantity\";i:1;s:4:\"size\";s:3:\"Xxl\";s:9:\"sizePrice\";i:2200;s:10:\"totalPrice\";i:2200;}}', '06, Purok Centro, Sta Lucia,, Lubao, Pampanga, 2005', '2200.00', 'Gcash', 'Delivery', '0000-00-00 00:00:00', 'Paid', 'image_2024-04-10_223234071.png'),
+(6, 1, 1, 'Ezequiel Gonzalez', '09762909844', 'ezequiel.gonzalez.cics@ust.edu.ph', 'a:1:{i:0;a:7:{s:9:\"productId\";s:1:\"1\";s:12:\"productImage\";s:39:\"admin/productimages/1/Spicy Chicken.jpg\";s:11:\"productName\";s:13:\"Spicy Chicken\";s:8:\"quantity\";i:1;s:4:\"size\";s:3:\"Xxl\";s:9:\"sizePrice\";i:2200;s:10:\"totalPrice\";i:2200;}}', '06, Purok Centro, Sta Lucia,, Lubao, Pampanga, 2005', '2200.00', 'Gcash', 'Delivery', '0000-00-00 00:00:00', 'Paid', 'image_2024-04-10_223234071.png'),
+(7, 1, 1, 'Ezequiel Gonzalez', '09762909844', 'ezequiel.gonzalez.cics@ust.edu.ph', 'a:1:{i:0;a:7:{s:9:\"productId\";s:1:\"1\";s:12:\"productImage\";s:39:\"admin/productimages/1/Spicy Chicken.jpg\";s:11:\"productName\";s:13:\"Spicy Chicken\";s:8:\"quantity\";i:1;s:4:\"size\";s:3:\"Xxl\";s:9:\"sizePrice\";i:2200;s:10:\"totalPrice\";i:2200;}}', '06, Purok Centro, Sta Lucia,, Lubao, Pampanga, 2005', '2200.00', 'Gcash', 'Delivery', '0000-00-00 00:00:00', 'Paid', 'image_2024-04-10_223234071.png');
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `orders`
+--
+
+CREATE TABLE `orders` (
+  `id` int(11) NOT NULL,
+  `userId` int(11) DEFAULT NULL,
+  `productId` varchar(255) DEFAULT NULL,
+  `quantity` int(11) DEFAULT NULL,
+  `orderDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `paymentMethod` varchar(50) DEFAULT NULL,
+  `orderStatus` varchar(55) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 -- --------------------------------------------------------
 
@@ -91,7 +151,14 @@ CREATE TABLE `ordertrackhistory` (
   `status` varchar(255) DEFAULT NULL,
   `remark` mediumtext DEFAULT NULL,
   `postingDate` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `ordertrackhistory`
+--
+
+INSERT INTO `ordertrackhistory` (`id`, `orderId`, `status`, `remark`, `postingDate`) VALUES
+(1, 1, 'To Pay', '', '2024-04-10 14:32:08');
 
 -- --------------------------------------------------------
 
@@ -113,7 +180,14 @@ CREATE TABLE `pending` (
   `preparation_date` date NOT NULL,
   `delivery_time` time NOT NULL,
   `status` varchar(50) NOT NULL DEFAULT 'Pending'
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `pending`
+--
+
+INSERT INTO `pending` (`id`, `user_session_id`, `name`, `contact`, `email`, `items`, `delivery_address`, `total_price`, `payment_option`, `delivery_option`, `preparation_date`, `delivery_time`, `status`) VALUES
+(1, 1, 'Ezequiel Gonzalez', '09762909844', 'ezequiel.gonzalez.cics@ust.edu.ph', 'a:1:{i:0;a:7:{s:9:\"productId\";s:1:\"1\";s:12:\"productImage\";s:39:\"admin/productimages/1/Spicy Chicken.jpg\";s:11:\"productName\";s:13:\"Spicy Chicken\";s:8:\"quantity\";i:1;s:4:\"size\";s:3:\"Xxl\";s:9:\"sizePrice\";i:2200;s:10:\"totalPrice\";i:2200;}}', '06, Purok Centro, Sta Lucia,, Lubao, Pampanga, 2005', '2200.00', 'Gcash', 'Delivery', '2024-04-20', '22:32:00', 'Paid');
 
 -- --------------------------------------------------------
 
@@ -137,7 +211,36 @@ CREATE TABLE `products` (
   `productAvailability` varchar(50) NOT NULL,
   `postingDate` timestamp NOT NULL DEFAULT current_timestamp(),
   `updationDate` timestamp NOT NULL DEFAULT current_timestamp() ON UPDATE current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `products`
+--
+
+INSERT INTO `products` (`id`, `category`, `subCategory`, `productName`, `mediumPrice`, `largePrice`, `xlPrice`, `xxlPrice`, `productDescription`, `productImage1`, `productImage2`, `productImage3`, `productAvailability`, `postingDate`, `updationDate`) VALUES
+(1, '1', '1', 'Spicy Chicken', '1200.00', '1400.00', '1700.00', '2200.00', '', 'Spicy Chicken.jpg', '', '', 'In Stock', '2024-04-10 13:40:42', '2024-04-10 13:40:42'),
+(2, '1', '1', 'Chicken Karaage', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'Chicken Karaage.jpg', '', '', 'In Stock', '2024-04-10 13:46:12', '2024-04-10 13:46:12'),
+(3, '1', '1', 'Chicken Shawarma', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'chicken shawarma.png', '', '', 'In Stock', '2024-04-10 13:51:18', '2024-04-10 13:51:18'),
+(4, '1', '1', 'Kapampangan Chicken Asado', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', '423686854_7136901539680477_3077292866098800232_n (1).jpg', '', '', 'In Stock', '2024-04-10 13:54:24', '2024-04-10 13:58:36'),
+(5, '1', '1', 'Chicken Caldereta', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'Chicken caldereta.jpg', '', '', 'In Stock', '2024-04-10 13:58:21', '2024-04-10 13:58:21'),
+(6, '1', '1', 'Chicken Cordon Blue', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'Cordon Blue.jpg', '', '', 'In Stock', '2024-04-10 14:02:01', '2024-04-10 14:02:01'),
+(7, '1', '1', 'Creamy Chicken Pastel', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'Creamy Chicken Pastel.jpg', '', '', 'In Stock', '2024-04-10 14:04:36', '2024-04-10 14:04:36'),
+(8, '1', '1', 'Classic Fried Chicken', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'Classic Fried Chicken.jpg', '', '', 'In Stock', '2024-04-10 14:05:35', '2024-04-10 14:05:35'),
+(9, '1', '1', 'Creamy Chicken With Mushroom', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'Creamy-Garlic-Butter-Mushroom-Chicken-.jpg', '', '', 'In Stock', '2024-04-10 14:09:35', '2024-04-10 14:09:35'),
+(10, '1', '1', 'Honey Lemon Chicken Wings', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'IMG_7991.jpg', '', '', 'In Stock', '2024-04-10 14:12:38', '2024-04-10 14:12:38'),
+(11, '1', '1', 'Buffallo Chicken Wings', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'Buffalo Chicken WIngs.jpg', '', '', 'In Stock', '2024-04-10 14:14:01', '2024-04-10 14:14:01'),
+(12, '1', '1', 'Salted Egg Chicken Wings', '1200.00', '1400.00', '1700.00', '2200.00', '<br>', 'Salted egg Chicken wings.jpg', '', '', 'In Stock', '2024-04-10 14:15:04', '2024-04-10 14:15:04'),
+(13, '1', '2', 'Spicy Pork', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'spicy pork.jpg', '', '', 'In Stock', '2024-04-10 14:25:23', '2024-04-10 14:35:21'),
+(14, '1', '2', 'Crispy Pork Kare Kare', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'c05423dc2537f4147563b545929d88d2.jpg', '', '', 'In Stock', '2024-04-10 14:27:40', '2024-04-10 14:37:23'),
+(15, '1', '2', 'Kapampangan Pork Embutido', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'Embutido.jpg', '', '', 'In Stock', '2024-04-10 14:29:55', '2024-04-10 14:29:55'),
+(16, '1', '2', 'Pork Shawarma', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'pork shawarma.jpeg', '', '', 'In Stock', '2024-04-10 14:44:01', '2024-04-10 14:44:01'),
+(17, '1', '2', 'Kapampangan Pork Asado', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'asado.jpg', '', '', 'In Stock', '2024-04-10 14:45:38', '2024-04-10 14:45:38'),
+(18, '1', '2', 'Sweet and Sour Pork', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'IMG_2941.jpg', '', '', 'In Stock', '2024-04-10 14:47:33', '2024-04-10 14:47:33'),
+(19, '1', '2', 'Pork Caldereta', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'IMG_0759.jpg', '', '', 'In Stock', '2024-04-10 14:49:21', '2024-04-10 14:49:21'),
+(20, '1', '2', 'Pork Menudo', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'IMG_6910.jpg', '', '', 'In Stock', '2024-04-10 14:51:43', '2024-04-10 14:51:43'),
+(21, '1', '2', 'Pork Lumpiang Shanghai', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'IMG_9325.jpg', '', '', 'In Stock', '2024-04-10 14:53:08', '2024-04-10 14:53:08'),
+(22, '1', '2', 'Sisig Kapampangan', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', 'IMG_3933.jpg', '', '', 'In Stock', '2024-04-10 14:54:55', '2024-04-10 14:54:55'),
+(23, '1', '2', 'Filipino Pork Ribs Steak', '1400.00', '1700.00', '2200.00', '2700.00', '<br>', '421829-e854b0e4cec44a90925c50b15efa516f.jpg', '', '', 'In Stock', '2024-04-10 14:57:06', '2024-04-10 14:57:06');
 
 -- --------------------------------------------------------
 
@@ -151,7 +254,87 @@ CREATE TABLE `subcategory` (
   `subcategory` varchar(255) DEFAULT NULL,
   `creationDate` timestamp NULL DEFAULT current_timestamp(),
   `updationDate` varchar(255) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=latin1 COLLATE=latin1_swedish_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+--
+-- Dumping data for table `subcategory`
+--
+
+INSERT INTO `subcategory` (`id`, `categoryid`, `subcategory`, `creationDate`, `updationDate`) VALUES
+(1, 1, 'Chicken', '2024-04-10 13:28:27', NULL),
+(2, 1, 'Pork', '2024-04-10 13:28:35', NULL),
+(3, 1, 'Seafood', '2024-04-10 13:28:43', NULL),
+(4, 1, 'Fish', '2024-04-10 13:28:51', NULL),
+(5, 1, 'Beef', '2024-04-10 13:29:09', NULL),
+(6, 1, 'Vegetable', '2024-04-10 13:29:25', NULL),
+(7, 1, 'Pasta', '2024-04-10 13:33:17', NULL),
+(8, 1, 'Sides and Salad', '2024-04-10 13:33:32', NULL),
+(9, 1, 'Dessert', '2024-04-10 13:33:38', NULL);
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `to_pay`
+--
+
+CREATE TABLE `to_pay` (
+  `id` int(11) NOT NULL,
+  `user_session_id` int(11) NOT NULL,
+  `name` varchar(255) NOT NULL,
+  `contact` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `items` text NOT NULL,
+  `delivery_address` text NOT NULL,
+  `total_price` decimal(10,2) NOT NULL,
+  `payment_option` varchar(50) NOT NULL,
+  `delivery_option` varchar(50) NOT NULL,
+  `preparation_date` date NOT NULL,
+  `delivery_time` time NOT NULL,
+  `status` varchar(50) NOT NULL DEFAULT 'To Pay'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userinfo`
+--
+
+CREATE TABLE `userinfo` (
+  `id` int(11) NOT NULL,
+  `name` varchar(255) DEFAULT NULL,
+  `email` varchar(255) DEFAULT NULL,
+  `contactno` bigint(11) DEFAULT NULL,
+  `password` varchar(255) DEFAULT NULL,
+  `shippingAddress` longtext DEFAULT NULL,
+  `shippingState` varchar(255) DEFAULT NULL,
+  `shippingCity` varchar(255) DEFAULT NULL,
+  `shippingPincode` int(11) DEFAULT NULL,
+  `billingAddress` longtext DEFAULT NULL,
+  `billingState` varchar(255) DEFAULT NULL,
+  `billingCity` varchar(255) DEFAULT NULL,
+  `billingPincode` int(11) DEFAULT NULL,
+  `regDate` timestamp NOT NULL DEFAULT current_timestamp(),
+  `updationDate` varchar(255) DEFAULT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+
+-- --------------------------------------------------------
+
+--
+-- Table structure for table `userorders`
+--
+
+CREATE TABLE `userorders` (
+  `order_id` int(11) NOT NULL,
+  `user_session_id` varchar(255) DEFAULT NULL,
+  `items` text DEFAULT NULL,
+  `delivery_address` text DEFAULT NULL,
+  `total_price` decimal(10,2) DEFAULT NULL,
+  `payment_option` varchar(50) DEFAULT NULL,
+  `delivery_option` varchar(50) DEFAULT NULL,
+  `preparation_date` date DEFAULT NULL,
+  `status` varchar(50) DEFAULT 'pending',
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- --------------------------------------------------------
 
@@ -169,7 +352,14 @@ CREATE TABLE `users` (
   `password` varchar(255) DEFAULT NULL,
   `verify_token` varchar(255) DEFAULT NULL,
   `verify_status` tinyint(4) DEFAULT 0
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+--
+-- Dumping data for table `users`
+--
+
+INSERT INTO `users` (`id`, `fname`, `lname`, `email`, `contact`, `address`, `password`, `verify_token`, `verify_status`) VALUES
+(1, 'Ezequiel', 'Gonzalez', 'ezequiel.gonzalez.cics@ust.edu.ph', '09762909844', '06, Purok Centro, Sta Lucia,, Lubao, Pampanga, 2005', '$2y$10$t00tU8GM1O9yQUgPiCo.9.RJY6tEqtgGJynGMrW3nEAwAQ./hbSci', 'f6e38145a5af151f37d89b877e8f31bc', 1);
 
 --
 -- Indexes for dumped tables
@@ -191,6 +381,12 @@ ALTER TABLE `category`
 -- Indexes for table `gcashpayments`
 --
 ALTER TABLE `gcashpayments`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `orders`
+--
+ALTER TABLE `orders`
   ADD PRIMARY KEY (`id`);
 
 --
@@ -218,6 +414,18 @@ ALTER TABLE `subcategory`
   ADD PRIMARY KEY (`id`);
 
 --
+-- Indexes for table `userinfo`
+--
+ALTER TABLE `userinfo`
+  ADD PRIMARY KEY (`id`);
+
+--
+-- Indexes for table `userorders`
+--
+ALTER TABLE `userorders`
+  ADD PRIMARY KEY (`order_id`);
+
+--
 -- Indexes for table `users`
 --
 ALTER TABLE `users`
@@ -237,43 +445,61 @@ ALTER TABLE `admin`
 -- AUTO_INCREMENT for table `category`
 --
 ALTER TABLE `category`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=4;
 
 --
 -- AUTO_INCREMENT for table `gcashpayments`
 --
 ALTER TABLE `gcashpayments`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
+
+--
+-- AUTO_INCREMENT for table `orders`
+--
+ALTER TABLE `orders`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `ordertrackhistory`
 --
 ALTER TABLE `ordertrackhistory`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `pending`
 --
 ALTER TABLE `pending`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `products`
 --
 ALTER TABLE `products`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- AUTO_INCREMENT for table `subcategory`
 --
 ALTER TABLE `subcategory`
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
+
+--
+-- AUTO_INCREMENT for table `userinfo`
+--
+ALTER TABLE `userinfo`
   MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+
+--
+-- AUTO_INCREMENT for table `userorders`
+--
+ALTER TABLE `userorders`
+  MODIFY `order_id` int(11) NOT NULL AUTO_INCREMENT;
 
 --
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
