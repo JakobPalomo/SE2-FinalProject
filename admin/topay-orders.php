@@ -69,7 +69,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 	<?php
     $status = 'Delivered';
-    $query = mysqli_query($con, "SELECT pending.id AS id, pending.name AS username, pending.email AS useremail, pending.contact AS usercontact, pending.preparation_date AS orderdate, pending.items AS products, pending.payment_option AS payment_option, pending.delivery_option AS delivery_option, pending.total_price AS total_price, pending.delivery_address AS delivery_address FROM pending WHERE pending.status = 'To Pay'");
+    $query = mysqli_query($con, "SELECT pending.id AS id, pending.name AS username, pending.email AS useremail, pending.contact AS usercontact, pending.preparation_date AS orderdate, pending.items AS products, pending.payment_option AS payment_option, pending.delivery_option AS delivery_option, pending.total_price AS total_price, pending.delivery_address AS delivery_address, pending.delivery_time AS delivery_time FROM pending WHERE pending.status = 'To Pay'");
 
     $orderProducts = []; // Associative array to store products grouped by order ID
 
@@ -89,6 +89,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
                 'orderdate' => $row['orderdate'],
                 'total_price' => $row['total_price'],
 				'delivery_address' => $row['delivery_address'],
+				'delivery_time' => $row['delivery_time'],
                 'products' => []
             ];
         }
@@ -132,6 +133,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 											<th>Dlvry Option</th>
 											<th>Address</th>
 											<th>Order Date</th>
+											<th>Delvry Time</th>
 											
 										</tr>
 									</thead>
@@ -159,7 +161,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_option']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_address']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['orderdate']); ?></td>
-															
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_time']); ?></td>
 														<?php endif; ?>
 													</tr>
 										<?php

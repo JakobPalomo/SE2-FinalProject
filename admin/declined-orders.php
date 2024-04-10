@@ -73,7 +73,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
     $status = 'Delivered';
 	$startOfDay = date('Y-m-d 00:00:00');
     $endOfDay = date('Y-m-d 23:59:59');
-	$query = mysqli_query($con, "SELECT pending.id AS id, pending.name AS username, pending.email AS useremail, pending.contact AS usercontact, pending.preparation_date AS orderdate, pending.items AS products, pending.payment_option AS payment_option, pending.delivery_option AS delivery_option, pending.total_price AS total_price, pending.delivery_address AS delivery_address FROM pending WHERE pending.status = 'Declined'");
+	$query = mysqli_query($con, "SELECT pending.id AS id, pending.name AS username, pending.email AS useremail, pending.contact AS usercontact, pending.preparation_date AS orderdate, pending.items AS products, pending.payment_option AS payment_option, pending.delivery_option AS delivery_option, pending.total_price AS total_price, pending.delivery_address AS delivery_address, pending.delivery_time AS delivery_time FROM pending WHERE pending.status = 'Declined'");
 
     $orderProducts = []; // Associative array to store products grouped by order ID
 
@@ -93,6 +93,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
                 'orderdate' => $row['orderdate'],
                 'total_price' => $row['total_price'],
 				'delivery_address' => $row['delivery_address'],
+				'delivery_time' => $row['delivery_time'],
                 'products' => []
             ];
         }
@@ -135,6 +136,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 											<th>Dlvry Option</th>
 											<th>Address</th>
 											<th>Order Date</th>
+											<th>Dlvry Time</th>
 											
 										</tr>
 									</thead>
@@ -162,7 +164,7 @@ popUpWin = open(URLStr,'popUpWin', 'toolbar=no,location=no,directories=no,status
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_option']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_address']); ?></td>
 															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['orderdate']); ?></td>
-															
+															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_time']); ?></td>
 														<?php endif; ?>
 													</tr>
 										<?php
