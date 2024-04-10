@@ -16,7 +16,12 @@ if(strlen($_SESSION['alogin']) == 0) {
 $oid = intval($_GET['oid']);
 
 // Fetch order list from the database
-$statement = $con->prepare("SELECT pending.*, gcashpayments.payment_screenshot FROM pending LEFT JOIN gcashpayments ON pending.id = gcashpayments.order_id WHERE pending.id = ?");
+$statement = $con->prepare("SELECT pending.*, gcashpayments.payment_screenshot 
+                            FROM pending 
+                            LEFT JOIN gcashpayments ON pending.id = gcashpayments.order_id 
+                            WHERE pending.id = ? 
+                            ORDER BY gcashpayments.id DESC 
+                            LIMIT 1");
 $statement->bind_param("i", $oid);
 $statement->execute();
 $result = $statement->get_result();
@@ -54,7 +59,7 @@ if ($items !== false) {
 }
 
 // Payment screenshot directory
-$payment_screenshot_dir = './admin/payments/';
+$payment_screenshot_dir = '../admin/payments/';
 
 // Payment screenshot filename from gcashpayments table
 $payment_screenshot_filename = $order['payment_screenshot'];
@@ -368,12 +373,14 @@ if(isset($_POST['submit2'])) {
                             </div>
                     <!-- End Order Details -->
 
- <!-- Display payment screenshot if available -->
- <?php if (!empty($payment_screenshot_filename)) : ?>
-  <img src="admin/payments/<?php echo htmlentities($payment_screenshot_filename); ?>" alt="Payment Screenshot">
-    <?php endif; ?>
-
-
+                    <!-- Display payment screenshot if available -->
+                    <?php if (!empty($payment_screenshot_filename)) : ?>
+                    <div style="display: flex; justify-content: center; align-items: center;">
+                        <div class="payment-screenshot" style="width: 400px; height: 400px; border: 1px solid #ccc;">
+                            <img src="<?php echo htmlentities($payment_screenshot_url); ?>" style="max-width: 100%; max-height: 100%; object-fit: contain;">
+                        </div>
+                    </div>
+                <?php endif; ?>
  
         
         <div class="status">

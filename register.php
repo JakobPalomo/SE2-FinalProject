@@ -170,10 +170,6 @@ Special requests (e.g., chicken part request, no use of MSG, no pepper, etc.) mu
   <script src="./js/termsandcondition.js"></script>
   </body>
   
-  <footer class="footer">
-      <p>2024 Chef's Daughter. All rights reserved.</p>
-    </footer>
-  
 </html>
 
 

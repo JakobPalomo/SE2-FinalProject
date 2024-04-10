@@ -133,9 +133,6 @@ include('./dbcon.php');
     </div>
     </div>
     
-    <footer class="footer">
-      <p>2024 Chef's Daughter. All rights reserved.</p>
-    </footer>
 
     <!-- End Code -->
   </body>
