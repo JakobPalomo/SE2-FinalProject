@@ -4,6 +4,7 @@ include('../dbcon.php');
 
 function placeOrder() {
     global $con;
+    $response = "";
 
     if (!empty($_SESSION['cart'])) {
         // Get user session ID
@@ -43,7 +44,7 @@ function placeOrder() {
             if (mysqli_stmt_execute($stmt)) {
                 // Order placed successfully, you can perform additional actions if needed
                 unset($_SESSION['cart']); // Unset the cart
-                echo "Order placed successfully!";
+                $response = "Order placed successfully!";
             } else {
                 echo "Error placing order: " . mysqli_stmt_error($stmt);
             }
@@ -54,11 +55,16 @@ function placeOrder() {
             echo "Error preparing statement: " . mysqli_error($con);
         }
     } else {
-        echo "Your cart is empty. Cannot place an empty order.";
+        $response = "Your cart is empty. Cannot place an empty order.";
     }
+
+    return $response;
 }
 
 
-// Call the placeOrder function
-placeOrder();
+// Call the placeOrder function and get the response
+$responseMessage = placeOrder();
+
+// Echo the response message
+echo $responseMessage;
 ?>

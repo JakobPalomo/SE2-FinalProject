@@ -404,7 +404,7 @@ if(isset($_POST['add_to_cart'])) {
                 window.location.reload();
                 // Reset the modal after successful add to cart
                  resetModal(productId);
-            }, 120000);
+            }, 2000);
            
         },
         error: function(error) {
@@ -415,7 +415,7 @@ if(isset($_POST['add_to_cart'])) {
             // Close error modal after 3 seconds
             setTimeout(function() {
                 $('#errorModal').modal('hide');
-            }, 120000);
+            }, 2000);
         }
     });
 }

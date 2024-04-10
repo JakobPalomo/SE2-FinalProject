@@ -27,6 +27,11 @@ include('./dbcon.php');
     <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 
     <script>
+    function showAlertModal(message) {
+        $('#alertModalBody').text(message);
+        $('#alertModal').modal('show');
+    }
+
     function updateAddress() {
         console.log('Update address function called');
 
@@ -42,7 +47,7 @@ include('./dbcon.php');
         // Check if any field is empty
         if (!buildingNumber || !streetBarangay || !cityMunicipality || !province || !postalCode) {
             // Display an error message or handle it
-            alert('Please fill in all address fields.');
+            showAlertModal('Please fill in all address fields.');
             console.log('Address update failed: Empty field(s)');
             return;
         }
@@ -318,23 +323,23 @@ include('./dbcon.php');
             // Check if the date field is empty
             var preparationDate = $('#datepicker').val();
             if (!preparationDate) {
-                alert('Please select a preparation date.');
+                showAlertModal('Please select a preparation date.');
                 return;
             }
             var deliveryTime = $('#timepicker').val();
             if (!deliveryTime) {
-                alert('Please select a time for delivery.');
+                showAlertModal('Please select a time for delivery.');
                 return;
             }
             var deliveryOption = $('input[name="deliveryOption"]:checked').val();
             if (!deliveryOption) {
-                alert('Please select a delivery option.');
+                showAlertModal('Please select a delivery option.');
                 return;
             }
             // Check if only one payment option is selected
             var paymentOption = $('input[name="paymentOption"]:checked').val();
             if (!paymentOption) {
-                alert('Please select a payment option.');
+                showAlertModal('Please select a payment option.');
                 return;
             }
             var userAddress = $('#userAddress').text();
@@ -342,33 +347,49 @@ include('./dbcon.php');
             // Calculate the minimum preparation date based on the number of items in the cart
             var minPreparationDate = getMinPreparationDate();
             if (new Date(preparationDate) < minPreparationDate) {
-                alert('Please select a preparation date at least 3 days in advance for 12 or fewer items, or at least 5 days in advance for more than 12 items.');
+                showAlertModal('Please select a preparation date at least 3 days in advance for 12 or fewer items, or at least 5 days in advance for more than 12 items.');
                 return;
             }
 
             // Call the placeOrder.php script using AJAX
             $.ajax({
                 type: 'POST',
-                url: './function/placeOrder.php',
-                data: {
-                    paymentOption: paymentOption,
-                    deliveryOption: deliveryOption,
-                    preparationDate: preparationDate,
-                    deliveryTime: deliveryTime,
-                    totalPrice: totalPrice,
-                    userAddress: userAddress
-                },
-                success: function (response) {
-                    // Display the response (you can update this part based on your UI requirements)
-                    alert(response);
+    url: './function/placeOrder.php',
+    data: {
+        paymentOption: paymentOption,
+        deliveryOption: deliveryOption,
+        preparationDate: preparationDate,
+        deliveryTime: deliveryTime,
+        totalPrice: totalPrice,
+        userAddress: userAddress
+    },
+    success: function (response) {
+                // Display the response in the modal
+                $('#alertModalBody2').text(response);
+                $('#alertModal2').modal('show');
+
+                // Redirect after a delay
+                setTimeout(function(){
                     window.location.href = 'user-account.php?scrollToCard2=true';
-                },
-                error: function (error) {
-                    console.error('Error placing order:', error);
-                }
-            });
+                }, 2000); // 2 seconds delay
+            },
+            error: function (error) {
+                console.error('Error placing order:', error);
+            }
+        });
+
+        // Close the modal when the user clicks on <span> (x)
+        $('.btn-close').on('click', function() {
+            $('#alertModal2').modal('hide');
+        });
+
+        // Close the modal when the user clicks anywhere outside of the modal
+        $('#alertModal2').on('hidden.bs.modal', function () {
+            // Redirect to user-account.php after closing modal
+            window.location.href = 'user-account.php?scrollToCard2=true';
+        });
         } else {
-            alert('Invalid total price format');
+            showAlertModal('Invalid total price format');
         }
     });
 
@@ -462,6 +483,43 @@ include('./dbcon.php');
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
                 <button type="button" class="btn btn-primary" id="confirmRemoveBtn">Remove</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Validation Modal -->
+<div class="modal fade" id="alertModal" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertModalLabel">Warning</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="alertModalBody">
+                <!-- Validation message will be displayed here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
+            </div>
+        </div>
+    </div>
+</div>
+</html>
+
+<!-- Order Place Modal -->
+<div class="modal fade" id="alertModal2" tabindex="-1" aria-labelledby="alertModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="alertModalLabel">Success!</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body" id="alertModalBody2">
+                <!-- Validation message will be displayed here -->
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">OK</button>
             </div>
         </div>
     </div>
