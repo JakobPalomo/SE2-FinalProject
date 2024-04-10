@@ -1,0 +1,80 @@
+.container {
+  min-height: fit-content;
+  margin-bottom: 50px;
+  padding: 0 20px; /* Add padding for smaller screens */
+}
+
+.earnings {
+  width: 100%; /* Adjust width to 100% for responsiveness */
+  max-width: 210px; /* Limit maximum width */
+  height: 210px;
+  border-radius: 50%; /* Makes the div circular */
+  border: 8px solid #ffac0e; /* Border color */
+  display: flex;
+  flex-direction: column; /* Flex direction */
+  justify-content: center; /* Center content vertically */
+  align-items: center; /* Center content horizontally */
+  margin-top: 20px;
+  padding: 10px;
+  transition: all 0.3s ease; /* Add transition for smoother effect with ease timing function */
+}
+
+.earnings:hover p {
+  opacity: 0; /* Fade out the <p> element on hover */
+  height: 0px; /* Reduce height to 0 */
+  padding: 0; /* Remove padding */
+  overflow: hidden; /* Hide any overflowing content */
+}
+
+.earnings:hover h2 {
+  font-size: 30px; /* Increase font size of <h2> on hover */
+}
+
+.earnings-container {
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+  flex-wrap: wrap; /* Allow items to wrap */
+}
+
+p {
+  font-size: 12px;
+  transition: opacity 0.3s ease, height 0.3s ease, padding 0.3s ease; /* Add transition for smoother effect */
+}
+
+h2 {
+  font-size: 26px;
+  transition: font-size 0.3s ease; /* Add transition for font size */
+}
+
+.total-earnings {
+  width: 100%; /* Adjust width to 100% for responsiveness */
+  max-width: 500px; /* Limit maximum width */
+  padding: 15px;
+  box-shadow: rgba(0, 0, 0, 0.15) 1.95px 1.95px 2.6px;
+}
+
+.total-earnings-box {
+  display: flex;
+  justify-content: center; /* Center horizontally */
+  align-items: center; /* Center vertically */
+}
+
+/* Media query for iPhone SE */
+@media only screen and (max-width: 320px) {
+  .earnings-container {
+    flex-direction: column; /* Stack items vertically */
+    align-items: center; /* Center items horizontally */
+    gap: 20px; /* Reduce gap between items */
+  }
+
+  .earnings,
+  .total-earnings {
+    height: auto; /* Reset height for smaller screens */
+    margin-top: 10px; /* Adjust margin */
+  }
+
+  .total-earnings {
+    max-width: 320px; /* Limit maximum width for smaller screens */
+  }
+}

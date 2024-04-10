@@ -65,6 +65,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
+    <link type="text/css" href="css/salesreportstyle.css" rel="stylesheet">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
 
@@ -153,12 +154,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 
 ?>
 					  <style>
-						.earnings {
-							margin-top: 20px;
-							padding: 10px;
-							background-color: #f9f9f9;
-							border-radius: 5px;
-						}
+						
 						.earnings h2 {
 							color: #666;
 							margin-bottom: 5px;
@@ -173,24 +169,27 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 						}
     				</style>
 							<div class="container">
-								<h1>Sales Report</h1>
+								
+                                <div class="earnings-container">
 								<div class="earnings">
-									<h2>Daily Earnings:</h2>
-									<p>₱<?php echo number_format($earnings['daily'], 2); ?></p>
+									<p>Daily Earnings:</p>
+									<h2>₱<?php echo number_format($earnings['daily'], 2); ?></h2>
 								</div>
 								<div class="earnings">
-									<h2>Weekly Earnings:</h2>
-									<p>₱<?php echo number_format($earnings['weekly'], 2); ?></p>
+									<p>Weekly Earnings:</p>
+									<h2>₱<?php echo number_format($earnings['weekly'], 2); ?></h2>
 								</div>
 								<div class="earnings">
-									<h2>Yearly Earnings:</h2>
-									<p>₱<?php echo number_format($earnings['yearly'], 2); ?></p>
-								</div>
+									<p>Yearly Earnings:</p>
+									<h2>₱<?php echo number_format($earnings['yearly'], 2); ?></h2>
+								</div></div>
 								<br>
+                                <div class="total-earnings-box">
 								<div class="total-earnings">
-									<h2>Total Earnings:</h2>
-									<p>₱<?php echo number_format($earnings['total'], 2); ?></p>
+									<p>Total Earnings:</p>
+									<center><h2>₱<?php echo number_format($earnings['total'], 2); ?></h2></center>
 								</div>
+                                </div>
 							</div>
 						</div>
 					</div>				
