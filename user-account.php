@@ -82,20 +82,21 @@ if ($result->num_rows == 1) {
 
     <!-- Code zone -->
     <div class="w3-sidebar w3-bar-block w3-card w3-animate-left" id="mySidebar">
-      <center><button class="add-item mt-5" style=" padding-bottom: 34px;margin-bottom:12px;  white-space: wrap;" onclick="redirectToCategory()"> <i class="fa-solid fa-utensils" style="color: #004225;"></i>  Order Now</button></center>
-      <a href="#" class="w3-bar-item w3-button show-card" data-target="card1"><span><img src="./img/profile.png" class="icon" />
-    </span>My Profile</a>
-      <a href="#" class="w3-bar-item w3-button show-card" data-target="card2">
-        <span><img src="./img/utensils.png" class="icon" /></span>Pending Order</a>
-        <a href="#" class="w3-bar-item w3-button show-card" data-target="card5">
-        <span><i class="fa-solid fa-sack-dollar" style="color: #000000;margin-right: 21px;"></i></span>To Pay</a>
-      <a href="#" class="w3-bar-item w3-button show-card" data-target="card3">
-        <span><img src="./img/biking-mountain.png" class="icon"/></span>Accepted Orders</a>
-      <a href="#" class="w3-bar-item w3-button show-card" data-target="card4">
-        <span><img src="./img/list-check.png" class="icon" /></span>Past Orders</a>
-      <a href="./logout.php" class="w3-bar-item w3-button">
-        <span><img src="./img/sign-out-alt.png" class="icon" /></span>Logout</a>
-    </div>
+  <center><button class="add-item mt-5" style=" padding-bottom: 34px;margin-bottom:12px;  white-space: wrap;" onclick="redirectToCategory()"> <i class="fa-solid fa-utensils" style="color: #004225;"></i>  Order Now</button></center>
+  <a href="#" class="w3-bar-item w3-button show-card" data-target="card1"><span><img src="./img/profile.png" class="icon" />
+</span>My Profile</a>
+  <a href="#" class="w3-bar-item w3-button show-card" data-target="card2">
+    <span><img src="./img/utensils.png" class="icon" /></span>Pending Order</a>
+    <a href="#" class="w3-bar-item w3-button show-card" data-target="card5">
+    <span><i class="fa-solid fa-sack-dollar" style="color: #000000;margin-right: 21px;"></i></span>To Pay</a>
+  <a href="#" class="w3-bar-item w3-button show-card" data-target="card3">
+    <span><img src="./img/biking-mountain.png" class="icon"/></span>Accepted Orders</a>
+  <a href="#" class="w3-bar-item w3-button show-card" data-target="card4">
+    <span><img src="./img/list-check.png" class="icon" /></span>Past Orders</a>
+  <a href="./logout.php" class="w3-bar-item w3-button">
+    <span><img src="./img/sign-out-alt.png" class="icon" /></span>Logout</a>
+ 
+</div>
 
     <script>
   function redirectToCategory() {
@@ -156,6 +157,14 @@ if ($result->num_rows == 1) {
       </td>
     </tr>
   </table>
+  <center>
+  <a href="editaccount.php">
+    <button class="add-item mt-5" style="padding-bottom: 34px; margin-bottom: 12px; white-space: wrap;">
+      <i class="fa-solid fa-user-edit" style="color: #004225;"></i> Edit Profile
+    </button>
+  </a>
+</center>
+
 </div>
 
           <!-- End of content card -->
