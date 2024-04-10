@@ -21,6 +21,8 @@ body {
   display: flex;
   align-items: center;
   flex-direction: column;
+  height: fit-content;
+  margin-bottom: 5%;
 }
 
 .itemfaq {
@@ -78,7 +80,6 @@ body {
 }
 
 .footer {
-  position: fixed;
   bottom: 0;
   left: 0;
   width: 100%;

@@ -9,6 +9,7 @@ session_start();
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <link rel="stylesheet" type="text/css" href="css/navbar.css" />
     <link rel="stylesheet" type="text/css" href="css/menuelement.css" />
+    <link rel="stylesheet" type="text/css" href="./css/faqs.css" />
     <link rel="stylesheet" type="text/css" href="css/register.css" />
     <title>Register</title>
     <script
@@ -169,6 +170,15 @@ Special requests (e.g., chicken part request, no use of MSG, no pepper, etc.) mu
 </div>
 <script src="./js/register.js"></script>
   <script src="./js/termsandcondition.js"></script>
+  <footer class="footer">
+<br>
+      <h3>Contact us through</h3><br>
+      <p><i class="fa-brands fa-facebook" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; <a href="https://www.facebook.com/chefsdaughterph" target="_blank"  style="color: inherit; text-decoration: none;">chefsdaughter</a></p>
+      <p><i class="fa-solid fa-phone" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; 0915 121 7129</p>
+      <p><i class="fa-solid fa-envelope" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; chefsdaughterph@gmail.com</p>
+<br>
+      <p style="opacity: .6;">2024 Chef's Daughter. All rights reserved.</p>
+    </footer>
   </body>
   
 </html>
