@@ -350,11 +350,6 @@ if (!isset($_SESSION['cart'])) {
             }
                 } else {?>
         <p class="food-name">No Products Found</p>
-        <style>
-        .subcategorydiv {
-            display: none;
-        }
-        </style>
         <?php } ?>
         </div> 
     </div>

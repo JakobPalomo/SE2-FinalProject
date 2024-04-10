@@ -174,8 +174,8 @@ if(isset($_POST['add_to_cart'])) {
                                  <?php endif; ?>
                       </div>
                         <center>
-                             <?php if($availability != 'Out of Stock'): ?>
-                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAuthenticate(<?php echo $row['id']; ?>)">Add to Cart</button>
+                            <?php if($availability != 'Out of Stock'): ?>
+                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAndReset(<?php echo $row['id']; ?>)">Add to Cart</button>
                             <?php else: ?>
                             <button class="add-item disabled" disabled>Add to Cart</button>
                             <?php endif; ?>
@@ -183,18 +183,6 @@ if(isset($_POST['add_to_cart'])) {
                     </div>
 
                   
-                
-                <script>
-                    function addToCartAuthenticate(productId) {
-                        event.stopPropagation();
-                        <?php if(!isset($_SESSION['authenticated'])): ?>
-                            window.location.href = './function/authentication.php';
-                        <?php else: ?>
-                            event.stopPropagation();
-                            var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
-                        <?php endif; ?>
-                    }             
-                </script>
 
             <!-- Modal -->
     <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
@@ -241,7 +229,7 @@ if(isset($_POST['add_to_cart'])) {
                                 </div>
 
                                 <div class="buttons">
-                                <input type="button" value="Close" class="add-itemmod" data-bs-dismiss="modal" onclick="resetModal('<?php echo $productId; ?>')" />
+                                    <input type="button" value="Close" class="add-itemmod" data-bs-dismiss="modal" onclick="resetModal('<?php echo $productId; ?>')" />
                                     <input type="button" value="Confirm" class="add-itemmod" onclick="addToCart('<?php echo $productId; ?>')" />
                                 </div>
 
@@ -255,8 +243,50 @@ if(isset($_POST['add_to_cart'])) {
      </div>
     </div>
 
+    <!-- Item Added Modal -->
+<div class="modal fade" id="itemAddedModal" tabindex="-1" aria-labelledby="itemAddedModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="itemAddedModalLabel">Item Added to Cart</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        Your item has been successfully added to the cart.
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- Error Modal -->
+<div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="errorModalLabel">Error</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+      </div>
+      <div class="modal-body">
+        An error occurred while adding the item to the cart. Please try again later.
+      </div>
+    </div>
+  </div>
+</div>
+
 
     <script>
+
+    function addToCartAuthenticate(productId) {
+                        event.stopPropagation();
+                        <?php if(!isset($_SESSION['authenticated'])): ?>
+                            window.location.href = './function/authentication.php';
+                        <?php else: ?>
+                            event.stopPropagation();
+                            var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
+                           
+                        <?php endif; ?>
+                    }             
+
     function resetModal(productId) {
         // Unselect all sizes
         var checkboxes = document.querySelectorAll("[id^='" + productId + "_']");
@@ -271,6 +301,14 @@ if(isset($_POST['add_to_cart'])) {
         // Reset quantity to 1
         var numberField = document.getElementById("numberField" + productId);
         numberField.value = "1";
+
+        // Log the modal ID to the console for debugging
+        console.log("Modal ID: ", '#addToCartModal' + productId);
+    }
+
+    function addToCartAndReset(productId) {
+        addToCartAuthenticate(productId);
+        resetModal(productId);
     }
 
     function decrease(productId) {
@@ -351,14 +389,28 @@ if(isset($_POST['add_to_cart'])) {
         success: function(response) {
             // Handle success
             console.log('Item added to cart successfully!');
-            // Show confirmation message
-            alert('Item added to cart!');
-            // Close modal
+            // Close current modal
             $('#addToCartModal' + productId).modal('hide');
+            // Show confirmation modal
+            $('#itemAddedModal').modal('show');
+            // Close confirmation modal after 3 seconds
+            setTimeout(function() {
+                $('#itemAddedModal').modal('hide');
+            }, 3000);
+            // Reset the modal after successful add to cart
+            resetModal(productId);
         },
         error: function(error) {
             // Handle error
             console.error('Error adding item to cart:', error);
+            // Close current modal
+            $('#addToCartModal' + productId).modal('hide');
+            // Show error modal
+            $('#errorModal').modal('show');
+            // Close error modal after 3 seconds
+            setTimeout(function() {
+                $('#errorModal').modal('hide');
+            }, 3000);
         }
     });
 }
@@ -368,11 +420,6 @@ if(isset($_POST['add_to_cart'])) {
             }
                 } else {?>
         <p class="food-name">No Products Found</p>
-        <style>
-        .subcategorydiv {
-            display: none;
-        }
-        </style>
         <?php } ?>
         </div> 
     </div>

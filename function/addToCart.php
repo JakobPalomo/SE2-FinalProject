@@ -14,5 +14,5 @@ if (!isset($_SESSION['cart'])) {
 $_SESSION['cart'][] = $item;
 
 // You can optionally return a response to the client
-// echo "Item added to the cart!";
+//echo "Item added to the cart!";
 ?>
