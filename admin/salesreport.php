@@ -168,7 +168,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 							font-weight: bold;
 						}
     				</style>
-							<div class="container">
+							<div class="container-sales">
 								
                                 <div class="earnings-container">
 								<div class="earnings">
