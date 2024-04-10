@@ -39,6 +39,9 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
             <li class="nav-item">
             <a class="navbutton" href="./faqs.php">FAQs</a>
             </li>
+            <li class="nav-item">
+            <a class="navbutton" href="./faqs.php">About Us</a>
+            </li>
             <?php if(!isset($_SESSION['authenticated'])) :?>
             <li class="nav-item">
             <a class="navbutton" aria-current="page" href="./login.php">Login</a>

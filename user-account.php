@@ -163,6 +163,12 @@ if ($result->num_rows == 1) {
       <i class="fa-solid fa-user-edit" style="color: #004225;"></i> Edit Profile
     </button>
   </a>
+
+  <a href="changepassword.php">
+            <button class="add-item mt-3" style="padding-bottom: 34px; margin-bottom: 12px; white-space: wrap;">
+              <i class="fa-solid fa-lock" style="color: #004225;"></i> Change Password
+            </button>
+          </a>
 </center>
 
 </div>
