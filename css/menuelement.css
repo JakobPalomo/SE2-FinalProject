@@ -156,29 +156,6 @@ body {
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
 }
 
-/* Media query for screens with a maximum width of 600px (typical mobile screens) */
-@media only screen and (max-width: 720px) {
-  .cart-item {
-    width: 90%; /* Make it fill the width of the viewport */
-    max-width: none; /* Remove max-width for smaller screens */
-  }
-  .subcategorydiv {
-    width: 20%;
-  }
-
-  .list {
-    width: 70%;
-  }
-  .side-by-side {
-    margin-left: -3%;
-  }
-
-  .menu-item,
-  .menu-item-unavailable {
-    margin-left: 60px;
-  }
-}
-
 .cart-display {
   width: 120px;
   height: 80px;
@@ -291,4 +268,51 @@ body {
 /* Optional: Adjust modal close button styles */
 .btn-close {
   padding: 0.5rem 0.75rem; /* Add padding */
+}
+
+.modal-header {
+  background-color: #004225;
+  color: whitesmoke;
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.modal-content {
+  font-family: "Plus Jakarta Sans", sans-serif;
+}
+
+.btn-close {
+  background-color: whitesmoke;
+}
+.btn.btn-primary {
+  background-color: rgb(217, 63, 63);
+  border: none;
+}
+/* Media query for screens with a maximum width of 600px (typical mobile screens) */
+@media only screen and (max-width: 720px) {
+  .cart-item {
+    width: 90%; /* Make it fill the width of the viewport */
+    max-width: none; /* Remove max-width for smaller screens */
+  }
+  .subcategorydiv {
+    width: 20%;
+  }
+
+  .list {
+    width: 70%;
+  }
+  .side-by-side {
+    margin-left: -3%;
+  }
+
+  .menu-item,
+  .menu-item-unavailable {
+    margin-left: 60px;
+  }
+
+  .foodcart-name {
+    margin-left: 18px;
+    margin-top: 8px;
+    color: #000000;
+    font-size: 12px;
+  }
 }

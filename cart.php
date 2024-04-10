@@ -442,7 +442,7 @@ include('./dbcon.php');
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-                <button type="button" class="btn btn-primary" onclick="updateAddress()">Save changes</button>
+                <button type="button" class="btn btn-primary" onclick="updateAddress()" style="background-color: red;">Save changes</button>
             </div>
         </div>
     </div>

@@ -42,6 +42,7 @@ if(isset($_POST['add_to_cart'])) {
       crossorigin="anonymous"
     />
     <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap"
@@ -252,7 +253,7 @@ if(isset($_POST['add_to_cart'])) {
                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
             </div>
             <div class="modal-body">
-                Your item has been successfully added to the cart.
+                Your item has been successfully added to the cart <i class="fa-solid fa-cart-shopping" style="color: #000000; position: relative;"></i>
             </div>
             </div>
         </div>
@@ -403,7 +404,7 @@ if(isset($_POST['add_to_cart'])) {
                 window.location.reload();
                 // Reset the modal after successful add to cart
                  resetModal(productId);
-            }, 2000);
+            }, 120000);
            
         },
         error: function(error) {
@@ -414,7 +415,7 @@ if(isset($_POST['add_to_cart'])) {
             // Close error modal after 3 seconds
             setTimeout(function() {
                 $('#errorModal').modal('hide');
-            }, 2000);
+            }, 120000);
         }
     });
 }
