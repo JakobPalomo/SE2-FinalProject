@@ -64,6 +64,9 @@ html {
   padding: 0px 10px;
   margin-bottom: 12px;
 }
+.button:hover {
+  background: #aa7400;
+}
 .btn:hover {
   opacity: 0.82;
 }
