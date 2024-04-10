@@ -213,22 +213,28 @@ if ($result->num_rows == 1) {
                             </tr>
                             <?php
                             $lastItemKey = array_key_last($orderItems);
+                            $subtotal = 0;
                             foreach ($orderItems as $key => $item):
                                 $quantity = $item['quantity'];
                                 $itemName = $item['productName'];
                                 $itemPrice = $item['sizePrice'];
                                 $totalPrice = $quantity * $itemPrice; 
+                                $subtotal += $totalPrice; 
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice"><?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">₱<?php echo $totalPrice; ?></td>
                                     <td class="orderprice">&nbsp;</td>
                                 </tr>
-                          
-                                <?php if ($key === $lastItemKey): ?>
+                            <?php endforeach; ?>
+                                    <tr>
+                                      <br>
+                                      <td class="orderprice">&nbsp;</td>
+                                      <td class="orderprice">Total: ₱<?php echo $subtotal; ?></td>
+                                   </tr>
+                                   <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
                                 <?php endif; ?>
-                            <?php endforeach; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
@@ -259,21 +265,28 @@ if ($result->num_rows == 1) {
                             </tr>
                             <?php
                             $lastItemKey = array_key_last($orderItems);
+                            $subtotal = 0;
                             foreach ($orderItems as $key => $item):
                                 $quantity = $item['quantity'];
                                 $itemName = $item['productName'];
                                 $itemPrice = $item['sizePrice'];
                                 $totalPrice = $quantity * $itemPrice; 
+                                $subtotal += $totalPrice; 
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice"><?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">₱<?php echo $totalPrice; ?></td>
                                     <td>&nbsp;</td>
                                 </tr>
-                                <?php if ($key === $lastItemKey): ?>
-                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
-                                <?php endif; ?>
                             <?php endforeach; ?>
+                                   <tr>
+                                      <br>
+                                      <td class="orderprice">&nbsp;</td>
+                                      <td class="orderprice">Total: ₱<?php echo $subtotal; ?></td>
+                                   </tr>
+                                   <?php if ($key === $lastItemKey): ?>
+                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
+                                   <?php endif; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
@@ -304,20 +317,28 @@ if ($result->num_rows == 1) {
                             </tr>
                             <?php
                             $lastItemKey = array_key_last($orderItems);
+                            $subtotal = 0;
                             foreach ($orderItems as $key => $item):
                                 $quantity = $item['quantity'];
                                 $itemName = $item['productName'];
                                 $itemPrice = $item['sizePrice'];
                                 $totalPrice = $quantity * $itemPrice; 
+                                $subtotal += $totalPrice; 
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice"><?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">₱<?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">&nbsp;</td>
                                 </tr>
-                                <?php if ($key === $lastItemKey): ?>
-                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
-                                <?php endif; ?>
                             <?php endforeach; ?>
+                                   <tr>
+                                      <br>
+                                      <td class="orderprice">&nbsp;</td>
+                                      <td class="orderprice">Total: ₱<?php echo $subtotal; ?></td>
+                                   </tr>
+                                   <?php if ($key === $lastItemKey): ?>
+                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
+                                   <?php endif; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </table>
@@ -343,27 +364,34 @@ if ($result->num_rows == 1) {
                     ?>
                             <tr>
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
-                                <td class="orderstat"><?php echo $orderStatus; ?></td>
                                 <td class="checkout-btn">
-                                    <center><a href="checkout2.php?id=<?php echo $orderId; ?>" class="add-item"  style="font-size: 10px"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Checkout</a></center>
+                                    <center><a href="checkout2.php?id=<?php echo $orderId; ?>" class="add-item"  style="font-size: 15px"><i class="fa-solid fa-money-bill-wave" style="color:#004225;"></i> Checkout</a></center>
                                 </td>
                             </tr>
                             <?php
                             $lastItemKey = array_key_last($orderItems);
+                            $subtotal = 0;
                             foreach ($orderItems as $key => $item):
                                 $quantity = $item['quantity'];
                                 $itemName = $item['productName'];
                                 $itemPrice = $item['sizePrice'];
                                 $totalPrice = $quantity * $itemPrice; 
+                                $subtotal += $totalPrice; 
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice"><?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">₱<?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">&nbsp;</td>
                                 </tr>
-                                <?php if ($key === $lastItemKey): ?>
-                                    <tr><td colspan="3"><hr style="border-top: 2px solid black;"></td></tr>
-                                <?php endif; ?>
                             <?php endforeach; ?>
+                                    <tr>
+                                      <br>
+                                      <td class="orderprice">&nbsp;</td>
+                                      <td class="orderprice">Total: ₱<?php echo $subtotal; ?></td>
+                                   </tr>
+                                   <?php if ($key === $lastItemKey): ?>
+                                    <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
+                                   <?php endif; ?>
                         <?php endif; ?>
                     <?php endforeach; ?>
                 </table>

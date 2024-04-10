@@ -80,7 +80,7 @@ if(isset($_POST['submit2'])) {
 
         if($sql) {
             // Order updated successfully
-            echo "<script>alert('Order updated successfully...');</script>";
+            echo "<script>alert('Order updated successfully!');</script>";
 
             // Check if the status is "Declined"
             if ($status == "Declined") {
@@ -303,7 +303,7 @@ if(isset($_POST['submit2'])) {
         
                 // Send email
                 $mail->send();
-                echo "<script>alert('Email sent to user: Order Accepted');</script>";
+                echo "<script>alert('Email sent to user: Order Delivered');</script>";
             } catch (Exception $e) {
                 echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
             }
@@ -379,7 +379,7 @@ if(isset($_POST['submit2'])) {
       
               // Send email
               $mail->send();
-              echo "<script>alert('Email sent to user: Order Accepted');</script>";
+              echo "<script>alert('Email sent to user: Order To Pay');</script>";
           } catch (Exception $e) {
               echo "Email could not be sent. Mailer Error: {$mail->ErrorInfo}";
           }
