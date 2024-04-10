@@ -17,10 +17,11 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin | Today's Orders</title>
+	<title>Admin | Declined Orders</title>
 	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
+	<link rel="shortcut icon" type="x-icon" href="../img/logomini.png">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
 

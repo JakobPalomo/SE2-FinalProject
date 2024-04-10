@@ -28,10 +28,11 @@ if(isset($_GET['del']))
 <head>
 	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<title>Admin| SubCategory</title>
+	<title>Admin | SubCategory</title>
 	<link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
 	<link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
+	<link rel="shortcut icon" type="x-icon" href="../img/logomini.png">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
 	<link type="text/css" href='http://fonts.googleapis.com/css?family=Open+Sans:400italic,600italic,400,600' rel='stylesheet'>

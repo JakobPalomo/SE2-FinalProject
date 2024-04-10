@@ -39,7 +39,7 @@ function sendemail_verify($fname,$lname,$email,$verify_token)
     <h2>Your account has been verified!</h2>
  <h5>You can now use Chef's Daughter Website<h5>
  <br/>
- <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>CLICK ME PLEASE DO IT</a>";
+ <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>Click to verify</a>";
 
 
     $mail->Body = $email_template;

@@ -23,7 +23,7 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 	<link type="text/css" href="css/theme.css" rel="stylesheet">
 	<link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
 	<script src="https://kit.fontawesome.com/0f6618b60b.js" crossorigin="anonymous"></script>
-
+	<link rel="shortcut icon" type="x-icon" href="../img/logomini.png">
 	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
     <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.js"></script>
     <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
