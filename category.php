@@ -244,7 +244,7 @@ if(isset($_POST['add_to_cart'])) {
     </div>
 
     <!-- Item Added Modal -->
-        <div class="modal fade" id="itemAddedModal" tabindex="-1" aria-labelledby="itemAddedModalLabel" aria-hidden="true">
+    <div class="modal fade" id="itemAddedModal" tabindex="-1" aria-labelledby="itemAddedModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
@@ -256,10 +256,10 @@ if(isset($_POST['add_to_cart'])) {
             </div>
             </div>
         </div>
-        </div>
+    </div>
 
-<!-- Error Modal -->
-        <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+    <!-- Error Modal -->
+    <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
             <div class="modal-content">
             <div class="modal-header">
@@ -271,7 +271,7 @@ if(isset($_POST['add_to_cart'])) {
             </div>
             </div>
         </div>
-        </div>
+    </div>
 
 
     <script>

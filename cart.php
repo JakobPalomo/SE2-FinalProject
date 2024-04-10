@@ -76,6 +76,8 @@ include('./dbcon.php');
                 success: function (response) {
                     // Update the cart on the client side (remove the item from the DOM)
                     $('#cart-item-' + index).remove();
+                    // Reload the window
+                     window.location.reload();
                 },
                 error: function (error) {
                     console.error('Error removing item:', error);
@@ -83,6 +85,25 @@ include('./dbcon.php');
             });
         }
     </script>
+
+<script>
+    // Function to show confirmation modal before removing an item
+    function showConfirmationModal(index) {
+        $('#confirmRemoveBtn').off('click').on('click', function() {
+            removeCartItem(index); // Proceed with removal if confirmed
+            $('#confirmationModal').modal('hide'); // Hide the confirmation modal
+        });
+        $('#confirmationModal').modal('show'); // Show the confirmation modal
+    }
+</script>
+
+<script>
+    // Function to remove an item using AJAX
+    function removeCartItemCon(index) {
+        showConfirmationModal(index); // Show confirmation modal
+        // AJAX removal process is moved inside showConfirmationModal function
+    }
+</script>
 
 </head>
 
@@ -106,7 +127,7 @@ include('./dbcon.php');
                     </div>
                     <div class="price">
                         <p class="total-price">₱<?php echo $item['totalPrice']; ?></p>
-                        <img src="./img/cross-circle (2).png" alt="food" width="24px" height="24px" style="cursor: pointer;" onclick="removeCartItem(<?php echo $index; ?>)" />
+                        <img src="./img/cross-circle (2).png" alt="food" width="24px" height="24px" style="cursor: pointer;" onclick="removeCartItemCon(<?php echo $index; ?>)" />
                     </div>
                 </div>
         <?php
@@ -139,7 +160,7 @@ include('./dbcon.php');
         <!-- Address Field -->
         <br>
         <div class="subtitle">
-            <span class="linebreak"><p class="subtitle-txt-2">Delivery Address</p></span>
+            <span class="linebreak" style="margin-right: 10px;"><p class="subtitle-txt-2">Delivery Address</p></span>
             <span class="linebreak"><button class="change-btn" data-bs-toggle="modal" data-bs-target="#changeAddressModal">Change</button></span>
         </div>
         <div class="subtitle" style="margin-bottom: 20px">
@@ -422,6 +443,25 @@ include('./dbcon.php');
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
                 <button type="button" class="btn btn-primary" onclick="updateAddress()">Save changes</button>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- Confirmation Modal -->
+<div class="modal fade" id="confirmationModal" tabindex="-1" aria-labelledby="confirmationModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="confirmationModalLabel">Confirmation</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Are you sure you want to remove this item from your cart?
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                <button type="button" class="btn btn-primary" id="confirmRemoveBtn">Remove</button>
             </div>
         </div>
     </div>
