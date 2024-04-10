@@ -5,7 +5,20 @@ $cid=intval($_GET['scid']);
 if (!isset($_SESSION['cart'])) {
     $_SESSION['cart'] = array();
 }
+
+if(isset($_POST['add_to_cart'])) {
+    // Check if the user is authenticated
+    if(!isset($_SESSION['authenticated'])) {
+        $_SESSION['status'] = "Please Login to Add Items to Cart";
+        header('Location: authentication.php');
+        exit(0);
+    }
+
+}
 ?> 
+
+
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -27,6 +40,8 @@ if (!isset($_SESSION['cart'])) {
     <link href="https://fonts.googleapis.com/css2?family=Inika&family=Plus+Jakarta+Sans&display=swap" rel="stylesheet"/>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
   </head>
+
+  
   <body style="background-color: #f5f5dc">
 
   <style>
@@ -52,7 +67,7 @@ if (!isset($_SESSION['cart'])) {
       <img src="img/logo.png" alt="Logo" />
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search..." id="searchInput" oninput="filterProducts()"/>
-        <div class="search-icon">&#128269;</div>
+        <div class="search-icon"><i class="fa-solid fa-magnifying-glass" style="color: #262626;"></i></div>
       </div>
     </div>
 
@@ -115,7 +130,7 @@ if (!isset($_SESSION['cart'])) {
 
     
 
-      <?php $sql=mysqli_query($con,"select subcategory  from subcategory where id='$cid'");
+      <?php $sql=mysqli_query($con,"select subcategory from subcategory where id='$cid'");
         while($row=mysqli_fetch_array($sql)){?>
 
 			<div class="food-name" style="text-align: center; font-size: 36px; margin-left:40px;">
@@ -154,32 +169,20 @@ if (!isset($_SESSION['cart'])) {
                        
                                <?php endif; ?>
                     </div>
-                      <center>
-                           <?php if($availability != 'Out of Stock'): ?>
-                          <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAuthenticate(<?php echo $row['id']; ?>)">Add to Cart</button>
-                          <?php else: ?>
-                          <button class="add-item disabled" disabled>Add to Cart</button>
-                          <?php endif; ?>
-                      </center>
+                    <center>
+                            <?php if($availability != 'Out of Stock'): ?>
+                            <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAndReset(<?php echo $row['id']; ?>)">Add to Cart</button>
+                            <?php else: ?>
+                            <button class="add-item disabled" disabled>Add to Cart</button>
+                            <?php endif; ?>
+                        </center>
                   </div>
 
                 
-              
-              <script>
-                  function addToCartAuthenticate(productId) {
-                      event.stopPropagation();
-                      <?php if(!isset($_SESSION['authenticated'])): ?>
-                          window.location.href = './function/authentication.php';
-                      <?php else: ?>
-                          event.stopPropagation();
-                          var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
-                      <?php endif; ?>
-                  }             
-              </script>
 
 
-            <!-- Modal -->
-            <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
+        <!-- Modal -->
+    <div class="modal fade" id="addToCartModal<?php echo $productId; ?>" tabindex="-1" aria-labelledby="addToCartModalLabel<?php echo $productId; ?>" aria-hidden="true" data-bs-backdrop="false">
      <div class="wrapper">
         <div class="modal-dialog">
    
@@ -223,7 +226,7 @@ if (!isset($_SESSION['cart'])) {
                                 </div>
 
                                 <div class="buttons">
-                                <input type="button" value="Close" class="add-itemmod" data-bs-dismiss="modal" onclick="resetModal('<?php echo $productId; ?>')" />
+                                    <input type="button" value="Close" class="add-itemmod" data-bs-dismiss="modal" onclick="resetModal('<?php echo $productId; ?>')" />
                                     <input type="button" value="Confirm" class="add-itemmod" onclick="addToCart('<?php echo $productId; ?>')" />
                                 </div>
 
@@ -237,8 +240,49 @@ if (!isset($_SESSION['cart'])) {
      </div>
     </div>
 
+    <!-- Item Added Modal -->
+        <div class="modal fade" id="itemAddedModal" tabindex="-1" aria-labelledby="itemAddedModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="itemAddedModalLabel">Item Added to Cart</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                Your item has been successfully added to the cart.
+            </div>
+            </div>
+        </div>
+        </div>
+
+<!-- Error Modal -->
+        <div class="modal fade" id="errorModal" tabindex="-1" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="errorModalLabel">Error</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                An error occurred while adding the item to the cart. Please try again later.
+            </div>
+            </div>
+        </div>
+        </div>
+
 
     <script>
+
+    function addToCartAuthenticate(productId) {
+                        event.stopPropagation();
+                        <?php if(!isset($_SESSION['authenticated'])): ?>
+                            window.location.href = './function/authentication.php';
+                        <?php else: ?>
+                            event.stopPropagation();
+                            var addToCartModal = document.getElementById('addToCartModal<?php echo $row['id']; ?>');
+                        <?php endif; ?>
+                    }             
+
     function resetModal(productId) {
         // Unselect all sizes
         var checkboxes = document.querySelectorAll("[id^='" + productId + "_']");
@@ -253,6 +297,13 @@ if (!isset($_SESSION['cart'])) {
         // Reset quantity to 1
         var numberField = document.getElementById("numberField" + productId);
         numberField.value = "1";
+
+    }
+
+    function addToCartAndReset(productId) {
+        addToCartAuthenticate(productId);
+        resetModal(productId);
+        $('#addToCartModal' + productId).modal('toggle');
     }
 
     function decrease(productId) {
@@ -310,6 +361,13 @@ if (!isset($_SESSION['cart'])) {
         alert('Please select a size.');
         return;
     }
+
+    if (totalPrice == 0) {
+        alert('Please select a size');
+        return;
+    }
+
+    $('#addToCartModal' + productId).modal('hide');
     
     var size = selectedSize.textContent.split('-')[0].trim();
     
@@ -333,14 +391,27 @@ if (!isset($_SESSION['cart'])) {
         success: function(response) {
             // Handle success
             console.log('Item added to cart successfully!');
-            // Show confirmation message
-            alert('Item added to cart!');
-            // Close modal
-            $('#addToCartModal' + productId).modal('hide');
+            // Show confirmation modal
+            $('#itemAddedModal').modal('show');
+            // Close confirmation modal after 3 seconds
+            setTimeout(function() {
+                $('#itemAddedModal').modal('hide');
+                // Refresh the page after successful add to cart
+                window.location.reload();
+                // Reset the modal after successful add to cart
+                 resetModal(productId);
+            }, 2000);
+           
         },
         error: function(error) {
             // Handle error
             console.error('Error adding item to cart:', error);
+            // Show error modal
+            $('#errorModal').modal('show');
+            // Close error modal after 3 seconds
+            setTimeout(function() {
+                $('#errorModal').modal('hide');
+            }, 2000);
         }
     });
 }
