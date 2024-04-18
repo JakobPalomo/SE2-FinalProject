@@ -1,6 +1,10 @@
 <?php
+require '../vendor/autoload.php'; // Include PHPMailer autoload file
 session_start();
 include('../dbcon.php');
+
+use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\Exception;
 
 function placeOrder() {
     global $con;
@@ -25,13 +29,6 @@ function placeOrder() {
         $deliveryTime = isset($_POST['deliveryTime']) ? $_POST['deliveryTime'] : '';
         $status = 'Pending';
         
-        //  // Set the status based on the payment option
-        //  if ($paymentOption === 'Gcash') {
-        //     $status = 'To Pay';
-        // } else {
-        //     $status = 'Pending';
-        // }
-
         // Prepare the SQL statement with parameterized queries to prevent SQL injection
         $query = "INSERT INTO pending (user_session_id, name, contact, email, items, delivery_address, total_price, payment_option, delivery_option, preparation_date,delivery_time, status)
                   VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
@@ -44,6 +41,10 @@ function placeOrder() {
             if (mysqli_stmt_execute($stmt)) {
                 // Order placed successfully, you can perform additional actions if needed
                 unset($_SESSION['cart']); // Unset the cart
+
+                // Send order email
+                sendOrderEmail($name, $contact, $email, $items, $deliveryAddress, $totalPrice, $paymentOption, $deliveryOption, $preparationDate, $deliveryTime, $status);
+
                 $response = "Order placed successfully!";
             } else {
                 echo "Error placing order: " . mysqli_stmt_error($stmt);
@@ -61,6 +62,45 @@ function placeOrder() {
     return $response;
 }
 
+function sendOrderEmail($name, $contact, $email, $items, $deliveryAddress, $totalPrice, $paymentOption, $deliveryOption, $preparationDate, $deliveryTime, $status) {
+    $mail = new PHPMailer(true);
+
+    $mail->isSMTP();   
+    $mail->SMTPAuth   = true;                             
+
+    $mail->Host       = 'smtp.gmail.com';                                    
+    $mail->Username   = 'cdemailverify@gmail.com';                    
+    $mail->Password   = 'imse cgjh qyzq bwhg';       
+    $mail->SMTPSecure ="tls";
+      
+    $mail->Port       = 587;           
+    
+    $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+    $mail->addAddress('cdemailverify@gmail.com'); // Receiver's email address
+
+    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->Subject = 'New Order Received';
+
+    $email_template = "<h1>New Order Received</h1>
+    <h2>Name: $name</h2>
+    <h2>Contact: $contact</h2>
+    <h2>Email: $email</h2>
+    <h2>Items: $items</h2>
+    <h2>Delivery Address: $deliveryAddress</h2>
+    <h2>Total Price: $totalPrice</h2>
+    <h2>Payment Option: $paymentOption</h2>
+    <h2>Delivery Option: $deliveryOption</h2>
+    <h2>Preparation Date: $preparationDate</h2>
+    <h2>Delivery Time: $deliveryTime</h2>
+    <h2>Status: $status</h2>";
+
+    $mail->Body = $email_template;
+    if(!$mail->send()) {
+        echo "Mailer Error: " . $mail->ErrorInfo;
+    } else {
+        echo "Message has been sent";
+    }
+}
 
 // Call the placeOrder function and get the response
 $responseMessage = placeOrder();
