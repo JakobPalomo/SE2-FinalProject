@@ -148,7 +148,7 @@ include('./dbcon.php');
         <br>
         <br>
         <div class="subtitle">
-            <p class="subtitle-txt-2">Date of Preparation</p>
+            <p class="subtitle-txt-2">Date of Delivery</p>
         </div>
         <div class="subtitle" style="margin-bottom: 20px">
             <input type="date" id="datepicker" name="preparationDate" class="subtitle-txt-bg-2">
@@ -203,7 +203,7 @@ include('./dbcon.php');
     <div class="checkbox-container">
         <label class="checkbox-label" for="codCheckbox">
             <input type="checkbox" id="codCheckbox" class="custom-checkbox" name="paymentOption" onclick="handlePaymentCheckboxClick('codCheckbox')" value="COD" />
-            <div class="checkmark"></div> Cash on Delivery
+            <div class="checkmark"></div> Cash
         </label>
     </div>
     <div class="checkbox-container">
