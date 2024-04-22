@@ -497,31 +497,37 @@ if(isset($_POST['submit2'])) {
  
         
         <div class="status">
-        <?php 
-    $st = 'Delivered';
-    $rt = mysqli_query($con,"SELECT * FROM pending WHERE id='$oid'");
-    while($num=mysqli_fetch_array($rt)) {
-        $currrentSt=$num['status'];
-    }
-    if($st == $currrentSt) { ?>
-        <tr><td colspan="2"><b>Product Delivered </b></td>
-    <?php } else  { ?>
-          <label for="statusDropdown" class="status">Status:</label>
-          <select class="drop" class="status" name="status" id="statusDropdown" required>
-          <option value="">Select Status</option>
-                      <option value="Accepted">Accepted</option>
-                      <option value="To Pay">Pay Online</option>
-                      <option value="Delivered">Delivered</option>
-                      <option value="Declined">Declined</option>
-          </select>
-        </div>
+        <?php
+$st = 'Delivered';
+$rt = mysqli_query($con,"SELECT * FROM pending WHERE id='$oid'");
+while($num=mysqli_fetch_array($rt)) {
+    $currrentSt=$num['status'];
+    $currrentPO=$num['payment_option'];
+}
+?>
 
-        <p class="status" style="padding-left: 24px;">Remarks</p>
-        <textarea class="remarks-box" name="remark"></textarea>
+<label for="statusDropdown" class="status">Status:</label>
+<select class="drop" class="status" name="status" id="statusDropdown" required>
+    <option value="">Select Status</option>
+    <?php if ($currrentSt == 'Pending' && $currrentPO == 'Gcash'): ?>
+        <option value="Pay Online">Pay Online</option>
+        <option value="Declined">Decline</option>
+    <?php elseif ($currrentSt == 'Pending'): ?>
+        <option value="Accepted">Accept</option>
+        <option value="Declined">Decline</option>
+    <?php elseif ($currrentSt == 'Accepted'): ?>
+        <option value="Delivered">Delivered</option>
+    <?php endif; ?>
+</select>
 
-        <div class="button">
-          <input type="submit" value="Update" class="add-item" name="submit2" />
-          <input type="submit" value="Cancel" class="add-item" name="Submit2" onClick="closeTab();" />
+<p class="status" style="padding-left: 24px;">Remarks</p>
+<textarea class="remarks-box" name="remark"></textarea>
+
+<div class="button">
+    <input type="submit" value="Update" class="add-item" name="submit2" />
+    <input type="submit" value="Cancel" class="add-item" name="Submit2" onClick="closeTab();" />
+</div>
+
 
 <script>
     function closeTab() {
@@ -529,12 +535,4 @@ if(isset($_POST['submit2'])) {
     }
 </script>
 
-        </div>    <?php } ?>
-        <!-- End of content card -->
-      </div>
-      </form>
-    </div>
 
-
-  </body>
-</html>
