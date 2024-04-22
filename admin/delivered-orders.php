@@ -116,61 +116,71 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 									</div>
 								</div>
 
-							<div class="tabling">
-								<table id="orderTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped display table-responsive">
-									<thead>
-										<tr><th>Action</th>
-											<th>Order ID</th>
-											<th>Name</th>
-											<th width="70">Contact no</th>
-											<th>Email</th>
-											<th>Product</th>
-											<th>Qty</th>
-											<th>Price</th>
-											<th>Total</th>
-											<th>Total All</th>
-											<th>Payment</th>
-											<th>Dlvry Option</th>
-											<th>Address</th>
-											<th>Order Date</th>
-											<th>Dlvry Time</th>
-											
-										</tr>
-									</thead>
-									<tbody>
-										<?php
-											$cnt = 1;
-											foreach ($orderProducts as $orderId => $order) {
-												foreach ($order['products'] as $index => $product) {
-										?>
-													<tr>
-														<?php if ($index === 0): ?>
-															<td rowspan="<?php echo count($order['products']); ?>"><a href="updateorder.php?oid=<?php echo htmlentities($orderId); ?>" title="Update order" target="_blank"><i class="fa-regular fa-pen-to-square" style="color: #48BE25;  font-size: 20px"></i></a></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($orderId); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['username']); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['usercontact']); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['useremail']); ?></td>
-														<?php endif; ?>
-														<td><?php echo isset($product['productName']) ? htmlentities($product['productName']) : ''; ?></td>
-														<td><?php echo isset($product['quantity']) ? htmlentities($product['quantity']) : ''; ?></td>
-														<td><?php echo isset($product['sizePrice']) ? htmlentities($product['sizePrice']) : ''; ?></td>
-														<td><?php echo isset($product['totalPrice']) ? htmlentities($product['totalPrice']) : ''; ?></td>
-														<?php if ($index === 0): ?>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['total_price']); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['payment_option']); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_option']); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_address']); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['orderdate']); ?></td>
-															<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_time']); ?></td>
-														<?php endif; ?>
-													</tr>
-										<?php
-													$cnt++;
-												}
-											}
-										?>
-									</tbody>
-								</table>
+								<button id="toggleEmailColumn" class="show"><i class="fa-solid fa-eye" style="color: #ffffff;"></i> More Details</button>
+
+<div class="tabling">
+	<table id="orderTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped display table-responsive">
+		<thead>
+			<tr><th>Action</th>
+				<th>Order ID</th>
+				<th>Name</th>
+				<th width="70" class="email-column" style="display: none;">Contact no</th>
+				<th class="email-column" style="display: none;">Email</th>
+				<th >Product</th>
+				<th class="email-column" style="display: none;">Qty</th>
+				<th class="email-column" style="display: none;">Price</th>
+				<th class="email-column" style="display: none;">Total</th>
+				<th>Total All</th>
+				<th class="email-column" style="display: none;">Payment</th>
+				<th >Dlvry Option</th>
+				<th class="email-column" style="display: none;">Address</th>
+				<th>Order Date</th>
+				
+			</tr>
+		</thead>
+		<tbody>
+			<?php
+				$cnt = 1;
+				foreach ($orderProducts as $orderId => $order) {
+					foreach ($order['products'] as $index => $product) {
+			?>
+						<tr>
+							<?php if ($index === 0): ?>
+								<td rowspan="<?php echo count($order['products']); ?>"><a href="updateorder.php?oid=<?php echo htmlentities($orderId); ?>" title="Update order" target="_blank"><i class="fa-regular fa-pen-to-square" style="color: #48BE25;  font-size: 20px"></i></a></td>
+								<td  rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($orderId); ?></td>
+								<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['username']); ?></td>
+								<td class="email-column" style="display: none;" rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['usercontact']); ?></td>
+								<td class="email-column" style="display: none;" rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['useremail']); ?></td>
+							<?php endif; ?>
+							<td ><?php echo isset($product['productName']) ? htmlentities($product['productName']) : ''; ?></td>
+							<td class="email-column" style="display: none;"><?php echo isset($product['quantity']) ? htmlentities($product['quantity']) : ''; ?></td>
+							<td class="email-column" style="display: none;"><?php echo isset($product['sizePrice']) ? htmlentities($product['sizePrice']) : ''; ?></td>
+							<td class="email-column" style="display: none;"><?php echo isset($product['totalPrice']) ? htmlentities($product['totalPrice']) : ''; ?></td>
+							<?php if ($index === 0): ?>
+								<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['total_price']); ?></td>
+								<td class="email-column" style="display: none;" rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['payment_option']); ?></td>
+								<td  rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_option']); ?></td>
+								<td class="email-column" style="display: none;" rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_address']); ?></td>
+								<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['orderdate']); ?></td>
+								
+							<?php endif; ?>
+						</tr>
+			<?php
+						$cnt++;
+					}
+				}
+			?>
+		</tbody>
+	</table>
+	<script>
+$(document).ready(function() {
+// Function to toggle the visibility of the email column
+$('#toggleEmailColumn').on('click', function() {
+// Toggle the visibility of the email column
+$('.email-column').toggle();
+});
+});
+</script>
 							</div>
 						</div>
 					</div>				

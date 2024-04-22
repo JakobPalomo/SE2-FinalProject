@@ -27,6 +27,14 @@ new adds */
     width: 100%;
   }
 }
+.show {
+  font-family: "Plus Jakarta Sans", sans-serif;
+  font-size: 12px;
+  background-color: #004225;
+  color: whitesmoke;
+  margin: 12px;
+  border-radius: 8px;
+}
 th {
   max-width: 120px;
   word-wrap: break-word;
