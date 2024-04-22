@@ -67,25 +67,40 @@ function sendOrderEmail($name, $contact, $email, $items, $deliveryAddress, $tota
 
     $mail->isSMTP();   
     $mail->SMTPAuth   = true;                             
-
     $mail->Host       = 'smtp.gmail.com';                                    
-    $mail->Username   = 'cdemailverify@gmail.com';                    
-    $mail->Password   = 'imse cgjh qyzq bwhg';       
-    $mail->SMTPSecure ="tls";
-      
+    $mail->Username   = 'ezequielg070901@gmail.com';                    
+    $mail->Password   = 'zmxy twtu fuym ejjs';       
+    $mail->SMTPSecure = "tls";   
     $mail->Port       = 587;           
-    
-    $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
-    $mail->addAddress('cdemailverify@gmail.com'); // Receiver's email address
+    $mail->setFrom("ezequielg070901@gmail.com", "Chef's Daughter"); // Corrected the From address
+    $mail->addAddress('ezequielg070901@gmail.com'); // Receiver's email address
 
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'New Order Received';
+
+    // Unserialize the items array
+    $itemsArray = unserialize($items);
+
+    // Format items as a list
+    $itemsList = "<ul>";
+    foreach ($itemsArray as $item) {
+        $itemsList .= "<li>";
+        $itemsList .= "Product ID: " . $item['productId'] . "<br>";
+        $itemsList .= "Product Name: " . $item['productName'] . "<br>";
+        $itemsList .= "Quantity: " . $item['quantity'] . "<br>";
+        $itemsList .= "Size: " . $item['size'] . "<br>";
+        $itemsList .= "Size Price: " . $item['sizePrice'] . "<br>";
+        $itemsList .= "Total Price: " . $item['totalPrice'] . "<br>";
+        $itemsList .= "</li>";
+    }
+    $itemsList .= "</ul>";
 
     $email_template = "<h1>New Order Received</h1>
     <h2>Name: $name</h2>
     <h2>Contact: $contact</h2>
     <h2>Email: $email</h2>
-    <h2>Items: $items</h2>
+    <h2>Items:</h2>
+    $itemsList
     <h2>Delivery Address: $deliveryAddress</h2>
     <h2>Total Price: $totalPrice</h2>
     <h2>Payment Option: $paymentOption</h2>
@@ -95,12 +110,19 @@ function sendOrderEmail($name, $contact, $email, $items, $deliveryAddress, $tota
     <h2>Status: $status</h2>";
 
     $mail->Body = $email_template;
+
+    // Console log for debugging
+    error_log("Email template: " . $email_template);
+
     if(!$mail->send()) {
         echo "Mailer Error: " . $mail->ErrorInfo;
     } else {
         echo "Message has been sent";
     }
 }
+
+
+
 
 // Call the placeOrder function and get the response
 $responseMessage = placeOrder();
