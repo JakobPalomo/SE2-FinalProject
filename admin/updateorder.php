@@ -515,6 +515,8 @@ while($num=mysqli_fetch_array($rt)) {
     <?php elseif ($currrentSt == 'Pending'): ?>
         <option value="Accepted">Accept</option>
         <option value="Declined">Decline</option>
+    <?php elseif ($currrentSt == 'To Pay'): ?>
+        <option value="Declined">Decline</option>
     <?php elseif ($currrentSt == 'Accepted'): ?>
         <option value="Delivered">Delivered</option>
     <?php endif; ?>

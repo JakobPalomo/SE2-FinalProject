@@ -180,7 +180,7 @@ include('./dbcon.php');
             <!-- COLUMN 1 -->
                 <div class="footer-column">
                     <h8>Total Price</h8>
-                    <p class="subtitle-txt-2">₱<?php echo number_format($totalPrice, 2); ?></p>
+                    <p class="subtitle-txt-2">₱<?php echo number_format($totalPrice, 2, '.', ','); ?></p>
                 </div>
 
                 <!-- COLUMN 2 -->           
