@@ -19,13 +19,14 @@ $fixedTop = isset($includeFixedTop) && $includeFixedTop ? 'fixed-top' : '';
   <style>
     .navbar-nav2 {
       margin-right: auto; /* Push the menu items to the left */
+      margin-left: 20px;
     }
 
     .navbar-nav .nav-item {
       margin-right: 5px; /* Add space between menu items */
     }
     .navbar-nav3 {
-      margin-right: 20; /* Add space between menu items */
+      margin-right: 25px; /* Add space between menu items */
     }
   </style>
 </head>

@@ -114,6 +114,26 @@ if ($result->num_rows == 1) {
     });
 </script>
 
+<script>
+  $(document).ready(function() {
+    $('.cancel-order-btn').click(function() {
+        var orderId = $(this).data('order-id');
+        $.ajax({
+            url: './function/cancel_order.php',
+            type: 'POST',
+            data: { order_id: orderId },
+            success: function(response) {
+                alert(response); // Display success or error message
+                location.reload();
+            },
+            error: function(xhr, status, error) {
+                alert("Error: " + xhr.responseText); // Display error message
+            }
+        });
+    });
+});
+  </script>
+
 
     <div class="dashboard" id="main">
       <div class="card-field" id="card1">
@@ -217,6 +237,7 @@ if ($result->num_rows == 1) {
                         $deliveryOption = $row['delivery_option'];
                         $paymentOption = $row['payment_option'];
                         $deliveryAddress = $row['delivery_address'];
+                        $orderTime = strtotime($row['created_at']);
                         $orderItems = unserialize($row['items']);
 
                         // Check if order status is "Pending"
@@ -226,6 +247,17 @@ if ($result->num_rows == 1) {
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
                                 <td class="orderstat"><?php echo $orderStatus; ?></td>
                             </tr>
+                            <td class="cancel-button">
+                                  <?php 
+                                  // Check if the order is still within the 2-hour window for cancellation
+                                  $currentTime = time();
+                                  $orderTime = strtotime($row['created_at']);
+                                  $timeDiff = $currentTime - $orderTime;
+                                  $cancelWindow = 2 * 60 * 60; // 2 hours in seconds
+                                  if ($timeDiff <= $cancelWindow): ?>
+                                      <button class="cancel-order-btn" data-order-id="<?php echo $orderId; ?>">Cancel Order</button>
+                                  <?php endif; ?>
+                              </td>
                             <?php
                             $lastItemKey = array_key_last($orderItems);
                             $subtotal = 0;
