@@ -207,7 +207,7 @@ session_start();
         barangays: ["Baguindoc", "Balutu", "Bancal", "Burgos", "Cruz", "De La Paz", "Dela Cruz", "Dela Paz Norte", "Dela Paz Sur", "La Loma", "Lomboy", "Maimpis", "Mangga", "Matasim", "Natividad", "Pampaunlad", "Pandaras", "Panipuan", "Poblacion", "San Agustin", "San Bartolome", "San Felipe", "San Isidro", "San Joaquin", "San Jose", "San Juan", "San Matias", "San Nicolas", "San Pablo", "San Pedro", "San Rafael", "San Roque", "San Vicente", "Santa Cruz", "Santa Lucia", "Santa Maria", "Santa Monica", "Santa Rita", "Santa Rosa", "Santo Domingo", "Santo Niño", "Santo Rosario", "Sapang Balen", "Sapang Maragul", "Sapang Putik", "Sapang Uwak", "Talimundoc", "Tenejero", "Tibag", "Tucop", "Villa Maria"],
         postal_code: "2020"
     },
-  }S
+  }
     
 };
 
@@ -235,6 +235,7 @@ provinceSelect.addEventListener('change', () => {
         postalCodeInput.value = '';
     }
 });
+
 
 citySelect.addEventListener('change', () => {
     const selectedProvince = provinceSelect.value;
