@@ -59,8 +59,8 @@ include('./dbcon.php');
         <div class="expanded-content">
           <!-- Content to show when the item is expanded -->
           Yes, we provide complimentary delivery service to locations within
-           Pampanga up to Balintawak. elivery from Balintawak to your
-            specified address can be arranged through Lalamove. 
+           Pampanga up to Balintawak. Deliveries outside of Balintawak to your
+            specified address will be discussed first via our facebook page. 
             Please note that the customer is responsible for 
             covering the Lalamove delivery fee.
         </div>
@@ -80,6 +80,19 @@ include('./dbcon.php');
             please allow at least 3 days for order placement.
         </div>
       </div>
+
+      <div class="itemfaq" onclick="toggleFaqContent(this)">
+        <p class="faqcontent">
+        How long will pending orders remain active?<img
+            class="drop"
+            src="./img/angle-small-left.png"
+          />
+        </p>
+        <div class="expanded-content">
+        Pending orders typically stay active for up to 3 days. Orders with GCash payment 
+        that remain unpaid for 3 days are automatically declined.
+      </div>
+    </div>
 
       <div class="itemfaq" onclick="toggleFaqContent(this)">
         <p class="faqcontent">
@@ -131,6 +144,8 @@ include('./dbcon.php');
         You can contact us promptly through Facebook Messenger. Our response hours are from 9:00 AM to 9:00 PM.
       </div>
     </div>
+
+
     </div>
     
     <footer class="footer">

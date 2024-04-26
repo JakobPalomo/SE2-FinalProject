@@ -147,18 +147,26 @@ if(isset($_SESSION['status']))
 <br/>
 Once orders are confirmed, any changes shall no longer be allowed.
 <br/>
-2. Food Tray Delivery
+<br/>
+2. Online Order Period
+<br/>
+Online Pending orders will remain active for a maximum of 3 days. GCash payments must be settled within 3 days; otherwise, they will be automatically declined.
+<br/>
+<br/>
+3. Food Tray Delivery
 <br/>
 Once food trays are delivered, it is best advised that food trays must be opened to prevent spoilage.
 <br/>
-3. Storage of Food Trays
+<br/>
+4. Storage of Food Trays
 <br/>
 Food trays that are not consumed or served an hour after delivery time shall be stored in a cool temperature or area.
 <br/>
-4. Allergies and Special Requests
 <br/>
-
+5. Allergies and Special Requests
+<br/>
 Inform Chef’s Daughter regarding personal food allergies, if any.
+<br/>
 <br/>
 Special requests (e.g., chicken part request, no use of MSG, no pepper, etc.) must be discussed upon ordering.</p>
       </div>
