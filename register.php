@@ -124,88 +124,93 @@ session_start();
         const addresses = {
           "Pampanga": {
     "Angeles City": {
-        barangays: ["Anunas", "Balibago", "Capaya", "Claro M. Recto", "Cuayan", "Cutcut", "Lourdes North West (Talimundok)", "Lourdes Sur (Talimundok)", "Malabanias", "Margot", "Marisol", "Mining", "Pulung Cacutud", "Pulung Maragul", "Pulong Masle", "Sapalibutad", "Sapangbato", "Sto. Cristo", "Sto. Domingo (Pob.)", "Sto. Rosario (Pob.)", "Santo Rosario (Pob.)", "Salapungan", "Santa Teresita", "Santo Niño", "Santo Rosario (Pob.)", "Virgen Delos Remedios"],
+        barangays: ["Agapito Del Rosario", "Anunas", "Balibago", "Cpaaya", "Claro M. Recto", "Cuayan", "Cutcut", "Cutud", "Lourdes North West", "Lourdes Sur", "Lourdes Sur East", "Malabanas", "Margot", "Mining", "Pampang", "Pandan", "Pulung Maragul", "Pulung Bulu", "Pulung Cacutud", "Salapungan", "San Jose", "San Nicolas", "Sta Teresita", "Sta Trinidad", "Sto Cristo", "Sto Domingo", "Sto Rosario", "Sapalibutad", "Sapang Bato", "Tabun", "Virgen Delos Remedios", "Amsic", "Ninoy Aquino"],
         postal_code: "2009"
     },
     "Apalit": {
-        barangays: ["Balucuc", "Capalangan", "Carmen", "Colgante", "Culantung", "Paligui", "Pampanga Day", "Sampaloc", "San Juan", "Sulipan"],
+        barangays: ["Balucuc","Calantipe", "Cansinala", "Capalangan", "Colgante", "Paligui", "Sampaloc", "San Juan", "San Vicente", "Sucad", "Sulipan", "Tabuyuc"],
         postal_code: "2016"
     },
     "Arayat": {
-        barangays: ["Bisal", "Cupang", "Gatiawin", "Gatiawin", "Lacmit", "Lanat", "Mabatang", "Matamo", "Pio", "Santo Rosario", "Tabuan", "Villa Maria"],
+        barangays: ["Arenas", "Baliti", "Batasan", "Buensuceso", "Candating", "Cupang", "Gatiawin", "Guemasan", "La Paz", "Lacmit", "Lacquios", "Mangga-Cacutud", "Mapalad", "Panlinlang", "Paralay", "Plazang Luma", "Poblacion", "San Agustin Norte", "San Agustin Sur", "San Antonio", "San Jose Mesulo", "San Juan Bano", "San Mateo", "San Nicolas", "San Roque Bitas", "Matamo","Santo Nino Tabuan", "Suclayin", "Telapayong", "Kaledian"],
         postal_code: "2012"
     },
     "Bacolor": {
-        barangays: ["Cabambangan", "Cabetican", "Concepcion", "Dolores", "Macabacle", "Magliman", "Magsaysay", "Malauli", "Parulog", "San Antonio", "San Isidro", "San Vicente", "Santa Barbara (Pob.)", "Santa Ines (Pob.)", "Santa Lucia", "Santa Maria", "Santa Cruz (Pob.)", "Santo Niño", "Villa Maria (Pob.)"],
+        barangays: ["Balas", "Cabalantian", "Cabambangan", "Cabetican", "Calibutbut", "Concepcion", "Dolores", "Duat", "Macabacle", "Magliman", "Maliwalu", "Mesalipit", "Parulog", "Potrero", "San Antonio", "San Isidro", "San Vicente", "Santa Barbara", "Santa Ines", "Talba", "Tinajero"],
         postal_code: "2001"
     },
     "Candaba": {
-        barangays: ["Bahay Pare", "Bambang", "Barit", "Buas", "Cacutud", "Dulong Ilog", "Mangga", "Meyto", "Pansinao", "Pulong Gubat", "Pulong Palazan", "San Agustin", "San Antonio", "San Isidro", "San Jose", "San Juan", "San Pablo", "San Pedro", "Santa Cruz", "Santa Lucia", "Santa Rita", "Santo Rosario (Pob.)", "Sapang Kawayan", "Sulipan", "Tenejero", "Vizal San Pablo"],
+        barangays: ["Bahay Pare", "Bambang", "Barangca", "Barit", "Buas", "Cuayang Bugtong", "Dalayang", "Dulong Ilog", "Gulap", "Lanang", "Lourdes", "Magumbali", "Mandasig", "Mandili", "Mangga", "Mapaniqui", "Paligui", "Pangclara", "Pansinao", "Paralaya", "Pasig", "Pescadores", "Pulong Gubat", "Pulong Palazan", "Salapungan", "San Agustin", "Santo Rosario", "Tagulod", "Talang", "Tenejero", "Vizal San Pedro", "Vizal Santo Cristo", "Vizal Santo Nino"],
         postal_code: "2013"
     },
     "Floridablanca": {
-        barangays: ["Anon", "Apalit", "Bancal", "Calantas", "Mabical", "Mabiga", "Malabo", "Maligaya", "Mamatitang", "Mapalad", "Pabanlag", "Pampang", "Poblacion", "San Antonio", "San Isidro", "San Jose", "San Juan", "San Nicolas", "San Pedro", "Santa Monica", "Santo Niño", "Sapang Balen", "Sapang Uwak", "Solib", "Villa Maria"],
+        barangays: ["Anon", "Apalit", "Basa Air Base", "Benedicto", "Bodega", "Cabangcalan", "Calantas", "Carmencita", "Consuelo", "Dampe", "Del Carmen", "Fortuna", "Gutad", "Mabical", "Sto Rosario", "Maligaya", "Nabuclod", "Pabanlag", "Paguiruan", "Palmayo", "Pandaguirig", "Poblacion", "San Antonio", "San Isidro", "San Jose", "San Nicolas", "San Pedro", "San Ramon", "San Roque", "Sta Monica", "Solib", "Valdez", "Mawacat"],
         postal_code: "2006"
     },
     "Guagua": {
-        barangays: ["Bancal", "Betis", "Caliligawan", "Concepcion", "Dela Cruz", "Lambac", "Lourdes", "Magsaysay", "Manibaug", "Maniango", "Natividad", "Pamintuan", "Parulog", "Poblacion", "San Agustin", "San Antonio", "San Isidro", "San Jose", "San Matias", "San Pedro", "San Roque", "San Vicente", "Santa Filomena", "Santa Ines", "Santa Ursula", "Santo Cristo", "Santo Niño", "Santo Rosario"],
+        barangays: ["Bancal", "Jose Abad Santos", "Lambac", "Magsaysay", "Maquiapo", "Natividad", "Plaza Burgos", "Pulungmasle", "Rizal", "San Agustin", "San Antonio", "San Isidro", "San Jose", "San Juan Bautista", "San Juan Nepomuceno", "San Matias", "San Miguel", "San Nicolas 1st", "San Nicolas 2nd", "San Pablo", "San Pedro", "San Rafael", "San Roque", "San Vicente", "San Juan", "Santa Filomena", "Santa Ines", "Santa Ursula", "Santo Cristo", "Santo Nino", "Ascomo"],
         postal_code: "2003"
     },
     "Lubao": {
-        barangays: ["Aguso", "Apalit", "Baruya", "Concepcion", "Lourdes", "Prado Saba", "Prado Ray", "San Francisco", "San Isidro", "San Jose Gumi", "San Matias", "San Miguel", "San Nicolas 1st", "San Nicolas 2nd", "San Pablo 1st", "San Pablo 2nd", "San Pedro Palcarangan", "Santa Barbara", "Santa Catalina", "Santa Cruz", "Santa Lucia", "Santa Monica", "Santa Rita", "Santa Teresa", "Santo Tomas", "Santo Niño", "Santo Rosario", "Tangle", "Tinang"],
+        barangays: ["Balantacan", "Bancal Sinubli", "Bancal Pugad", "Baruya", "Calangain", "Concepcion", "Del Carmen", "De La Paz", "Don Ignacio Dimson", "Lourdes", "Prado Siongco", "Remedios", "San Agustin", "San Antonio", "San Francisco", "San Isidro", "San Jose Apunan", "San Jose Gumi", "San Juan", "San Matias", "San Miguel", "San Nicolas 1st", "San Nicolas 2nd", "San Pablo 1st", "San Pablo 2nd", "San Pedro Palcarangan", "San Pedro Palcarangan", "San Pedro Saug", "San Roque Arbol", "San Roque Dau", "San Vicente", "Santa Barbara", "Santa Catalina", "Santa Cruz", "Santa Lucia", "Santa Maria", "Santa Monica", "Santa Rica", "Santa Teresa 1st", "Santa Teresa 2nd", "Santiago", "Santo Domingo", "Santo Nino", "Santo Tomas", "Santo Cristo"],
         postal_code: "2005"
     },
     "Mabalacat City": {
-        barangays: ["Atlu-Bola", "Bical", "Bundagul", "Cacutud", "Calumpang", "Camachiles", "Dapdap", "Dau", "Dolores", "Duquit", "Lourdes", "Mabiga", "Macapagal Village", "Mamatitang", "Manuel A. Roxas", "Marimla", "Mawaque", "Mazapil", "Mazubi", "Nabuclod", "Pandacaqui", "Paralayunan", "Poblacion", "Sagrada Familia", "Santa Ines", "Santa Maria", "Santo Rosario", "Sapalibutad", "Sapang Balen", "Sapang Biabas", "Sapang Maisac", "Tabun", "Talaga", "Tanguayu", "Turon", "Sapang Bato"],
+        barangays: ["Atlu-Bola", "Bical", "Bundagul", "Cacutud", "Calumpang", "Camachiles", "Dapdap", "Dau", "Dolores", "Duquit", "Lakandula", "Mabiga", "Macapagal Village", "Mamatitang", "Mangalit", "Marcos Village", "Mawaque", "Paralayunan", "Poblacion", "San Francisco", "San Joaquin", "Santa Ines", "Santa Maria", "Santo Rosario", "Sapang Balen", "Sapang Biabas", "Tabun"],
         postal_code: "2010"
     },
     "Macabebe": {
-        barangays: ["Batasan", "Buenavista", "Calantas", "Dolores", "Lumandol", "Macabebe", "Magaul Birdge", "Maligaya", "Mataguiti", "Pangatlan", "San Jose Matulid", "San Juan", "San Nicolas", "San Vicente", "Santa Maria", "Santo Rosario", "Tagulod", "Tumana"],
+        barangays: ["Batasan", "Caduang Tete", "Candelaria", "Castuli", "Consuelo", "Dalayap", "Mataguiti", "San Esteban", "San Francisco", "San Gabriel", "San Isidro", "San Jose", "San Juan", "San Rafael", "San Roque", "San Vicente", "Sta Cruz", "Sta Lutgarda", "Sta Maria", "Sta Rita", "Sto Nino", "Sto Rosario", "Saplad David", "Tacasan", "Telacsan"],
         postal_code: "2017"
     },
     "Magalang": {
-        barangays: ["Balitucan", "Bodega", "San Agustin", "San Antonio", "San Bartolome", "San Francisco", "San Isidro", "San Jose", "San Juan", "San Miguel", "San Nicolas", "San Pablo", "San Pedro", "San Roque", "Santa Lucia", "Santa Maria", "Santa Teresita", "Santo Rosario", "Sapang Balen"],
+        barangays: ["Camias", "Dolores", "Escaler", "La Paz", "Navaling", "San Agustin", "San Antonio", "San Francisco", "San Ildefonso", "San Isidro", "San Jose", "San Miguel", "San Nicolas 1st", "San Nicolas 2nd", "San Pablo", "San Pedro I", "San Pedro II", "San Roque", "San Vicente", "Santa Cruz", "Santa Lucia", "Santa Maria", "Santo Nino", "Santo Rosario", "Bucunan", "Turu Ayala"],
         postal_code: "2011"
     },
     "Masantol": {
-        barangays: ["Buenavista", "Camias", "Dalayap", "Dolores", "Lanat", "Lapnit", "Balibago", "Linga", "Mabuanbuan", "Maite", "Paligui", "San Agustin", "San Nicolas", "Santa Lucia", "Santo Rosario", "Saplad David", "Saplad Kahoy", "Saplad Tapa", "Sula", "Poblacion"],
+        barangays: ["Alauli", "Bagang", "Balibago", "Bebe Anac", "Bebe Matua", "Bulacus", "San Agustin", "Sta Monica", "Cambasi", "Malauli", "Nigui", "Palimpe", "Puti", "Sagrada", "San Isidro Anac", "San Isidro Matua", "San Nicolas", "San Pedro", "Sta Cruz", "Sta Lucia Matua", "Sta Lucia Paguiba", "Sta Lucia Wakas", "Sta Lucia Anac", "Sapang Kawayan", "Sua", "Sto Nino"],
         postal_code: "2017"
     },
     "Mexico": {
-        barangays: ["Balacat", "Camuning", "Calumpang", "Lourdes", "Mancatian", "Masamat", "Pandacaqui", "Panipuan", "Parian", "San Antonio", "San Jose Matulid", "San Juan", "Santa Cruz", "Santa Cruz Pambilog", "Santa Maria", "Santa Monica", "Santo Rosario", "Santo Tomas", "Sapang Maisac", "Saplad Dau", "Saplad Kati", "Saplad Pandan", "Sula", "Poblacion"],
+        barangays: ["Acli", "Anao", "Balas", "Buenavista", "Camuning", "Cawayan", "Concepcion", "Culubasa", "Divisoria", "Dolores", "Eden", "Gandus", "Lagundi", "Laput", "Laug", "Masamat", "Masangsang", "Nueva Victoria", "Pandacaqui", "Pangatlan", "Panipuan", "Parian", "Sabanilla", "San Antonio", "San Carlos", "San Jose Malino", "San Jose Matulid", "San Juan", "San Lorenzo", "San Miguel", "San Nicolas", "San Pablo", "San Patricio", "San Rafael", "San Roque", "San Vicente", "Santa Cruz", "Santa Maria", "Santo Domingo", "Santo Rosario", "Sapang Maisac", "Suclaban", "Tangle"],
         postal_code: "2021"
     },
     "Minalin": {
-        barangays: ["Batasan", "Bical", "Cabusacan", "Dolores", "San Francisco", "San Isidro", "San Nicolas", "Santa Clara", "Santa Maria", "Santo Domingo", "Santo Rosario", "Santo Tomas"],
+        barangays: ["Bulac", "Dawe", "Lourdes", "Maniango", "San Francisco 1st", "San Francisco 2nd", "San Isidro", "San Nicolas", "San Pedro", "Sta Catalina", "Sta Maria", "Sta Rita", "Sto Domingo", "Sto Rosario", "Saplad"],
         postal_code: "2019"
     },
     "Porac": {
-        barangays: ["Cangatba", "Diaz", "Dolores", "Inararo", "Mancatian", "Manibaug Paralaya", "Manibaug Pasig", "Manuel B. Villar, Sr.", "Pabanlag", "Pias", "Pio", "Planas", "Poblacion", "Pulung Santol", "Sagrada", "Salu", "Santa Cruz", "Santa Maria", "Santo Domingo", "Santo Rosario", "Sapang Uwak", "Sepung Bulaun", "Villa Maria"],
+        barangays: ["Babo Pangulo", "Babo Sacan", "Balubad", "Calzadang Bayu", "Camias", "Cangatba", "Diaz", "Dolores", "Jalung", "Mancatian", "Manibaug Libutad", "Manibaug Paralaya", "Manibaug Pasig", "Manuali", "Mitia Proper", "Palat", "Pias", "Pio Planas", "Poblacion", "Pulung Santol", "Salu", "San Jose Mitla", "Sta Cruz", "Sepung Bulaon", "Sinura", "Villa Maria", "Inararo", "Sapang Uwak"],
         postal_code: "2008"
     },
     "San Fernando City": {
-        barangays: ["Agustin P. Tambungui", "Almacen", "Bulaon", "Calulut", "Dela Paz Norte", "Dela Paz Sur", "Del Carmen", "Del Pilar", "Dolores", "Juliana", "Lara", "Lourdes", "Maimpis", "Malino", "Magliman", "Magliman Dike", "Malpitic", "Panipuan", "Pulungbulu", "Quebiawan", "Saguin", "San Agustin", "San Felipe", "San Isidro", "San Jose", "San Juan", "San Nicolas", "Santa Lucia", "Santa Teresita", "Santo Niño", "Santo Rosario", "Sindalan", "Telabastagan"],
+        barangays: ["Alasas", "Baliti", "Bulaon", "Calulut", "Dela Paz Norte", "Dela Paz Sur", "Del Carmen", "Del Rosario", "Dolores", "Julian", "Lara", "Lourdes", "Magliman", "Maimpis", "Malino", "Malpitic", "Pandaras", "Panipuan", "Santo Rosario", "Quebiauan", "Saguin", "San Agustin", "San Felipe", "San Isidro", "San Jose", "San Juan", "San Nicolas", "San Pedro", "Santa Lucia", "Santa Teresita", "Santo Nino", "Sindalan", "Telabastagan", "Pulung Bulu"],
         postal_code: "2000"
     },
     "San Luis": {
-        barangays: ["Balutu", "Bancal Pugad", "Bancal Sinubli", "Cawayan", "Diaz", "Dolores", "Lubao Poblacion", "Mangga", "Parang", "Paudpod", "San Agustin", "San Isidro", "San Jose", "San Juan", "San Matias", "San Miguel", "San Nicolas", "San Pablo", "Santa Cruz", "Santa Monica", "Santa Rita", "Santa Teresita", "Santo Niño", "Santo Rosario", "Sapang", "Sapa", "Sapang Balen", "Sapang Kawayan", "Sapang Maisac", "Sapang Maragul", "Sapang Putik", "Tinajero"],
+        barangays: ["San Agustin", "San Carlos", "San Isidro", "San Jose", "San Juan", "San Nicolas", "San Roque", "San Sebastian", "Santa Catalina", "Santa Cruz Pambilog", "Santa Cruz Poblacion", "Santa Lucia", "Santa Monica", "Santa Rita", "Santo Nino", "Santo Rosario", "Santo Tomas"],
         postal_code: "2004"
     },
     "San Simon": {
-        barangays: ["Bano", "Bicutan", "Bundagul", "Candating", "Lanang", "Laug", "Mangga", "Pitabunan", "San Agustin", "San Francisco", "San Isidro", "San Juan", "San Nicolas", "San Pablo", "Santa Cruz", "Santa Monica", "Santa Rita", "Santo Niño", "Santo Rosario", "Sapa Grande"],
+        barangays: ["Concepcion", "De La Paz", "San Juan", "San Agustin", "San Isidro", "San Jose", "San Miguel", "San Nicolas", "San Pablo Libutad", "San Pablo Proper", "San Pedro", "Santa Cruz", "Santa Monica", "Santo Nino"],
         postal_code: "2010"
     },
     "Santa Ana": {
-        barangays: ["Calmayo", "Candelaria", "Dancalan", "Del Carmen", "Lourdes", "Poblacion", "San Agustin", "San Bartolome", "San Isidro", "San Joaquin", "San Jose", "San Juan", "San Nicolas", "San Pablo", "Santa Lucia", "Santa Maria", "Santa Rita", "Santo Rosario", "Santo Tomas", "Sulipan", "Telacsan", "Tibagan"],
+        barangays: ["San Agustin", "San Bartolome", "San Isidro", "San Joaquin", "San Jose", "San Juan", "San Nicolas", "San Pablo", "San Pedro", "San Roque", "Santa Lucia", "Santa Maria", "Santiago", "Santo Rosario"],
         postal_code: "2009"
     },
     "Santa Rita": {
-        barangays: ["Bancal Sinubli", "Bancal Pugad", "Buenavista", "Cabanatuan", "Cacutud", "Calulut", "Dila-Dila", "Dolores", "Dulong Bayan", "Ireneville I", "Ireneville II", "Malusac", "Palangue", "Pandan", "Pau", "Poblacion", "San Agustin", "San Basilio", "San Isidro", "San Jose", "San Juan", "San Matias", "San Miguel", "San Nicolas", "San Pablo", "San Pedro", "Santa Catalina", "Santa Cruz", "Santa Lucia", "Santa Monica", "Santa Rita", "Santa Teresita", "Santo Domingo", "Santo Niño", "Sapang Balen", "Sapang Maragul", "Sapang Putik", "Sapang Uwak", "Sua", "Suclayin", "Tua"],
+        barangays: ["Becuran", "Dila-Dila", "San Agustin", "San Basilio", "San Isidro", "San Jose", "San Juan", "San Matias", "San Vicente", "Santa Monica"],
         postal_code: "2005"
     },
     "Santo Tomas": {
-        barangays: ["Baguindoc", "Balutu", "Bancal", "Burgos", "Cruz", "De La Paz", "Dela Cruz", "Dela Paz Norte", "Dela Paz Sur", "La Loma", "Lomboy", "Maimpis", "Mangga", "Matasim", "Natividad", "Pampaunlad", "Pandaras", "Panipuan", "Poblacion", "San Agustin", "San Bartolome", "San Felipe", "San Isidro", "San Joaquin", "San Jose", "San Juan", "San Matias", "San Nicolas", "San Pablo", "San Pedro", "San Rafael", "San Roque", "San Vicente", "Santa Cruz", "Santa Lucia", "Santa Maria", "Santa Monica", "Santa Rita", "Santa Rosa", "Santo Domingo", "Santo Niño", "Santo Rosario", "Sapang Balen", "Sapang Maragul", "Sapang Putik", "Sapang Uwak", "Talimundoc", "Tenejero", "Tibag", "Tucop", "Villa Maria"],
+        barangays: ["Moras De La Paz", "Poblacion", "San Bartolome", "San Matias", "San Vicente", "Santo Rosario", "Sapa"],
         postal_code: "2020"
+    },
+
+    "Sasmuan": {
+        barangays: ["Batang 1st", "Batang 2nd", "Mabuanbuan", "Malusac", "Sta Lucia", "San Antonio", "San Nicolas 1st", "San Nicolas 2nd", "San Pedro", "Santa Monica"],
+        postal_code: "2004"
     },
   }
     
