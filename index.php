@@ -2,6 +2,14 @@
 session_start();
 include('dbcon.php');
 ?> 
+
+<!-- <php
+require __DIR__ . '/function/cancel_static_orders.php';
+// Call the cancelPendingOrders function
+cancelPendingOrders();
+
+?> -->
+
 <!DOCTYPE html>
 <html lang="en">
   <head>

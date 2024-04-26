@@ -1,10 +1,11 @@
 <?php
-require '../vendor/autoload.php'; // Include PHPMailer autoload file
-include('../dbcon.php');
+require __DIR__ . '/../vendor/autoload.php'; // Include PHPMailer autoload file
+include(__DIR__ . '/../dbcon.php');
+
 
 use PHPMailer\PHPMailer\PHPMailer;
+use PHPMailer\PHPMailer\SMTP;
 use PHPMailer\PHPMailer\Exception;
-
 
 function cancelPendingOrders() {
     global $con;
@@ -38,9 +39,12 @@ function cancelPendingOrders() {
             $userEmail = $row['email'];
             $status = $row['status'];
             sendCancellationEmail($userEmail, $status);
+            echo "Order cancelled successfully.";
+
+            sleep(10);
         }
     } else {
-       // echo "Error cancelling pending and To Pay orders: " . $stmt->error;
+        echo "Error cancelling pending and To Pay orders: " . $stmt->error;
     }
 }
 
@@ -54,15 +58,11 @@ function sendCancellationEmail($userEmail, $status) {
     $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
-
-     // Sender and recipient settings
     $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
-    $mail->addAddress($userEmail); // Receiver's email address
-
-    $mail->isHTML(true);                                  //Set email format to HTML
+    $mail->addAddress($userEmail); 
+    $mail->isHTML(true);                       
     $mail->Subject = 'Your Order Has Been Cancelled';
 
-    $emailContent = '';
 
     if ($status === 'Pending') {
         $emailContent = "Your order has been cancelled. We couldn't get to your request in time. (Busy / Unavailable) Try to order some other time.";
@@ -73,11 +73,17 @@ function sendCancellationEmail($userEmail, $status) {
     }
 
     $mail->Body = $emailContent;
+    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 
-    // if(!$mail->send()) {
-    //     echo "Failed to send cancellation email to $userEmail: " . $mail->ErrorInfo;
-    // } else {
-    //     echo "Cancellation email sent successfully to $userEmail.";
-    // }
+    try {
+        // Attempt to send the email
+        if (!$mail->send()) {
+            echo "Failed to send email: " . $mail->ErrorInfo;
+        } else {
+            echo "Email sent successfully!";
+        }
+    } catch (Exception $e) {
+        echo "An error occurred while sending the email: " . $e->getMessage();
+    }
 }
 
