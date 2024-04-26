@@ -35,7 +35,7 @@ include('dbcon.php');
    <!-- Code of homepage -->
 
     <!-- top part of the homepage after the navbar -->
-    <div class="topdiv">
+    <div class="topdiv" style="padding-top: 60px;">
       <img src="./img/logo.png" alt="Logo" />
       
     </div>

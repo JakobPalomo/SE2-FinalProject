@@ -1,11 +1,12 @@
-body {
+body.apply-padding {
   background-color: #f5f5dc;
+  padding-top: 60px;
 }
 
 .navbar.navbar-expand-lg {
   background-color: #004225;
-  padding-top: 24px;
-  padding-bottom: 24px;
+  padding-top: 20px;
+  padding-bottom: 20px;
 }
 
 .brand {
@@ -13,8 +14,8 @@ body {
   text-decoration: none;
   font-family: "Inika", serif;
   font-weight: bolder;
-  font-size: 24px;
-  margin-left: 24px;
+  font-size: 20px;
+  margin-left: 20px;
 }
 .navbutton {
   color: #ffffff;

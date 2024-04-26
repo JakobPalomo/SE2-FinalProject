@@ -42,7 +42,7 @@ if(isset($_POST['add_to_cart'])) {
   </head>
 
   
-  <body style="background-color: #f5f5dc">
+  <body style="background-color: #f5f5dc" class="apply-padding">
 
   <style>
     .menu-item {

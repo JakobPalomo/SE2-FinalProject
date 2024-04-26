@@ -33,7 +33,7 @@ session_start();
       rel="stylesheet"
     />
   </head>
-  <body style="background-color: #f5f5dc">
+  <body style="background-color: #f5f5dc" class="apply-padding">
   <?php include('common/navbar.php');?>
      <!-- Code zone -->
   <body>  <!--ito yung sign up to your account  -->

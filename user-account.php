@@ -65,7 +65,7 @@ if ($result->num_rows == 1) {
       rel="stylesheet"
     />
   </head>
-  <body style="background-color: #f5f5dc; margin-top:56px;">
+  <body style="background-color: #f5f5dc; margin-top:5px;">
 
   <style>
   /* Hide all card-fields except the first one */

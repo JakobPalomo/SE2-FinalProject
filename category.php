@@ -55,7 +55,7 @@ if(isset($_POST['add_to_cart'])) {
   </head>
 
  <!-- inline style-->
-  <body style="background-color: #f5f5dc">
+  <body style="background-color: #f5f5dc" class="apply-padding">
   <style>
     .menu-item {
             transition: transform 0.3s;

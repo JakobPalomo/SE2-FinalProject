@@ -112,7 +112,7 @@ include('./dbcon.php');
 
 </head>
 
-<body style="background-color: #f5f5dc;  margin-bottom: 200px;">
+<body style="background-color: #f5f5dc;  margin-bottom: 200px;" class="apply-padding">
     <?php include('common/navbar.php'); ?>
 
     <div class="maintitle">
@@ -128,10 +128,10 @@ include('./dbcon.php');
                     <img src="<?php echo $item['productImage']; ?>" alt="food" class="cart-display" />
                     <div class="detail-cart">
                         <p class="foodcart-name"><?php echo $item['productName']; ?></p>
-                        <p class="foodcart-name"><?php echo $item['quantity']; ?> - <?php echo $item['size']; ?> (PHP<?php echo $item['sizePrice']; ?>)</p>
+                        <p class="foodcart-name"><?php echo $item['quantity']; ?> - <?php echo $item['size']; ?> (₱<?php echo number_format($item['sizePrice'], 2, '.', ','); ?>)</p>
                     </div>
                     <div class="price">
-                        <p class="total-price">₱<?php echo $item['totalPrice']; ?></p>
+                        <p class="total-price">₱<?php echo number_format($item['totalPrice'], 2, '.', ','); ?></p>
                         <img src="./img/cross-circle (2).png" alt="food" width="24px" height="24px" style="cursor: pointer;" onclick="removeCartItemCon(<?php echo $index; ?>)" />
                     </div>
                 </div>
@@ -180,7 +180,7 @@ include('./dbcon.php');
             <!-- COLUMN 1 -->
                 <div class="footer-column">
                     <h8>Total Price</h8>
-                    <p class="subtitle-txt-2"><?php echo number_format($totalPrice, 2); ?></p>
+                    <p class="subtitle-txt-2">₱<?php echo number_format($totalPrice, 2); ?></p>
                 </div>
 
                 <!-- COLUMN 2 -->           
