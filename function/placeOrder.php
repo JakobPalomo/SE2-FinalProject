@@ -28,14 +28,17 @@ function placeOrder() {
         $preparationDate = isset($_POST['preparationDate']) ? $_POST['preparationDate'] : '';
         $deliveryTime = isset($_POST['deliveryTime']) ? $_POST['deliveryTime'] : '';
         $status = 'Pending';
+
+        // Get the current date and time
+        $currentDateTime = date('Y-m-d H:i:s'); // Format: YYYY-MM-DD HH:MM:SS
         
         // Prepare the SQL statement with parameterized queries to prevent SQL injection
-        $query = "INSERT INTO pending (user_session_id, name, contact, email, items, delivery_address, total_price, payment_option, delivery_option, preparation_date,delivery_time, status)
-                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
+        $query = "INSERT INTO pending (user_session_id, name, contact, email, items, delivery_address, total_price, payment_option, delivery_option, preparation_date, delivery_time, status, created_at)
+                  VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?, ?)";
 
         // Prepare and bind the statement
         if ($stmt = mysqli_prepare($con, $query)) {
-            mysqli_stmt_bind_param($stmt, "isssssdsssss", $userSessionId, $name, $contact, $email, $items, $deliveryAddress, $totalPrice, $paymentOption, $deliveryOption, $preparationDate, $deliveryTime, $status);
+            mysqli_stmt_bind_param($stmt, "isssssdssssss", $userSessionId, $name, $contact, $email, $items, $deliveryAddress, $totalPrice, $paymentOption, $deliveryOption, $preparationDate, $deliveryTime, $status, $currentDateTime);
 
             // Execute the statement
             if (mysqli_stmt_execute($stmt)) {
@@ -111,16 +114,15 @@ function sendOrderEmail($name, $contact, $email, $items, $deliveryAddress, $tota
 
     $mail->Body = $email_template;
 
-    // Console log for debugging
-    error_log("Email template: " . $email_template);
+    // // Console log for debugging
+    // error_log("Email template: " . $email_template);
 
-    if(!$mail->send()) {
-        echo "Mailer Error: " . $mail->ErrorInfo;
-    } else {
-        echo "Message has been sent";
-    }
+    // if(!$mail->send()) {
+    //     echo "Mailer Error: " . $mail->ErrorInfo;
+    // } else {
+    //     echo "Message has been sent";
+    // }
 }
-
 
 
 

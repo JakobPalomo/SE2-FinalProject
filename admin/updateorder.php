@@ -88,6 +88,7 @@ if(isset($_POST['submit2'])) {
                 $getUserEmailQuery = mysqli_query($con, "SELECT email FROM users WHERE id IN (SELECT user_session_id FROM pending WHERE id='$oid') LIMIT 1");
                 $userEmailRow = mysqli_fetch_array($getUserEmailQuery);
                 $userEmail = $userEmailRow['email'];
+                $remarks = $_POST['remark'];
 
                 // Send email to the user
                 $mail = new PHPMailer(true);
@@ -121,7 +122,7 @@ if(isset($_POST['submit2'])) {
                     // $mail->Body .= '<img src="' . $imageSrc . '" alt="Logo">';
 
                     $mail->Body .= '<p style="color: #333;">Unfortunately, were unable to process your order at this time. We apologize for any inconvenience.</p>';
-
+                    $mail->Body .= '<p style="color: #333;"><strong>Remarks:</strong> ' . htmlentities($remarks) . '</p>';
                     $mail->Body .= '<table style="border-collapse: collapse; width: 100%;">'; 
                     $mail->Body .= '<tr style="background-color: #b2fba5;">'; 
                     $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Product</th>'; 
@@ -163,6 +164,7 @@ if(isset($_POST['submit2'])) {
               $getUserEmailQuery = mysqli_query($con, "SELECT email FROM users WHERE id IN (SELECT user_session_id FROM pending WHERE id='$oid') LIMIT 1");
               $userEmailRow = mysqli_fetch_array($getUserEmailQuery);
               $userEmail = $userEmailRow['email'];
+              $remarks = $_POST['remark'];
           
               // Send email to the user
               $mail = new PHPMailer(true);
@@ -196,7 +198,7 @@ if(isset($_POST['submit2'])) {
                 //   $mail->Body .= '<img src="' . $imageSrc . '" alt="Logo" style="display: block; margin: 0 auto;">';
 
                   $mail->Body .= '<p style="color: #333;">Your order has been accepted. Please complete necessary payments and thank you for your purchase.</p>';
-
+                  $mail->Body .= '<p style="color: #333;"><strong>Remarks:</strong> ' . htmlentities($remarks) . '</p>';
                   $mail->Body .= '<table style="border-collapse: collapse; width: 100%;">'; 
                   $mail->Body .= '<tr style="background-color: #b2fba5;">'; 
                   $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Product</th>'; 
@@ -238,6 +240,7 @@ if(isset($_POST['submit2'])) {
             $getUserEmailQuery = mysqli_query($con, "SELECT email FROM users WHERE id IN (SELECT user_session_id FROM pending WHERE id='$oid') LIMIT 1");
             $userEmailRow = mysqli_fetch_array($getUserEmailQuery);
             $userEmail = $userEmailRow['email'];
+            $remarks = $_POST['remark'];
         
             // Send email to the user
             $mail = new PHPMailer(true);
@@ -271,7 +274,7 @@ if(isset($_POST['submit2'])) {
                 // $mail->Body .= '<img src="' . $imageSrc . '" alt="Logo" style="display: block; margin: 0 auto;">';
                 
                 $mail->Body .= '<p style="color: #333;">Your order has been delivered successfully. We hope you find everything to your satisfaction and have a wonderful day!</p>';
-                
+                $mail->Body .= '<p style="color: #333;"><strong>Remarks:</strong> ' . htmlentities($remarks) . '</p>';
                 $mail->Body .= '<table style="border-collapse: collapse; width: 100%;">'; 
                 $mail->Body .= '<tr style="background-color: #b2fba5;">'; 
                 $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Product</th>'; 
@@ -313,6 +316,7 @@ if(isset($_POST['submit2'])) {
           $getUserEmailQuery = mysqli_query($con, "SELECT email FROM users WHERE id IN (SELECT user_session_id FROM pending WHERE id='$oid') LIMIT 1");
           $userEmailRow = mysqli_fetch_array($getUserEmailQuery);
           $userEmail = $userEmailRow['email'];
+          $remarks = $_POST['remark'];
       
           // Send email to the user
           $mail = new PHPMailer(true);
@@ -347,7 +351,7 @@ if(isset($_POST['submit2'])) {
 
               
               $mail->Body .= '<p style="color: #333;">Before we process your order, please complete your online payment through GCash.</p>';
-              
+              $mail->Body .= '<p style="color: #333;"><strong>Remarks:</strong> ' . htmlentities($remarks) . '</p>';
               $mail->Body .= '<table style="border-collapse: collapse; width: 100%;">'; 
               $mail->Body .= '<tr style="background-color: #b2fba5;">'; 
               $mail->Body .= '<th style="border: 1px solid #dddddd; text-align: left; padding: 8px;">Product</th>'; 
@@ -498,13 +502,13 @@ if(isset($_POST['submit2'])) {
         
         <div class="status">
         <?php
-$st = 'Delivered';
-$rt = mysqli_query($con,"SELECT * FROM pending WHERE id='$oid'");
-while($num=mysqli_fetch_array($rt)) {
-    $currrentSt=$num['status'];
-    $currrentPO=$num['payment_option'];
-}
-?>
+                $st = 'Delivered';
+                $rt = mysqli_query($con,"SELECT * FROM pending WHERE id='$oid'");
+                while($num=mysqli_fetch_array($rt)) {
+                    $currrentSt=$num['status'];
+                    $currrentPO=$num['payment_option'];
+                }
+        ?>
 
 <label for="statusDropdown" class="status">Status:</label>
 <select class="drop" class="status" name="status" id="statusDropdown" required>
@@ -523,7 +527,7 @@ while($num=mysqli_fetch_array($rt)) {
 </select>
 
 <p class="status" style="padding-left: 24px;">Remarks</p>
-<textarea class="remarks-box" name="remark"></textarea>
+<textarea class="remarks-box" name="remark" id="remark"></textarea>
 
 <div class="button">
     <input type="submit" value="Update" class="add-item" name="submit2" />

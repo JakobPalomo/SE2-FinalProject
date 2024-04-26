@@ -153,6 +153,10 @@ if(isset($_POST['add_to_cart'])) {
               while ($row = mysqli_fetch_array($ret)) {
                 $productId = $row['id'];
                 $availability = $row['productAvailability'];
+                if ($availability == 'Remove') {
+                    continue;
+                }
+                
                 $menuClass = ($availability == 'Out of Stock') ? 'menu-item-unavailable' : ''; // Add class if product is out of stock
           ?>
                
@@ -162,9 +166,6 @@ if(isset($_POST['add_to_cart'])) {
                       </div>
                       <div class="detail-field">
                           <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>  
-                          <?php if ($availability == 'Out of Stock'): ?>
-                          <p class="food-name"><?php echo htmlentities($availability); ?></p>  
-                          <?php endif; ?>
                       </div>
                       <div class="desc-field"> 
                                 <?php if ($availability != 'Out of Stock'): ?>
@@ -181,7 +182,7 @@ if(isset($_POST['add_to_cart'])) {
                             <?php if($availability != 'Out of Stock'): ?>
                             <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAndReset(<?php echo $row['id']; ?>)">Add to Cart</button>
                             <?php else: ?>
-                            <button class="add-item disabled" disabled>Add to Cart</button>
+                            <button class="add-item disabled" disabled>Not Available</button>
                             <?php endif; ?>
                         </center>
                     </div>

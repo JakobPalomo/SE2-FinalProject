@@ -156,16 +156,15 @@ if(isset($_POST['add_to_cart'])) {
                     </div>
                     <div class="detail-field">
                         <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>  
-                        <?php if ($availability == 'Out of Stock'): ?>
-                        <p class="food-name"><?php echo htmlentities($availability); ?></p>  
-                        <?php endif; ?>
                     </div>
                     <div class="desc-field"> 
                               <?php if ($availability != 'Out of Stock'): ?>
-                           <p class="food-desc">M- ₱<strong><?php echo htmlentities($row['mediumPrice']); ?></strong> </br>
-                            L- ₱<strong><?php echo htmlentities($row['largePrice']); ?></strong></br>
-                           XL- ₱<strong><?php echo htmlentities($row['xlPrice']); ?></strong></br>
-                            XXL- ₱<strong><?php echo htmlentities($row['xxlPrice']); ?></strong></p>
+                                <p class="food-desc">
+                                M- ₱<strong><?php echo number_format($row['mediumPrice'], 2, '.', ','); ?></strong></br>
+                                L- ₱<strong><?php echo number_format($row['largePrice'], 2, '.', ','); ?></strong></br>
+                                XL- ₱<strong><?php echo number_format($row['xlPrice'], 2, '.', ','); ?></strong></br>
+                                XXL- ₱<strong><?php echo number_format($row['xxlPrice'], 2, '.', ','); ?></strong>
+                                </p>
                        
                                <?php endif; ?>
                     </div>
@@ -173,7 +172,7 @@ if(isset($_POST['add_to_cart'])) {
                             <?php if($availability != 'Out of Stock'): ?>
                             <button class="add-item" data-bs-toggle="modal" data-bs-target="#addToCartModal<?php echo $row['id']; ?>" onclick="addToCartAndReset(<?php echo $row['id']; ?>)">Add to Cart</button>
                             <?php else: ?>
-                            <button class="add-item disabled" disabled>Add to Cart</button>
+                            <button class="add-item disabled" disabled>Not Available</button>
                             <?php endif; ?>
                         </center>
                   </div>
@@ -198,7 +197,7 @@ if(isset($_POST['add_to_cart'])) {
                                 <div class="labels"></div>
                                 <div style="display: flex">
                                     <p class="food-namemod"><?php echo htmlentities($row['productName']); ?></p>
-                                    <p class="food-price">PHP <span id="totalPrice<?php echo $productId; ?>"><?php echo number_format($row['mediumPrice'], 2); ?></span></p>
+                                    <p class="food-price">₱ <span id="totalPrice<?php echo $productId; ?>"><?php echo number_format($row['mediumPrice'], 2, '.', ','); ?></span></p>
                                 </div>
 
                                 <div class="labels"></div>
@@ -220,7 +219,7 @@ if(isset($_POST['add_to_cart'])) {
                                             $checkboxId = $productId . '_' . $size; // Unique ID for each checkbox
                                                 echo '<label class="check-button" id="' . $checkboxId . '" onclick="toggleCheck(\'' . $checkboxId . '\', ' . htmlentities($price) . ')">';
                                                 echo '<input type="radio" name="size' . $productId . '" data-price="' . htmlentities($price) . '" />';
-                                                echo ucfirst($size) . ' - PHP ' . number_format($price, 2);
+                                                echo ucfirst($size) . ' - ₱ ' . number_format($price, 2);
                                                 echo '</label>'; } ?>
                                     </div>
                                 </div>
@@ -345,7 +344,7 @@ if(isset($_POST['add_to_cart'])) {
         if (isNaN(basePrice)) return;
         var totalPrice = basePrice * quantity;
         var foodPrice = document.getElementById("totalPrice" + productId);
-        foodPrice.textContent = totalPrice.toFixed(2);
+        foodPrice.textContent = totalPrice.toLocaleString('en-US', { minimumFractionDigits: 2 });
     }
 
     
@@ -354,7 +353,10 @@ if(isset($_POST['add_to_cart'])) {
     var productName = document.querySelector('#addToCartModal' + productId + ' .food-namemod').textContent;
     var quantity = parseInt(document.querySelector('#numberField' + productId).value);
     var selectedSize = document.querySelector('.check-button.checked');
-    var totalPrice = parseFloat(document.getElementById("totalPrice" + productId).textContent);
+    var totalPrice = parseFloat(selectedSize.querySelector('input').getAttribute('data-price')) * quantity; // Calculate total price
+    var totalPriceElement = document.getElementById("totalPrice" + productId);
+    var formattedTotalPrice = totalPriceElement.textContent; // Fetch formatted total price
+    var unformattedTotalPrice = parseFloat(totalPriceElement.getAttribute('data-total-price')); // Fetch unformatted total price
     var sizePrice = parseFloat(selectedSize.querySelector('input').getAttribute('data-price')); // Fetch size price
 
     if (!selectedSize) {

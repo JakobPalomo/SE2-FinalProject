@@ -203,7 +203,8 @@ while($rw=mysqli_fetch_array($query))
 <select   name="productAvailability"  id="productAvailability" class="span8 tip" required>
 <option value="<?php echo htmlentities($row['productAvailability']);?>"><?php echo htmlentities($row['productAvailability']);?></option>
 <option value="In Stock">In Stock</option>
-<option value="Out of Stock">Out of Stock</option>
+<option value="Out of Stock">Not Available</option>
+<option value="Remove">Remove</option>
 </select>
 </div>
 </div>
