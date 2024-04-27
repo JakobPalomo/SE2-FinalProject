@@ -10,6 +10,7 @@ body {
   font-size: 36px;
   color: #004225;
   font-weight: bold;
+  font-family: "Plus Jakarta Sans", sans-serif;
 }
 
 .navbar-toggler-icon {

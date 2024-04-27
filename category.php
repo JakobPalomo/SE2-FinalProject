@@ -75,8 +75,11 @@ if(isset($_POST['add_to_cart'])) {
 
     <!-- Code zone -->
     <!-- top part of the menupage after the navbar -->
-    <div class="topdiv">
-      <img src="img/logo.png" alt="Logo" />
+    <div class="topdiv" style=" background-image: none;  margin:20px; height: 350px;">
+      <img src="img/logo.png" alt="Logo" style="max-width: 200px;"/>
+      <div class="maintitle">
+      <p class="title" style="margin-top: -28px;">Menu</p>
+    </div>
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search..." id="searchInput" oninput="filterProducts()"/>
         <div class="search-icon"><i class="fa-solid fa-magnifying-glass" style="color: #262626;"></i></div>
@@ -106,7 +109,7 @@ if(isset($_POST['add_to_cart'])) {
             }
             
         ?>
-        <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton" style="font-weight: bolder;">
+        <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton1" style="font-weight: bolder;">
             <span><i class="fa-solid" style="color: #262626;"></i> </span><?php echo $subcategory;?> 
         </a>
         <?php } ?>
@@ -116,7 +119,8 @@ if(isset($_POST['add_to_cart'])) {
 
        <div class="main-menu">
     <!-- div for the category buttons-->
-    <div class="categorydiv">    
+    <div class="categorydiv"> <p>Main Categories: </p>
+        
     <?php
     $sql = mysqli_query($con, "SELECT id, categoryName FROM category LIMIT 6");
     while ($row = mysqli_fetch_array($sql)) {
@@ -461,15 +465,7 @@ if(isset($_POST['add_to_cart'])) {
 
 
     <!--Menu item-->
-    <footer class="footer">
-<br>
-      <h3>Contact us through</h3><br>
-      <p><i class="fa-brands fa-facebook" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; <a href="https://www.facebook.com/chefsdaughterph" target="_blank"  style="color: inherit; text-decoration: none;">chefsdaughter</a></p>
-      <p><i class="fa-solid fa-phone" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; 0915 121 7129</p>
-      <p><i class="fa-solid fa-envelope" style="color: #f5f5f5; font-size:26px;"></i>&nbsp;&nbsp; chefsdaughterph@gmail.com</p>
-<br>
-      <p style="opacity: .6;">2024 Chef's Daughter. All rights reserved.</p>
-    </footer>
+    <?php include('common/footer.php');?>
     <!-- End Code -->
   </body>
 </html>

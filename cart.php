@@ -149,7 +149,8 @@ include('./dbcon.php');
         <br>
         <br>
         <div class="subtitle">
-            <p class="subtitle-txt-2">Date of Delivery</p>
+            <p class="subtitle-txt-2" style="text-align: center;">Date of Delivery</p>
+            <p class="subtitle-txt-3">(Set at least <u>3 days</u> in advance)</p>
         </div>
         <div class="subtitle" style="margin-bottom: 20px">
             <input type="date" id="datepicker" name="preparationDate" class="subtitle-txt-bg-2">
@@ -167,7 +168,10 @@ include('./dbcon.php');
         <br>
         <div class="subtitle">
             <span class="linebreak" style="margin-right: 10px;"><p class="subtitle-txt-2">Delivery Address</p></span>
-            <span class="linebreak"><button class="change-btn" data-bs-toggle="modal" data-bs-target="#changeAddressModal">Change</button></span>
+            
+        </div>
+        <div class="subtitle">
+            <span class="linebreak"><button class="change-btn" data-bs-toggle="modal" data-bs-target="#changeAddressModal">Change</button></span><br>
         </div>
         <div class="subtitle" style="margin-bottom: 20px">
             <p class="subtitle-txt-bg-2" id="userAddress" ><?php echo $_SESSION['auth_user']['address']; ?></p>
@@ -211,6 +215,7 @@ include('./dbcon.php');
         <label class="checkbox-label" for="gcashCheckbox">
             <input type="checkbox" id="gcashCheckbox" class="custom-checkbox" name="paymentOption" onclick="handlePaymentCheckboxClick('gcashCheckbox')" value="Gcash" />
             <div class="checkmark"></div> GCash
+            <p class="subtitle-txt-3" style="font-size: 10px; margin-top: 0px; margin-bottom:-20px">(Gcash must be paid within <u>3 days</u>)</p>
         </label>
     </div>
 </div>

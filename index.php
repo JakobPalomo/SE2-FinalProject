@@ -132,15 +132,7 @@ cancelPendingOrders();
 
 </div>
 </div>
-    <footer class="footer">
-<br>
-      <h3 style="font-size:20px;">Contact us through</h3><br>
-      <p><i class="fa-brands fa-facebook" style="color: #f5f5f5; font-size:20px;"></i>&nbsp;&nbsp; <a href="https://www.facebook.com/chefsdaughterph" target="_blank"  style="color: inherit; text-decoration: none; font-size:13px;">chefsdaughter</a></p>
-      <p style="font-size:13px;"><i class="fa-solid fa-phone" style="color: #f5f5f5; font-size:20px;"></i>&nbsp;&nbsp; 0915 121 7129</p>
-      <p style="font-size:13px;"><i class="fa-solid fa-envelope" style="color: #f5f5f5; font-size:20px;"></i>&nbsp;&nbsp; chefsdaughterph@gmail.com</p>
-<br>
-      <p style="opacity: .6; font-size:13px;">2024 Chef's Daughter. All rights reserved.</p>
-    </footer>
+<?php include('common/footer.php');?>
 
    <!-- End Code -->
   </body>
