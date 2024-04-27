@@ -37,15 +37,16 @@ include('./dbcon.php');
 
         // Get values from the modal
         var buildingNumber = $('#buildingNumber').val();
-        var streetBarangay = $('#streetBarangay').val();
+        var street = $('#street').val();
+        var barangay = $('#barangay').val();
         var cityMunicipality = $('#cityMunicipality').val();
         var province = $('#province').val();
         var postalCode = $('#postalCode').val();
 
-        console.log('Values from modal:', buildingNumber, streetBarangay, cityMunicipality, province, postalCode);
+        
 
         // Check if any field is empty
-        if (!buildingNumber || !streetBarangay || !cityMunicipality || !province || !postalCode) {
+        if (!buildingNumber || !street || !barangay || !cityMunicipality || !province || !postalCode) {
             // Display an error message or handle it
             showAlertModal('Please fill in all address fields.');
             console.log('Address update failed: Empty field(s)');
@@ -53,7 +54,7 @@ include('./dbcon.php');
         }
 
         // Concatenate the fields with a comma
-        var updatedAddress = buildingNumber + ', ' + streetBarangay + ', ' + cityMunicipality + ', ' + province + ', ' + postalCode;
+        var updatedAddress = buildingNumber + ', ' + street + ', ' + barangay + ', ' + cityMunicipality + ', ' + province + ', ' + postalCode;
 
         console.log('Updated Address:', updatedAddress);
 
@@ -441,25 +442,41 @@ include('./dbcon.php');
             <div class="modal-body">
                 <!-- Address fields in the modal -->
                 <div class="mb-3">
+    <label for="province" class="form-label">Province</label>
+    <select class="form-select" id="province" onchange="populateCities()">
+        <option value="">Select Province</option>
+        <option value="Pampanga">Pampanga</option>
+        <!-- Add other provinces here if needed -->
+    </select>
+</div>
+<div class="mb-3">
+    <label for="cityMunicipality" class="form-label">City/Municipality</label>
+    <select class="form-select" id="cityMunicipality" onchange="populateBarangays()">
+        <option value="">Select City/Municipality</option>
+    </select>
+</div>
+<div class="mb-3">
+    <label for="barangay" class="form-label">Barangay</label>
+    <select class="form-select" id="barangay">
+        <option value="">Select Barangay</option>
+    </select>
+</div>
+<div class="mb-3">
+    <label for="postalCode" class="form-label">Postal Code</label>
+    <input type="text" class="form-control" id="postalCode" readonly>
+</div>
+                <div class="mb-3">
                     <label for="buildingNumber" class="form-label">Building/ House Number</label>
                     <input type="text" class="form-control" id="buildingNumber">
                 </div>
                 <div class="mb-3">
-                    <label for="streetBarangay" class="form-label">Street Barangay</label>
-                    <input type="text" class="form-control" id="streetBarangay">
+                    <label for="streetBarangay" class="form-label">Street</label>
+                    <input type="text" class="form-control" id="street">
                 </div>
-                <div class="mb-3">
-                    <label for="cityMunicipality" class="form-label">City/Municipality</label>
-                    <input type="text" class="form-control" id="cityMunicipality">
-                </div>
-                <div class="mb-3">
-                    <label for="province" class="form-label">Province</label>
-                    <input type="text" class="form-control" id="province">
-                </div>
-                <div class="mb-3">
-                    <label for="postalCode" class="form-label">Postal Code</label>
-                    <input type="text" class="form-control" id="postalCode">
-                </div>
+                
+                
+                
+                
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
@@ -524,4 +541,145 @@ include('./dbcon.php');
         </div>
     </div>
 </div>
+
+<script>
+    const addresses = {
+          "Pampanga": {
+    "Angeles City": {
+        barangays: ["Agapito Del Rosario", "Anunas", "Balibago", "Cpaaya", "Claro M. Recto", "Cuayan", "Cutcut", "Cutud", "Lourdes North West", "Lourdes Sur", "Lourdes Sur East", "Malabanas", "Margot", "Mining", "Pampang", "Pandan", "Pulung Maragul", "Pulung Bulu", "Pulung Cacutud", "Salapungan", "San Jose", "San Nicolas", "Sta Teresita", "Sta Trinidad", "Sto Cristo", "Sto Domingo", "Sto Rosario", "Sapalibutad", "Sapang Bato", "Tabun", "Virgen Delos Remedios", "Amsic", "Ninoy Aquino"],
+        postal_code: "2009"
+    },
+    "Apalit": {
+        barangays: ["Balucuc","Calantipe", "Cansinala", "Capalangan", "Colgante", "Paligui", "Sampaloc", "San Juan", "San Vicente", "Sucad", "Sulipan", "Tabuyuc"],
+        postal_code: "2016"
+    },
+    "Arayat": {
+        barangays: ["Arenas", "Baliti", "Batasan", "Buensuceso", "Candating", "Cupang", "Gatiawin", "Guemasan", "La Paz", "Lacmit", "Lacquios", "Mangga-Cacutud", "Mapalad", "Panlinlang", "Paralay", "Plazang Luma", "Poblacion", "San Agustin Norte", "San Agustin Sur", "San Antonio", "San Jose Mesulo", "San Juan Bano", "San Mateo", "San Nicolas", "San Roque Bitas", "Matamo","Santo Nino Tabuan", "Suclayin", "Telapayong", "Kaledian"],
+        postal_code: "2012"
+    },
+    "Bacolor": {
+        barangays: ["Balas", "Cabalantian", "Cabambangan", "Cabetican", "Calibutbut", "Concepcion", "Dolores", "Duat", "Macabacle", "Magliman", "Maliwalu", "Mesalipit", "Parulog", "Potrero", "San Antonio", "San Isidro", "San Vicente", "Santa Barbara", "Santa Ines", "Talba", "Tinajero"],
+        postal_code: "2001"
+    },
+    "Candaba": {
+        barangays: ["Bahay Pare", "Bambang", "Barangca", "Barit", "Buas", "Cuayang Bugtong", "Dalayang", "Dulong Ilog", "Gulap", "Lanang", "Lourdes", "Magumbali", "Mandasig", "Mandili", "Mangga", "Mapaniqui", "Paligui", "Pangclara", "Pansinao", "Paralaya", "Pasig", "Pescadores", "Pulong Gubat", "Pulong Palazan", "Salapungan", "San Agustin", "Santo Rosario", "Tagulod", "Talang", "Tenejero", "Vizal San Pedro", "Vizal Santo Cristo", "Vizal Santo Nino"],
+        postal_code: "2013"
+    },
+    "Floridablanca": {
+        barangays: ["Anon", "Apalit", "Basa Air Base", "Benedicto", "Bodega", "Cabangcalan", "Calantas", "Carmencita", "Consuelo", "Dampe", "Del Carmen", "Fortuna", "Gutad", "Mabical", "Sto Rosario", "Maligaya", "Nabuclod", "Pabanlag", "Paguiruan", "Palmayo", "Pandaguirig", "Poblacion", "San Antonio", "San Isidro", "San Jose", "San Nicolas", "San Pedro", "San Ramon", "San Roque", "Sta Monica", "Solib", "Valdez", "Mawacat"],
+        postal_code: "2006"
+    },
+    "Guagua": {
+        barangays: ["Bancal", "Jose Abad Santos", "Lambac", "Magsaysay", "Maquiapo", "Natividad", "Plaza Burgos", "Pulungmasle", "Rizal", "San Agustin", "San Antonio", "San Isidro", "San Jose", "San Juan Bautista", "San Juan Nepomuceno", "San Matias", "San Miguel", "San Nicolas 1st", "San Nicolas 2nd", "San Pablo", "San Pedro", "San Rafael", "San Roque", "San Vicente", "San Juan", "Santa Filomena", "Santa Ines", "Santa Ursula", "Santo Cristo", "Santo Nino", "Ascomo"],
+        postal_code: "2003"
+    },
+    "Lubao": {
+        barangays: ["Balantacan", "Bancal Sinubli", "Bancal Pugad", "Baruya", "Calangain", "Concepcion", "Del Carmen", "De La Paz", "Don Ignacio Dimson", "Lourdes", "Prado Siongco", "Remedios", "San Agustin", "San Antonio", "San Francisco", "San Isidro", "San Jose Apunan", "San Jose Gumi", "San Juan", "San Matias", "San Miguel", "San Nicolas 1st", "San Nicolas 2nd", "San Pablo 1st", "San Pablo 2nd", "San Pedro Palcarangan", "San Pedro Palcarangan", "San Pedro Saug", "San Roque Arbol", "San Roque Dau", "San Vicente", "Santa Barbara", "Santa Catalina", "Santa Cruz", "Santa Lucia", "Santa Maria", "Santa Monica", "Santa Rica", "Santa Teresa 1st", "Santa Teresa 2nd", "Santiago", "Santo Domingo", "Santo Nino", "Santo Tomas", "Santo Cristo"],
+        postal_code: "2005"
+    },
+    "Mabalacat City": {
+        barangays: ["Atlu-Bola", "Bical", "Bundagul", "Cacutud", "Calumpang", "Camachiles", "Dapdap", "Dau", "Dolores", "Duquit", "Lakandula", "Mabiga", "Macapagal Village", "Mamatitang", "Mangalit", "Marcos Village", "Mawaque", "Paralayunan", "Poblacion", "San Francisco", "San Joaquin", "Santa Ines", "Santa Maria", "Santo Rosario", "Sapang Balen", "Sapang Biabas", "Tabun"],
+        postal_code: "2010"
+    },
+    "Macabebe": {
+        barangays: ["Batasan", "Caduang Tete", "Candelaria", "Castuli", "Consuelo", "Dalayap", "Mataguiti", "San Esteban", "San Francisco", "San Gabriel", "San Isidro", "San Jose", "San Juan", "San Rafael", "San Roque", "San Vicente", "Sta Cruz", "Sta Lutgarda", "Sta Maria", "Sta Rita", "Sto Nino", "Sto Rosario", "Saplad David", "Tacasan", "Telacsan"],
+        postal_code: "2017"
+    },
+    "Magalang": {
+        barangays: ["Camias", "Dolores", "Escaler", "La Paz", "Navaling", "San Agustin", "San Antonio", "San Francisco", "San Ildefonso", "San Isidro", "San Jose", "San Miguel", "San Nicolas 1st", "San Nicolas 2nd", "San Pablo", "San Pedro I", "San Pedro II", "San Roque", "San Vicente", "Santa Cruz", "Santa Lucia", "Santa Maria", "Santo Nino", "Santo Rosario", "Bucunan", "Turu Ayala"],
+        postal_code: "2011"
+    },
+    "Masantol": {
+        barangays: ["Alauli", "Bagang", "Balibago", "Bebe Anac", "Bebe Matua", "Bulacus", "San Agustin", "Sta Monica", "Cambasi", "Malauli", "Nigui", "Palimpe", "Puti", "Sagrada", "San Isidro Anac", "San Isidro Matua", "San Nicolas", "San Pedro", "Sta Cruz", "Sta Lucia Matua", "Sta Lucia Paguiba", "Sta Lucia Wakas", "Sta Lucia Anac", "Sapang Kawayan", "Sua", "Sto Nino"],
+        postal_code: "2017"
+    },
+    "Mexico": {
+        barangays: ["Acli", "Anao", "Balas", "Buenavista", "Camuning", "Cawayan", "Concepcion", "Culubasa", "Divisoria", "Dolores", "Eden", "Gandus", "Lagundi", "Laput", "Laug", "Masamat", "Masangsang", "Nueva Victoria", "Pandacaqui", "Pangatlan", "Panipuan", "Parian", "Sabanilla", "San Antonio", "San Carlos", "San Jose Malino", "San Jose Matulid", "San Juan", "San Lorenzo", "San Miguel", "San Nicolas", "San Pablo", "San Patricio", "San Rafael", "San Roque", "San Vicente", "Santa Cruz", "Santa Maria", "Santo Domingo", "Santo Rosario", "Sapang Maisac", "Suclaban", "Tangle"],
+        postal_code: "2021"
+    },
+    "Minalin": {
+        barangays: ["Bulac", "Dawe", "Lourdes", "Maniango", "San Francisco 1st", "San Francisco 2nd", "San Isidro", "San Nicolas", "San Pedro", "Sta Catalina", "Sta Maria", "Sta Rita", "Sto Domingo", "Sto Rosario", "Saplad"],
+        postal_code: "2019"
+    },
+    "Porac": {
+        barangays: ["Babo Pangulo", "Babo Sacan", "Balubad", "Calzadang Bayu", "Camias", "Cangatba", "Diaz", "Dolores", "Jalung", "Mancatian", "Manibaug Libutad", "Manibaug Paralaya", "Manibaug Pasig", "Manuali", "Mitia Proper", "Palat", "Pias", "Pio Planas", "Poblacion", "Pulung Santol", "Salu", "San Jose Mitla", "Sta Cruz", "Sepung Bulaon", "Sinura", "Villa Maria", "Inararo", "Sapang Uwak"],
+        postal_code: "2008"
+    },
+    "San Fernando City": {
+        barangays: ["Alasas", "Baliti", "Bulaon", "Calulut", "Dela Paz Norte", "Dela Paz Sur", "Del Carmen", "Del Rosario", "Dolores", "Julian", "Lara", "Lourdes", "Magliman", "Maimpis", "Malino", "Malpitic", "Pandaras", "Panipuan", "Santo Rosario", "Quebiauan", "Saguin", "San Agustin", "San Felipe", "San Isidro", "San Jose", "San Juan", "San Nicolas", "San Pedro", "Santa Lucia", "Santa Teresita", "Santo Nino", "Sindalan", "Telabastagan", "Pulung Bulu"],
+        postal_code: "2000"
+    },
+    "San Luis": {
+        barangays: ["San Agustin", "San Carlos", "San Isidro", "San Jose", "San Juan", "San Nicolas", "San Roque", "San Sebastian", "Santa Catalina", "Santa Cruz Pambilog", "Santa Cruz Poblacion", "Santa Lucia", "Santa Monica", "Santa Rita", "Santo Nino", "Santo Rosario", "Santo Tomas"],
+        postal_code: "2004"
+    },
+    "San Simon": {
+        barangays: ["Concepcion", "De La Paz", "San Juan", "San Agustin", "San Isidro", "San Jose", "San Miguel", "San Nicolas", "San Pablo Libutad", "San Pablo Proper", "San Pedro", "Santa Cruz", "Santa Monica", "Santo Nino"],
+        postal_code: "2010"
+    },
+    "Santa Ana": {
+        barangays: ["San Agustin", "San Bartolome", "San Isidro", "San Joaquin", "San Jose", "San Juan", "San Nicolas", "San Pablo", "San Pedro", "San Roque", "Santa Lucia", "Santa Maria", "Santiago", "Santo Rosario"],
+        postal_code: "2009"
+    },
+    "Santa Rita": {
+        barangays: ["Becuran", "Dila-Dila", "San Agustin", "San Basilio", "San Isidro", "San Jose", "San Juan", "San Matias", "San Vicente", "Santa Monica"],
+        postal_code: "2005"
+    },
+    "Santo Tomas": {
+        barangays: ["Moras De La Paz", "Poblacion", "San Bartolome", "San Matias", "San Vicente", "Santo Rosario", "Sapa"],
+        postal_code: "2020"
+    },
+
+    "Sasmuan": {
+        barangays: ["Batang 1st", "Batang 2nd", "Mabuanbuan", "Malusac", "Sta Lucia", "San Antonio", "San Nicolas 1st", "San Nicolas 2nd", "San Pedro", "Santa Monica"],
+        postal_code: "2004"
+    },
+  }
+    
+};
+
+function populateCities() {
+    const province = document.getElementById('province').value;
+    const cities = addresses[province];
+    const citySelect = document.getElementById('cityMunicipality');
+    
+    // Clear existing options
+    citySelect.innerHTML = '<option value="">Select City/Municipality</option>';
+    
+    // Populate with new options
+    for (const city in cities) {
+        const option = document.createElement('option');
+        option.value = city;
+        option.text = city;
+        citySelect.appendChild(option);
+    }
+}
+
+function populateBarangays() {
+    const province = document.getElementById('province').value;
+    const city = document.getElementById('cityMunicipality').value;
+    const barangays = addresses[province][city].barangays;
+    const barangaySelect = document.getElementById('barangay');
+    
+    // Clear existing options
+    barangaySelect.innerHTML = '<option value="">Select Barangay</option>';
+    
+    // Populate with new options
+    barangays.forEach(barangay => {
+        const option = document.createElement('option');
+        option.value = barangay;
+        option.text = barangay;
+        barangaySelect.appendChild(option);
+    });
+    
+    // Set the postal code
+    const postalCode = addresses[province][city].postal_code;
+    document.getElementById('postalCode').value = postalCode;
+}
+
+
+
+
+    </script>
+    
 </html>

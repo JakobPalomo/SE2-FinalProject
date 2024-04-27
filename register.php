@@ -72,6 +72,13 @@ session_start();
                 </div>
 
                 <div class="field input">
+                <label for="Barangay">Barangay</label>
+              <select class ="form-select" id="barangay" name="barangay" required>
+              <option selected disabled>Select Barangay</option>
+              </select>
+            </div>
+
+                <div class="field input">
                     <label for="BuildingNumber">Building/House Number</label>
                     <input type="text" name="building_number" maxlength="60" required>
                 </div>
@@ -81,12 +88,7 @@ session_start();
                     <input type="text" name="street" maxlength="60" required>
                 </div>
 
-                <div class="field input">
-                <label for="Barangay">Barangay</label>
-              <select class ="form-select" id="barangay" name="barangay" required>
-              <option selected disabled>Select Barangay</option>
-              </select>
-            </div>
+                
 
                 
 
