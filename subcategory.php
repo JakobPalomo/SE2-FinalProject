@@ -29,6 +29,7 @@ if(isset($_POST['add_to_cart'])) {
     <link rel="stylesheet" href="css/menupageStyle.css" />
     <link rel="stylesheet" type="text/css" href="css/menuelement.css" />
     <link rel="shortcut icon" type="x-icon" href="./img/logomini.png">
+    <link rel="stylesheet" type="text/css" href="./css/faqs.css" />
     <link rel="stylesheet" type="text/css" href="css/ordermodal.css" />
     <title>Menu</title>
     <script
@@ -65,6 +66,7 @@ if(isset($_POST['add_to_cart'])) {
     <!-- top part of the menupage after the navbar -->
     <div class="topdiv">
       <img src="img/logo.png" alt="Logo" />
+      <p class="title" style="margin-top: -16px;">Menu</p>
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search..." id="searchInput" oninput="filterProducts()"/>
         <div class="search-icon"><i class="fa-solid fa-magnifying-glass" style="color: #262626;"></i></div>
@@ -74,7 +76,7 @@ if(isset($_POST['add_to_cart'])) {
     <!--to make the side bar -->
     <div class="side-by-side">  
             <!-- div for subcat buttons-->
-            <div class="subcategorydiv">
+            <!-- <div class="subcategorydiv">
     <div class="food-name subcat" style="margin-bottom: 12px; font-size: 10px; padding-left: 12px;">Sub Categories</div>
     <div class="subcatbutton">
         <?php 
@@ -98,11 +100,15 @@ if(isset($_POST['add_to_cart'])) {
         </a>
         <?php } ?>
     </div>
-</div>
+</div> -->
 
     <div class="main-menu">
             <!-- div for the category buttons-->
-            <div class="categorydiv">    
+
+            <div class="options">
+            <div class="category-container">
+            <div class="categorydiv"> <p><i class="fa-solid fa-utensils" style="color: #262626;"></i> Main Categories: </p>
+                 <div class="categorydiv">    
             <?php
             $sql = mysqli_query($con, "SELECT id, categoryName FROM category LIMIT 6");
             while ($row = mysqli_fetch_array($sql)) {
@@ -127,6 +133,36 @@ if(isset($_POST['add_to_cart'])) {
             }
             ?>
         </div>
+            </div></div>
+            <div class="category-container">
+            <div class="categorydiv"> <p><i class="fa-solid fa-drumstick-bite" style="color: #262626;"></i> Sub Categories: </p>
+                 <div class="categorydiv">    
+                 <?php 
+        $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory");
+        while ($row = mysqli_fetch_array($sql)) {
+            $subcategory = $row['subcategory'];
+            $iconClass = '';
+
+            // Set the icon class based on the subcategory
+            if (strtolower($subcategory) == 'pasta') {
+                $iconClass = 'fa-plate-wheat'; // Pasta icon
+            } elseif (strpos(strtolower($subcategory), 'chicken') !== false) {
+                $iconClass = 'fa-drumstick-bite'; // Chicken icon
+            }else {
+                $iconClass = 'fa-utensils'; // Default utensils icon
+            }
+            
+        ?>
+        <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton1" style="font-weight: bolder;">
+            <span><i class="fa-solid" style="color: #262626;"></i> </span><?php echo $subcategory;?> 
+        </a>
+        <?php } ?>
+        </div>
+            </div>
+
+            </div>
+            
+       
 
     
 
