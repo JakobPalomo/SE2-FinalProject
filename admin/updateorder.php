@@ -98,13 +98,13 @@ if(isset($_POST['submit2'])) {
                     $mail->isSMTP();
                     $mail->Host = 'smtp.gmail.com';
                     $mail->SMTPAuth = true;
-                    $mail->Username = 'cdemailverify@gmail.com'; // Your Gmail email address
-                    $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
+                    $mail->Username   = 'ezequielg070901@gmail.com';                    
+                    $mail->Password   = 'zmxy twtu fuym ejjs';      
                     $mail->SMTPSecure = 'tls';
                     $mail->Port = 587;
 
                     // Sender and recipient settings
-                    $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+                    $mail->setFrom("ezequielg070901@gmail.com", "Chef's Daughter");
                     $mail->addAddress($userEmail);
 
                     // Email content
@@ -174,13 +174,13 @@ if(isset($_POST['submit2'])) {
                   $mail->isSMTP();
                   $mail->Host = 'smtp.gmail.com';
                   $mail->SMTPAuth = true;
-                  $mail->Username = 'cdemailverify@gmail.com'; // Your Gmail email address
-                  $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
+                  $mail->Username   = 'ezequielg070901@gmail.com';                    
+                  $mail->Password   = 'zmxy twtu fuym ejjs';      
                   $mail->SMTPSecure = 'tls';
                   $mail->Port = 587;
           
                   // Sender and recipient settings
-                  $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+                  $mail->setFrom("ezequielg070901@gmail.com", "Chef's Daughter");
                   $mail->addAddress($userEmail);
           
                   // Email content
@@ -250,13 +250,13 @@ if(isset($_POST['submit2'])) {
                 $mail->isSMTP();
                 $mail->Host = 'smtp.gmail.com';
                 $mail->SMTPAuth = true;
-                $mail->Username = 'cdemailverify@gmail.com'; // Your Gmail email address
-                $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
+                $mail->Username   = 'ezequielg070901@gmail.com';                    
+                $mail->Password   = 'zmxy twtu fuym ejjs';      
                 $mail->SMTPSecure = 'tls';
                 $mail->Port = 587;
         
                 // Sender and recipient settings
-                $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+                $mail->setFrom("ezequielg070901@gmail.com", "Chef's Daughter");
                 $mail->addAddress($userEmail);
         
                 // Email content
@@ -326,13 +326,13 @@ if(isset($_POST['submit2'])) {
               $mail->isSMTP();
               $mail->Host = 'smtp.gmail.com';
               $mail->SMTPAuth = true;
-              $mail->Username = 'cdemailverify@gmail.com'; // Your Gmail email address
-              $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
+              $mail->Username   = 'ezequielg070901@gmail.com';                    
+             $mail->Password   = 'zmxy twtu fuym ejjs';      
               $mail->SMTPSecure = 'tls';
               $mail->Port = 587;
       
               // Sender and recipient settings
-              $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+              $mail->setFrom("ezequielg070901@gmail.com", "Chef's Daughter");
               $mail->addAddress($userEmail);
       
               // Email content

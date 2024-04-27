@@ -54,8 +54,8 @@ function sendCancellationEmail($userEmail, $status) {
     $mail->isSMTP();
     $mail->Host = 'smtp.gmail.com';
     $mail->SMTPAuth = true;
-    $mail->Username = 'cdemailverify@gmail.com'; // Your Gmail email address
-    $mail->Password = 'imse cgjh qyzq bwhg'; // Your Gmail password
+    $mail->Username = 'ezequielg070901@gmail.com';
+    $mail->Password = 'zmxy twtu fuym ejjs';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
     $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");

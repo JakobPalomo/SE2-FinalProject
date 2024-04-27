@@ -23,13 +23,13 @@ function sendemail_verify($fname,$lname,$email,$verify_token)
     $mail->SMTPAuth   = true;                             
 
     $mail->Host       = 'smtp.gmail.com';                                    
-    $mail->Username   = 'cdemailverify@gmail.com';                    
-    $mail->Password   = 'imse cgjh qyzq bwhg';    
+    $mail->Username   = 'ezequielg070901@gmail.com';                    
+    $mail->Password   = 'zmxy twtu fuym ejjs';       
     $mail->SMTPSecure ="tls";
       
     $mail->Port       = 587;           
     
-    $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+    $mail->setFrom("ezequielg070901@gmail.com", "Chef's Daughter");
     $mail->addAddress($email);
 
     $mail->isHTML(true);                                  //Set email format to HTML
