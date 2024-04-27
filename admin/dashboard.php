@@ -72,7 +72,7 @@ else{
    $currentDate = date('Y-m-d'); // Current date in YYYY-MM-DD format
    $endDate = date('Y-m-d', strtotime('+7 days')); // End date is 7 days from current date
    
-   $query = mysqli_query($con, "SELECT pending.id AS id, pending.name AS username, pending.email AS useremail, pending.contact AS usercontact, pending.preparation_date AS orderdate, pending.items AS products, pending.payment_option AS payment_option, pending.delivery_option AS delivery_option, pending.total_price AS total_price, pending.delivery_address AS delivery_address, pending.delivery_time AS delivery_time FROM pending WHERE pending.status = 'Delivered' AND STR_TO_DATE(pending.preparation_date, '%d/%m/%Y') BETWEEN '$currentDate' AND '$endDate' ORDER BY STR_TO_DATE(pending.preparation_date, '%d/%m/%Y') ASC LIMIT 3");
+   $query = mysqli_query($con, "SELECT pending.id AS id, pending.name AS username, pending.email AS useremail, pending.contact AS usercontact, pending.preparation_date AS orderdate, pending.items AS products, pending.payment_option AS payment_option, pending.delivery_option AS delivery_option, pending.total_price AS total_price, pending.delivery_address AS delivery_address, pending.delivery_time AS delivery_time FROM pending WHERE pending.status = 'Accepted' AND STR_TO_DATE(pending.preparation_date, '%Y-%m-%d') >= '$currentDate' ORDER BY STR_TO_DATE(pending.preparation_date, '%Y-%m-%d') ASC LIMIT 6");
 
     // Fetching the counts of orders with different statuses
     $countPending = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS pendingCount FROM pending WHERE status = 'Pending'"));

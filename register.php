@@ -203,7 +203,7 @@ session_start();
     },
     "Santa Rita": {
         barangays: ["Becuran", "Dila-Dila", "San Agustin", "San Basilio", "San Isidro", "San Jose", "San Juan", "San Matias", "San Vicente", "Santa Monica"],
-        postal_code: "2005"
+        postal_code: "2002"
     },
     "Santo Tomas": {
         barangays: ["Moras De La Paz", "Poblacion", "San Bartolome", "San Matias", "San Vicente", "Santo Rosario", "Sapa"],

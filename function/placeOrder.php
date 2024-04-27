@@ -114,14 +114,14 @@ function sendOrderEmail($name, $contact, $email, $items, $deliveryAddress, $tota
 
     $mail->Body = $email_template;
 
-    // // Console log for debugging
-    // error_log("Email template: " . $email_template);
+  
+    error_log("Email template: " . $email_template);
 
-    // if(!$mail->send()) {
-    //     echo "Mailer Error: " . $mail->ErrorInfo;
-    // } else {
-    //     echo "Message has been sent";
-    // }
+   if(!$mail->send()) {
+        echo "Mailer Error: " . $mail->ErrorInfo;
+    } else {
+        echo "A Message has been sent to the owner";
+     }
 }
 
 
