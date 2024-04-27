@@ -253,7 +253,7 @@ if ($result->num_rows == 1) {
                                   $currentTime = time();
                                   $orderTime = strtotime($row['created_at']);
                                   $timeDiff = $currentTime - $orderTime;
-                                  $cancelWindow = 2 * 60 * 60; // 2 hours in seconds
+                                  $cancelWindow = 1 * 24 * 60 * 60; //1day
                                   if ($timeDiff <= $cancelWindow): ?>
                                       <button class="cancel-order-btn" data-order-id="<?php echo $orderId; ?>">Cancel Order</button>
                                   <?php endif; ?>

@@ -12,7 +12,7 @@ function cancelPendingOrders() {
 
     // Get the current time
     $currentTime = time();
-    $cancelWindow = 10; // 2 hours in seconds
+    $cancelWindow = 3 * 24 * 60 * 60; // 3 days in seconds
 
     // Calculate the time 2 hours ago
     $cancelTime = $currentTime - $cancelWindow;
@@ -34,14 +34,27 @@ function cancelPendingOrders() {
         $cancelledOrdersStmt->execute();
         $result = $cancelledOrdersStmt->get_result();
 
+        // Array to keep track of emailed users
+        $emailedUsers = array();
+
         // Loop through the cancelled orders and send email notifications to the users
         while ($row = $result->fetch_assoc()) {
             $userEmail = $row['email'];
             $status = $row['status'];
-            sendCancellationEmail($userEmail, $status);
-            echo "Order cancelled successfully.";
-
-            sleep(10);
+            
+            // Check if the user has already been sent an email
+            if (!in_array($userEmail, $emailedUsers)) {
+                sendCancellationEmail($userEmail, $status);
+                echo "Order cancelled successfully.";
+                
+                // Add the user to the list of emailed users
+                $emailedUsers[] = $userEmail;
+            } else {
+                echo "Email already sent to this user.";
+            }
+            
+            // Sleep for 30 seconds before processing the next order
+            sleep(30);
         }
     } else {
         echo "Error cancelling pending and To Pay orders: " . $stmt->error;
@@ -58,7 +71,7 @@ function sendCancellationEmail($userEmail, $status) {
     $mail->Password = 'zmxy twtu fuym ejjs';
     $mail->SMTPSecure = 'tls';
     $mail->Port = 587;
-    $mail->setFrom("cdemailverify@gmail.com", "Chef's Daughter");
+    $mail->setFrom("ezequielg070901@gmail.com", "Chef's Daughter");
     $mail->addAddress($userEmail); 
     $mail->isHTML(true);                       
     $mail->Subject = 'Your Order Has Been Cancelled';
@@ -73,7 +86,6 @@ function sendCancellationEmail($userEmail, $status) {
     }
 
     $mail->Body = $emailContent;
-    $mail->SMTPDebug = SMTP::DEBUG_SERVER;
 
     try {
         // Attempt to send the email
