@@ -278,7 +278,7 @@ if ($result->num_rows == 1) {
                                           $timeDiff = $currentTime - $orderTime;
                                           $cancelWindow = 1 * 24 * 60 * 60; //1 day
                                           if ($timeDiff <= $cancelWindow): ?>
-                                              <button class="add-item mt-5" style="padding-bottom: 34px; white-space: wrap;" data-order-id="<?php echo $orderId; ?>"> <i style="color: #004225;"></i>  Cancel Order </button></center>
+                                              <button class="cancel-order-btn add-item mt-5" style="padding-bottom: 34px; white-space: wrap;" data-order-id="<?php echo $orderId; ?>"> <i style="color: #004225;"></i>  Cancel Order </button></center>
                                           <?php endif; ?>
                                       </td>
                                   </tr>
