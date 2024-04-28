@@ -116,7 +116,9 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 									</div>
 								</div>
 
-								<button id="toggleEmailColumn" class="show"><i class="fa-solid fa-eye" style="color: #ffffff;"></i> More Details</button>
+								<button id="toggleEmailColumn" class="show">
+  							<i class="fa-solid fa-eye" style="color: #ffffff;"></i> More Details
+								</button>
 
 <div class="tabling">
 	<table id="orderTable" cellpadding="0" cellspacing="0" border="0" class="table table-bordered table-striped display table-responsive">
@@ -154,10 +156,11 @@ $currentTime = date( 'd-m-Y h:i:s A', time () );
 							<?php endif; ?>
 							<td ><?php echo isset($product['productName']) ? htmlentities($product['productName']) : ''; ?></td>
 							<td class="email-column" style="display: none;"><?php echo isset($product['quantity']) ? htmlentities($product['quantity']) : ''; ?></td>
-							<td class="email-column" style="display: none;"><?php echo isset($product['sizePrice']) ? htmlentities($product['sizePrice']) : ''; ?></td>
-							<td class="email-column" style="display: none;"><?php echo isset($product['totalPrice']) ? htmlentities($product['totalPrice']) : ''; ?></td>
+							<td class="email-column" style="display: none;">₱<?php echo isset($product['sizePrice']) ? number_format($product['sizePrice'], 2) : ''; ?></td>
+							<td class="email-column" style="display: none;">₱<?php echo isset($product['totalPrice']) ? number_format($product['totalPrice'], 2) : ''; ?></td>
+
 							<?php if ($index === 0): ?>
-								<td rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['total_price']); ?></td>
+								<td rowspan="<?php echo count($order['products']); ?>">₱<?php echo number_format($order['total_price'], 2); ?></td>
 								<td class="email-column" style="display: none;" rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['payment_option']); ?></td>
 								<td  rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_option']); ?></td>
 								<td class="email-column" style="display: none;" rowspan="<?php echo count($order['products']); ?>"><?php echo htmlentities($order['delivery_address']); ?></td>
@@ -237,6 +240,7 @@ $('.email-column').toggle();
 
 <script>
     // Function to perform search
+	
     function performSearch() {
         var searchDate = $('#searchDate').val(); // Get the selected date
 
@@ -264,6 +268,8 @@ $('.email-column').toggle();
         $('#searchDate').on('change', performSearch);
     });
 </script>
+
+
 
 </body>
 <?php } ?>

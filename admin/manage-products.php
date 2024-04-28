@@ -86,10 +86,11 @@ while($row=mysqli_fetch_array($query))
 											<td><?php echo htmlentities($row['productName']);?></td>
 											<td><?php echo htmlentities($row['categoryName']);?></td>
 											<td> <?php echo htmlentities($row['subcategory']);?></td>
-											<td><?php echo htmlentities($row['mediumPrice']);?></td>
-											<td><?php echo htmlentities($row['largePrice']);?></td>
-											<td><?php echo htmlentities($row['xlPrice']);?></td>
-											<td><?php echo htmlentities($row['xxlPrice']);?></td>
+											<td>₱<?php echo number_format($row['mediumPrice'], 2); ?></td>
+											<td>₱<?php echo number_format($row['largePrice'], 2); ?></td>
+											<td>₱<?php echo number_format($row['xlPrice'], 2); ?></td>
+											<td>₱<?php echo number_format($row['xxlPrice'], 2); ?></td>
+
 											<td><?php echo htmlentities($row['postingDate']);?></td>
 											
 										</tr>

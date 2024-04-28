@@ -120,7 +120,7 @@ function sendOrderEmail($name, $contact, $email, $items, $deliveryAddress, $tota
    if(!$mail->send()) {
         echo "Mailer Error: " . $mail->ErrorInfo;
     } else {
-        echo "A Message has been sent to the owner";
+        echo "A Message has been sent to the owner! ";
      }
 }
 
