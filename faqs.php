@@ -59,7 +59,7 @@ include('./dbcon.php');
         <div class="expanded-content">
           <!-- Content to show when the item is expanded -->
           Yes, we provide complimentary delivery service to locations within
-           Pampanga up to Balintawak. Deliveries outside of Balintawak to your
+           Pampanga. Deliveries outside of Pampanga to your
             specified address will be discussed first via our facebook page. 
             Please note that the customer is responsible for 
             covering the Lalamove delivery fee.

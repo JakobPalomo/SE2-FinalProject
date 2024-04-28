@@ -35,9 +35,9 @@ function sendemail_verify($fname,$lname,$email,$verify_token)
     $mail->isHTML(true);                                  //Set email format to HTML
     $mail->Subject = 'Email Verification';
 
-    $email_template = "<h1>Account Verified</h1>
-    <h2>Your account has been verified!</h2>
- <h5>You can now use Chef's Daughter Website<h5>
+    $email_template = "<h1>Account Verification</h1>
+    
+ <h5>You can now use Chef's Daughter Website once you click the link below<h5>
  <br/>
  <a href ='http://localhost/SE2-FINALPROJECT/function/verify-email.php?token=$verify_token'>Click to verify</a>";
 
