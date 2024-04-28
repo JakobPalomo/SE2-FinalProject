@@ -42,6 +42,7 @@ if ($result->num_rows == 1) {
     <link rel="stylesheet" type="text/css" href="css/lectercard.css" />
     <link rel="stylesheet" type="text/css" href="css/pendingordercard.css" />
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 
 
     <title>My Account</title>
@@ -467,7 +468,6 @@ if ($result->num_rows == 1) {
     </div>
 
     <!-- End Code -->
-
 <!-- Modal -->
 <?php foreach ($orders as $row): ?>
     <?php 
@@ -492,8 +492,6 @@ if ($result->num_rows == 1) {
             <div class="modal-content">
                 <div class="modal-header">
                     <h5 class="modal-title" id="orderModalLabel">Order Details - <?php echo $orderId; ?></h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
                     </button>
                 </div>
                 <div class="modal-body">
