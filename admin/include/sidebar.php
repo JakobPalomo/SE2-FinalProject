@@ -10,6 +10,19 @@
 									Order Management
 								</a>
 								<ul id="togglePages" class="collapse unstyled">
+								<li>
+										<a href="dashboard.php">
+											<i class="icon-tasks"></i>
+											Dashboard
+											<?php	
+													$status='Delivered';									 
+													$ret = mysqli_query($con,"SELECT COUNT(*) AS num_pending FROM pending WHERE status = 'Pending'");
+													$row = mysqli_fetch_assoc($ret);
+													$num = $row['num_pending'];
+												{?><b class="label orange pull-right"><?php echo htmlentities($num); ?></b>
+											<?php } ?>
+										</a>
+									</li>
 									<li>
 										<a href="pending-orders.php">
 											<i class="icon-tasks"></i>

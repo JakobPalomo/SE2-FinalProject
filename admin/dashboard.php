@@ -98,30 +98,49 @@ else{
                     </style>
                           <!-- Your existing content -->
 						  <div class="container-sales">
-                                    <div class="total-earnings-box">
-                                        <div class="total-earnings">
-                                            <p>Upcoming Orders</p>
-                                            <!-- Display upcoming orders here -->
-                                            <?php
-                                            // Loop through the fetched upcoming orders
-                                            while ($row = mysqli_fetch_array($query)) {
-                                                echo "<p>Order ID: " . $row['id'] . ", Username: " . $row['username'] . ", Order Date: " . $row['orderdate'] . "</p>";
-                                            }
-                                            ?>
-                                        </div>
-                                    </div>
+                          <div class="total-earnings-box">
+    <div class="total-earnings">
+        <p>Upcoming Orders</p>
+        <div class="row">
+            <!-- Display upcoming orders here -->
+            <?php
+            $count = 0; // Counter to track number of orders
+            while ($row = mysqli_fetch_array($query)) {
+                ?>
+                <div class="col-lg-4 col-md-6 mb-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <h5 class="card-title">Order ID: <?php echo $row['id']; ?></h5>
+                            <h6 class="card-subtitle mb-2 text-muted">Username: <?php echo $row['username']; ?></h6>
+                            <p class="card-text">Order Date: <?php echo $row['orderdate']; ?></p>
+                        </div>
+                    </div>
+                </div>
+                <?php
+                $count++;
+                // Start a new row after every 3 orders
+                if ($count % 3 == 0) {
+                    echo '</div><div class="row">';
+                }
+            }
+            ?>
+        </div>
+    </div>
+</div>
+
                                     <!-- Remaining content -->
                                     <div class="earnings-container">
                                         <!-- Counts of orders with different statuses -->
-                                        <div class="earnings">
+                                        <div class="earnings" onclick="window.location.href='pending-orders.php';" style="cursor: pointer;">
                                             <p>Pending</p>
                                             <h2><?php echo $countPending['pendingCount']; ?></h2>
                                         </div>
-                                        <div class="earnings">
+                                        
+                                        <div class="earnings" onclick="window.location.href='topay-orders.php';" style="cursor: pointer;">
                                             <p>To Pay</p>
                                             <h2><?php echo $countToPay['toPayCount']; ?></h2>
                                         </div>
-                                        <div class="earnings">
+                                        <div class="earnings" onclick="window.location.href='accepted-orders.php';" style="cursor: pointer;">
                                             <p>Accepted</p>
                                             <h2><?php echo $countAccepted['acceptedCount']; ?></h2>
                                         </div>
