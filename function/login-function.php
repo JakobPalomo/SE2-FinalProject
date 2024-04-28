@@ -22,7 +22,7 @@ if (isset($_POST['login_now_btn'])) {
                 ];
 
                 $_SESSION['alogin'] = $admin_row['username'];
-                header("Location: ../admin/insert-product.php");
+                header("Location: ../admin/dashboard.php");
                 exit(0);
             } else {
                 $_SESSION['status'] = "Invalid Password";

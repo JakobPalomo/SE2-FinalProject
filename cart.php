@@ -153,7 +153,7 @@ include('./dbcon.php');
             <p class="subtitle-txt-3">(Set at least <u>3 days</u> in advance)</p>
         </div>
         <div class="subtitle" style="margin-bottom: 20px">
-            <input type="date" id="datepicker" name="preparationDate" class="subtitle-txt-bg-2">
+            <input type="date" id="datepicker" name="preparationDate" class="subtitle-txt-bg-2" min="<?php echo date('Y-m-d'); ?>">
         </div>
 
         <br>
@@ -277,6 +277,7 @@ include('./dbcon.php');
             </script>
 
     </div>
+
     <script>
         $(function () {
     // Initialize datepicker
