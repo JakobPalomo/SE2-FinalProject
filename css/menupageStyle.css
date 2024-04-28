@@ -172,6 +172,11 @@ body {
   transition: background-color 0.3s ease-in-out;
   display: inline-block;
 }
+.categorybutton.active {
+  background-color: #024317; /* Your desired background color for the active button */
+  color: rgb(255, 255, 255); /* Text color for the active button */
+  /* Add any other styles for the active button */
+}
 .categorybutton1 {
   /* margin-left: 1vh;
   margin-right: 1vh; */
@@ -188,6 +193,12 @@ body {
   transition: background-color 0.3s ease-in-out;
   display: inline-block;
 }
+.categorybutton1.active {
+  background-color: #ffae00; /* Your desired background color for the active button */
+  color: black; /* Text color for the active button */
+  /* Add any other styles for the active button */
+}
+
 p {
   font-family: "Plus Jakarta Sans", sans-serif;
   font-weight: bold;

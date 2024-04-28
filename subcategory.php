@@ -147,6 +147,11 @@ if(isset($_POST['add_to_cart'])) {
                         ?>
                     </div>
                 </div>
+
+                <?php
+                    // Get the current subcategory ID from the URL parameter
+                    $currentSubcategory = isset($_GET['scid']) ? $_GET['scid'] : null;
+                    ?>
                 <div class="category-container" style="display: flex; justify-content: center;">
                     <div class="categorydiv">
                         <?php
@@ -164,8 +169,11 @@ if(isset($_POST['add_to_cart'])) {
                                 $iconClass = 'fa-utensils'; // Default utensils icon
                             }
 
+                            // Determine if the current subcategory matches the one in the loop
+                            $activeClass = ($row['id'] == $currentSubcategory) ? 'active' : '';
+
                             ?>
-                            <a href="subcategory.php?scid=<?php echo $row['id']; ?>" class="categorybutton1"
+                            <a href="subcategory.php?scid=<?php echo $row['id']; ?>" class="categorybutton1 <?php echo $activeClass; ?>"
                                 style="font-weight: bolder;">
                                 <span><i class="fa-solid" style="color: #262626;"></i> </span><?php echo $subcategory; ?>
                             </a>

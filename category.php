@@ -124,7 +124,12 @@ if(isset($_POST['add_to_cart'])) {
                 }
             });
             </script>
-    
+
+                <?php
+            // Get the current category ID from the URL parameter
+            $currentCategory = isset($_GET['cid']) ? $_GET['cid'] : null;
+            ?>
+
         <div class="main-menu">
             <!-- div for the category buttons-->
             <div class="options">
@@ -143,8 +148,10 @@ if(isset($_POST['add_to_cart'])) {
                             } elseif (strtolower($categoryName) == 'bulk order') {
                                 $iconClass = 'fa-truck-moving'; // Bowl food icon
                             }
+                            // Determine if the current category matches the one in the loop
+                             $activeClass = ($categoryId == $currentCategory) ? 'active' : '';
                             ?>
-                            <a href="category.php?cid=<?php echo $categoryId; ?>" class="categorybutton">
+                             <a href="category.php?cid=<?php echo $categoryId; ?>" class="categorybutton <?php echo $activeClass; ?>">
                                 <?php if (!empty($iconClass)) { ?>
                                     <i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626;"></i>
                                 <?php } ?>
@@ -159,7 +166,7 @@ if(isset($_POST['add_to_cart'])) {
                 <div class="category-container" style="display: flex; justify-content: center;">
                     <div class="categorydiv">
                         <?php
-                        $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
+                        $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory");
                         while ($row = mysqli_fetch_array($sql)) {
                             $subcategory = $row['subcategory'];
                             $iconClass = '';
