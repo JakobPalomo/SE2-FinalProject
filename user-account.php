@@ -102,7 +102,7 @@ if ($result->num_rows == 1) {
 
     <script>
   function redirectToCategory() {
-    window.location.href = 'category.php?cid=1';
+    window.location.href = 'subcategory.php?scid=1';
   }
     </script>
 

@@ -81,7 +81,7 @@ cancelPendingOrders();
         </div>
       </div>
     </div>
-    <a href="category.php?cid=8" class="order-button1">Order Now!</a>
+    <a href="subcategory.php?scid=1" class="order-button1">Order Now!</a>
     
     <!-- <div class="bottomdiv">
       <div class="movedown">

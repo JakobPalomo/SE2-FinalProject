@@ -75,11 +75,8 @@ if(isset($_POST['add_to_cart'])) {
 
     <!-- Code zone -->
     <!-- top part of the menupage after the navbar -->
-    <div class="topdiv" style=" margin:20px; height: 350px;">
+    <div class="topdiv" style="height: 350px;">
       <img src="img/logo.png" alt="Logo" style="max-width: 200px;"/>
-      <div class="maintitle">
-      <p class="title" style="margin-top: -28px;">Menu</p>
-    </div>
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search..." id="searchInput" oninput="filterProducts()"/>
         <div class="search-icon"><i class="fa-solid fa-magnifying-glass" style="color: #262626;"></i></div>
@@ -93,90 +90,107 @@ if(isset($_POST['add_to_cart'])) {
             <!-- <div class="subcategorydiv">
     <div class="food-name subcat" style="margin-bottom: 12px; font-size: 10px; padding-left: 12px;">Sub Categories</div>
     <div class="subcatbutton">
-        <?php 
-        $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
-        while ($row = mysqli_fetch_array($sql)) {
-            $subcategory = $row['subcategory'];
-            $iconClass = '';
+        <?php
+            $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
+            while ($row = mysqli_fetch_array($sql)) {
+                $subcategory = $row['subcategory'];
+                $iconClass = '';
 
-            // Set the icon class based on the subcategory
-            if (strtolower($subcategory) == 'pasta') {
-                $iconClass = 'fa-plate-wheat'; // Pasta icon
-            } elseif (strpos(strtolower($subcategory), 'chicken') !== false) {
-                $iconClass = 'fa-drumstick-bite'; // Chicken icon
-            }else {
-                $iconClass = 'fa-utensils'; // Default utensils icon
-            }
-            
-        ?>
-        <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton1" style="font-weight: bolder;">
-            <span><i class="fa-solid" style="color: #262626;"></i> </span><?php echo $subcategory;?> 
-        </a>
-        <?php } ?>
-    </div>
-</div> -->
+                // Set the icon class based on the subcategory
+                if (strtolower($subcategory) == 'pasta') {
+                    $iconClass = 'fa-plate-wheat'; // Pasta icon
+                } elseif (strpos(strtolower($subcategory), 'chicken') !== false) {
+                    $iconClass = 'fa-drumstick-bite'; // Chicken icon
+                } else {
+                    $iconClass = 'fa-utensils'; // Default utensils icon
+                }
 
-
-       <div class="main-menu">
-    <!-- div for the category buttons-->
-    <div class="options">
-<div class="category-container">
-    <div class="categorydiv"> <p><i class="fa-solid fa-utensils" style="color: #262626;"></i> Main Categories: </p>
-        
-    <?php
-    $sql = mysqli_query($con, "SELECT id, categoryName FROM category LIMIT 6");
-    while ($row = mysqli_fetch_array($sql)) {
-        $categoryId = $row['id'];
-        $categoryName = $row['categoryName'];
-        $iconClass = '';
-
-        // Set the icon class based on the category name
-        if (strtolower($categoryName) == 'short order') {
-            $iconClass = 'fa-bowl-food'; // Bowl food icon
-        }elseif (strtolower($categoryName) == 'bulk order') {
-            $iconClass = 'fa-truck-moving'; // Bowl food icon
-        }
-    ?>
-        <a href="category.php?cid=<?php echo $categoryId; ?>" class="categorybutton">
-            <?php if (!empty($iconClass)) { ?>
-                <i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626;"></i>
-            <?php } ?> 
-            <?php echo $categoryName; ?>
-        </a>
-    <?php
-    }
-    ?>
-</div>
-    </div>
-    <div class="category-container">
-    <div class="categorydiv"> <p><i class="fa-solid fa-drumstick-bite" style="color: #262626;"></i> Sub Categories: </p>
-        
-    <?php 
-        $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
-        while ($row = mysqli_fetch_array($sql)) {
-            $subcategory = $row['subcategory'];
-            $iconClass = '';
-
-            // Set the icon class based on the subcategory
-            if (strtolower($subcategory) == 'pasta') {
-                $iconClass = 'fa-plate-wheat'; // Pasta icon
-            } elseif (strpos(strtolower($subcategory), 'chicken') !== false) {
-                $iconClass = 'fa-drumstick-bite'; // Chicken icon
-            }else {
-                $iconClass = 'fa-utensils'; // Default utensils icon
-            }
-            
-        ?>
-        <a href="subcategory.php?scid=<?php echo $row['id'];?>" class="categorybutton1" style="font-weight: bolder;">
-            <span><i class="fa-solid" style="color: #262626;"></i> </span><?php echo $subcategory;?> 
-        </a>
-        <?php } ?>
-</div>
-    </div>
-
-    </div>
+                ?>
+                <a href="subcategory.php?scid=<?php echo $row['id']; ?>" class="categorybutton1" style="font-weight: bolder;">
+                    <span><i class="fa-solid" style="color: #262626;"></i> </span><?php echo $subcategory; ?> 
+                </a>
+            <?php } ?>
+        </div>
+    </div> -->
+                <script>
+                window.addEventListener('scroll', function() {
+                var categoryContainer = document.querySelector('.options');
+                var navbarHeight = document.querySelector('.topdiv').offsetHeight;
+                
+                if (window.pageYOffset > navbarHeight) {
+                    categoryContainer.classList.add('fixed');
+                } else {
+                    categoryContainer.classList.remove('fixed');
+                }
+            });
+            </script>
     
+        <div class="main-menu">
+            <!-- div for the category buttons-->
+            <div class="options">
+                <div class="category-container" style="display: flex; justify-content: center;">
+                    <div class="categorydiv">
+                        <?php
+                        $sql = mysqli_query($con, "SELECT id, categoryName FROM category LIMIT 6");
+                        while ($row = mysqli_fetch_array($sql)) {
+                            $categoryId = $row['id'];
+                            $categoryName = $row['categoryName'];
+                            $iconClass = '';
 
+                            // Set the icon class based on the category name
+                            if (strtolower($categoryName) == 'short order') {
+                                $iconClass = 'fa-bowl-food'; // Bowl food icon
+                            } elseif (strtolower($categoryName) == 'bulk order') {
+                                $iconClass = 'fa-truck-moving'; // Bowl food icon
+                            }
+                            ?>
+                            <a href="category.php?cid=<?php echo $categoryId; ?>" class="categorybutton">
+                                <?php if (!empty($iconClass)) { ?>
+                                    <i class="fa-solid <?php echo $iconClass; ?>" style="color: #262626;"></i>
+                                <?php } ?>
+                                <?php echo $categoryName; ?>
+                            </a>
+                            <?php
+                        }
+                        ?>
+                    </div>
+                </div>
+                
+                <div class="category-container" style="display: flex; justify-content: center;">
+                    <div class="categorydiv">
+                        <?php
+                        $sql = mysqli_query($con, "SELECT id, subcategory FROM subcategory WHERE categoryid='$cid'");
+                        while ($row = mysqli_fetch_array($sql)) {
+                            $subcategory = $row['subcategory'];
+                            $iconClass = '';
+
+                            // Set the icon class based on the subcategory
+                            if (strtolower($subcategory) == 'pasta') {
+                                $iconClass = 'fa-plate-wheat'; // Pasta icon
+                            } elseif (strpos(strtolower($subcategory), 'chicken') !== false) {
+                                $iconClass = 'fa-drumstick-bite'; // Chicken icon
+                            } else {
+                                $iconClass = 'fa-utensils'; // Default utensils icon
+                            }
+
+                            ?>
+                            <a href="subcategory.php?scid=<?php echo $row['id']; ?>" class="categorybutton1"
+                                style="font-weight: bolder;">
+                                <span><i class="fa-solid" style="color: #262626;"></i> </span><?php echo $subcategory; ?>
+                            </a>
+                        <?php } ?>
+                    </div>
+                </div>
+    
+            </div>
+
+            <?php $sql = mysqli_query($con, "select categoryName from category where id='$cid'");
+            while ($row = mysqli_fetch_array($sql)) { ?>
+            
+                <div class="food-name" style="text-align: center; font-size: 36px; margin-left:40px;">
+                    <?php echo htmlentities($row['categoryName']); ?>
+                </div>
+            <?php } ?>
 
         <div class="list">
           <?php
@@ -195,21 +209,19 @@ if(isset($_POST['add_to_cart'])) {
           ?>
                
                   <div class="menu-item <?php echo $menuClass; ?>">
-                  <div class="img-container-menu">
+                    <div class="img-container-menu">
                       <img src="admin/productimages/<?php echo htmlentities($row['id']); ?>/<?php echo htmlentities($row['productImage1']); ?>" alt="food" class="menu-display" />
-                      </div>
+                    </div>
                       <div class="detail-field">
                           <p class="food-name"><?php echo htmlentities($row['productName']); ?></p>  
                       </div>
                       <div class="desc-field"> 
                                 <?php if ($availability != 'Out of Stock'): ?>
                              <p class="food-desc">
-                                M- ₱<strong><?php echo number_format($row['mediumPrice'], 2, '.', ','); ?></strong></br>
-                                L- ₱<strong><?php echo number_format($row['largePrice'], 2, '.', ','); ?></strong></br>
-                                XL- ₱<strong><?php echo number_format($row['xlPrice'], 2, '.', ','); ?></strong></br>
-                                XXL- ₱<strong><?php echo number_format($row['xxlPrice'], 2, '.', ','); ?></strong>
+                                <br>
+                                <br>
+                                Medium starts at ₱<strong><?php echo number_format($row['mediumPrice'], 2, '.', ','); ?></strong></br>                              
                             </p>
-                         
                                  <?php endif; ?>
                       </div>
                         <center>

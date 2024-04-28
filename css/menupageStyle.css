@@ -43,7 +43,7 @@ body {
 }
 
 .topdiv {
-  height: 30vh;
+  height: 350px;
   background-image: url("../img/buffetbg.jpg");
   background-size: cover;
   background-position: center;
@@ -53,13 +53,12 @@ body {
   flex-direction: column;
   justify-content: center;
   align-items: center;
-  margin-top: 24px;
 }
 
 .topdiv img {
   max-width: 100%;
   height: auto;
-  max-height: 70%;
+  max-height: 100%; 
 }
 
 .search-container {
@@ -117,6 +116,20 @@ body {
   overflow-x: auto; /* Enable horizontal scrolling on overflow */
   -webkit-overflow-scrolling: touch; /* Enable smooth scrolling on iOS devices */
   margin-bottom: 12px;
+}
+.options {
+  position: relative;
+  top: 0;
+}
+
+.options.fixed {
+  position: fixed;
+  padding-top: 20px;
+  top: 70px; /* Adjust according to the height of your navbar */
+  width: 170%;
+  z-index: 999;
+  background-color: #f5f5dc; /* Change the color to your desired background color */
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1); 
 }
 
 .subcategorydiv {

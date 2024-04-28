@@ -104,6 +104,7 @@ body {
   justify-content: space-between;
   height: 54px;
   width: 240px;
+
   margin-bottom: 12px;
 }
 
@@ -111,7 +112,7 @@ body {
   margin-left: 18px;
   margin-top: 12px;
   color: #000000;
-  font-size: 14px;
+  font-size: 18px;
   font-weight: bold;
   font-family: "Plus Jakarta Sans", sans-serif;
 }
@@ -131,8 +132,8 @@ body {
 }
 
 .food-desc {
-  color: #000000;
-  font-size: 9px;
+  color: #004225;
+  font-size: 13px;
   margin-left: 18px;
   font-family: "Plus Jakarta Sans", sans-serif;
 }
