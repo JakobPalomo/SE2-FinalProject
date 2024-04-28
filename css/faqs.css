@@ -11,6 +11,9 @@ body {
   color: #004225;
   font-weight: bold;
   font-family: "Plus Jakarta Sans", sans-serif;
+  background-color: #f5f5dc;
+  padding: 12px;
+  border-radius: 12px;
 }
 
 .navbar-toggler-icon {

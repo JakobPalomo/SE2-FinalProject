@@ -175,6 +175,8 @@ include('./dbcon.php');
         </div>
         <div class="subtitle" style="margin-bottom: 20px">
             <p class="subtitle-txt-bg-2" id="userAddress" ><?php echo $_SESSION['auth_user']['address']; ?></p>
+            <p class="subtitle-txt-3" style="font-size: 10px; margin-top: 0px; margin-bottom:-20px">(Free delivery within <u>Pampanga and Balintawak</u></p>
+            <p class="subtitle-txt-3" style="font-size: 10px; margin-top: 0px; margin-top:24px">Orders outside are to be chatted through FB)</p>
         </div>
 
         <!-- FOOTER -->

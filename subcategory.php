@@ -64,9 +64,9 @@ if(isset($_POST['add_to_cart'])) {
 
     <!-- Code zone -->
     <!-- top part of the menupage after the navbar -->
-    <div class="topdiv">
+    <div class="topdiv" style="margin-top: 56px;">
       <img src="img/logo.png" alt="Logo" />
-      <p class="title" style="margin-top: -16px;">Menu</p>
+      <p class="title" style="margin-top: 0px;">Menu</p>
       <div class="search-container">
         <input type="text" class="search-input" placeholder="Search..." id="searchInput" oninput="filterProducts()"/>
         <div class="search-icon"><i class="fa-solid fa-magnifying-glass" style="color: #262626;"></i></div>

@@ -73,6 +73,7 @@ body {
   position: relative;
   width: 300px;
   opacity: 0.95;
+  margin-bottom: 36px;
 }
 
 .search-input {

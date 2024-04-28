@@ -75,7 +75,7 @@ if(isset($_POST['add_to_cart'])) {
 
     <!-- Code zone -->
     <!-- top part of the menupage after the navbar -->
-    <div class="topdiv" style=" background-image: none;  margin:20px; height: 350px;">
+    <div class="topdiv" style=" margin:20px; height: 350px;">
       <img src="img/logo.png" alt="Logo" style="max-width: 200px;"/>
       <div class="maintitle">
       <p class="title" style="margin-top: -28px;">Menu</p>
