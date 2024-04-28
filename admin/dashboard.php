@@ -18,6 +18,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         <link type="text/css" href="bootstrap/css/bootstrap.min.css" rel="stylesheet">
         <link type="text/css" href="bootstrap/css/bootstrap-responsive.min.css" rel="stylesheet">
         <link type="text/css" href="css/theme.css" rel="stylesheet">
+        <link type="text/css" href="css/dashboard.css" rel="stylesheet">
         <link type="text/css" href="css/salesreportstyle.css" rel="stylesheet">
         <link type="text/css" href="images/icons/css/font-awesome.css" rel="stylesheet">
         <link rel="shortcut icon" type="x-icon" href="../img/logomini.png">
@@ -75,6 +76,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                     // Fetching the counts of orders with different statuses
                                     $countPending = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS pendingCount FROM pending WHERE status = 'Pending'"));
                                     $countToPay = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS toPayCount FROM pending WHERE status = 'To Pay'"));
+                                    $countPaid = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS paidCount FROM pending WHERE status = 'Paid'"));
                                     $countAccepted = mysqli_fetch_assoc(mysqli_query($con, "SELECT COUNT(*) AS acceptedCount FROM pending WHERE status = 'Accepted'"));
 
                                     // Your existing PHP code...
@@ -109,12 +111,9 @@ if (strlen($_SESSION['alogin']) == 0) {
                                                         <div class="col-lg-4 col-md-6 mb-4">
                                                             <div class="card">
                                                                 <div class="card-body">
-                                                                    <h5 class="card-title">Order ID: <?php echo $row['id']; ?>
-                                                                    </h5>
-                                                                    <h6 class="card-subtitle mb-2 text-muted">Username:
-                                                                        <?php echo $row['username']; ?></h6>
-                                                                    <p class="card-text">Order Date:
-                                                                        <?php echo $row['orderdate']; ?></p>
+                                                                    <h5 class="card-title">Order ID: <?php echo $row['id']; ?></h5>
+                                                                    <p class="card-text"><strong>Name:</strong> <?php echo $row['username']; ?></p>
+                                                                    <p class="card-text"><strong>Order Date:</strong> <?php echo $row['orderdate']; ?></p>
                                                                 </div>
                                                             </div>
                                                         </div>
@@ -148,7 +147,7 @@ if (strlen($_SESSION['alogin']) == 0) {
                                             <div class="earnings" onclick="window.location.href='paid-orders.php';"
                                                 style="cursor: pointer;">
                                                 <p>Paid</p>
-                                                <h2><?php echo $countPending['pendingCount']; ?></h2>
+                                                <h2><?php echo $countPaid['paidCount']; ?></h2>
                                             </div>
 
                                             <div class="earnings" onclick="window.location.href='accepted-orders.php';"

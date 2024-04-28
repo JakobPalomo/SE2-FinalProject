@@ -514,10 +514,14 @@ if(isset($_POST['submit2'])) {
 <select class="drop" class="status" name="status" id="statusDropdown" required>
     <option value="">Select Status</option>
     <?php if ($currrentSt == 'Pending' && $currrentPO == 'Gcash'): ?>
-        <option value="Pay Online">Pay Online</option>
+        <option value="To Pay">Pay Online</option>
         <option value="Declined">Decline</option>
     <?php elseif ($currrentSt == 'Pending'): ?>
         <option value="Accepted">Accept</option>
+        <option value="Declined">Decline</option>
+        <?php elseif ($currrentSt == 'Paid'): ?>
+        <option value="Accepted">Accept</option>
+        <option value="To Pay">Pay Online Again</option>
         <option value="Declined">Decline</option>
     <?php elseif ($currrentSt == 'To Pay'): ?>
         <option value="Declined">Decline</option>

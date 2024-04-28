@@ -1,0 +1,43 @@
+.container-sales {
+  padding: 20px;
+}
+
+.upcoming-orders {
+  margin-bottom: 30px;
+}
+
+.upcoming-orders h2 {
+  font-size: 24px;
+  margin-bottom: 20px;
+}
+
+.total-something {
+  width: 100%; /* Adjust width to 100% for responsiveness */
+  max-width: 500px; /* Limit maximum width */
+  padding: 15px;
+  font-size: 24px;
+}
+
+.card {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+.card-title {
+  font-size: 18px;
+  margin-bottom: 10px;
+}
+
+.card-text {
+  font-size: 14px;
+  margin-bottom: 5px;
+}
+
+.card-text strong {
+  font-weight: bold;
+}
+
+.card-body {
+  padding: 20px;
+}

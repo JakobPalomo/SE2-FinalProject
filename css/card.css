@@ -78,6 +78,11 @@ td {
   height: 36px;
 }
 
+.cancel-button {
+  text-align: right;
+  padding: 0px 0px 0px 0px;
+}
+
 .add-item {
   width: max-content;
   height: 32px;

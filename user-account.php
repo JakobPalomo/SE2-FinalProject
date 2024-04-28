@@ -248,17 +248,6 @@ if ($result->num_rows == 1) {
                                 <td class="orderno">Order No. <?php echo $orderId; ?></td>
                                 <td class="orderstat"><?php echo $orderStatus; ?></td>
                             </tr>
-                            <td class="cancel-button">
-                                  <?php 
-                                  // Check if the order is still within the 2-hour window for cancellation
-                                  $currentTime = time();
-                                  $orderTime = strtotime($row['created_at']);
-                                  $timeDiff = $currentTime - $orderTime;
-                                  $cancelWindow = 1 * 24 * 60 * 60; //1day
-                                  if ($timeDiff <= $cancelWindow): ?>
-                                      <button class="cancel-order-btn" data-order-id="<?php echo $orderId; ?>">Cancel Order</button>
-                                  <?php endif; ?>
-                              </td>
                             <?php
                             $lastItemKey = array_key_last($orderItems);
                             $subtotal = 0;
@@ -271,15 +260,28 @@ if ($result->num_rows == 1) {
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice">₱<?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">₱<?php echo number_format($totalPrice, 2, '.', ','); ?></td>
                                     <td class="orderprice">&nbsp;</td>
                                 </tr>
                             <?php endforeach; ?>
                                     <tr>
                                       <br>
                                       <td class="orderprice">&nbsp;</td>
-                                      <td class="orderprice">Total: ₱<?php echo $subtotal; ?></td>
+                                      <td class="orderprice">Total: ₱<?php echo number_format($subtotal, 2, '.', ','); ?></td>
                                    </tr>
+                                   <tr class="cancel-button-container">
+                                      <td colspan="2" class="cancel-button">
+                                          <?php 
+                                          // Check if the order is still within the 2-hour window for cancellation
+                                          $currentTime = time();
+                                          $orderTime = strtotime($row['created_at']);
+                                          $timeDiff = $currentTime - $orderTime;
+                                          $cancelWindow = 1 * 24 * 60 * 60; //1 day
+                                          if ($timeDiff <= $cancelWindow): ?>
+                                              <button class="add-item mt-5" style="padding-bottom: 34px; white-space: wrap;" data-order-id="<?php echo $orderId; ?>"> <i style="color: #004225;"></i>  Cancel Order </button></center>
+                                          <?php endif; ?>
+                                      </td>
+                                  </tr>
                                    <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
                                 <?php endif; ?>
@@ -328,14 +330,14 @@ if ($result->num_rows == 1) {
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice">₱<?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">₱<?php echo number_format($totalPrice, 2, '.', ','); ?></td>
                                     <td>&nbsp;</td>
                                 </tr>
                             <?php endforeach; ?>
                                    <tr>
                                       <br>
                                       <td class="orderprice">&nbsp;</td>
-                                      <td class="orderprice">Total: ₱<?php echo $subtotal; ?></td>
+                                      <td class="orderprice">Total: ₱<?php echo number_format($subtotal, 2, '.', ','); ?></td>
                                    </tr>
                                    <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
@@ -385,14 +387,14 @@ if ($result->num_rows == 1) {
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice">₱<?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">₱<?php echo number_format($totalPrice, 2, '.', ','); ?></td>
                                     <td class="orderprice">&nbsp;</td>
                                 </tr>
                             <?php endforeach; ?>
                                    <tr>
                                       <br>
                                       <td class="orderprice">&nbsp;</td>
-                                      <td class="orderprice">Total: ₱<?php echo $subtotal; ?></td>
+                                      <td class="orderprice">Total: ₱<?php echo number_format($subtotal, 2, '.', ','); ?></td>
                                    </tr>
                                    <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
@@ -443,14 +445,14 @@ if ($result->num_rows == 1) {
                             ?>
                                 <tr<?php if ($key === $lastItemKey) echo " style='margin-bottom: 24px;'"; ?>>
                                     <td class="ordername">x <?php echo $quantity . ' ' . $itemName; ?></td>
-                                    <td class="orderprice">₱<?php echo $totalPrice; ?></td>
+                                    <td class="orderprice">₱<?php echo number_format($totalPrice, 2, '.', ','); ?></td>
                                     <td class="orderprice">&nbsp;</td>
                                 </tr>
                             <?php endforeach; ?>
                                     <tr>
                                       <br>
                                       <td class="orderprice">&nbsp;</td>
-                                      <td class="orderprice">Total: ₱<?php echo $subtotal; ?></td>
+                                      <td class="orderprice">Total: ₱<?php echo number_format($subtotal, 2, '.', ','); ?></td>
                                    </tr>
                                    <?php if ($key === $lastItemKey): ?>
                                     <tr><td colspan="2"><hr style="border-top: 2px solid black;"></td></tr>
@@ -468,8 +470,9 @@ if ($result->num_rows == 1) {
     </div>
 
     <!-- End Code -->
-<!-- Modal -->
-<?php foreach ($orders as $row): ?>
+
+    <!-- Modal -->
+    <?php foreach ($orders as $row): ?>
     <?php 
         $orderId = $row['id'];
         $deliveryDate = $row['preparation_date'];
@@ -490,24 +493,23 @@ if ($result->num_rows == 1) {
     <div class="modal fade" id="orderModal_<?php echo $orderId; ?>" tabindex="-1" role="dialog" aria-labelledby="orderModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="orderModalLabel">Order Details - <?php echo $orderId; ?></h5>
-                    </button>
+                <div class="modal-header" style="background-color: #004225; color: white; border-bottom: none;">
+                    <h5 class="modal-title" id="orderModalLabel" style="font-weight: bold; text-align: center;">Order Details - <?php echo $orderId; ?></h5>
                 </div>
-                <div class="modal-body">
-                    <p>Delivery Date: <?php echo $deliveryDate; ?></p>
-                    <p>Delivery Time: <?php echo $deliveryTime; ?></p>
-                    <p>Delivery Option: <?php echo $deliveryOption; ?></p>
-                    <p>Payment Option: <?php echo $paymentOption; ?></p>
-                    <p>Delivery Address: <?php echo $deliveryAddress; ?></p>
+                <div class="modal-body" style="text-align: left;">
+                    <p><strong>Delivery Date:</strong> <?php echo $deliveryDate; ?></p>
+                    <p><strong>Delivery Time:</strong> <?php echo $deliveryTime; ?></p>
+                    <p><strong>Delivery Option:</strong> <?php echo $deliveryOption; ?></p>
+                    <p><strong>Payment Option:</strong> <?php echo $paymentOption; ?></p>
+                    <p><strong>Delivery Address:</strong> <?php echo $deliveryAddress; ?></p>
                     <hr>
-                    <p>Order Items:</p>
-                    <ul>
+                    <p style="margin-bottom: 0;"><strong>Order Items:</strong></p>
+                    <ul style="list-style-type: none; padding-left: 0;">
                         <?php foreach ($orderItems as $item): ?>
-                            <li><?php echo $item['quantity'] . ' x ' . $item['productName'] . ' - ₱' . ($item['quantity'] * $item['sizePrice']); ?></li>
+                          <li><?php echo '<strong>' . $item['quantity'] . ' x ' . $item['productName'] . '</strong> - ₱' . number_format($item['quantity'] * $item['sizePrice'], 2, '.', ','); ?></li>
                         <?php endforeach; ?>
                     </ul>
-                    <p>Total: ₱<?php echo $subtotal; ?></p>
+                    <p style="margin-top: 10px; font-size: 24px;"><strong>Total: ₱<?php echo number_format($subtotal, 2, '.', ','); ?></strong></p>
                 </div>
             </div>
         </div>
