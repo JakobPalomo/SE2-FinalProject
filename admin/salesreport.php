@@ -13,6 +13,7 @@ if (strlen($_SESSION['alogin']) == 0) {
         $dailyEarnings = 0;
         $weeklyEarnings = 0;
         $yearlyEarnings = 0;
+        $totalEarnings = 0;
 
         $currentDate = date('Y-m-d');
         $currentWeek = date('W');
@@ -38,21 +39,24 @@ if (strlen($_SESSION['alogin']) == 0) {
                     $weeklyEarnings += $totalPrice;
                 }
 
-                // Yearly earnings
-                if ($orderYear === $currentYear) {
-                    $yearlyEarnings += $totalPrice;
-                }
+             // Yearly earnings
+             if ($orderYear === $currentYear) {
+                $yearlyEarnings += $totalPrice;
             }
-        }
 
-        return array(
-            'daily' => $dailyEarnings,
-            'weekly' => $weeklyEarnings,
-            'yearly' => $yearlyEarnings,
-            'total' => $dailyEarnings + $weeklyEarnings + $yearlyEarnings
-        );
+            // Total earnings (all delivered orders)
+            $totalEarnings += $totalPrice;
+        }
     }
-    ?>
+
+    return array(
+        'daily' => $dailyEarnings,
+        'weekly' => $weeklyEarnings,
+        'yearly' => $yearlyEarnings,
+        'total' => $totalEarnings
+    );
+}
+?>
 
     <!DOCTYPE html>
     <html lang="en">
